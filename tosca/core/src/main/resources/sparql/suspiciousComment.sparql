@@ -1,0 +1,5 @@
+select distinct ?resource ?comment
+where {
+   	?resource rdfs:comment ?comment .
+   	FILTER (regex(lcase(str(?comment)), "(bug|hack|later|todo|later2)","i")).
+	}

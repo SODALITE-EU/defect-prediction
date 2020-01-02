@@ -1,0 +1,6 @@
+select distinct ?var ?resource
+where {
+   	?var DUL:hasParameter ?p .
+	?p DUL:classifies tosca:default .
+	?p tosca:hasDataValue "0.0.0.0".
+	}

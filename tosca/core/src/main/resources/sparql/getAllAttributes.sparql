@@ -1,0 +1,10 @@
+select distinct ?p ?attribute
+where {
+		?resource soda:hasInferredContext ?context .
+		?context tosca:attributes ?p .
+		?p DUL:classifies ?attribute .
+		FILTER (?p != owl:Nothing ) .
+}
+
+
+                

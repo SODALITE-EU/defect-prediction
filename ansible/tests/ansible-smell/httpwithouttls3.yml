@@ -1,0 +1,138 @@
+---
+- name: Install dependencies
+  yum:
+    name: "{{item}}"
+    state: present
+  become: true
+  with_items:
+    - git
+    - python27-pip
+    - docker
+- name: Fix docker config to work with Jenkins
+  lineinfile:
+    dest: /etc/sysconfig/docker
+    regexp: '^OPTIONS="'
+    line: OPTIONS="--default-ulimit nofile=1024:4096 -H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375" 
+  become: true
+- name: start docker
+  service:
+    name: docker
+    state: restarted
+  become: true
+- name: Add ec2-user, jenkins to docker group
+  user:
+    name: "{{item}}"
+    groups: docker
+  become: true
+  with_items:
+    - jenkins
+    - ec2-user
+#- name: Get Ansible Git
+#  git:
+#    repo: git://github.com/ansible/ansible.git
+#    dest: ~/ansible
+#    clone: yes
+#- name: Install Ansible
+#  shell: >
+#        cd ~/ansible && 
+#        make install
+#  become: true
+#  ignore_errors: true
+#- name: install Ansible
+#  lineinfile:
+#    dest: ~/.bashrc
+#    line: "source ~/ansible/hacking/env-setup -q"
+#    insertafter: EOF
+- name: Install pip dependencies
+  pip:
+    name: "{{item}}"
+    state: present
+    executable: pip-2.7
+  with_items:
+    - docker-py
+  become: true
+- name: Copy over files
+  copy:
+    src: "{{item}}"
+    dest: /opt/{{item}}
+    owner: jenkins
+    group: jenkins
+  become: true
+  with_items:
+    - cred1.xml
+    - cred2.xml
+    - domain.xml
+    - nestbuild.xml
+#- name: Remove credentials.xml
+#  file:
+#    name: "{{jenkins_home}}/credentials.xml"
+#    state: absent
+#  become: true
+- name: Copy plugin configuration
+  copy:
+    src: "{{item}}"
+    dest: "{{jenkins_home}}/{{item}}"
+    owner: jenkins
+    group: jenkins
+  become: true
+  with_items:
+ #   - github-plugin-configuration.xml
+    - jenkins.model.JenkinsLocationConfiguration.xml
+    - jenkins.pem
+#- name: Remove secrets
+#  file:
+#    name: "{{jenkins_home}}/secrets"
+#    state: absent
+#  become: true
+#- name: Copy secrets
+#  unarchive:
+#    src: secrets.zip
+#    dest: "{{jenkins_home}}/"
+#  become: true
+#- name: Add Github Domain
+#  shell: >
+#        cat /opt/domain.xml |
+#        java -jar {{jenkins_jar_location}} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix }}/ 
+#        create-credentials-domain-by-xml "SystemCredentialsProvider::SystemContextResolver::jenkins"
+#        --username {{ jenkins_admin_username }}
+#        --password {{ jenkins_admin_password }}
+#  register: result
+#  failed_when: "result.stderr != '' and 'No change' not in result.stderr"
+#- name: Add Github credentials
+#  shell: >
+#        cat /opt/{{item}} |
+#        java -jar {{jenkins_jar_location}} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix }}/ 
+#        create-credentials-by-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" "(global)"
+#        --username {{jenkins_admin_username}}
+#        --password {{ jenkins_admin_password }} 
+#  with_items:
+#    - cred1.xml
+#    - cred2.xml
+#  failed_when: "result.stderr != '' and 'No change' not in result.stderr"
+- name: Create Jobs
+  shell: >
+        cat /opt/{{item}} | 
+        java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
+        create-job $(echo {{item}} | sed 's/\.[^.]*$//')
+        --username {{jenkins_admin_username}}
+        --password {{jenkins_admin_password}}
+  with_items:
+    - nestbuild.xml
+  failed_when: "result.stderr != '' and 'No change' not in result.stderr" 
+- name: Reload Configs
+  shell: >
+        java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
+        reload-configuration
+        --username {{jenkins_admin_username}}
+        --password {{jenkins_admin_password}}
+  changed_when: false
+  notify: restart Jenkins
+
+- name: Start Ansible Docker
+  docker_container: 
+    name: ansible
+    image: teamidefix/ansible
+#- name: Add Docker as host
+#  add_host:
+#    name: ansible
+#    connection: docker

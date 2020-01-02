@@ -1,0 +1,124 @@
+---
+- name: F03a. Get Address Group Data from the firewall
+  fortiosconfig:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    action: "get"
+    config: "firewall addrgrp"
+  register: fw_address_group
+
+- name: F03b. Parse firewall config for locally defined objects
+  set_fact:
+    defined_address_groups: |
+      {
+        {% for object in fw_address_group.meta.results %}
+          '{{ object.name }}': {
+            {% if (address_groups_USED_INTERNAL | default({}))[object.name] is defined or (built_in_address_groups | default({}))[object.name] is defined %}
+              'defined': True
+            {% endif %}
+          },
+        {% endfor %}
+      }
+      
+- name: F03c. Remove Address Groups (Try 1)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.key }}"
+  failed_when: false
+  loop: "{{ defined_address_groups | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  when: item.value.defined | default('') == ''
+  register: delgrp2
+
+- name: F03d. Remove Address Groups (Try 2)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.item.key }}"
+  failed_when: false
+  loop: "{{ delgrp2.results }}"
+  loop_control:
+    label: "{{ item._ansible_item_label | default(item.item.key | default('Key is missing')) }}"
+  when: item.changed | default(False) == False and item.skipped | default(False) == False
+  register: delgrp3
+
+- name: F03e. Remove Address Groups (Try 3)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.item.item.key }}"
+  failed_when: false
+  loop: "{{ delgrp3.results }}"
+  loop_control:
+    label: "{{ item._ansible_item_label | default(item.item.key | default(item.item.item.key | default('Key is missing'))) }}"
+  when: item.changed | default(False) == False and item.skipped | default(False) == False
+  register: delgrp4
+
+- name: F03f. Remove Address Groups (Try 4)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.item.item.item.key }}"
+  failed_when: false
+  loop: "{{ delgrp4.results }}"
+  loop_control:
+    label: "{{ item._ansible_item_label | default(item.item.key | default(item.item.item.key | default(item.item.item.item.key | default('Key is missing')))) }}"
+  when: item.changed | default(False) == False and item.skipped | default(False) == False
+  register: delgrp5
+
+- name: F03g. Remove Address Groups (Try 5)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.item.item.item.item.key }}"
+  failed_when: false
+  loop: "{{ delgrp5.results }}"
+  loop_control:
+    label: "{{ item._ansible_item_label | default(item.item.key | default(item.item.item.key | default(item.item.item.item.key | default(item.item.item.item.item.key | default('Key is missing'))))) }}"
+  when: item.changed | default(False) == False and item.skipped | default(False) == False
+  register: delgrp6
+
+- name: F03f. Remove Address Groups (Final Try)
+  fortios_firewall_addrgrp:
+    host: "{{ ansible_host }}"
+    username: "{{ admin_username | default(ansible_username | default('admin')) }}"
+    password: "{{ admin_password | default(ansible_password | default('')) }}"
+    vdom: "{{ ansible_vdom | default('root') }}"
+    https: "{{ ansible_https | default(true) }}"
+    firewall_addrgrp:
+      state: "absent"
+      name: "{{ item.item.item.item.item.item.key }}"
+  loop: "{{ delgrp6.results }}"
+  loop_control:
+    label: "{{ item._ansible_item_label | default(item.item.key | default(item.item.item.key | default(item.item.item.item.key | default(item.item.item.item.item.key | default(item.item.item.item.item.item.key | default('Key is missing')))))) }}"
+  when: item.changed | default(False) == False and item.skipped | default(False) == False

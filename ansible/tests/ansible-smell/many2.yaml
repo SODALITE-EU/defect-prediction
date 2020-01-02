@@ -1,0 +1,72 @@
+---
+- name: grafana
+  hosts: "client"
+  tasks:
+    - name: add repo grafana
+      yum_repository:
+        name: grafana
+        description: Gafana upstream yum repo
+        baseurl: "https://packages.grafana.com/oss/rpm"
+        gpgcheck: yes
+        enabled: yes
+        gpgkey: "https://packages.grafana.com/gpg.key"
+        sslverify: yes
+        sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: install grafana 
+      yum:
+        name: grafana
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: start grafana server
+      become: true
+      systemd:
+        daemon_reload: true
+        name: grafana-server
+        state: restarted
+        enabled: yes
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: check status firewalld 
+      shell: "firewall-cmd --state"
+      register: status
+      failed_when:
+        - status.rc != 0 
+        - status.rc != 252
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: Firewalld setting 
+      firewalld:
+        port: 3000/tcp
+        immediate: yes
+        permanent: true
+        state: enabled
+      when: status.stdout == 'running' and ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: Create prometheus datasource
+      grafana_datasource:
+        name: "prometheus"
+        grafana_url: "http://localhost:3000"
+        grafana_user: "admin"
+        grafana_password: "admin"
+        org_id: "1"
+        is_default: yes
+        ds_type: "prometheus"
+        url: "{{ url_prometheus }}"
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+    - name: copy template
+      copy:
+        src: "node_exporter.json"
+        dest: "/root/node_exporter.json"
+        mode: 0755
+        owner: root
+        group: root
+    - name: Import Grafana dashboard
+      grafana_dashboard:
+        grafana_url: "http://localhost:3000"
+        grafana_user: "admin"
+        grafana_password: "admin"
+        state: present
+        message: Updated by ansible
+        overwrite: yes
+        org_id: 1
+        path: /root/node_exporter.json
+      when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
+
+# ansible-playbook grafana.yml --extra-vars '{"url_prometheus":"http://localhost:9090"}'

@@ -1,0 +1,8 @@
+
+- name: Testing port 80 - 443 - 8443 on server_x
+  wait_for: host=server_x port={{item}} timeout=1
+  with_items:
+    - 80
+    - 443
+    - 8443
+  when: (sg_building == "TIGERY" and sg_marley_environment == "DEV" and sg_building is defined and sg_marley_environment is defined) or (specified_building == "TIGERY" and specified_environment == "DEV" and specified_building is defined and specified_environment is defined)

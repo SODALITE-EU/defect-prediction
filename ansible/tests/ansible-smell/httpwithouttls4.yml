@@ -1,0 +1,30 @@
+---
+
+- name: Creating the Admin tenant
+  keystone_user: token={{ admin_token }} endpoint=http://{{ ansible_hostname }}:{{ keystone_admin_port }}/v2.0 tenant=admin state=present tenant_description="Admin for the Openstack Services"
+
+- name: Creating the Service tenant
+  keystone_user: token={{ admin_token }} endpoint=http://{{ ansible_hostname }}:{{ keystone_admin_port }}/v2.0 tenant=service state=present tenant_description="Service tenant for all the Openstack Services"
+
+- name: Creating the Admin user for the Openstack Services
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone user-create --name admin --pass {{ admin_user_password }} 
+
+- name: Creating the Demo user
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone user-create --name demo --pass {{ admin_user_password }}
+
+- name: Creating an Admin role
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone role-create --name admin
+
+- name: Ading the Admin user to the Admin role
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone user-role-add --user=admin --tenant=admin --role=admin
+
+- name: Cretaing the Keystone service
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone service-create --name=keystone --type=identity --description="Keystone Identity Service"
+
+- name: Creating the Endpoint of the Keystone Service 
+  shell: export OS_SERVICE_TOKEN=ad4c82ecf26a7b40149d;export  OS_SERVICE_ENDPOINT=http://{{ ansible_hostname }}:35357/v2.0;keystone endpoint-create --service-id=`keystone service-list | grep -w keystone | awk '{ print $2 }'` --publicurl=http://{{ ansible_hostname }}:5000/v2.0 --internalurl=http://{{ ansible_hostname }}:5000/v2.0 --adminurl=http://{{ ansible_hostname }}:35357/v2.0
+
+- name: Creating the Openrc file for the authentication
+  shell: echo -en  "export OS_USERNAME=admin\nexport OS_PASSWORD={{ admin_user_password }}\nexport OS_TENANT_NAME=admin\nexport OS_AUTH_URL=http://{{ ansible_hostname }}:35357/v2.0" > /root/openrc.sh
+
+

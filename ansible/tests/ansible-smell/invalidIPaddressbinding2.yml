@@ -1,0 +1,18 @@
+---
+tinyproxy_log_level: Info
+
+tinyproxy_maxclients: 100
+tinyproxy_minspare_servers: 5
+tinyproxy_maxspare_servers: 10
+tinyproxy_startservers: 10
+tinyproxy_maxrequest: 0
+
+tinyproxy_allowed_subnet: 0.0.0.0
+tinyproxy_listen_address: 0.0.0.0
+tinyproxy_port: 8888
+
+tinyproxy_upstream_proxies:
+  - address: "{{ lookup('env','http_proxy') | regex_replace('^(?P<protocol>http.?://)(?P<host>.+):(?P<port>\\d+)$', '\\g<host>:\\g<port>') }}"
+
+profile_proxy: http://localhost:{{ tinyproxy_port }}
+docker_proxy: http://192.168.56.99:5000

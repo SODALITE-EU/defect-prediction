@@ -1,0 +1,62 @@
+---
+- name: "Add nodes to required groups"
+  hosts: storm-nodes
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: Add nodes to dse-cluster group (from {{ outer_loop.dc_name }})
+    add_host:
+      name: "{{ hostvars[local_item].inventory_hostname }}"
+      ansible_host: "{{ hostvars[local_item].ansible_host|default(hostvars[local_item].ansible_ssh_host) }}"
+      ansible_user: "{{ hostvars[local_item].ansible_user|default('root') }}"
+      ansible_ssh_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      ansible_become_user: root
+      ansible_become_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      groups: "dse-cluster"
+      dc_name: "{{ outer_loop.dc_name }}"
+      options: "{{ outer_loop.options }}"
+      rack_name: "{{ hostvars[local_item].rack_name|default('RAC1') }}"
+    loop_control:
+      loop_var: local_item
+    with_items: "{{ groups[outer_loop.options.group]|sort }}"
+    when: "{{ outer_loop.options.workloads is defined }}"
+    tags:
+      - always
+
+  - name: Add nodes to dse-seeds group (from {{ outer_loop.dc_name }})
+    add_host:
+      name: "{{ hostvars[local_item].inventory_hostname }}"
+      ansible_host: "{{ hostvars[local_item].ansible_host|default(hostvars[local_item].ansible_ssh_host) }}"
+      ansible_user: "{{ hostvars[local_item].ansible_user|default('root') }}"
+      ansible_ssh_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      ansible_become_user: root
+      ansible_become_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      groups: "dse-seeds"
+      dc_name: "{{ outer_loop.dc_name }}"
+      options: "{{ outer_loop.options }}"
+      rack_name: "{{ hostvars[local_item].rack_name|default('RAC1') }}"
+    loop_control:
+      loop_var: local_item
+    with_items: "{{ groups[outer_loop.options.group]|sort|batch(3)|list|first }}"
+    when: "{{ outer_loop.options.workloads is defined }}"
+    tags:
+      - always
+
+  - name: Add nodes to opscenter-group group (from {{ outer_loop.dc_name }})
+    add_host:
+      name: "{{ hostvars[local_item].inventory_hostname }}"
+      ansible_host: "{{ hostvars[local_item].ansible_host|default(hostvars[local_item].ansible_ssh_host) }}"
+      ansible_user: "{{ hostvars[local_item].ansible_user|default('root') }}"
+      ansible_ssh_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      ansible_become_user: root
+      ansible_become_pass: "{{ hostvars[local_item].ansible_ssh_pass|default('') }}"
+      groups: "opscenter-group"
+      dc_name: "{{ outer_loop.dc_name }}"
+      options: "{{ outer_loop.options }}"
+      rack_name: "{{ hostvars[local_item].rack_name|default('RAC1') }}"
+    loop_control:
+      loop_var: local_item
+    with_items: "{{ groups[outer_loop.options.group]|sort|list|first }}"
+    when: "{{ outer_loop.dc_name == opscenter_dc }}"
+    tags:
+      - always

@@ -1,0 +1,64 @@
+---
+- hosts: linux
+  remote_user: ansible
+  become_user: root
+  become: true
+
+  #prompt for boot loader password
+  vars_prompt:
+    - name: "boot_loader_password"
+      prompt: "grub boot loader password"
+      private: yes
+      #requires passlib - pip install passlib
+      encrypt: "md5_crypt"
+      #salt size of grub-md5-crypt is 6
+      salt_size: 6
+      confirm: yes
+
+    # - name: "boot_loader_password_user"
+      # prompt: "grub boot loader user (Ubuntu)"
+      # private: no
+
+    # - name: "boot_loader_password_ubuntu"
+      # prompt: "grub boot loader password (Ubuntu)"
+      # private: yes
+      # #requires passlib - pip install passlib
+      # encrypt: "pbkdf2_digest"
+      # #salt size of grub-md5-crypt is 6
+      # salt_size: 6
+      # confirm: yes
+
+  tasks:
+    - name: Set boot loader password
+      lineinfile:
+        dest: /etc/grub.conf
+        state: present
+        regexp: "^password"
+        insertafter: "^timeout"
+        line: "password --md5 {{ boot_loader_password }}"
+      when: not (ansible_distribution == "Ubuntu")
+
+    - name: Display error
+      debug:
+        msg: "ERROR: Setting boot loader password is currently not supported on {{ ansible_distribution }}"
+      when: ansible_distribution == "Ubuntu"
+
+    # - name: Set boot loader password users (Ubuntu)
+      # lineinfile: >
+          # dest=/etc/grub.d/01_users
+          # state=present
+          # insertafter="EOF"
+          # line='set superusers="{{ boot_loader_password_user }}"'
+      # when: ansible_distribution == "Ubuntu"
+
+    # - name: Set boot loader password (Ubuntu)
+      # lineinfile: >
+          # dest=/etc/grub.d/00_header
+          # state=present
+          # insertafter="EOF"
+          # line='password_pbkdf2 {{ boot_loader_password_user }} {{ boot_loader_password_ubuntu }}'
+      # when: ansible_distribution == "Ubuntu"
+
+    # - name: Activate boot loader password (Ubuntu)
+      # command: /usr/sbin/update-grub
+      # when: ansible_distribution == "Ubuntu"

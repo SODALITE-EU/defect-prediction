@@ -1,0 +1,63 @@
+---
+
+- name: install system tools
+  apt: name={{ item }} update_cache=yes state=present
+  with_items:
+   - htop
+   - iotop
+   - inotify-tools
+   - sysstat
+   - sysdig
+   - oprofile
+   - nicstat
+   - iptraf
+   - pax-utils
+  tags: systools
+
+- name: install hardware static perf tools
+  apt: name={{ item }} update_cache=yes state=present
+  with_items:
+   - hwinfo
+
+- name: install kernel tools
+  apt: name={{ item }} update_cache=yes state=present
+  with_items:
+   - linux-tools-generic
+  tags: perf
+
+
+- name: install systemtap
+  apt: name={{ item }}
+       update_cache=yes
+       state=latest
+  with_items:
+   - gcc
+   - systemtap
+  tags: systemtap
+
+- name: get repo keys
+  apt_key: keyserver=keyserver.ubuntu.com id=C8CAB6595FDFF622 state=present
+  tags: systemtap
+
+- name: add repos for debug symbols
+  apt_repository: repo="{{ item }}" state=present
+  with_items:
+    - deb http://ddebs.ubuntu.com/ {{ ansible_distribution_release }} main restricted universe multiverse
+    - deb http://ddebs.ubuntu.com/ {{ ansible_distribution_release }}-updates main restricted universe multiverse
+  tags: systemtap
+
+- name: install debug info kernel
+  apt: name=linux-image-{{ ansible_kernel }}-dbgsym
+       update_cache=yes
+       state=present
+  # HACK for Travis CI
+  # ubuntu release and kernel version do not match
+  # for example trusty has kernel 3.13 but on Travis CI kernel was upgraded to 4.4
+  when: not ( ansible_distribution_release == "trusty" and ansible_kernel.split(".")[:2] != ['3','13'] )
+  tags: systemtap
+
+- name: tests systemtap
+  command: stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  # HACK for Travis CI
+  when: not ( ansible_distribution_release == "trusty" and ansible_kernel.split(".")[:2] != ['3','13'] )
+  tags: systemtap

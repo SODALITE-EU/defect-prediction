@@ -1,0 +1,14 @@
+
+- name: Debug
+  debug:
+    msg: "{{groups['DBServers'][0]}}, {{ groups['DBServers'][1] }}, {{ansible_default_ipv4.address}}"
+
+- name: Bulid cluster
+  raw: curl -X POST -H "Content-Type:application/json" http://admin:admin@"{{ansible_default_ipv4.address}}":5984/_cluster_setup -d '{"action":"enable_cluster", "bind_address":"0.0.0.0", "username":"admin", "password":"admin", "port":5984, "node_count":"2", "remote_node":"{{ groups['DBServers'][1] }}", "remote_current_user":"admin", "remote_current_password":"admin" }';
+     curl -X POST -H "Content-Type:application/json" http://admin:admin@"{{ansible_default_ipv4.address}}":5984/_cluster_setup -d '{"action":"add_node", "host":"{{ groups['DBServers'][1] }}", "port":5984, "username":"admin", "password":"admin"}';
+     curl -X POST -H "Content-Type:application/json" http://admin:admin@"{{ansible_default_ipv4.address}}":5984/_cluster_setup -d '{"action":"finish_cluster"}'
+
+# In coordinate node, remove nonode@nohost#
+- name: Delete nonode
+  raw: rev=`curl -XGET "http://"{{ansible_default_ipv4.address}}":5986/_nodes/nonode@nohost" --user "admin:admin" | sed -e 's/[{}"]//g' | cut -f3 -d:`;
+    curl -X DELETE "http://"{{ansible_default_ipv4.address}}":5986/_nodes/nonode@nohost?rev=${rev}"  --user "admin:admin"

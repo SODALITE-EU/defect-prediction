@@ -1,0 +1,29 @@
+---
+- name: Get variables for Package Manager
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_pkg_mgr }}.yml"
+    - empty-fallback-hack.yml
+
+- name: Get OS family variables (override Package Manager)
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+    - empty-fallback-hack.yml
+
+- name: Get distribution variables (override family)
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - empty-fallback-hack.yml
+  when: ansible_os_family != ansible_distribution # Account for `family == distro` like RedHat, Debian, etc.
+
+# Install instructions for each package manager
+# Note: These are not (for instance) `include: "install-{{ ansible_pkg_mgr }}.yml"` (despite looking cleaner) due to...
+# ...reasons that are outlined here: https://github.com/ansible/ansible/issues/10020
+- include: "install-yum.yml"
+  when: ansible_pkg_mgr == "yum"
+
+- include: "config-yum.yml"
+  when: ansible_pkg_mgr == "yum"
+  ignore_errors: true # There may not be any configuration needed depending on the repository being provided

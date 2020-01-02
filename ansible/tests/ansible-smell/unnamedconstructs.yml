@@ -1,0 +1,9 @@
+- hosts: web
+  tasks:
+    - yum:
+        name: http
+        state : latest
+    - service:
+        name: httpd
+        state: started
+        enabled: yes

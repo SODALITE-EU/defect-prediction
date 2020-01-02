@@ -1,0 +1,110 @@
+# baseURI: https://www.sodalite.eu/ontologies/sodalite-metamodel/
+# imports: http://www.loa-cnr.it/ontologies/DUL.owl
+# imports: http://www.w3.org/2006/time
+
+@prefix : <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type owl:Ontology ;
+  owl:imports <http://www.loa-cnr.it/ontologies/DUL.owl> ;
+  owl:imports <http://www.w3.org/2006/time> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+:AbstractApplicationDeployment
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:Situation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom :SodaliteSituation ;
+      owl:onProperty :includesTemplate ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty DUL:includesAgent ;
+      owl:someValuesFrom :User ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty owl:versionInfo ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
+.
+:SodaliteConcept
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom :SodaliteParameter ;
+      owl:onProperty DUL:hasParameter ;
+    ] ;
+.
+:SodaliteDescription
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:Description ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty :specification ;
+      owl:someValuesFrom :SodaliteConcept ;
+    ] ;
+.
+:SodaliteParameter
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:Parameter ;
+  rdfs:subClassOf :SodaliteConcept ;
+.
+:SodaliteSituation
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:Situation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty :hasContext ;
+      owl:someValuesFrom :SodaliteDescription ;
+    ] ;
+.
+:User
+  rdf:type owl:Class ;
+  rdfs:subClassOf DUL:NaturalPerson ;
+.
+:createdAt
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain :AbstractApplicationDeployment ;
+  rdfs:subPropertyOf time:inXSDDateTime ;
+.
+:createdBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :AbstractApplicationDeployment ;
+  rdfs:range :User ;
+  rdfs:subPropertyOf DUL:includesAgent ;
+.
+:hasContext
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :SodaliteSituation ;
+  rdfs:range :SodaliteDescription ;
+  rdfs:subPropertyOf DUL:satisfies ;
+.
+:hasInferredContext
+  rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf DUL:satisfies ;
+  owl:propertyChainAxiom (
+      rdfs:subClassOf
+      :hasContext
+    ) ;
+.
+:includesTemplate
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :AbstractApplicationDeployment ;
+  rdfs:range :SodaliteSituation ;
+  rdfs:subPropertyOf DUL:isSettingFor ;
+.
+:specification
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :SodaliteDescription ;
+  rdfs:range :SodaliteConcept ;
+  rdfs:subPropertyOf DUL:defines ;
+.

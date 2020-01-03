@@ -1,0 +1,140 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+metadata:
+  template_name: Cumulus Linux Switch Shell 2G
+  template_author: Quali
+  template_version: 0.1.0
+  template_icon: shell-icon.png
+
+description: >
+ This Shell supports devices that run Cumulus Linux operating system
+
+imports:
+  - cloudshell_standard: cloudshell_networking_standard_5_0_4.yaml
+
+node_types:
+
+  vendor.Cumulus Linux Switch 2G:
+    derived_from: cloudshell.nodes.Switch
+    #properties:
+    #  my_property:
+    #    type: string          # optional values: string, integer, float, boolean, cloudshell.datatypes.Password
+    #    default: fast
+    #    description: Some attribute description
+    #    constraints:
+    #      - valid_values: [fast, slow]
+    capabilities:
+      concurrent_execution:
+        type: cloudshell.capabilities.SupportConcurrentCommands
+      auto_discovery_capability:
+        type: cloudshell.capabilities.AutoDiscovery
+        properties:
+          enable_auto_discovery:
+            type: boolean
+            default: true
+          auto_discovery_description:
+            type: string
+            default: Describe the auto discovery
+          inventory_description:
+            type: string
+            default: Describe the resource shell template
+          User:
+            description: User with administrative privileges
+            type: string
+          Password:
+            description: The password is required by some CLI protocols such as Telnet and is required according to the device configuration.
+            type: cloudshell.datatypes.Password
+          Enable Password:
+            description: UNIX root password.
+            type: cloudshell.datatypes.Password
+          Sessions Concurrency Limit:
+            description: The maximum number of concurrent sessions that the driver will open to the device. Default is 1 (no concurrency).
+            type: integer
+            default: 1
+          SNMP Read Community:
+            description: The SNMP Read-Only Community String is like a password. It is sent along with each SNMP Get-Request and allows (or denies) access to device.
+            type: string
+          SNMP Write Community:
+            description: The SNMP Write Community String is like a password. It is sent along with each SNMP Set-Request and allows (or denies) chaning MIBs values.
+            type: string
+          SNMP V3 User:
+            description: Relevant only in case SNMP V3 is in use.
+            type: string
+          SNMP V3 Password:
+            description: Relevant only in case SNMP V3 is in use.
+            type: cloudshell.datatypes.Password
+          SNMP V3 Private Key:
+            description: Relevant only in case SNMP V3 is in use.
+            type: string
+          SNMP V3 Authentication Protocol:
+            description: Relevant only in case SNMP V3 is in use.
+            type: string
+            default: No Authentication Protocol
+            constraints:
+              - valid_values: [No Authentication Protocol, MD5, SHA]
+          SNMP V3 Privacy Protocol:
+            description: Relevant only in case SNMP V3 is in use.
+            type: string
+            default: No Privacy Protocol
+            constraints:
+              - valid_values: [No Privacy Protocol, DES, 3DES-EDE, AES-128, AES-192, AES-256]
+          SNMP Version:
+            type: string
+            default: ''
+            description: The version of SNMP to use. Possible values are v1, v2c and v3.
+            constraints:
+              - valid_values: [ v1, v2c, v3]
+          Enable SNMP:
+            description: If set to True and SNMP isn’t enabled yet in the device the Shell will automatically enable SNMP in the device when Autoload command is called. SNMP must be enabled on the device for the Autoload command to run successfully. True by default.
+            type: boolean
+            default: true
+          Disable SNMP:
+            description: If set to True SNMP will be disabled automatically by the Shell after the Autoload command execution is completed. False by default.
+            type: boolean
+            default: false
+          Backup Location:
+            description: Used by the save/restore orchestration to determine where backups should be saved.
+            type: string
+          Backup Type:
+            description: Supported protocols for saving and restoring of configuration and firmware files. Possible values are 'File System' 'FTP' and 'TFTP'. Default value is 'File System'.
+            type: string
+            default: File System
+          Backup User:
+            description: Username for the storage server used for saving and restoring of configuration and firmware files.
+            type: string
+          Backup Password:
+            description: Password for the storage server used for saving and restoring of configuration and firmware files.
+            type: cloudshell.datatypes.Password
+          Power Management:
+            type: boolean
+            default: true
+            description: Used by the power management orchestration, if enabled, to determine whether to automatically manage the device power status. Enabled by default.
+          VRF Management Name:
+            description: The default VRF Management to use if configured in the network and no such input was passed to the Save or Restore command.
+            type: string
+          Console Server IP Address:
+            description: The IP address of the console server, in IPv4 format.
+            type: string
+          Console User:
+            type: string
+          Console Port:
+            description: The port on the console server, usually TCP port, which the device is associated with.
+            type: integer
+            default: 0
+          Console Password:
+            type: cloudshell.datatypes.Password
+          CLI Connection Type:
+            type: string
+            description: The CLI connection type that will be used by the driver. Possible values are Auto, Console, SSH, Telnet and TCP. If Auto is selected the driver will choose the available connection type automatically. Default value is Auto.
+            default: Auto
+          CLI TCP Port:
+            description: TCP Port to user for CLI connection. If kept empty a default CLI port will be used based on the chosen protocol, for example Telnet will use port 23.
+            type: Numeric
+            default: 0
+    artifacts:
+      icon:
+        file: shell-icon.png
+        type: tosca.artifacts.File
+      driver:
+        file: CumulusLinuxSwitchShell2GDriver.zip
+        type: tosca.artifacts.File

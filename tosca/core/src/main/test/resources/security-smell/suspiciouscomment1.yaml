@@ -1,0 +1,182 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+description: Setup CORD-related services -- vOLT, vCPE, vBNG.
+
+imports:
+   - custom_types/xos.yaml
+
+node_types:
+#FIXME: See if we can avoid redefining the below types again in this file by moving to common file
+    tosca.nodes.SFlowService:
+        derived_from: tosca.nodes.Root
+        description: >
+            XOS SFlow Collection Service
+        capabilities:
+            scalable:
+                type: tosca.capabilities.Scalable
+            service:
+                type: tosca.capabilities.xos.Service
+        properties:
+            no-delete:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to delete this object
+            no-create:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to create this object
+            no-update:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to update this object
+            kind:
+                type: string
+                default: generic
+                description: Type of service.
+            view_url:
+                type: string
+                required: false
+                description: URL to follow when icon is clicked in the Service Directory.
+            icon_url:
+                type: string
+                required: false
+                description: ICON to display in the Service Directory.
+            enabled:
+                type: boolean
+                default: true
+            published:
+                type: boolean
+                default: true
+                description: If True then display this Service in the Service Directory.
+            public_key:
+                type: string
+                required: false
+                description: Public key to install into Instances to allows Services to SSH into them.
+            private_key_fn:
+                type: string
+                required: false
+                description: Location of private key file
+            versionNumber:
+                type: string
+                required: false
+                description: Version number of Service.
+            sflow_port:
+              type: integer
+              required: false
+              default: 6343
+              description: sFlow listening port
+            sflow_api_port:
+              type: integer
+              required: false
+              default: 33333
+              description: sFlow publish subscribe api listening port
+
+    tosca.nodes.CeilometerService:
+        derived_from: tosca.nodes.Root
+        description: >
+            XOS Ceilometer Service
+        capabilities:
+            scalable:
+                type: tosca.capabilities.Scalable
+            service:
+                type: tosca.capabilities.xos.Service
+        properties:
+            no-delete:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to delete this object
+            no-create:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to create this object
+            no-update:
+                type: boolean
+                default: false
+                description: Do not allow Tosca to update this object
+            kind:
+                type: string
+                default: generic
+                description: Type of service.
+            view_url:
+                type: string
+                required: false
+                description: URL to follow when icon is clicked in the Service Directory.
+            icon_url:
+                type: string
+                required: false
+                description: ICON to display in the Service Directory.
+            enabled:
+                type: boolean
+                default: true
+            published:
+                type: boolean
+                default: true
+                description: If True then display this Service in the Service Directory.
+            public_key:
+                type: string
+                required: false
+                description: Public key to install into Instances to allows Services to SSH into them.
+            private_key_fn:
+                type: string
+                required: false
+                description: Location of private key file
+            versionNumber:
+                type: string
+                required: false
+                description: Version number of Service.
+            ceilometer_pub_sub_url:
+                type: string
+                required: false
+                description: REST URL of ceilometer PUB/SUB component
+
+    tosca.nodes.CeilometerTenant:
+        derived_from: tosca.nodes.Root
+        description: >
+            CORD: A Tenant of the Ceilometer Service.
+        properties:
+            kind:
+                type: string
+                default: generic
+                description: Kind of tenant
+
+topology_template:
+  node_templates:
+    service_ceilometer:
+      type: tosca.nodes.CeilometerService
+      properties:
+          no-create: true
+          no-update: true
+          no-delete: true
+
+    my_ceilometer_tenant:
+      description: Ceilometer Service default Tenant
+      type: tosca.nodes.CeilometerTenant
+      requirements:
+          - provider_service:
+              node: service_ceilometer
+              relationship: tosca.relationships.MemberOfService
+       
+    Ceilometer:
+      type: tosca.nodes.DashboardView
+      properties:
+          url: template:xosCeilometerDashboard
+    Tenant:
+      type: tosca.nodes.DashboardView
+      properties:
+          no-create: true
+          no-update: true
+          no-delete: true
+
+    padmin@vicci.org:
+      type: tosca.nodes.User
+      properties:
+          firstname: XOS
+          lastname: admin
+          is_admin: true
+      requirements:
+          - tenant_dashboard:
+              node: Tenant
+              relationship: tosca.relationships.UsesDashboard
+          - ceilometer_dashboard:
+              node: Ceilometer
+              relationship: tosca.relationships.UsesDashboard

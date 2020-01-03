@@ -1,0 +1,116 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+description: Adds OpenCloud Sites, Deployments, and Controllers.
+
+imports:
+   - custom_types/xos.yaml
+
+topology_template:
+  node_templates:
+
+# Nodes
+    trusty-server-multi-nic:
+      type: tosca.nodes.Image
+      properties:
+         disk_format: QCOW2
+         container_format: BARE
+
+    campus:
+      type: tosca.nodes.Deployment
+      properties:
+          flavors: m1.large, m1.medium, m1.small
+      requirements:
+          - image:
+              node: trusty-server-multi-nic
+              relationship: tosca.relationships.SupportsImage
+
+# controllers
+    campus-arizona:
+      type: tosca.nodes.Controller
+      requirements:
+          - deployment:
+              node: campus
+              relationship: tosca.relationships.ControllerDeployment
+      properties:
+          backend_type: CORD
+          version: 1.1
+          auth_url: http://192.168.33.10:9999/
+          admin_user: padmin@vicci.org
+          admin_password: letmein
+          admin_tenant: admin
+          domain: Default
+
+    campus-utah:
+      type: tosca.nodes.Controller
+      requirements:
+          - deployment:
+              node: campus
+              relationship: tosca.relationships.ControllerDeployment
+      properties:
+          backend_type: CORD
+          version: 1.1
+          auth_url: http://192.168.33.11:9999/
+          admin_user: padmin@vicci.org
+          admin_password: letmein
+          admin_tenant: admin
+          domain: Default
+
+# Sites
+    arizona:
+      type: tosca.nodes.Site
+      properties:
+          display_name: Arizona
+          site_url: http://opencloud.us/
+          hosts_nodes: false 
+      requirements:
+          - deployment:
+               node: campus
+               relationship: tosca.relationships.MemberOfDeployment
+          - controller:
+               node: campus-arizona
+               relationship: tosca.relationships.UsesController
+
+# Users
+    padmin@vicci.org:
+      type: tosca.nodes.User
+      requirements:
+          - site:
+              node: arizona
+              relationship: tosca.relationships.MemberOfSite
+      properties:
+          is_admin: true
+          is_active: true
+          firstname: XOS
+          lastname: admin
+          password: letmein
+
+    acb@cs.princeton.edu:
+      type: tosca.nodes.User
+      requirements:
+          - site:
+              node: arizona
+              relationship: tosca.relationships.MemberOfSite
+      properties:
+          is_admin: true
+          is_active: true
+          firstname: Andy
+          lastname: Bavier
+          password: letmein
+
+# Slices
+    arizona_myslice:
+      description: A tests slice at the Arizona site
+      type: tosca.nodes.Slice
+      properties:
+          network: noauto
+      requirements:
+          - site:
+              node: arizona
+              relationship: tosca.relationships.MemberOfSite
+          - privilege:
+              node: acb@cs.princeton.edu
+              relationship: tosca.relationships.AccessPrivilege
+          - image:
+              node: trusty-server-multi-nic
+              relationship: tosca.relationships.DefaultImage
+# Services

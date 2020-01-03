@@ -1,0 +1,619 @@
+tosca_definitions_version: alien_dsl_1_4_0
+
+metadata:
+  template_name: indigo-mesos-types
+  template_version: 1.0.0
+  template_author: indigo
+
+description: The INDIGO Mesos custom types
+
+imports:
+  - tosca-normative-types:1.0.0-ALIEN14
+  - indigo-base-types:1.0.0
+
+capability_types:
+
+  tosca.capabilities.indigo.LRMS.Mesos:
+    derived_from: tosca.capabilities.indigo.LRMS
+    properties:
+      type:
+        type: string
+        required: true
+        default: mesos
+        constraints:
+          - equal: mesos
+
+  tosca.capabilities.indigo.MesosMaster:        
+    derived_from: tosca.capabilities.Container
+
+  tosca.capabilities.indigo.MesosSlave:
+    derived_from: tosca.capabilities.Container
+
+node_types:
+
+  tosca.nodes.indigo.DariahRepository:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      icon: /images/dariah.png
+    properties:
+      marathon_password:
+        type: string
+        required: yes
+      cache_cpus:
+        type: float
+        required: no
+        default: 1.0
+      cache_mem:
+        type: integer
+        required: no
+        default: 1024
+      cache_image:
+        type: string
+        required: no
+        default: 'redis'
+      db_cpus:
+        type: float
+        required: no
+        default: 1.0
+      db_mem:
+        type: integer
+        required: no
+        default: 1024
+      db_image:
+        type: string
+        required: no
+        default: 'postgres'
+      es_cpus:
+        type: float
+        required: no
+        default: 1.0
+      es_mem:
+        type: integer
+        required: no
+        default: 1024
+      es_image:
+        type: string
+        required: no
+        default: 'indigodatacloudapps/dariah-repository:elasticsearch'
+      mq_cpus:
+        type: float
+        required: no
+        default: 1.0
+      mq_mem:
+        type: integer
+        required: no
+        default: 1024
+      mq_image:
+        type: string
+        required: no
+        default: 'rabbitmq:3-management'
+      statsd_cpus:
+        type: float
+        required: no
+        default: 1.0
+      statsd_mem:
+        type: integer
+        required: no
+        default: 1024
+      statsd_image:
+        type: string
+        required: no
+        default: 'indigodatacloudapps/dariah-repository:statsd'
+      web_cpus:
+        type: float
+        required: no
+        default: 1.0
+      web_mem:
+        type: integer
+        required: no
+        default: 1024
+      web_image:
+        type: string
+        required: no
+        default: 'indigodatacloudapps/dariah-repository:web'
+      worker_cpus:
+        type: float
+        required: no
+        default: 1.0
+      worker_mem:
+        type: integer
+        required: no
+        default: 1024
+      worker_image:
+        type: string
+        required: no
+        default: 'indigodatacloudapps/dariah-repository:web'
+    artifacts:
+      - dariahrepo_role:
+          file: indigo-dc.dariahrepo
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        create:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/dariahrepo-setup.yml
+          inputs:
+            marathon_password: { get_property: [ SELF, marathon_password ] }
+            dariahrepo_app_cache_cpus: { get_property: [ SELF, cache_cpus ] }
+            dariahrepo_app_cache_mem: { get_property: [ SELF, cache_mem ] }
+            dariahrepo_app_cache_image: { get_property: [ SELF, cache_image ] }
+            dariahrepo_app_db_cpus: { get_property: [ SELF, db_cpus ] }
+            dariahrepo_app_db_mem: { get_property: [ SELF, db_mem ] }
+            dariahrepo_app_db_image: { get_property: [ SELF, db_image ] }
+            dariahrepo_app_es_cpus: { get_property: [ SELF, es_cpus ] }
+            dariahrepo_app_es_mem: { get_property: [ SELF, es_mem ] }
+            dariahrepo_app_es_image: { get_property: [ SELF, es_image ] }
+            dariahrepo_app_mq_cpus: { get_property: [ SELF, mq_cpus ] }
+            dariahrepo_app_mq_mem: { get_property: [ SELF, mq_mem ] }
+            dariahrepo_app_mq_image: { get_property: [ SELF, mq_image ] }
+            dariahrepo_app_statsd_cpus: { get_property: [ SELF, statsd_cpus ] }
+            dariahrepo_app_statsd_mem: { get_property: [ SELF, statsd_mem ] }
+            dariahrepo_app_statsd_image: { get_property: [ SELF, statsd_image ] }
+            dariahrepo_app_web_cpus: { get_property: [ SELF, web_cpus ] }
+            dariahrepo_app_web_mem: { get_property: [ SELF, web_mem ] }
+            dariahrepo_app_web_image: { get_property: [ SELF, web_image ] }
+            dariahrepo_app_worker_cpus: { get_property: [ SELF, worker_cpus ] }
+            dariahrepo_app_worker_mem: { get_property: [ SELF, worker_mem ] }
+            dariahrepo_app_worker_image: { get_property: [ SELF, worker_image ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.indigo.MesosMaster
+          relationship: tosca.relationships.HostedOn
+          node: tosca.nodes.SoftwareComponent
+          occurrences: [1, 1]
+
+  tosca.nodes.indigo.LRMS.FrontEnd.Mesos:
+    derived_from: tosca.nodes.indigo.LRMS.FrontEnd
+    metadata:
+      icon: /images/mesos.png
+    capabilities:
+        lrms:
+          type: tosca.capabilities.indigo.LRMS.Mesos
+        host:
+          type: tosca.capabilities.indigo.MesosMaster
+    properties:
+      # Set the current data of the mesos server
+      # but it can also specified in the TOSCA document
+      mesos_masters_list:
+        type: list
+        entry_schema:
+          type: string
+        required: no
+        # Removed as A4C does not support it
+        # default: { get_attribute: [ HOST, public_address ] }
+      mesos_authenticate_http:
+        type: boolean
+        required: no
+        default: true
+      mesos_username:
+        type: string
+        required: no
+        default: 'admin'       
+      mesos_password:
+        type: string
+        required: no
+        default: 'admin'         
+      marathon_enable_ssl:
+        type: boolean
+        required: no
+        default: true
+      marathon_username:
+        type: string
+        required: no
+        default: admin
+      marathon_password:
+        type: string
+        required: yes
+      enable_chronos:
+        type: boolean
+        required: no
+        default: true
+      chronos_enable_ssl:
+        type: boolean
+        required: no
+        default: true
+      chronos_username:
+        type: string
+        required: no
+        default: admin
+      chronos_password:
+        type: string
+        required: no
+        default: admin
+      enable_nfs_share:
+        type: boolean
+        required: no
+        default: false
+    artifacts:
+      - docker_agent_role:
+          file: indigo-dc.docker
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - consul_agent_role:
+          file: indigo-dc.consul
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - zookeeper_agent_role:
+          file: indigo-dc.zookeeper
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - mesos_agent_role:
+          file: indigo-dc.mesos
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - marathon_agent_role:
+          file: indigo-dc.marathon
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - chronos_agent_role:
+          file: indigo-dc.chronos
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - nfs_role:
+          file: indigo-dc.nfs
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        configure:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/mesos_master_install.yml
+          inputs:
+            mesos_masters_list_ips: { get_property: [ SELF, mesos_masters_list ] }
+            mesos_authenticate_http: { get_property: [ SELF, mesos_authenticate_http ] }
+            mesos_username: { get_property: [ SELF, mesos_username ] }
+            mesos_password: { get_property: [ SELF, mesos_password ] }
+            marathon_enable_ssl: { get_property: [ SELF, marathon_enable_ssl ] }
+            marathon_user: { get_property: [ SELF, marathon_username ] }
+            marathon_pass: { get_property: [ SELF, marathon_password ] }
+            enable_chronos: { get_property: [ SELF, enable_chronos ] }
+            chronos_enable_ssl: { get_property: [ SELF, chronos_enable_ssl ] }
+            chronos_user: { get_property: [ SELF, chronos_username ] }
+            chronos_pass: { get_property: [ SELF, chronos_password ] }
+            enable_nfs_share: { get_property: [ SELF, enable_nfs_share ] }
+            wn_ips: { get_property: [ SELF, wn_ips ] }
+
+  tosca.nodes.indigo.MesosMaster:
+    derived_from: tosca.nodes.indigo.LRMS.FrontEnd.Mesos
+    metadata:
+      icon: /images/mesos.png
+
+  tosca.nodes.indigo.CmsServices:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      icon: /images/cms.png
+    properties:
+      cms_local_site:
+        type: string
+        required: yes
+      cms_squid_image:
+        type: string
+        required: no
+        default: "spiga/frontiersquidv1"
+      cms_wn_image:
+        type: string
+        default: "spiga/cmswn"
+        required: no
+      cms_proxycache_image:
+        type: string
+        required: no
+        default: "spiga/ttscache"
+      mysquid_host:
+        type: string
+        required: yes
+      proxycache_host:
+        type: string
+        required: yes
+      iam_access_token:
+        type: string
+        description: INDIGO IAM access token
+        required: yes
+      iam_client_id:
+        type: string
+        description: INDIGO IAM client id
+        required: yes
+      iam_client_secret:
+        type: string
+        description: INDIGO IAM client secret
+        required: yes
+      marathon_username:
+        type: string
+        required: no
+        default: admin
+      marathon_password:
+        type: string
+        required: yes
+      cms_proxycache_token_manager:
+        type: string
+        required: yes
+      master_ips:
+        type: list
+        entry_schema:
+          type: string
+        required: yes
+      onedatatoken:
+        type: string
+        required: no
+      onedatacache:
+        type: string
+        required: no
+    artifacts:
+      - cms_config_role:
+          file: indigo-dc.cms_config
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        start:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/cms_services_start.yml
+          inputs:
+            cms_config_mysquid_host: { get_property: [ SELF, mysquid_host ] }
+            cms_config_proxycache_host: { get_property: [ SELF, proxycache_host ] }
+            cms_config_iam_token: { get_property: [ SELF, iam_access_token ] }
+            cms_config_iam_client_id: { get_property: [ SELF, iam_client_id ] }
+            cms_config_iam_client_secret: { get_property: [ SELF, iam_client_secret ] }
+            cms_config_cms_local_site: { get_property: [ SELF, cms_local_site ] }
+            cms_config_squid_image: { get_property: [ SELF, cms_squid_image ] }
+            cms_config_wn_image: { get_property: [ SELF, cms_wn_image ] }
+            cms_config_proxycache_image: { get_property: [ SELF, cms_proxycache_image ]}
+            cms_config_onedatacache: { get_property: [ SELF, onedatacache ] }
+            cms_config_onedatatoken: { get_property: [ SELF, onedatatoken ] }
+            marathon_user: { get_property: [ SELF, marathon_username ] }
+            marathon_pass: { get_property: [ SELF, marathon_password ] }
+            zookeeper_host_list: { get_property: [ SELF, master_ips ] }            
+            proxy_cache_manager: { get_property: [ SELF, cms_proxycache_token_manager ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.indigo.MesosMaster
+          relationship: tosca.relationships.HostedOn
+          node: tosca.nodes.SoftwareComponent
+          occurrences: [1, 1]
+
+  tosca.nodes.indigo.LRMS.WorkerNode.Mesos:
+    derived_from: tosca.nodes.indigo.LRMS.WorkerNode
+    metadata:
+      icon: /images/mesos.png
+    capabilities:
+        host:
+          type: tosca.capabilities.indigo.MesosSlave
+    properties:
+      # Set the current data of the mesos server
+      # but it can also specified in the TOSCA document
+      master_ips:
+        required: yes
+        type: list
+        entry_schema:
+          type: string
+      enable_nfs_share:
+        type: boolean
+        required: no
+        default: false
+    artifacts:
+      - docker_agent_role:
+          file: indigo-dc.docker
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - consul_agent_role:
+          file: indigo-dc.consul
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - mesos_agent_role:
+          file: indigo-dc.mesos
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - nfs_role:
+          file: indigo-dc.nfs
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        create:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/mesos_slave_install.yml
+          inputs:
+            mesos_masters_list_ips: { get_property: [ SELF, master_ips ] }
+            enable_nfs_share: { get_property: [ SELF, enable_nfs_share ] }
+            front_end_ip: { get_property: [ SELF, front_end_ip ] }
+
+  tosca.nodes.indigo.MesosSlave:
+    metadata:
+      icon: /images/mesos.png
+    derived_from: tosca.nodes.indigo.LRMS.WorkerNode.Mesos
+
+  tosca.nodes.indigo.CmsWnConfig:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      icon: /images/cms.png
+    properties:
+      cms_local_site:
+        type: string
+        required: yes
+      cms_stageoutsite:
+        type: string
+        required: yes
+      cms_stageoutserver:
+        type: string
+        required: yes
+      cms_stageoutprefix:
+        type: string
+        required: yes
+      cms_stageoutsite_fallback:
+        type: string
+        required: yes
+      cms_stageoutserver_fallback:
+        type: string
+        required: yes
+      cms_stageoutprefix_fallback:
+        type: string
+        required: yes
+      cms_input_path:
+        type: string
+        required: yes
+      cms_input_protocol:
+        type: string
+        required: yes
+      mysquid_host:
+        type: string
+        required: yes
+      proxycache_host:
+        type: string
+        required: yes
+      monitordb_ip:
+        type: string
+        required: no
+      elasticsearch_secret:
+        type: string
+        required: no
+    artifacts:
+      - cms_config_role:
+          file: indigo-dc.cms_config
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        configure:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/cms_wn_configure.yml
+          inputs:
+            cms_config_mysquid_host: { get_property: [ SELF, mysquid_host ] }
+            cms_config_proxycache_host: { get_property: [ SELF, proxycache_host ] }
+            cms_config_cms_local_site: { get_property: [ SELF, cms_local_site ] }
+            cms_config_stageoutsite: { get_property: [ SELF, cms_stageoutsite ] }
+            cms_config_stageoutserver: { get_property: [ SELF, cms_stageoutserver ] }
+            cms_config_stageoutprefix: { get_property: [ SELF, cms_stageoutprefix ] }
+            cms_config_stageoutsite_fallback: { get_property: [ SELF, cms_stageoutsite_fallback ] }
+            cms_config_stageoutserver_fallback: { get_property: [ SELF, cms_stageoutserver_fallback ] }
+            cms_config_stageoutprefix_fallback: { get_property: [ SELF, cms_stageoutprefix_fallback ] }
+            cms_input_path: { get_property: [ SELF, cms_input_path ] }
+            cms_input_protocol: { get_property: [ SELF, cms_input_protocol ] }
+            cms_config_elastic_secret: { get_property: [ SELF, elasticsearch_secret ] }
+            monitordb_ip: { get_property: [ SELF, monitordb_ip ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.indigo.MesosSlave
+          relationship: tosca.relationships.HostedOn
+          node: tosca.nodes.SoftwareComponent
+          occurrences: [1, 1]
+
+  tosca.nodes.indigo.MesosLoadBalancer:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      icon: /images/mesos.png
+    properties:
+      master_ips:
+        required: yes
+        type: list
+        entry_schema:
+          type: string
+      marathon_username:
+        type: string
+        required: no
+        default: admin
+      marathon_password:
+        type: string
+        required: yes
+    artifacts:
+      - docker_agent_role:
+          file: indigo-dc.docker
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - consul_agent_role:
+          file: indigo-dc.consul
+          type: tosca.artifacts.AnsibleGalaxy.role
+      - marathon_lb_role:
+          file: indigo-dc.marathon-lb
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        create:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/mesos_lb_install.yml
+          inputs:
+            consul_server_ips: { get_property: [ SELF, master_ips ] }
+            marathon_username: { get_property: [ SELF, marathon_username ] }
+            marathon_password: { get_property: [ SELF, marathon_password ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: tosca.nodes.indigo.Compute
+          relationship: tosca.relationships.HostedOn
+
+  tosca.nodes.indigo.SparkMesos:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      icon: /images/spark-mesos.png
+    properties:
+      marathon_password:
+        type: string
+        required: true
+      zookeeper_peers:
+        type: string
+        required: true
+      spark_mesos_deploy_app:
+        type: string
+        constraints:
+        - valid_values: [ apache-zeppelin, spark-dispatcher ]
+        required: false
+      spark_hdfs_uri:
+        type: string
+        required: false
+        default: ''
+      spark_swift_auth_url: 
+        type: string
+        required: false
+        default: ''
+      spark_swift_http_port:
+        type: string
+        required: false
+        default: '8080'
+      spark_swift_region: 
+        type: string
+        required: false
+        default: ''
+      spark_swift_tenant:
+        type: string
+        required: false
+        default: ''
+      spark_swift_username: 
+        type: string
+        required: false
+        default: ''
+      spark_swift_password: 
+        type: string
+        required: false
+        default: ''
+      spark_swift_provider: 
+        type: string
+        required: false
+        default: 'Test'
+      spark_cores_max: 
+        type: integer
+        required: false
+        default: '-1'
+      spark_executor_cores: 
+        type: integer
+        required: false
+        default: '-1'
+      spark_executor_mem:
+        type: scalar-unit.size
+        required: false
+        default: '0 GB'
+      spark_driver_mem: 
+        type: scalar-unit.size
+        required: false
+        default: '0 GB'
+      spark_driver_cores: 
+        type: integer
+        required: false
+        default: '-1'
+    artifacts:
+      - spark_mesos_role:
+          file: indigo-dc.spark-mesos
+          type: tosca.artifacts.AnsibleGalaxy.role
+    interfaces:
+      Standard:
+        create:
+          implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/mesos/spark_mesos_setup.yml
+          inputs:
+            marathon_password: { get_property: [ SELF, marathon_password ] }
+            zookeeper_peers: { get_property: [ SELF, zookeeper_peers ] }
+            spark_hdfs_uri: { get_property: [ SELF, spark_hdfs_uri ] }
+            spark_swift_auth_url: { get_property: [ SELF, spark_swift_auth_url ] }
+            spark_mesos_swift_http_port: { get_property: [ SELF, spark_swift_http_port ] }
+            spark_mesos_swift_region: { get_property: [ SELF, spark_swift_region  ] }
+            spark_mesos_swift_tenant: { get_property: [ SELF, spark_swift_tenant ] }
+            spark_mesos_swift_username:  { get_property: [ SELF, spark_swift_username ] }
+            spark_mesos_swift_password: { get_property: [ SELF, spark_swift_password ] }
+            spark_mesos_swift_provider: { get_property: [ SELF, spark_swift_provider ] }
+            spark_mesos_cores_max: { get_property: [ SELF, spark_cores_max ] }
+            spark_mesos_executor_cores: { get_property: [ SELF, spark_executor_cores ] }
+            spark_mesos_executor_mem: { get_property: [ SELF, spark_executor_mem ] }
+            spark_mesos_driver_mem: { get_property: [ SELF, spark_driver_mem ] }
+            spark_mesos_driver_cores: { get_property: [ SELF, spark_driver_cores ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.indigo.MesosMaster
+          relationship: tosca.relationships.HostedOn
+          node: tosca.nodes.SoftwareComponent
+          occurrences: [1, 1]

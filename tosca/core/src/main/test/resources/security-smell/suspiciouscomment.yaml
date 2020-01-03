@@ -1,0 +1,248 @@
+tosca_definitions_version: ${alien4cloud.dsl.version}
+
+template_name: yorc-openstack-types
+template_author: Yorc
+template_version: ${yorc.os.types.version}
+
+imports:
+  - tosca-normative-types:${tosca.normative.types.version}
+  - alien-base-types:${alien4cloud.version}
+  - yorc-types:${yorc.types.version}
+
+data_types:
+  yorc.datatypes.openstack.BootVolume:
+    derived_from: tosca.datatypes.Root
+    properties:
+      uuid:
+        type: string
+        required: false
+        description: UUID of the image, volume, or snapshot. Required unless source is set to 'blank'
+      source:
+        type: string
+        required: true
+        description: Source type of the device. Must be one of 'blank', 'image', 'volume', or 'snapshot'
+        constraints:
+          - valid_values: [ blank, image, volume, snapshot ]
+      destination:
+        type: string
+        required: false
+        description: Destination type, possible values are 'volume' or 'local'
+        constraints:
+          - valid_values: [ volume, local ]
+      size:
+        type: scalar-unit.size
+        required: false
+        description: >
+          Size of volume to create (default unit is MB). Required when source=image and destination=volume,
+          source=blank and destination=local, or source=blank and destination=volume
+        constraints:
+          - greater_or_equal: 1 GB
+      delete_on_termination:
+        type: boolean
+        required: false
+        default: true
+        description: Delete the volume upon termination of the instance
+artifact_types:
+  yorc.artifacts.openstack.Deployment:
+    derived_from: tosca.artifacts.Deployment
+
+capability_types:
+  # NOTE: Alien specific
+  yorc.capabilities.openstack.FIPConnectivity:
+    derived_from: tosca.capabilities.Connectivity
+
+policy_types:
+  yorc.openstack.policies.ServerGroupAffinity:
+    derived_from:  org.alien4cloud.policies.Affinity
+    description: >
+      Allows to apply a server group affinity placement policy to OpenStack compute instances
+    metadata:
+      # pluginId:pluginBean:phase
+      a4c_policy_impl: alien4cloud-yorc-plugin:yorc-openstack-server-group-modifier:post-node-match
+    targets: [ tosca.nodes.Compute ]
+    properties:
+      strict:
+        type: boolean
+        description: >
+         If true, the scheduling is stopped if the policy can't be applied.
+         If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
+         To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
+        required: false
+        default: true
+  yorc.openstack.policies.ServerGroupAntiAffinity:
+    derived_from:  org.alien4cloud.policies.AntiAffinity
+    description: >
+      Allows to apply a server group anti-affinity placement policy to OpenStack compute instances
+    metadata:
+      # pluginId:pluginBean:phase
+      a4c_policy_impl: alien4cloud-yorc-plugin:yorc-openstack-server-group-modifier:post-node-match
+    targets: [ tosca.nodes.Compute ]
+    properties:
+      strict:
+        type: boolean
+        description: >
+         If true, the scheduling is stopped if the policy can't be applied.
+         If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
+         To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
+        required: false
+        default: true
+
+node_types:
+  yorc.nodes.openstack.FloatingIP:
+    #derived_from: tosca.nodes.Root
+    # This is a hack to force Alien to generate a delegate operation for this type
+    derived_from: tosca.nodes.Network
+    properties:
+      ip:
+        type: string
+        description: A specific Floating IP to use. Note that either 'ip' or 'floating_network_name' should be specified and 'ip' take the precedence.
+        required: false
+      floating_network_name:
+        type: string
+        description: Name of the Pool of Floating IPs to use. Note that either 'ip' or 'floating_network_name' should be specified and 'ip' take the precedence.
+        required: false
+    capabilities:
+      connection:
+        type: yorc.capabilities.openstack.FIPConnectivity
+
+  yorc.nodes.openstack.Compute:
+    derived_from: yorc.nodes.Compute
+    properties:
+      image:
+        type: string
+        description: >
+          Openstack VM Image ID, this property is required when 'imageName' is not set and not booting from a volume
+        required: false
+      imageName:
+        type: string
+        description: >
+          Openstack VM Image Name, this property is required when 'image' is not set and not booting from a volume
+        required: false
+      boot_volume:
+        type: yorc.datatypes.openstack.BootVolume
+        description: >
+          Boot Volume to create
+        required: false
+      flavor:
+        type: string
+        description: The Openstack VM Flavor ID either this property or the 'flavorName' property is required
+        required: false
+      flavorName:
+        type: string
+        description: >
+          The Openstack VM Image Name either this property or the 'flavor' property is required.
+        required: false
+      availability_zone:
+        type: string
+        description: >
+          The Openstack Availability Zone on which the Compute should be hosted.
+        required: false
+      region:
+        type: string
+        description: >
+          The Openstack Region. Defaults to 'RegionOne'
+        required: false
+      key_pair:
+        type: string
+        description: >
+          The Openstack Key Pair name to use when creating this Compute
+        required: false
+      security_groups:
+        type: string
+        description: >
+          Coma separated list of security groups to add to the Compute
+        required: false
+    requirements:
+      - group:
+          capability: yorc.capabilities.Group
+          node: yorc.nodes.openstack.ServerGroup
+          relationship: yorc.relationships.MemberOf
+          occurrences: [0, 1]
+
+  yorc.nodes.openstack.BlockStorage:
+    derived_from: tosca.nodes.BlockStorage
+    properties:
+      availability_zone:
+        type: string
+        description: >
+          The Openstack Availability Zone on which the BlockStorage should be hosted.
+        required: false
+      region:
+        type: string
+        description: >
+          The Openstack Region. Defaults to 'RegionOne'
+        required: false
+      deletable:
+        type: boolean
+        description: should this volume be deleted at undeployment
+        required: false
+        default: false
+
+  yorc.nodes.openstack.PublicNetwork:
+    derived_from: tosca.nodes.Network
+    properties:
+      ip:
+        type: string
+        description: A specific Floating IP to use. Note that either 'ip' or 'floating_network_name' should be specified and 'ip' take the precedence.
+        required: false
+      floating_network_name:
+        type: string
+        description: Name of the Pool of Floating IPs to use. Note that either 'ip' or 'floating_network_name' should be specified and 'ip' take the precedence.
+        required: false
+
+  yorc.nodes.openstack.Network:
+    derived_from: tosca.nodes.Network
+
+  yorc.nodes.openstack.ServerGroup:
+    derived_from: tosca.nodes.Root
+    properties:
+      name:
+        type: string
+        description: The name of the server group.
+        required: true
+      policy:
+        type: string
+        description: The policy applied to the server group.
+        required: true
+    attributes:
+      id:
+        type: string
+        description: The unique id of the server group.
+    capabilities:
+      group:
+        type: yorc.capabilities.Group
+        valid_source_types: [yorc.nodes.openstack.Compute]
+    interfaces:
+      Standard:
+        create:
+          implementation:
+            file: fake.sh
+            type: yorc.artifacts.openstack.Deployment
+        delete:
+          implementation:
+            file: fake.sh
+            type: yorc.artifacts.openstack.Deployment
+
+  ##############################################
+  # Abstract resources used for auto-config
+  ##############################################
+  yorc.nodes.openstack.Image:
+    abstract: true
+    derived_from: tosca.nodes.Root
+    properties:
+      id:
+        type: string
+    capabilities:
+      os:
+        type: tosca.capabilities.OperatingSystem
+
+  yorc.nodes.openstack.Flavor:
+    abstract: true
+    derived_from: tosca.nodes.Root
+    properties:
+      id:
+        type: string
+    capabilities:
+      host:
+        type: tosca.capabilities.Container
+

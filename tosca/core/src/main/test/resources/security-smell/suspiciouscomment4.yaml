@@ -1,0 +1,186 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+metadata:
+  template_name: vsn
+  template_version: "1.0"
+  template_author: onap
+description: vsn
+
+imports:
+  - onap_dm.yaml
+
+topology_template:
+  inputs:
+    vsn1_vsn2_private_net_id:
+      type: string
+      description: Private network that connects vsn1 to vsn2
+      default: intelvsn1vsn201_private
+    vsn1_vsn2_private_net_cidr:
+      type: string
+      description: The CIDR of the vsn2 private network
+      default: 10.5.0.0/24
+    vsn1_name_0:
+      type: string
+      description: Name of the vsn1
+      default: intelvsn1
+    vsn2_name_0:
+      type: string
+      description: Name of the vsn2
+      default: intelvsn2
+    vsn1_ip_addr:
+      type: string
+      description: IP address of vsn1
+      default: 10.5.0.21
+    vsn2_ip_addr:
+      type: string
+      description: IP address of vsn2
+      default: 10.5.0.22
+    vnf_id:
+      type: string
+      description: The VNF ID is provided by ONAP
+      default: vsn_demo_app
+    vf_module_id:
+      type: string
+      description: The vsn ID is provided by ONAP
+      default: Customer_vsn
+
+  node_templates:
+    #Private network that connects vsn1 to vsn2
+    VL_vsn1_vsn2_private_net:
+      type: tosca.nodes.nfv.VnfVirtualLink
+      properties:
+        connectivity_type:
+          layer_protocol: ipv4
+        vl_profile:
+          max_bit_rate_requirements:
+            root: 10000000
+            leaf: 10000000
+          min_bit_rate_requirements:
+            root: 10000000
+            leaf: 10000000
+          networkName: { get_input: vsn1_vsn2_private_net_id}
+          cidr: { get_input: vsn1_vsn2_private_net_cidr }
+          dhcpEnabled: false
+
+    Cp_vsn1_vsn2_private_net:
+      type: tosca.nodes.nfv.VduCp
+      properties:
+        layer_protocol: [ipv4]
+        trunk_mode: false
+        protocol_data:
+          - asscociated_layer_protocol: ipv4
+            address_data:
+              address_type: ip_address
+              l3_address_data:
+                ip_address_assignment: false
+                floating_ip_activated: false
+                fixed_ip_address:
+                  - { get_input: vsn1_ip_addr }
+      requirements:
+        - virtual_binding: VDU_vsn1_0
+        - virtual_link: VL_vsn1_vsn2_private_net
+
+    Cp_vsn2_vsn1_private_net:
+      type: tosca.nodes.nfv.VduCp
+      properties:
+        layer_protocol: [ipv4]
+        trunk_mode: false
+        protocol_data:
+          - asscociated_layer_protocol: ipv4
+            address_data:
+              address_type: ip_address
+              l3_address_data:
+                ip_address_assignment: false
+                floating_ip_activated: false
+                fixed_ip_address:
+                  - { get_input: vsn2_ip_addr }
+      requirements:
+        - virtual_binding: VDU_vsn2_0
+        - virtual_link: VL_vsn1_vsn2_private_net
+
+    VirtualStorage_root_all:
+      # this indicate the VDU root storage size
+      type: tosca.nodes.nfv.Vdu.VirtualStorage
+      properties:
+        type_of_storage: root
+        size_of_storage: 40 GB
+
+    VDU_vsn1_0:
+      type: tosca.nodes.nfv.Vdu.Compute
+      properties:
+        name: { get_input: vsn1_name_0 }
+        description: vsn1
+        configurable_properties:
+          additional_vnfc_configurable_properties: {}
+        vdu_profile:
+          min_number_of_instances: 1
+          max_number_of_instances: 1
+          watchdog: none
+        inject_files: 
+          source_path: ../Artifacts/keys/authorized_keys #SSH authorized_keys
+          dest_path: /home/ubuntu/.ssh/authorized_keys
+        meta_data:
+          vsn1_ip_addr: { get_input: vsn1_ip_addr }
+        user_data: |
+          #!/bin/bash
+          mkdir /opt/config
+          echo "$(get_metadata vsn1_ip_addr)" > /opt/config/vsn1_ip_addr.txt
+
+      capabilities:
+        virtual_compute:
+          properties:
+            #TODO add local disk size
+            virtual_memory:
+              virtual_mem_size: 4096 MB
+              # HPA requirements
+              vdu_memory_requirements:
+                memoryPageSize: '{"schemaVersion": "0", "schemaSelector": "", "hardwarePlatform": "generic", "mandatory": "true", "configurationValue": "2 MB"}'
+                numberOfPages: '{"schemaVersion": "0", "schemaSelector": "", "hardwarePlatform": "generic", "mandatory": "true", "configurationValue": "1024"}'
+            virtual_cpu:
+              num_virtual_cpu: 2
+              cpu_architecture: generic
+      requirements:
+        - virtual_storage: VirtualStorage_root_all
+      artifacts:
+        sw_image: #TODO need to put glance image name here
+          file: ../Artifacts/images/ubuntu_16.04
+          type: tosca.artifacts.nfv.SwImage
+
+    VDU_vsn2_0:
+      type: tosca.nodes.nfv.Vdu.Compute
+      properties:
+        name: { get_input: vsn2_name_0 }
+        description: vsn2
+        configurable_properties:
+          additional_vnfc_configurable_properties: {}
+        vdu_profile:
+          min_number_of_instances: 1
+          max_number_of_instances: 1
+          watchdog: none
+        inject_files: # TODO SDC BUG
+          source_path: ../Artifacts/keys/authorized_keys #SSH authorized_keys
+          dest_path: /home/ubuntu/.ssh/authorized_keys
+        meta_data:
+          vsn2_ip_addr: { get_input: vsn2_ip_addr }
+        user_data: |
+          #!/bin/bash
+          mkdir /opt/config
+          echo "$(get_metadata vsn2_ip_addr)" > /opt/config/vsn2_ip_addr.txt
+      capabilities:
+        virtual_compute:
+          properties:
+            #TODO add local disk size
+            virtual_memory:
+              virtual_mem_size: 4096 MB
+              # HPA requirements
+              vdu_memory_requirements:
+                memoryPageSize: '{"schemaVersion": "0", "schemaSelector": "", "hardwarePlatform": "generic", "mandatory": "true", "configurationValue": "2 MB"}'
+                numberOfPages: '{"schemaVersion": "0", "schemaSelector": "", "hardwarePlatform": "generic", "mandatory": "true", "configurationValue": "1024"}'
+            virtual_cpu:
+              num_virtual_cpu: 2
+              cpu_architecture: generic
+      requirements:
+        - virtual_storage: VirtualStorage_root_all
+      artifacts:
+        sw_image: #TODO need to put glance image name here
+          file: ../Artifacts/images/ubuntu_16.04
+          type: tosca.artifacts.nfv.SwImage

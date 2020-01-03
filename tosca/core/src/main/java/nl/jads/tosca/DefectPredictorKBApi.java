@@ -5,12 +5,16 @@ import kb.dto.Attribute;
 import kb.dto.Property;
 import kb.utils.MyUtils;
 import kb.utils.QueryUtil;
+import nl.jads.tosca.dto.BugRecord;
+import nl.jads.tosca.dto.BugReport;
+import nl.jads.tosca.dto.Comment;
+import nl.jads.tosca.dto.FindBugInput;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.query.impl.SimpleBinding;
-import nl.jads.tosca.dto.Comment;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,6 +23,10 @@ import java.util.Set;
 
 public class DefectPredictorKBApi extends KBApi {
 
+    public static String DCTERMS = "http://purl.org/dc/terms/";
+    public static String DUL = "http://www.loa-cnr.it/ontologies/DUL.owl#";
+    public static String TOSCA = "https://www.sodalite.eu/ontologies/tosca/";
+    public static String SODA = "https://www.sodalite.eu/ontologies/sodalite-metamodel/";
     String PREFIXES = "PREFIX tosca: <https://www.sodalite.eu/ontologies/tosca/> \r\n" +
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\n" +
             "PREFIX soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> \r\n" +
@@ -26,13 +34,18 @@ public class DefectPredictorKBApi extends KBApi {
             "PREFIX dcterms: <http://purl.org/dc/terms/> \r\n" +
             "PREFIX owl: <http://www.w3.org/2002/07/owl#> \r\n";
 
-    public static String DCTERMS = "http://purl.org/dc/terms/";
-    public static String DUL = "http://www.loa-cnr.it/ontologies/DUL.owl#";
-    public static String TOSCA = "https://www.sodalite.eu/ontologies/tosca/";
-    public static String SODA = "https://www.sodalite.eu/ontologies/sodalite-metamodel/";
-
     public DefectPredictorKBApi() {
         super();
+    }
+
+    public static void main(String[] args) throws IOException {
+        DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
+        FindBugInput findBugInput = new FindBugInput();
+        BugReport bugReport = kbApi.findBugs(findBugInput);
+        for (BugRecord r : bugReport.getBugs()) {
+            System.out.println(r.getBugName());
+            System.out.println(r.getBugInfo().serialise());
+        }
     }
 
     public void shutDown() {
@@ -156,10 +169,64 @@ public class DefectPredictorKBApi extends KBApi {
         result.close();
         return comments;
     }
-    
-    public static void main(String[] args) throws IOException {
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
-        kbApi.suspiciousComment();
 
+    public BugReport findBugs(FindBugInput bugInput) throws IOException {
+        BugReport bugReport = new BugReport();
+        List<BugRecord> bugs = new ArrayList<>();
+        for (Comment c : suspiciousComment()) {
+            if (c.getParameters() == null) {
+                c.setParameters(new HashSet<>());
+            }
+            BugRecord bugRecord = new BugRecord();
+            bugRecord.setBugName("SuspiciousComment");
+            bugRecord.setBugInfo(c);
+            bugs.add(bugRecord);
+        }
+        Set<Property> parameters = getProperties();
+        for (Property p : parameters) {
+            if (p.getParameters() == null) {
+                p.setParameters(new HashSet<>());
+            }
+            if (adminByDefault(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("AdminByDefault");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+            if (emptyPassword(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("EmptyPassword");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+            if (hardcodedSecret(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("HardcodedSecret");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+            if (invalidIPAddressBinding(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("InvalidIPAddressBinding");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+            if (useOfHTTPWithoutTLS(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("UseOfHTTPWithoutTLS");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+            if (weakCryptoAlgo(p)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("WeakCryptoAlgo");
+                bugRecord.setBugInfo(p);
+                bugs.add(bugRecord);
+            }
+        }
+        bugReport.setActionId(bugInput.getActionId());
+        bugReport.setDeploymentId(bugInput.getDeploymentId());
+        bugReport.setBugs(bugs);
+        return bugReport;
     }
 }

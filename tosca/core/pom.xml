@@ -7,7 +7,6 @@
 		<artifactId>bug-predictor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-    <groupId>jads.sodalite</groupId>
     <artifactId>tosca-bug-predictor-core</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>

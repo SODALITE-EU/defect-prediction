@@ -13,7 +13,7 @@
 	</modules>
 
 	<build>
-		<finalName>bug-predictor-parent</finalName>
+		<finalName>bug-predictor</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

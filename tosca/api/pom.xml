@@ -7,7 +7,6 @@
 		<artifactId>bug-predictor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>jads.sodalite</groupId>
 	<artifactId>bug-predictor-api</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -64,7 +63,7 @@
 		<dependency>
 			<groupId>jads.sodalite</groupId>
 			<artifactId>tosca-bug-predictor-core</artifactId>
-			<version>0.1</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

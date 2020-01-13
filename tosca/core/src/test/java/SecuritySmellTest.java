@@ -101,7 +101,7 @@ public class SecuritySmellTest {
     @Test
     void testSuspiciousComment() {
         try {
-            DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
             RepositoryConnection connection = repository.getConnection();
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);

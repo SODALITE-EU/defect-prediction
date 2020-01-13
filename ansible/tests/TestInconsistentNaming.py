@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.InconsistentNaming import InconsistentNaming
+from ansiblelints.rules.InconsistentNaming import InconsistentNaming
 
 
 class TestInconsistentNaming(unittest.TestCase):
@@ -10,6 +10,6 @@ class TestInconsistentNaming(unittest.TestCase):
         self.collection.register(InconsistentNaming())
 
     def test_file(self):
-        file_name = 'ansible-smell/unnamedconstructs.yml'
+        file_name = 'tests/ansible-smell/unnamedconstructs.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
         print(good_runner.run())

@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.HardCodePassword import HardCodePassword
+from ansiblelints.rules.HardCodePassword import HardCodePassword
 
 class TestHardCodePassword(unittest.TestCase):
     collection = RulesCollection()
@@ -9,7 +9,7 @@ class TestHardCodePassword(unittest.TestCase):
         self.collection.register(HardCodePassword())
 
     def test_file(self):
-        success = 'ansible-smell/hardcodepassword.yml'
+        success = 'tests/ansible-smell/hardcodepassword.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         print(good_runner.run())
         print(type(good_runner.run()))

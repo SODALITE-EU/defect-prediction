@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.LongStatement import LongStatement
+from ansiblelints.rules.LongStatement import LongStatement
 
 
 class TestLongStatement(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestLongStatement(unittest.TestCase):
         self.collection.register(LongStatement())
 
     def test_file(self):
-        file_name = 'ansible-smell/many.yaml'
+        file_name = 'tests/ansible-smell/many.yaml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         print(good_runner.run())

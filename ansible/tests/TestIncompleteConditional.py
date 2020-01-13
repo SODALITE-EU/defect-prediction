@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.IncompleteConditional import IncompleteConditional
+from ansiblelints.rules.IncompleteConditional import IncompleteConditional
 
 
 class TestIncompleteConditional(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestIncompleteConditional(unittest.TestCase):
         self.collection.register(IncompleteConditional())
 
     def test_file(self):
-        file_name = 'ansible-smell/hardcodepassword5.yml'
+        file_name = 'tests/ansible-smell/hardcodepassword5.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         print(good_runner.run())

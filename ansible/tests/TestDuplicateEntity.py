@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.DuplicateEntity import DuplicateEntity
+from ansiblelints.rules.DuplicateEntity import DuplicateEntity
 import collections
 
 class TestDuplicateEntity(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestDuplicateEntity(unittest.TestCase):
         self.collection.register(DuplicateEntity())
 
     def test_file(self):
-        file_name = 'ansible-smell/hardcodepassword5.yml'
+        file_name = 'tests/ansible-smell/hardcodepassword5.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         name_list=[]

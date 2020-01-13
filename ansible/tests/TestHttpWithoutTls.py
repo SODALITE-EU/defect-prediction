@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.HttpWithoutTls import HttpWithoutTls
+from ansiblelints.rules.HttpWithoutTls import HttpWithoutTls
 
 class TestHttpWithoutTls(unittest.TestCase):
     collection = RulesCollection()
@@ -9,7 +9,7 @@ class TestHttpWithoutTls(unittest.TestCase):
         self.collection.register(HttpWithoutTls())
 
     def test_file(self):
-        success = 'ansible-smell/httpwithouttls2.yml'
+        success = 'tests/ansible-smell/httpwithouttls2.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         print(good_runner.run())
         #print(type(good_runner.run()))

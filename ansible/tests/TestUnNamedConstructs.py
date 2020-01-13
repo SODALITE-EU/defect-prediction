@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelintsoda.rules.UnNamedConstructs import UnNamedConstructs
+from ansiblelints.rules.UnNamedConstructs import UnNamedConstructs
 
 
 class TestUnNamedConstruct(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestUnNamedConstruct(unittest.TestCase):
         self.collection.register(UnNamedConstructs())
 
     def test_file(self):
-        file_name = 'ansible-smell/unnamedconstructs.yml'
+        file_name = 'tests/ansible-smell/unnamedconstructs.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
         print(good_runner.run())
 

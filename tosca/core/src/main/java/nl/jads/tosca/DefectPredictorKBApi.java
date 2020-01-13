@@ -38,7 +38,6 @@ public class DefectPredictorKBApi extends KBApi {
     public DefectPredictorKBApi() {
         super();
     }
-
     public static void main(String[] args) throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
         FindBugInput findBugInput = new FindBugInput();

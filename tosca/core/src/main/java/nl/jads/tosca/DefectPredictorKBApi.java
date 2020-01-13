@@ -14,6 +14,7 @@ import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.query.impl.SimpleBinding;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,11 +53,11 @@ public class DefectPredictorKBApi extends KBApi {
         super.shutDown();
     }
 
-    public Set<Attribute> getAllAttributes() throws IOException {
+    public Set<Attribute> getAllAttributes(RepositoryConnection connection) throws IOException {
         Set<Attribute> attributes = new HashSet<>();
         String sparql = MyUtils.fileToString("sparql/getAllAttributes.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(), query);
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection, query);
 
         while (result.hasNext()) {
             BindingSet bindingSet = result.next();
@@ -72,11 +73,11 @@ public class DefectPredictorKBApi extends KBApi {
         return attributes;
     }
 
-    public Set<Property> getProperties() throws IOException {
+    public Set<Property> getProperties(RepositoryConnection connection) throws IOException {
         Set<Property> properties = new HashSet<>();
         String sparql = MyUtils.fileToString("sparql/getAllProperties.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(), query);
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection, query);
 
         while (result.hasNext()) {
             BindingSet bindingSet = result.next();
@@ -95,70 +96,70 @@ public class DefectPredictorKBApi extends KBApi {
         return properties;
     }
 
-    public boolean adminByDefault(Property property) throws IOException {
+    public boolean adminByDefault(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/adminByDefault.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public boolean emptyPassword(Property property) throws IOException {
+    public boolean emptyPassword(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/emptyPassword.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public boolean hardcodedSecret(Property property) throws IOException {
+    public boolean hardcodedSecret(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/hardcodedSecret.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public boolean invalidIPAddressBinding(Property property) throws IOException {
+    public boolean invalidIPAddressBinding(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/invalidIPAddressBinding.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public boolean useOfHTTPWithoutTLS(Property property) throws IOException {
+    public boolean useOfHTTPWithoutTLS(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/useOfHTTPwithoutTLS.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public boolean weakCryptoAlgo(Property property) throws IOException {
+    public boolean weakCryptoAlgo(Property property, RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/weakCryptoAlgo.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", property.getClassifiedBy()));
         boolean tobeReturned = result.hasNext();
         result.close();
         return tobeReturned;
     }
 
-    public List<Comment> suspiciousComment() throws IOException {
+    public List<Comment> suspiciousComment(RepositoryConnection connection) throws IOException {
         String sparql = MyUtils.fileToString("sparql/suspiciousComment.sparql");
         String query = PREFIXES + sparql;
-        TupleQueryResult result = QueryUtil.evaluateSelectQuery(kb.getConnection(),
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query);
         List<Comment> comments = new ArrayList<>();
         while (result.hasNext()) {
@@ -171,9 +172,10 @@ public class DefectPredictorKBApi extends KBApi {
     }
 
     public BugReport findBugs(FindBugInput bugInput) throws IOException {
+        RepositoryConnection connection = kb.getConnection();
         BugReport bugReport = new BugReport();
         List<BugRecord> bugs = new ArrayList<>();
-        for (Comment c : suspiciousComment()) {
+        for (Comment c : suspiciousComment(connection)) {
             if (c.getParameters() == null) {
                 c.setParameters(new HashSet<>());
             }
@@ -182,42 +184,42 @@ public class DefectPredictorKBApi extends KBApi {
             bugRecord.setBugInfo(c);
             bugs.add(bugRecord);
         }
-        Set<Property> parameters = getProperties();
+        Set<Property> parameters = getProperties(connection);
         for (Property p : parameters) {
             if (p.getParameters() == null) {
                 p.setParameters(new HashSet<>());
             }
-            if (adminByDefault(p)) {
+            if (adminByDefault(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("AdminByDefault");
                 bugRecord.setBugInfo(p);
                 bugs.add(bugRecord);
             }
-            if (emptyPassword(p)) {
+            if (emptyPassword(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("EmptyPassword");
                 bugRecord.setBugInfo(p);
                 bugs.add(bugRecord);
             }
-            if (hardcodedSecret(p)) {
+            if (hardcodedSecret(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("HardcodedSecret");
                 bugRecord.setBugInfo(p);
                 bugs.add(bugRecord);
             }
-            if (invalidIPAddressBinding(p)) {
+            if (invalidIPAddressBinding(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("InvalidIPAddressBinding");
                 bugRecord.setBugInfo(p);
                 bugs.add(bugRecord);
             }
-            if (useOfHTTPWithoutTLS(p)) {
+            if (useOfHTTPWithoutTLS(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("UseOfHTTPWithoutTLS");
                 bugRecord.setBugInfo(p);
                 bugs.add(bugRecord);
             }
-            if (weakCryptoAlgo(p)) {
+            if (weakCryptoAlgo(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("WeakCryptoAlgo");
                 bugRecord.setBugInfo(p);

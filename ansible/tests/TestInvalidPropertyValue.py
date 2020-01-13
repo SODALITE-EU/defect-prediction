@@ -10,7 +10,7 @@ class TestInvalidPropertyValue(unittest.TestCase):
         self.collection.register(InvalidPropertyValue())
 
     def test_file(self):
-        file_name = 'tests/ansible-smell/httpwithouttls3.yml'
+        file_name = 'testResources/ansible-smell/httpwithouttls3.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         print(good_runner.run())

@@ -9,7 +9,7 @@ class TestEmptyPassword(unittest.TestCase):
         self.collection.register(EmptyPassword())
 
     def test_file(self):
-        success = 'tests/ansible-smell/adminbydefault.yml'
+        success = 'testResources/ansible-smell/adminbydefault.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         print(good_runner.run())
         print(len(good_runner.run()))

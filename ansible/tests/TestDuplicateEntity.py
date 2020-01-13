@@ -10,7 +10,7 @@ class TestDuplicateEntity(unittest.TestCase):
         self.collection.register(DuplicateEntity())
 
     def test_file(self):
-        file_name = 'tests/ansible-smell/hardcodepassword5.yml'
+        file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         name_list=[]

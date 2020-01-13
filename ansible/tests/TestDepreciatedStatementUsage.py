@@ -10,7 +10,7 @@ class TestDepreciatedStatementUsage(unittest.TestCase):
         self.collection.register(DepreciatedStatementUsage())
 
     def test_file(self):
-        file_name = 'tests/ansible-smell/adminbydefault.yml'
+        file_name = 'testResources/ansible-smell/adminbydefault.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         print(good_runner.run())

@@ -9,7 +9,7 @@ class TestHardCodePassword(unittest.TestCase):
         self.collection.register(HardCodePassword())
 
     def test_file(self):
-        success = 'tests/ansible-smell/hardcodepassword.yml'
+        success = 'testResources/ansible-smell/hardcodepassword.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         print(good_runner.run())
         print(type(good_runner.run()))

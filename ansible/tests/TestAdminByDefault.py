@@ -9,7 +9,7 @@ class TestAdminByDefault(unittest.TestCase):
         self.collection.register(AdminByDefault())
 
     def test_file(self):
-        success = 'tests/ansible-smell/adminbydefault.yml'
+        success = 'testResources/ansible-smell/adminbydefault.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         # print(good_runner.run())
         self.assertEqual(3, len(good_runner.run()))

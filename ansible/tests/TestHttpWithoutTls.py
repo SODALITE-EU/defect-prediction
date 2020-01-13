@@ -9,7 +9,7 @@ class TestHttpWithoutTls(unittest.TestCase):
         self.collection.register(HttpWithoutTls())
 
     def test_file(self):
-        success = 'tests/ansible-smell/httpwithouttls2.yml'
+        success = 'testResources/ansible-smell/httpwithouttls2.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         print(good_runner.run())
         #print(type(good_runner.run()))

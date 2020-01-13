@@ -10,6 +10,6 @@ class TestInconsistentNaming(unittest.TestCase):
         self.collection.register(InconsistentNaming())
 
     def test_file(self):
-        file_name = 'tests/ansible-smell/unnamedconstructs.yml'
+        file_name = 'testResources/ansible-smell/unnamedconstructs.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
         print(good_runner.run())

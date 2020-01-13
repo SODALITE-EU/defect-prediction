@@ -10,7 +10,7 @@ class TestImproperQuoteUsage(unittest.TestCase):
         self.collection.register(ImproperQuoteUsage())
 
     def test_file(self):
-        file_name = 'tests/ansible-smell/hardcodepassword5.yml'
+        file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 
         print(good_runner.run())

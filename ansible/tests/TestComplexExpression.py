@@ -10,6 +10,6 @@ class TestComplexExpression(unittest.TestCase):
 
     def test_file(self):
 
-        file_name = 'tests/ansible-smell/complexexpression.yml'
+        file_name = 'testResources/ansible-smell/complexexpression.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
         print(good_runner.run())

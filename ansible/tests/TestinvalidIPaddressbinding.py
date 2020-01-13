@@ -9,7 +9,7 @@ class TestInvalidIPaddressbinding(unittest.TestCase):
         self.collection.register(InvalidIPaddressbinding())
 
     def test_file(self):
-        success = 'tests/ansible-smell/invalidIPaddressbinding.yml'
+        success = 'testResources/ansible-smell/invalidIPaddressbinding.yml'
         good_runner = Runner(self.collection, success, [], [], [])
         result = good_runner.run()
         print(result)

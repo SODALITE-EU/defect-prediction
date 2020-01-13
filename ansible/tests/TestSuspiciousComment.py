@@ -11,7 +11,7 @@ class TestSuspiciousComment(unittest.TestCase):
 
     def test_file(self):
 
-        file_name = str('tests/ansible-smell/suspiciouscomment.yml')
+        file_name = str('testResources/ansible-smell/suspiciouscomment.yml')
         good_runner = Runner(self.collection, file_name, [], [], [])
         for item in good_runner.run():
             print(item)

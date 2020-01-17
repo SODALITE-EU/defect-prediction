@@ -95,6 +95,7 @@ public class SecuritySmellTest {
     @AfterAll
     static void afterAll() {
         repository.shutDown();
+        repositoryManager.removeRepository("TOSCA");
         repositoryManager.shutDown();
     }
 

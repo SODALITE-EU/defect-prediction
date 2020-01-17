@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+  vars:
+    pip_install_packages:
+      - name: docker
+    imagepath: ""
+
+  tasks:
+    - name: Delete the path to registry communication keys
+      file:
+          path: "/etc/docker/certs.d/{{ registry_ip }}"
+          state: absent
+
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.pip
+    - geerlingguy.docker

@@ -1,0 +1,430 @@
+# baseURI: https://www.sodalite.eu/ontologies/hpc/tier1/
+# imports: https://www.sodalite.eu/ontologies/tosca/
+
+@prefix : <https://www.sodalite.eu/ontologies/hpc/tier1/> .
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix tier1: <https://www.sodalite.eu/ontologies/hpc/tier1/> .
+@prefix tosca: <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+tier1:
+  rdf:type owl:Ontology ;
+  owl:imports tosca: ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+tier1:Attribute_1
+  rdf:type tosca:Attribute ;
+  DUL:classifies tier1:username ;
+  DUL:hasParameter tier1:SodaliteParameter_1 ;
+.
+tier1:Attribute_2
+  rdf:type tosca:Attribute ;
+  DUL:classifies tier1:ssh-key ;
+  DUL:hasParameter tier1:SodaliteParameter_2 ;
+.
+tier1:Attribute_3
+  rdf:type tosca:Attribute ;
+  DUL:classifies tier1:job_id ;
+  DUL:hasParameter tier1:SodaliteParameter_18 ;
+.
+tier1:Capability_1
+  rdf:type tosca:Capability ;
+  DUL:classifies tosca:host ;
+  DUL:hasParameter tier1:SodaliteParameter_3 ;
+  DUL:hasParameter tier1:SodaliteParameter_4 ;
+.
+tier1:Interface_1
+  rdf:type tosca:Interface ;
+  DUL:classifies tosca:Standard ;
+  DUL:hasParameter tier1:SodaliteParameter_19 ;
+  DUL:hasParameter tier1:SodaliteParameter_20 ;
+  DUL:hasParameter tier1:SodaliteParameter_32 ;
+  DUL:hasParameter tier1:SodaliteParameter_34 ;
+  DUL:hasParameter tier1:SodaliteParameter_36 ;
+.
+tier1:Interface_2
+  rdf:type tosca:Interface ;
+  DUL:classifies tosca:Configure ;
+  DUL:hasParameter tier1:SodaliteParameter_38 ;
+.
+tier1:List_1
+  rdf:type tosca:List ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque> ;
+.
+tier1:Property_1
+  rdf:type tosca:Property ;
+  dcterms:description "Name of the job" ;
+  DUL:classifies tier1:name ;
+  DUL:hasParameter tier1:SodaliteParameter_8 ;
+.
+tier1:Property_2
+  rdf:type tosca:Property ;
+  dcterms:description "Job script template with j2 extension, such that Ansible can process it with the template module" ;
+  DUL:classifies tier1:script_template ;
+  DUL:hasParameter tier1:SodaliteParameter_9 ;
+.
+tier1:Property_3
+  rdf:type tosca:Property ;
+  dcterms:description "Job status will be notified to this email" ;
+  DUL:classifies tier1:email ;
+  DUL:hasParameter tier1:SodaliteParameter_10 ;
+.
+tier1:Property_4
+  rdf:type tosca:Property ;
+  dcterms:description "Number of requested nodes" ;
+  DUL:classifies tier1:nb_nodes ;
+  DUL:hasParameter tier1:SodaliteParameter_11 ;
+.
+tier1:Property_5
+  rdf:type tosca:Property ;
+  dcterms:description "Number of processes per node" ;
+  DUL:classifies tier1:ppn ;
+  DUL:hasParameter tier1:SodaliteParameter_12 ;
+.
+tier1:Property_6
+  rdf:type tosca:Property ;
+  dcterms:description "Expected time of execution" ;
+  DUL:classifies tier1:walltime ;
+  DUL:hasParameter tier1:SodaliteParameter_13 ;
+.
+tier1:Property_7
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_period ;
+  DUL:hasParameter tier1:SodaliteParameter_14 ;
+  DUL:hasParameter tier1:SodaliteParameter_15 ;
+.
+tier1:Property_8
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_retries_headroom ;
+  DUL:hasParameter tier1:SodaliteParameter_16 ;
+  DUL:hasParameter tier1:SodaliteParameter_17 ;
+.
+tier1:Requirement_1
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:host ;
+  DUL:hasParameter tier1:SodaliteParameter_5 ;
+  DUL:hasParameter tier1:SodaliteParameter_6 ;
+  DUL:hasParameter tier1:SodaliteParameter_7 ;
+.
+tier1:SodaliteDescription_1
+  rdf:type soda:SodaliteDescription ;
+  tosca:attributes tier1:Attribute_1 ;
+  tosca:attributes tier1:Attribute_2 ;
+  tosca:capabilities tier1:Capability_1 ;
+.
+tier1:SodaliteDescription_2
+  rdf:type soda:SodaliteDescription ;
+  tosca:attributes tier1:Attribute_3 ;
+  tosca:interfaces tier1:Interface_1 ;
+  tosca:properties tier1:Property_1 ;
+  tosca:properties tier1:Property_2 ;
+  tosca:properties tier1:Property_3 ;
+  tosca:properties tier1:Property_4 ;
+  tosca:properties tier1:Property_5 ;
+  tosca:properties tier1:Property_6 ;
+  tosca:properties tier1:Property_7 ;
+  tosca:properties tier1:Property_8 ;
+  tosca:requirements tier1:Requirement_1 ;
+.
+tier1:SodaliteDescription_3
+  rdf:type soda:SodaliteDescription ;
+  tosca:interfaces tier1:Interface_2 ;
+.
+tier1:SodaliteParameter_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_10
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_11
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:integer ;
+.
+tier1:SodaliteParameter_12
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:integer ;
+.
+tier1:SodaliteParameter_13
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_14
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:integer ;
+.
+tier1:SodaliteParameter_15
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:default ;
+  tosca:hasDataValue 10 ;
+.
+tier1:SodaliteParameter_16
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:integer ;
+.
+tier1:SodaliteParameter_17
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:default ;
+  tosca:hasDataValue 2 ;
+.
+tier1:SodaliteParameter_18
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_19
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.node.lifecycle.Standard> ;
+.
+tier1:SodaliteParameter_2
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_20
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:inputs ;
+  DUL:hasParameter tier1:SodaliteParameter_21 ;
+  DUL:hasParameter tier1:SodaliteParameter_22 ;
+  DUL:hasParameter tier1:SodaliteParameter_23 ;
+  DUL:hasParameter tier1:SodaliteParameter_24 ;
+  DUL:hasParameter tier1:SodaliteParameter_25 ;
+  DUL:hasParameter tier1:SodaliteParameter_26 ;
+  DUL:hasParameter tier1:SodaliteParameter_27 ;
+  DUL:hasParameter tier1:SodaliteParameter_28 ;
+  DUL:hasParameter tier1:SodaliteParameter_29 ;
+  DUL:hasParameter tier1:SodaliteParameter_30 ;
+  DUL:hasParameter tier1:SodaliteParameter_31 ;
+.
+tier1:SodaliteParameter_21
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:wm_public_address ;
+  tosca:hasDataValue "{ default: { get_attribute: [SELF, host, public_address] } }" ;
+.
+tier1:SodaliteParameter_22
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:wm_username ;
+  tosca:hasDataValue "{ default: { get_attribute: [SELF, host, username] } }" ;
+.
+tier1:SodaliteParameter_23
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:wm_keypath ;
+  tosca:hasDataValue "{ default: { get_attribute: [SELF, host, ssh-key] } }" ;
+.
+tier1:SodaliteParameter_24
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_name ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, name] } }" ;
+.
+tier1:SodaliteParameter_25
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_script_template ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, script_template] } }" ;
+.
+tier1:SodaliteParameter_26
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_email ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, email] } }" ;
+.
+tier1:SodaliteParameter_27
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_nb_nodes ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, nb_nodes] } }" ;
+.
+tier1:SodaliteParameter_28
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_ppn ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, ppn] } }" ;
+.
+tier1:SodaliteParameter_29
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_walltime ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, walltime] } }" ;
+.
+tier1:SodaliteParameter_3
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+.
+tier1:SodaliteParameter_30
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_monitor_period ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, monitor_period] } }" ;
+.
+tier1:SodaliteParameter_31
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tier1:job_monitor_retries_headroom ;
+  tosca:hasDataValue "{ default: { get_property: [SELF, monitor_retries_headroom] } }" ;
+.
+tier1:SodaliteParameter_32
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:create ;
+  DUL:hasParameter tier1:SodaliteParameter_33 ;
+.
+tier1:SodaliteParameter_33
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  tosca:hasDataValue "playbooks/torque-job/create.yml" ;
+.
+tier1:SodaliteParameter_34
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:configure ;
+  DUL:hasParameter tier1:SodaliteParameter_35 ;
+.
+tier1:SodaliteParameter_35
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  tosca:hasDataValue "playbooks/torque-job/configure.yml" ;
+.
+tier1:SodaliteParameter_36
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:start ;
+  DUL:hasParameter tier1:SodaliteParameter_37 ;
+.
+tier1:SodaliteParameter_37
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  tosca:hasDataValue "playbooks/torque-job/start.yml" ;
+.
+tier1:SodaliteParameter_38
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:add_source ;
+  DUL:hasParameter tier1:SodaliteParameter_39 ;
+.
+tier1:SodaliteParameter_39
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  DUL:hasParameter tier1:SodaliteParameter_40 ;
+.
+tier1:SodaliteParameter_4
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:valid_source_types ;
+  tosca:hasObjectValue tier1:List_1 ;
+.
+tier1:SodaliteParameter_40
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:primary ;
+  tosca:hasDataValue "playbooks/torque-job/test.yml" ;
+.
+tier1:SodaliteParameter_5
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:node ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.wm.torque> ;
+.
+tier1:SodaliteParameter_6
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:capability ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+.
+tier1:SodaliteParameter_7
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:relationship ;
+  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/hpc/tier1/my.relationships.jobHostedOn> ;
+.
+tier1:SodaliteParameter_8
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:SodaliteParameter_9
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+tier1:email
+  rdf:type rdf:Property ;
+.
+tier1:job_email
+  rdf:type rdf:Property ;
+.
+tier1:job_id
+  rdf:type rdf:Property ;
+.
+tier1:job_monitor_period
+  rdf:type rdf:Property ;
+.
+tier1:job_monitor_retries_headroom
+  rdf:type rdf:Property ;
+.
+tier1:job_name
+  rdf:type rdf:Property ;
+.
+tier1:job_nb_nodes
+  rdf:type rdf:Property ;
+.
+tier1:job_ppn
+  rdf:type rdf:Property ;
+.
+tier1:job_script_template
+  rdf:type rdf:Property ;
+.
+tier1:job_walltime
+  rdf:type rdf:Property ;
+.
+tier1:monitor_period
+  rdf:type rdf:Property ;
+.
+tier1:monitor_retries_headroom
+  rdf:type rdf:Property ;
+.
+<https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque>
+  rdf:type owl:Class ;
+  dcterms:description "torque job type, here we can define properties/attributes applicable for torque WM, e.g. execution environment, etc." ;
+  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
+  soda:hasContext tier1:SodaliteDescription_2 ;
+.
+<https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.wm.torque>
+  rdf:type owl:Class ;
+  dcterms:description "torque wm, here we can define properties/attributes applicable for torque WM" ;
+  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
+  soda:hasContext tier1:SodaliteDescription_1 ;
+.
+<https://www.sodalite.eu/ontologies/hpc/tier1/my.relationships.jobHostedOn>
+  rdf:type owl:Class ;
+  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.HostedOn> ;
+  soda:hasContext tier1:SodaliteDescription_3 ;
+.
+tier1:name
+  rdf:type rdf:Property ;
+.
+tier1:nb_nodes
+  rdf:type rdf:Property ;
+.
+tier1:ppn
+  rdf:type rdf:Property ;
+.
+tier1:script_template
+  rdf:type rdf:Property ;
+.
+tier1:ssh-key
+  rdf:type owl:ObjectProperty ;
+.
+tier1:username
+  rdf:type rdf:Property ;
+.
+tier1:walltime
+  rdf:type rdf:Property ;
+.
+tier1:wm_keypath
+  rdf:type rdf:Property ;
+.
+tier1:wm_public_address
+  rdf:type owl:ObjectProperty ;
+.
+tier1:wm_username
+  rdf:type rdf:Property ;
+.

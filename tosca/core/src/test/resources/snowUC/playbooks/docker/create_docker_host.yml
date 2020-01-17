@@ -1,0 +1,76 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: cryptography
+    imagepath: ""
+
+  tasks:
+    - name: Set attributes
+      set_stats:
+        data:
+          registry_ip: "{{ registry_ip }}"
+
+    - name: Create certs and storage folders
+      block:
+        - file:
+            path: "/home/xopera/drive"
+            state: directory
+        - file:
+            path: "/home/xopera/certs"
+            state: directory
+
+    - name: Copy root CA files
+      block:
+        - copy:
+            src: /home/xopera/certs/ca.crt
+            dest: "/home/xopera/certs/ca.crt"
+        - copy:
+            src: /home/xopera/certs/ca.key
+            dest: "/home/xopera/certs/ca.key"
+
+    - name: Install root CA
+      block:
+        - command: "cp /home/xopera/certs/ca.crt /etc/pki/ca-trust/source/anchors/ca.crt"
+        - command: update-ca-trust
+
+    - name: Generate certificates and clean up
+      block:
+        - openssl_privatekey:
+            path: "/home/xopera/certs/image.docker.local.key"
+            size: 4096
+        - openssl_csr:
+            path: "/home/xopera/certs/image.docker.local.csr"
+            privatekey_path: "/home/xopera/certs/image.docker.local.key"
+            country_name: SI
+            organization_name: XLAB
+            email_address: dragan.radolovic@xlab.si
+            common_name: "image.docker.local"
+            subject_alt_name: "IP:{{ public_ipv4_address }}"
+        - openssl_certificate:
+            path: "/home/xopera/certs/image.docker.local.crt"
+            csr_path: "/home/xopera/certs/image.docker.local.csr"
+            ownca_path: "/home/xopera/certs/ca.crt"
+            ownca_privatekey_path: "/home/xopera/certs/ca.key"
+            provider: ownca
+        - file:
+            state: absent
+            path: "/home/xopera/certs/image.docker.local.csr"
+
+    - name: Install certificates for communication with the registry
+      block:
+        - file:
+            path: "/etc/docker/certs.d/{{ registry_ip }}"
+            state: directory
+        - command: "cp /home/xopera/certs/ca.crt /etc/docker/certs.d/{{ registry_ip }}"
+        - command: "cp /home/xopera/certs/image.docker.local.key /etc/docker/certs.d/{{ registry_ip }}"
+        - command: "cp /home/xopera/certs/image.docker.local.crt /etc/docker/certs.d/{{ registry_ip }}/image.docker.local.cert"
+
+
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.pip
+    - geerlingguy.docker

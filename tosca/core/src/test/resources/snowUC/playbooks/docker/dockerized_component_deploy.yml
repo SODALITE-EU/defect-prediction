@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+
+  tasks:
+    - name: Create docker container and connect to network
+      docker_container:
+        name: "{{ image_name }}"
+        image: "{{ registry_ip }}/{{ image_name }}"
+        auto_remove: yes
+        pull: true
+        ports:
+          - "{{ ports }}"
+        exposed_ports:
+          - "{{ exposed_ports }}"
+        ca_cert: "/home/xopera/certs/ca.crt"
+        client_cert: "/home/xopera/certs/image.docker.local.crt"
+        client_key: "/home/xopera/certs/image.docker.local.key"
+        volumes:
+          - "/home/xopera/certs:/home/xopera/certs"
+          - "/etc/docker/certs.d/{{ registry_ip }}:/etc/docker/certs.d/{{ registry_ip }}"
+
+
+

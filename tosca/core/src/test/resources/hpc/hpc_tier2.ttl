@@ -1,0 +1,326 @@
+# baseURI: https://www.sodalite.eu/ontologies/hpc/tier2/
+# imports: https://www.sodalite.eu/ontologies/hpc/tier1/
+# prefix: tier2
+
+@prefix : <https://www.sodalite.eu/ontologies/hpc/tier2/> .
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix tier1: <https://www.sodalite.eu/ontologies/hpc/tier1/> .
+@prefix tier2: <https://www.sodalite.eu/ontologies/hpc/tier2/> .
+@prefix tosca: <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+tier2:
+  rdf:type owl:Ontology ;
+  owl:imports tier1: ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+tier2:AbstractApplicationDeployment_1
+  rdf:type soda:AbstractApplicationDeployment ;
+  soda:createdAt "2019-12-12T18:35:50.502+02:00"^^xsd:dateTime ;
+  soda:createdBy tier2:User_1 ;
+  soda:includesTemplate tier2:hpc-job-torque-1 ;
+  soda:includesTemplate tier2:hpc-job-torque-2 ;
+  soda:includesTemplate tier2:hpc-job-torque-3 ;
+  soda:includesTemplate tier2:hpc-job-torque-4 ;
+  soda:includesTemplate tier2:hpc-wm-torque ;
+.
+tier2:Attribute_1
+  rdf:type tosca:Attribute ;
+  DUL:classifies tosca:public_address ;
+  tosca:hasDataValue "sodalite-fe.hlrs.de" ;
+.
+tier2:Attribute_2
+  rdf:type tosca:Attribute ;
+  DUL:classifies tier1:username ;
+  tosca:hasDataValue "kamil" ;
+.
+tier2:Attribute_3
+  rdf:type tosca:Attribute ;
+  DUL:classifies tier1:ssh-key ;
+  tosca:hasDataValue "~/keys/kamil-sodalite-fe" ;
+.
+tier2:Property_1
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:name ;
+  tosca:hasDataValue "hpc-test-1" ;
+.
+tier2:Property_10
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:script_template ;
+  tosca:hasDataValue "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+tier2:Property_11
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:email ;
+  tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+tier2:Property_12
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:nb_nodes ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_13
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:ppn ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_14
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:walltime ;
+  tosca:hasDataValue "00:02:00" ;
+.
+tier2:Property_15
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_period ;
+  tosca:hasDataValue "10" ;
+.
+tier2:Property_16
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_retries_headroom ;
+  tosca:hasDataValue "2" ;
+.
+tier2:Property_17
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:name ;
+  tosca:hasDataValue "hpc-test-2" ;
+.
+tier2:Property_18
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:script_template ;
+  tosca:hasDataValue "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+tier2:Property_19
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:email ;
+  tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+tier2:Property_2
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:script_template ;
+  tosca:hasDataValue "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+tier2:Property_20
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:nb_nodes ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_21
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:ppn ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_22
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:walltime ;
+  tosca:hasDataValue "00:02:00" ;
+.
+tier2:Property_23
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_period ;
+  tosca:hasDataValue "10" ;
+.
+tier2:Property_24
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_retries_headroom ;
+  tosca:hasDataValue "2" ;
+.
+tier2:Property_25
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:name ;
+  tosca:hasDataValue "hpc-test-3" ;
+.
+tier2:Property_26
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:script_template ;
+  tosca:hasDataValue "~/soda-repo/src/wp4/opera-job/artifacts/job.pbs.j2" ;
+.
+tier2:Property_27
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:email ;
+  tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+tier2:Property_28
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:nb_nodes ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_29
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:ppn ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_3
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:email ;
+  tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+tier2:Property_30
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:walltime ;
+  tosca:hasDataValue " 00:02:00" ;
+.
+tier2:Property_31
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_period ;
+  tosca:hasDataValue "10" ;
+.
+tier2:Property_32
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_retries_headroom ;
+  tosca:hasDataValue "2" ;
+.
+tier2:Property_4
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:nb_nodes ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_5
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:ppn ;
+  tosca:hasDataValue "1" ;
+.
+tier2:Property_6
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:walltime ;
+  tosca:hasDataValue "00:02:00" ;
+.
+tier2:Property_7
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_period ;
+  tosca:hasDataValue "10" ;
+.
+tier2:Property_8
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:monitor_retries_headroom ;
+  tosca:hasDataValue "2" ;
+.
+tier2:Property_9
+  rdf:type tosca:Property ;
+  DUL:classifies tier1:name ;
+  tosca:hasDataValue "hpc-test-4" ;
+.
+tier2:Requirement_1
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:host ;
+  tosca:hasObjectValue tier2:hpc-wm-torque ;
+.
+tier2:Requirement_2
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:host ;
+  tosca:hasObjectValue tier2:hpc-wm-torque ;
+.
+tier2:Requirement_3
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:dependency ;
+  tosca:hasObjectValue tier2:hpc-job-torque-3 ;
+.
+tier2:Requirement_4
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:dependency ;
+  tosca:hasObjectValue tier2:hpc-job-torque-2 ;
+.
+tier2:Requirement_5
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:host ;
+  tosca:hasObjectValue tier2:hpc-wm-torque ;
+.
+tier2:Requirement_6
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:dependency ;
+  tosca:hasObjectValue tier2:hpc-job-torque-1 ;
+.
+tier2:Requirement_7
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:host ;
+  tosca:hasObjectValue tier2:hpc-wm-torque ;
+.
+tier2:Requirement_8
+  rdf:type tosca:Requirement ;
+  DUL:classifies tosca:dependency ;
+  tosca:hasObjectValue tier2:hpc-job-torque-1 ;
+.
+tier2:SodaliteDescription_1
+  rdf:type soda:SodaliteDescription ;
+  tosca:attributes tier2:Attribute_1 ;
+  tosca:attributes tier2:Attribute_2 ;
+  tosca:attributes tier2:Attribute_3 ;
+.
+tier2:SodaliteDescription_2
+  rdf:type soda:SodaliteDescription ;
+  tosca:properties tier2:Property_1 ;
+  tosca:properties tier2:Property_2 ;
+  tosca:properties tier2:Property_3 ;
+  tosca:properties tier2:Property_4 ;
+  tosca:properties tier2:Property_5 ;
+  tosca:properties tier2:Property_6 ;
+  tosca:properties tier2:Property_7 ;
+  tosca:properties tier2:Property_8 ;
+  tosca:requirements tier2:Requirement_1 ;
+.
+tier2:SodaliteDescription_3
+  rdf:type soda:SodaliteDescription ;
+  tosca:properties tier2:Property_10 ;
+  tosca:properties tier2:Property_11 ;
+  tosca:properties tier2:Property_12 ;
+  tosca:properties tier2:Property_13 ;
+  tosca:properties tier2:Property_14 ;
+  tosca:properties tier2:Property_15 ;
+  tosca:properties tier2:Property_16 ;
+  tosca:properties tier2:Property_9 ;
+  tosca:requirements tier2:Requirement_2 ;
+  tosca:requirements tier2:Requirement_3 ;
+  tosca:requirements tier2:Requirement_4 ;
+.
+tier2:SodaliteDescription_4
+  rdf:type soda:SodaliteDescription ;
+  tosca:properties tier2:Property_17 ;
+  tosca:properties tier2:Property_18 ;
+  tosca:properties tier2:Property_19 ;
+  tosca:properties tier2:Property_20 ;
+  tosca:properties tier2:Property_21 ;
+  tosca:properties tier2:Property_22 ;
+  tosca:properties tier2:Property_23 ;
+  tosca:properties tier2:Property_24 ;
+  tosca:requirements tier2:Requirement_5 ;
+  tosca:requirements tier2:Requirement_6 ;
+.
+tier2:SodaliteDescription_5
+  rdf:type soda:SodaliteDescription ;
+  tosca:properties tier2:Property_25 ;
+  tosca:properties tier2:Property_26 ;
+  tosca:properties tier2:Property_27 ;
+  tosca:properties tier2:Property_28 ;
+  tosca:properties tier2:Property_29 ;
+  tosca:properties tier2:Property_30 ;
+  tosca:properties tier2:Property_31 ;
+  tosca:properties tier2:Property_32 ;
+  tosca:requirements tier2:Requirement_7 ;
+  tosca:requirements tier2:Requirement_8 ;
+.
+tier2:User_1
+  rdf:type soda:User ;
+.
+tier2:hpc-job-torque-1
+  rdf:type <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque> ;
+  soda:hasContext tier2:SodaliteDescription_2 ;
+.
+tier2:hpc-job-torque-2
+  rdf:type <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque> ;
+  soda:hasContext tier2:SodaliteDescription_4 ;
+.
+tier2:hpc-job-torque-3
+  rdf:type <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque> ;
+  soda:hasContext tier2:SodaliteDescription_5 ;
+.
+tier2:hpc-job-torque-4
+  rdf:type <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.job.torque> ;
+  soda:hasContext tier2:SodaliteDescription_3 ;
+.
+tier2:hpc-wm-torque
+  rdf:type <https://www.sodalite.eu/ontologies/hpc/tier1/my.nodes.hpc.wm.torque> ;
+  soda:hasContext tier2:SodaliteDescription_1 ;
+.

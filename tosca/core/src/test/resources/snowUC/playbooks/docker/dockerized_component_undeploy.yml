@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become_user: root
+  become: yes
+
+  tasks:
+    - name: Delete docker containers
+      docker_container:
+        name: "{{ image_name }}"
+        force_kill: true
+        keep_volumes: false
+        state: absent
+

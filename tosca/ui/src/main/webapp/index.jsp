@@ -23,10 +23,62 @@
                     dataType:"json",
                     success: function(response){
                         if(response !== 0){
-                            alert(response)
-                            alert(response.bugs);
-                            alert(response.action_id)
-                            $("#loadOnClick").html(response.action_id);
+                            var bugtable = "<h2>TOSCA Defects</h2>\n";
+                            bugtable = bugtable+ "<table>\n" +
+                                "  <tr>\n" +
+                                "    <th>Defect Id</th>\n" +
+                                "    <th>Defect Type</th>\n" +
+                                "    <th>Location</th>\n" +
+                                "  </tr>";
+                            response.bugs.forEach(function(entry, index) {
+                                bugtable = bugtable +"<tr>\n" +
+                                    "    <td>"+ index +"</td>\n" +
+                                    "    <td>"+entry.bug_name+"</td>\n" +
+                                    "    <td>"+entry.bug_info.uri+"</td>\n" +
+                                    "  </tr>";
+                            });
+                            bugtable = bugtable+ "</table>";
+                            $("#loadOnClick").html(bugtable);
+                        }
+                        else{
+                            alert('file not uploaded');
+                        }
+                    },
+                });
+            });
+        }
+        function detectAnsibleBugs () {
+            $("#but_upload_ansible").click(function() {
+                var fd = new FormData();
+                var files = $('#file_ansible')[0].files[0];
+                fd.append('file', files);
+                // var filename = $('input[type=file]').val().split('\\').pop();
+                // fd.append("name", filename);
+                $.ajax({
+                    url: 'http://localhost:8080/bug-predictor-api/v0.1/bugs/tosca/file',
+                    type: 'post',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    dataType:"json",
+                    success: function(response){
+                        if(response !== 0){
+                            var bugtable = "<h2>Ansible Defects</h2>\n";
+                            bugtable = bugtable+ "<table>\n" +
+                                "  <tr>\n" +
+                                "    <th>Defect Id</th>\n" +
+                                "    <th>Defect Type</th>\n" +
+                                "    <th>Location</th>\n" +
+                                "  </tr>";
+                            response.bugs.forEach(function(entry, index) {
+                                bugtable = bugtable +"<tr>\n" +
+                                    "    <td>"+ index +"</td>\n" +
+                                    "    <td>"+entry.bug_name+"</td>\n" +
+                                    "    <td>"+entry.bug_info.uri+"</td>\n" +
+                                    "  </tr>";
+                            });
+                            bugtable = bugtable+ "</table>";
+                            $("#loadOnClick").html(bugtable);
                         }
                         else{
                             alert('file not uploaded');
@@ -81,6 +133,23 @@
         .displayOnClick{
             display: none;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -94,8 +163,8 @@
     <section id="container1">
         <nav class="displayInLine" style="width: 20%; float: left;">
             <ul>
-                <li><a href="#toscaSmell" class="quickLinks" onclick='loadContent("#toscaSmell")'>TOSCA Smells</a></li>
-                <li><a href="#ansibleSmell" class="quickLinks" onclick='loadContent("#ansibleSmell")'>Ansible Smells</a></li>
+                <li><a href="#toscaSmell" class="quickLinks" onclick='loadContent("#toscaSmell")'>TOSCA Defects</a></li>
+                <li><a href="#ansibleSmell" class="quickLinks" onclick='loadContent("#ansibleSmell")'>Ansible Defects</a></li>
             </ul>
         </nav>
 
@@ -105,19 +174,39 @@
     </section>
 
     <div id="toscaSmell" class="displayOnClick">
-        <h1>TOSCA Smells</h1>
+        <h1>Upload TOSCA Files</h1>
         <div align="center">
             <form method="post" action="" enctype="multipart/form-data" id="myform">
-                <div >
-                    <input type="file" id="file" name="file" />
-                    <input type="button" class="button" value="Upload" id="but_upload" onclick="detectTOSCABugs()">
+                <div style="background-color:lavender">
+                    <table>
+                        <tr>
+                            <td><input type="file" id="file" name="file"/></td>
+                            <td><input type="button" class="button" value="Upload" id="but_upload" onclick="detectTOSCABugs()"></td>
+                        </tr>
+
+                    </table>
+
+
                 </div>
             </form>
         </div>
     </div>
     <div id="ansibleSmell" class="displayOnClick">
-        <h1>Ansible Smells</h1>
-        <p> upload</p>
+        <h1>Upload TOSCA Files</h1>
+        <div align="center">
+            <form method="post" action="" enctype="multipart/form-data" id="myform2">
+                <div style="background-color:lavender">
+                    <table>
+                        <tr>
+                            <td><input type="file" id="file_ansible" name="file"/></td>
+                            <td><input type="button" class="button" value="Upload" id="but_upload_ansible" onclick="detectAnsibleBugs()"></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </form>
+        </div>
     </div>
     <footer>Copyright &copy; SODALITE</footer>
 </div>

@@ -6,14 +6,35 @@
 
         function loadContent(selector){
             $("#loadOnClick").html($(selector).html());
-        };
-
-
-        $(document).ready(function(){
-
-            loadContent("#userGuide");
-
-        });
+        }
+        function detectTOSCABugs () {
+            $("#but_upload").click(function() {
+                var fd = new FormData();
+                var files = $('#file')[0].files[0];
+                fd.append('file', files);
+                // var filename = $('input[type=file]').val().split('\\').pop();
+                // fd.append("name", filename);
+                $.ajax({
+                    url: 'http://localhost:8080/bug-predictor-api/v0.1/bugs/tosca/file',
+                    type: 'post',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    dataType:"json",
+                    success: function(response){
+                        if(response !== 0){
+                            alert(response)
+                            alert(response.bugs);
+                            alert(response.action_id)
+                            $("#loadOnClick").html(response.action_id);
+                        }
+                        else{
+                            alert('file not uploaded');
+                        }
+                    },
+                });
+            });
+        }
     </script>
     <style>
         div.container11 {
@@ -85,14 +106,20 @@
 
     <div id="toscaSmell" class="displayOnClick">
         <h1>TOSCA Smells</h1>
-        <p> upload</p>
+        <div align="center">
+            <form method="post" action="" enctype="multipart/form-data" id="myform">
+                <div >
+                    <input type="file" id="file" name="file" />
+                    <input type="button" class="button" value="Upload" id="but_upload" onclick="detectTOSCABugs()">
+                </div>
+            </form>
+        </div>
     </div>
     <div id="ansibleSmell" class="displayOnClick">
         <h1>Ansible Smells</h1>
         <p> upload</p>
     </div>
     <footer>Copyright &copy; SODALITE</footer>
-
 </div>
 
 </body>

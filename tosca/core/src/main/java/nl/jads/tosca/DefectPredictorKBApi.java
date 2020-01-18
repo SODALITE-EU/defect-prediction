@@ -35,14 +35,16 @@ public class DefectPredictorKBApi extends KBApi {
             "PREFIX DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> \r\n" +
             "PREFIX dcterms: <http://purl.org/dc/terms/> \r\n" +
             "PREFIX owl: <http://www.w3.org/2002/07/owl#> \r\n";
-    private  Repository repository;
+    private Repository repository;
 
     public DefectPredictorKBApi() {
         super();
     }
+
     public DefectPredictorKBApi(Repository repository) {
         this.repository = repository;
     }
+
     public static void main(String[] args) throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
         FindBugInput findBugInput = new FindBugInput();

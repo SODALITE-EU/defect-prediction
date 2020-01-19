@@ -3,7 +3,7 @@ from ansiblelint import AnsibleLintRule
 
 class DepreciatedStatementUsage(AnsibleLintRule):
     id = 'ANSIBLE0021'
-    descreiption = 'Prevent using depreciated syntax in Ansible playbook'
+    description = 'Prevent using depreciated syntax in Ansible playbook'
     severity = 'High'
     tags = {'clarity'}
     version_added = 'v1.0.0'

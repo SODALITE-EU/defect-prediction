@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.IncompleteConditional import IncompleteConditional
+from ansiblelints.stage.IncompleteConditional import IncompleteConditional
 
 
 class TestIncompleteConditional(unittest.TestCase):

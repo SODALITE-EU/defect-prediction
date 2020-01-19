@@ -12,7 +12,7 @@ class DuplicateEntity(AnsibleLintRule):
 
     def match(self, file, line):
 
-        if "name:"in line:
+        if "name:" in line:
             return(line.split("name:")[1])
         return False
 

@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.UnguardedVariable import UnguardedVariable
+from ansiblelints.stage.UnguardedVariable import UnguardedVariable
 
 
 class TestUnguardedVariable(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.DepreciatedStatementUsage import DepreciatedStatementUsage
+from ansiblelints.stage.DepreciatedStatementUsage import DepreciatedStatementUsage
 
 
 class TestDepreciatedStatementUsage(unittest.TestCase):

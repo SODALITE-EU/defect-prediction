@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.DuplicateEntity import DuplicateEntity
+from ansiblelints.stage.DuplicateEntity import DuplicateEntity
 import collections
 
 class TestDuplicateEntity(unittest.TestCase):

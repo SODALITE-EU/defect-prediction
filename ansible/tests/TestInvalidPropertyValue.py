@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.InvalidPropertyValue import InvalidPropertyValue
+from ansiblelints.stage.InvalidPropertyValue import InvalidPropertyValue
 
 
 class TestInvalidPropertyValue(unittest.TestCase):

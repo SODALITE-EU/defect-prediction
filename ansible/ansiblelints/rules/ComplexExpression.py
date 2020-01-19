@@ -4,11 +4,11 @@ import ruamel.yaml
 
 class ComplexExpression(AnsibleLintRule):
     id = 'ANSIBLE0012'
-    descreiption = 'code script contains a difficult to understand complex expression like having several if, and, or'
+    description = 'code script contains a difficult to understand complex expression like having several if, and, or'
     severity = 'medium'
     tags = {'complex'}
     version_added = 'v1.0.0'
-    shortdesc = 'difficult to understand complex expression in code'
+    shortdesc = 'ComplexExpression'
 
     # _modules = ['fortiosconfig']
 

@@ -3,12 +3,12 @@ from ansiblelint import AnsibleLintRule
 
 class AdminByDefault(AnsibleLintRule):
     id = 'ANSIBLE0003'
-    descreiption = 'Set admin as default-admin when it is empty'
+    description = 'Set admin as default-admin when it is empty'
     severity = 'HIGH'
     tags = {'incomplete'}
     version_added = 'v1.0.0'
     _modules = ['add_host','fortiosconfig']
-    shortdesc ='some'
+    shortdesc ='AdminByDefault'
 
     def matchtask(self, file, task):
 

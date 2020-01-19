@@ -3,7 +3,7 @@ from ansiblelint import AnsibleLintRule
 class DeprecatedVariableRule(AnsibleLintRule):
 
     id = 'ANSIBLE0001'
-    shortdesc = 'Deprecated variable declarations'
+    shortdesc = 'DeprecatedVariables'
     description = 'Check for lines that have old style ${var} ' + \
                   'declarations'
     tags = { 'deprecated' }

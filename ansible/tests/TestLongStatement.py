@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.LongStatement import LongStatement
+from ansiblelints.stage.LongStatement import LongStatement
 
 
 class TestLongStatement(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.ImproperQuoteUsage import ImproperQuoteUsage
+from ansiblelints.stage.ImproperQuoteUsage import ImproperQuoteUsage
 
 
 class TestImproperQuoteUsage(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.UnNamedConstructs import UnNamedConstructs
+from ansiblelints.stage.UnNamedConstructs import UnNamedConstructs
 
 
 class TestUnNamedConstruct(unittest.TestCase):

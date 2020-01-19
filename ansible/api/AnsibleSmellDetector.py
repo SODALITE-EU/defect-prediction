@@ -31,7 +31,10 @@ def detectBugsFile():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         file_path = str(folder) + str(file.filename);
         res = runDetector(file_path,"default","default")
-        # os.remove(file_path)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        else:
+            print("The file does not exist to be removed")
         return res
 
 

@@ -31,7 +31,7 @@ public class BugPredictorService {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
-        return Response.ok(bugReport).build();
+        return Response.ok(bugReport).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Origin","POST").build();
     }
 
     @POST
@@ -61,6 +61,6 @@ public class BugPredictorService {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
-        return Response.ok(bugReport).build();
+        return Response.ok(bugReport).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Origin","POST").build();
     }
 }

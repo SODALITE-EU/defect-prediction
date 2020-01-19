@@ -55,7 +55,7 @@
                 // var filename = $('input[type=file]').val().split('\\').pop();
                 // fd.append("name", filename);
                 $.ajax({
-                    url: 'http://localhost:8080/bug-predictor-api/v0.1/bugs/tosca/file',
+                    url: 'http://localhost:5000/bugs/ansible/file',
                     type: 'post',
                     data: fd,
                     contentType: false,
@@ -192,7 +192,7 @@
         </div>
     </div>
     <div id="ansibleSmell" class="displayOnClick">
-        <h1>Upload TOSCA Files</h1>
+        <h1>Upload Ansible Files</h1>
         <div align="center">
             <form method="post" action="" enctype="multipart/form-data" id="myform2">
                 <div style="background-color:lavender">

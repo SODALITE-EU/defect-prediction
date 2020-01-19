@@ -21,4 +21,6 @@ class HardCodePassword(AnsibleLintRule):
             print(len(pass_word))
             #print("default('')" in pass_word)
             if len(pass_word) == 0 :
-                return pass_word
+                return True
+            return False
+        return False

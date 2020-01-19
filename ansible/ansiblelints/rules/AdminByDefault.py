@@ -11,9 +11,9 @@ class AdminByDefault(AnsibleLintRule):
     shortdesc ='some'
 
     def matchtask(self, file, task):
-        print(task)
+
         if task["action"]["__ansible_module__"] in self._modules:
             usr = task['action'].get('ansible_become_user')
             usr = str(usr)
             return usr in ['root', 'admin']
-        # return task.get('name')
+        return False

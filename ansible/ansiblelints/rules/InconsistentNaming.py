@@ -7,10 +7,12 @@ class InconsistentNaming(AnsibleLintRule):
     severity = 'medium'
     tags = {'clarity'}
     version_added = 'v1.0.0'
-    #_modules = ['hosts']
-    shortdesc ='meaningful and less confusing names for role or tasks should exist'
+    # _modules = ['hosts']
+    shortdesc = 'meaningful and less confusing names for role or tasks should exist'
 
     def match(self, file, line):
-        if "name:"in line:
+        if "name:" in line:
             if len(line.split("name:")[1]) < 7:
-                return(line)
+                return True
+
+        return False

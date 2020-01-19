@@ -19,4 +19,4 @@ class SuspiciousComment(AnsibleLintRule):
             if "#" in line:
                 if 'TODO' in line:
                     res.append(line)
-        return(res)
+        return res

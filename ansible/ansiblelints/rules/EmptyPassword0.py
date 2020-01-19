@@ -1,7 +1,7 @@
 from ansiblelint import AnsibleLintRule
 
 
-class EmptyPassword(AnsibleLintRule):
+class EmptyPassword0(AnsibleLintRule):
     id = 'ANSIBLE0004'
     descreiption = 'check if password is empty'
     severity = 'HIGH'

@@ -20,3 +20,4 @@ class IncompleteConditional(AnsibleLintRule):
                             return(prev_line_no,line)
                         else:
                             return('None found')
+        return []

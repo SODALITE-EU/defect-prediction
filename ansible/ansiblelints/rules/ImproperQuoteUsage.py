@@ -26,3 +26,5 @@ class ImproperQuoteUsage(AnsibleLintRule):
                             return(prev_line_no,line)
                         elif line.split(": ")[1].startswith('"') and line.split(": ")[1].endswith('"'):
                             return(prev_line_no,line)
+
+        return []

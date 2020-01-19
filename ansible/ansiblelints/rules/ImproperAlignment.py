@@ -31,4 +31,4 @@ class ImproperAlignment(AnsibleLintRule):
                                 return('no line found')
 
 
-
+        return []

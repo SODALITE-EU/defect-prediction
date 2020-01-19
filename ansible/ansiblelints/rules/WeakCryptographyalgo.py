@@ -21,6 +21,6 @@ class WeakCryptographyalgo(AnsibleLintRule):
         for line in ruamel.yaml.round_trip_dump(data, indent=2, block_seq_indent=3).splitlines(True):
             if "MD5" or 'md5' in line:
                 res.append(line)
-        return(res)
+        return res
 
 

@@ -3,7 +3,7 @@ from ansiblelint import AnsibleLintRule
 
 class DuplicateEntity(AnsibleLintRule):
     id = 'ANSIBLE0015'
-    descreiption = 'unexpected results can happen from same names fro different handelers'
+    descreiption = 'unexpected results can happen from same names from different handelers'
     severity = 'medium'
     tags = {'complex'}
     version_added = 'v1.0.0'
@@ -14,5 +14,5 @@ class DuplicateEntity(AnsibleLintRule):
 
         if "name:"in line:
             return(line.split("name:")[1])
-
+        return False
 

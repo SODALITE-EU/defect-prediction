@@ -1,12 +1,12 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.EmptyPassword0 import EmptyPassword
+from ansiblelints.rules.EmptyPassword0 import EmptyPassword0
 
 class TestEmptyPassword(unittest.TestCase):
     collection = RulesCollection()
 
     def setUp(self):
-        self.collection.register(EmptyPassword())
+        self.collection.register(EmptyPassword0())
 
     def test_file(self):
         success = 'testResources/ansible-smell/adminbydefault.yml'

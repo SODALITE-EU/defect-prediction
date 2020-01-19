@@ -19,7 +19,7 @@ class HttpWithoutTls(AnsibleLintRule):
         if with_out_tls_count >= 1 :
             return with_out_tls_count*['http:']
 
-
+        return False
 
         #print(type(task["action"]["__ansible_module__"]))
         #if task["action"]["__ansible_module__"] in self._modules:

@@ -1,5 +1,6 @@
-from ansiblelint import AnsibleLintRule
 import ruamel.yaml
+from ansiblelint import AnsibleLintRule
+
 
 class WeakCryptographyalgo(AnsibleLintRule):
     id = 'ANSIBLE0010'
@@ -7,10 +8,9 @@ class WeakCryptographyalgo(AnsibleLintRule):
     severity = 'HIGH'
     tags = {'weak algo'}
     version_added = 'v1.0.0'
-    shortdesc ='WeakCryptographyalgo'
-    #_commands = ['shell']
+    shortdesc = 'WeakCryptographyalgo'
+    # _commands = ['shell']
     _modules = ['add_host']
-
 
     def matchtask(self, file, task):
 
@@ -21,5 +21,3 @@ class WeakCryptographyalgo(AnsibleLintRule):
             if "MD5" or 'md5' in line:
                 return True
         return False
-
-

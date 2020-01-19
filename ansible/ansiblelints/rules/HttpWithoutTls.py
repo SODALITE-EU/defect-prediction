@@ -12,7 +12,6 @@ class HttpWithoutTls(AnsibleLintRule):
     _modules = ['uri']
 
     def matchtask(self, file, task):
-
         if task["action"]["__ansible_module__"] in self._modules:
             url = task['action'].get('url')
             url = str(url)

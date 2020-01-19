@@ -7,11 +7,10 @@ class AdminByDefault(AnsibleLintRule):
     severity = 'HIGH'
     tags = {'incomplete'}
     version_added = 'v1.0.0'
-    _modules = ['add_host','fortiosconfig']
-    shortdesc ='AdminByDefault'
+    _modules = ['add_host', 'fortiosconfig']
+    shortdesc = 'AdminByDefault'
 
     def matchtask(self, file, task):
-
         if task["action"]["__ansible_module__"] in self._modules:
             usr = task['action'].get('ansible_become_user')
             usr = str(usr)

@@ -7,12 +7,9 @@ class DuplicateEntity(AnsibleLintRule):
     severity = 'medium'
     tags = {'complex'}
     version_added = 'v1.0.0'
-    shortdesc ='use unique name for handelers'
-
+    shortdesc = 'use unique name for handelers'
 
     def match(self, file, line):
-
         if "name:" in line:
-            return(line.split("name:")[1])
+            return (line.split("name:")[1])
         return False
-

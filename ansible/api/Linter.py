@@ -22,17 +22,16 @@
 
 from __future__ import print_function
 
-import errno
 import optparse
+import os
 import sys
 
 import ansiblelint.formatters as formatters
 import six
-from ansiblelint import default_rulesdir, RulesCollection, Runner
-from ansiblelint.version import __version__
-from ansiblelint.utils import get_playbooks_and_roles, normpath
 import yaml
-import os
+from ansiblelint import default_rulesdir, RulesCollection, Runner
+from ansiblelint.utils import get_playbooks_and_roles, normpath
+from ansiblelint.version import __version__
 
 
 def load_config(config_file):
@@ -49,7 +48,6 @@ def load_config(config_file):
 
 
 def main(args):
-
     formatter = formatters.Formatter()
 
     parser = optparse.OptionParser("%prog [options] [playbook.yml [playbook2 ...]]|roledirectory",
@@ -93,7 +91,7 @@ def main(args):
                       default=0)
     parser.add_option('-x', dest='skip_list', default=[], action='append',
                       help="only check rules whose id/tags do not " +
-                      "match these values")
+                           "match these values")
     parser.add_option('--nocolor', dest='colored',
                       default=hasattr(sys.stdout, 'isatty') and sys.stdout.isatty(),
                       action='store_false',
@@ -120,7 +118,7 @@ def main(args):
 
         if 'parseable_severity' in config:
             options.parseable_severity = options.parseable_severity or \
-                config['parseable_severity']
+                                         config['parseable_severity']
 
         if 'use_default_rules' in config:
             options.use_default_rules = options.use_default_rules or config['use_default_rules']

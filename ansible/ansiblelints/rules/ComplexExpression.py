@@ -1,5 +1,4 @@
 from ansiblelint import AnsibleLintRule
-import ruamel.yaml
 
 
 class ComplexExpression(AnsibleLintRule):

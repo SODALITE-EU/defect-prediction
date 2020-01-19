@@ -1,5 +1,6 @@
-from ansiblelint import AnsibleLintRule
 import ruamel.yaml
+from ansiblelint import AnsibleLintRule
+
 
 class SuspiciousComment(AnsibleLintRule):
     id = 'ANSIBLE0009'

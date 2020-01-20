@@ -60,7 +60,7 @@ public class SecuritySmellTest {
         // add the RDF data from the inputstream directly to our database
         try {
             InputStream input =
-                    SecuritySmellTest.class.getResourceAsStream("/ontology/DUL.rdf");
+                    SecuritySmellTest.class.getResourceAsStream("/import/DUL.rdf");
             repositoryConnection.add(input, "", RDFFormat.RDFXML);
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class SecuritySmellTest {
         // add the RDF data from the inputstream directly to our database
         try {
             InputStream input =
-                    SecuritySmellTest.class.getResourceAsStream("/ontology/sodalite-metamodel.ttl");
+                    SecuritySmellTest.class.getResourceAsStream("/core/sodalite-metamodel.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class SecuritySmellTest {
         // add the RDF data from the inputstream directly to our database
         try {
             InputStream input =
-                    SecuritySmellTest.class.getResourceAsStream("/ontology/tosca-builtins.ttl");
+                    SecuritySmellTest.class.getResourceAsStream("/core/tosca-builtins.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +84,15 @@ public class SecuritySmellTest {
         // add the RDF data from the inputstream directly to our database
         try {
             InputStream input =
-                    SecuritySmellTest.class.getResourceAsStream("/ontology/snow-blueprint-containerized-OS.ttl");
+                    SecuritySmellTest.class.getResourceAsStream("/snow/snow_tier1.ttl");
+            repositoryConnection.add(input, "", RDFFormat.TURTLE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // add the RDF data from the inputstream directly to our database
+        try {
+            InputStream input =
+                    SecuritySmellTest.class.getResourceAsStream("/snow/snow_tier2.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
             e.printStackTrace();

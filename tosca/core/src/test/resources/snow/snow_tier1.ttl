@@ -139,6 +139,46 @@ snowt1:Property_9
   DUL:classifies snowt1:security_groups ;
   DUL:hasParameter snowt1:SodaliteParameter_47 ;
 .
+snowt1:Property_UserName
+  rdf:type            tosca:Property ;
+  dcterms:description "User Name" ;
+  DUL:classifies      snowt1:user_name ;
+  DUL:hasParameter    snowt1:SodaliteParameter_US_1 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_US_2 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_US_3 ;
+.
+
+snowt1:Property_Password
+  rdf:type            tosca:Property ;
+  dcterms:description "Password" ;
+  DUL:classifies      snowt1:pass_word ;
+  DUL:hasParameter    snowt1:SodaliteParameter_PS_4 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_PS_3 ;
+.
+
+snowt1:Property_Password2
+  rdf:type            tosca:Property ;
+  dcterms:description "Password 2" ;
+  DUL:classifies      snowt1:pass_word ;
+  DUL:hasParameter    snowt1:SodaliteParameter_PS_1 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_PS_5 ;
+.
+snowt1:Property_AUTH_URL
+  rdf:type            tosca:Property ;
+  dcterms:description "Authentication URL" ;
+  DUL:classifies      snowt1:auth_url ;
+  DUL:hasParameter    snowt1:SodaliteParameter_NoTSL_1 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_NoTSL_2 ;
+.
+
+snowt1:Property_AUTH_Protocol
+  rdf:type            tosca:Property ;
+  dcterms:description "Authentication Protocol" ;
+  DUL:classifies      snowt1:auth_protocol ;
+  DUL:hasParameter    snowt1:SodaliteParameter_WeakAglo_1 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_WeakAglo_2 ;
+.
+
 snowt1:Requirement_1
   rdf:type tosca:Requirement ;
   DUL:classifies tosca:host ;
@@ -152,6 +192,10 @@ snowt1:SodaliteDescription_1
   tosca:capabilities snowt1:Capability_1 ;
   tosca:interfaces snowt1:Interface_1 ;
   tosca:properties snowt1:Property_1 ;
+  tosca:properties   snowt1:Property_UserName ;
+  tosca:properties   snowt1:Property_Password ;
+  tosca:properties   snowt1:Property_AUTH_URL ;
+  tosca:properties   snowt1:Property_AUTH_Protocol ;
 .
 snowt1:SodaliteDescription_2
   rdf:type soda:SodaliteDescription ;
@@ -160,6 +204,7 @@ snowt1:SodaliteDescription_2
   tosca:properties snowt1:Property_3 ;
   tosca:properties snowt1:Property_4 ;
   tosca:requirements snowt1:Requirement_1 ;
+  tosca:properties   snowt1:Property_Password2 ;
 .
 snowt1:SodaliteDescription_3
   rdf:type soda:SodaliteDescription ;
@@ -515,7 +560,82 @@ snowt1:SodaliteParameter_9
   DUL:classifies snowt1:public_ipv4_address ;
   tosca:hasDataValue "{ default:  { get_attribute: [ SELF, host, public_address ] } }" ;
 .
+snowt1:SodaliteParameter_BH_1
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "0.0.0.0" ;
+.
 
+snowt1:SodaliteParameter_NoTSL_1
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "http://127.0.0.1:35357/v2.0" ;
+.
+
+snowt1:SodaliteParameter_WeakAglo_1
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "md5" ;
+.
+
+snowt1:SodaliteParameter_US_1
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "admin" ;
+.
+
+snowt1:SodaliteParameter_PS_1
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "admin" ;
+  rdfs:comment       "TODO: Replace hardcoded password with secure vault"^^rdfs:Literal
+.
+
+snowt1:SodaliteParameter_PS_4
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:default ;
+  tosca:hasDataValue "" ;
+.
+snowt1:SodaliteParameter_US_2
+  rdf:type           soda:SodaliteParameter ;
+  DUL:classifies     tosca:required ;
+  tosca:hasDataValue "true"^^xsd:boolean ;
+.
+snowt1:SodaliteParameter_BH_2
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+
+snowt1:SodaliteParameter_NoTSL_2
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+
+snowt1:SodaliteParameter_WeakAglo_2
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+
+snowt1:SodaliteParameter_US_3
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+
+snowt1:SodaliteParameter_PS_3
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+
+snowt1:SodaliteParameter_PS_5
+  rdf:type             soda:SodaliteParameter ;
+  DUL:classifies       tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
 snowt1:exposed_ports
   rdf:type rdf:Property ;
 .
@@ -558,6 +678,22 @@ snowt1:registry_ip
 snowt1:security_groups
   rdf:type rdf:Property ;
 .
+snowt1:auth_url
+  rdf:type rdf:Property ;
+.
+
+snowt1:auth_protocol
+  rdf:type rdf:Property ;
+.
+
+snowt1:user_name
+  rdf:type rdf:Property ;
+.
+
+snowt1:pass_word
+  rdf:type rdf:Property ;
+.
+
 <https://www.sodalite.eu/ontologies/snow/tier1/sodalite.nodes.DockerHost>
   rdf:type owl:Class ;
   rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
@@ -572,6 +708,7 @@ snowt1:security_groups
   rdf:type owl:Class ;
   rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
   soda:hasContext snowt1:SodaliteDescription_3 ;
+  rdfs:comment "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 snowt1:vm_name
   rdf:type rdf:Property ;

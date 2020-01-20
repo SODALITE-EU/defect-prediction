@@ -163,6 +163,13 @@ snowt1:Property_Password2
   DUL:hasParameter    snowt1:SodaliteParameter_PS_1 ;
   DUL:hasParameter    snowt1:SodaliteParameter_PS_5 ;
 .
+snowt1:Property_Bind_Host
+  rdf:type            tosca:Property ;
+  dcterms:description "Bind Host" ;
+  DUL:classifies      snowt1:bind_host ;
+  DUL:hasParameter    snowt1:SodaliteParameter_BH_1 ;
+  DUL:hasParameter    snowt1:SodaliteParameter_BH_2 ;
+.
 snowt1:Property_AUTH_URL
   rdf:type            tosca:Property ;
   dcterms:description "Authentication URL" ;
@@ -192,6 +199,7 @@ snowt1:SodaliteDescription_1
   tosca:capabilities snowt1:Capability_1 ;
   tosca:interfaces snowt1:Interface_1 ;
   tosca:properties snowt1:Property_1 ;
+  tosca:properties   snowt1:Property_Bind_Host ;
   tosca:properties   snowt1:Property_UserName ;
   tosca:properties   snowt1:Property_Password ;
   tosca:properties   snowt1:Property_AUTH_URL ;
@@ -693,7 +701,9 @@ snowt1:user_name
 snowt1:pass_word
   rdf:type rdf:Property ;
 .
-
+snowt1:bind_host
+  rdf:type rdf:Property ;
+.
 <https://www.sodalite.eu/ontologies/snow/tier1/sodalite.nodes.DockerHost>
   rdf:type owl:Class ;
   rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;

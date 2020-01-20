@@ -1,3 +1,4 @@
+import kb.dto.Property;
 import nl.jads.tosca.DefectPredictorKBApi;
 import nl.jads.tosca.dto.Comment;
 import org.eclipse.rdf4j.model.Resource;
@@ -21,7 +22,10 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -115,6 +119,150 @@ public class SecuritySmellTest {
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
                 assertEquals(2, comments.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testAdminBYyDefault() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.adminByDefault(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testEmptyPassword() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.emptyPassword(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testHardcodedSecret() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.hardcodedSecret(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(2, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testUseOfHTTPWithoutTLS() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.useOfHTTPWithoutTLS(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testWeakCryptoAlgo() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.weakCryptoAlgo(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
+    void testInvalidIPAddressBinding() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Property> parameters = kbApi.getProperties(connection);
+                List<Property> properties = new ArrayList<>();
+                for (Property p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.invalidIPAddressBinding(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

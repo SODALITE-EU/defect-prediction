@@ -1,4 +1,4 @@
-# baseURI: https://www.sodalite.eu/ontologies/clinical/tier1
+# baseURI: https://www.sodalite.eu/ontologies/clinical/tier1/
 # imports: http://www.loa-cnr.it/ontologies/DUL.owl
 # imports: https://www.sodalite.eu/ontologies/sodalite-metamodel/
 # imports: https://www.sodalite.eu/ontologies/tosca/
@@ -9,12 +9,12 @@
 @prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix soda:      <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
-@prefix clinical1: <https://www.sodalite.eu/ontologies/clinical/tier1> .
+@prefix clinical1: <https://www.sodalite.eu/ontologies/clinical/tier1/> .
 @prefix tosca:     <https://www.sodalite.eu/ontologies/tosca/> .
 @prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms:   <http://purl.org/dc/terms/> .
 
-<https://www.sodalite.eu/ontologies/clinical/tier1>
+<https://www.sodalite.eu/ontologies/clinical/tier1/>
     rdf:type        owl:Ontology ;
     owl:imports     <http://www.loa-cnr.it/ontologies/DUL.owl> ;
     owl:imports     soda: ;
@@ -583,13 +583,13 @@ clinical1:my.nodes.hpc.wm.torque
     soda:hasContext clinical1:SodaliteDescription_1 ;
 .
 
-<https://www.sodalite.eu/ontologies/clinical/tier1/my.nodes.hpc.job.torque>
+clinical1:my.nodes.hpc.job.torque
     rdf:type        owl:Class ;
     rdfs:subClassOf tosca:tosca.nodes.SoftwareComponent ;
     soda:hasContext clinical1:SodaliteDescription_2 ;
 .
 
-<https://www.sodalite.eu/ontologies/clinical/tier1/my.relationships.jobHostedOn>
+clinical1:my.relationships.jobHostedOn
     rdf:type        owl:Class ;
     rdfs:subClassOf tosca:tosca.relationships.HostedOn ;
     soda:hasContext clinical1:SodaliteDescription_3 ;

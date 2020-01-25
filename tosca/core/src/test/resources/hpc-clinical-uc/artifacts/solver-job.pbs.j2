@@ -1,0 +1,7 @@
+#PBS -S /bin/bash
+#PBS -m abe
+#PBS -N {{ job_name }}
+#PBS -M {{ job_email }}
+#PBS -l nodes={{ job_nb_nodes }}:ppn={{ job_ppn }},walltime={{ job_walltime }},gpus={{ job_gpus }}
+
+/usr/local/bin/singularity run solver-code-aster/

@@ -1,0 +1,197 @@
+# baseURI: https://www.sodalite.eu/ontologies/clinical/tier1
+# imports: http://www.loa-cnr.it/ontologies/DUL.owl
+# imports: https://www.sodalite.eu/ontologies/sodalite-metamodel/
+# imports: https://www.sodalite.eu/ontologies/tosca/
+# prefix: clinical1
+
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix clinical1: <https://www.sodalite.eu/ontologies/clinical/tier1#> .
+@prefix tosca: <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.sodalite.eu/ontologies/clinical/tier1>
+  rdf:type owl:Ontology ;
+  owl:imports <http://www.loa-cnr.it/ontologies/DUL.owl> ;
+  owl:imports soda: ;
+  owl:imports tosca: ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+clinical1:Attribute_1
+  rdf:type tosca:Attribute ;
+  DUL:classifies clinical1:username ;
+  DUL:hasParameter clinical1:SodaliteParameter_1 ;
+.
+clinical1:Attribute_2
+  rdf:type tosca:Attribute ;
+  DUL:classifies clinical1:ssh-key ;
+  DUL:hasParameter clinical1:SodaliteParameter_2 ;
+.
+clinical1:SodaliteDescription_1
+  rdf:type soda:SodaliteDescription ;
+  tosca:attributes clinical1:Attribute_1 ;
+  tosca:attributes clinical1:Attribute_2 ;
+.
+clinical1:SodaliteParameter_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+clinical1:SodaliteParameter_2
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:type ;
+  tosca:hasObjectValue tosca:string ;
+.
+clinical1:email
+  rdf:type rdf:Property ;
+.
+clinical1:gpus
+  rdf:type rdf:Property ;
+.
+clinical1:job_id
+  rdf:type rdf:Property ;
+.
+clinical1:monitor_period
+  rdf:type rdf:Property ;
+.
+clinical1:monitor_retries_headroom
+  rdf:type rdf:Property ;
+.
+clinical1:Interface_1
+  rdf:type tosca:Interface ;
+  DUL:classifies tosca:Standard ;
+  DUL:hasParameter clinical1:SodaliteParameter_in1 ;
+  DUL:hasParameter clinical1:SodaliteParameter_in2 ;
+  DUL:hasParameter clinical1:SodaliteParameter_in3 ;
+  DUL:hasParameter clinical1:SodaliteParameter_in4 ;
+.
+
+clinical1:SodaliteParameter_in1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:create ;
+  DUL:hasParameter clinical1:SodaliteParameter_in1_1 ;
+.
+clinical1:SodaliteParameter_in1_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  DUL:hasParameter clinical1:SodaliteParameter_in1_1_1 ;
+.
+clinical1:SodaliteParameter_in1_1_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:primary ;
+  tosca:hasDataValue "playbooks/torque-job/create.yml" ;
+.
+clinical1:SodaliteParameter_in2
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:configure ;
+  DUL:hasParameter clinical1:SodaliteParameter_in2_1 ;
+.
+clinical1:SodaliteParameter_in2_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  DUL:hasParameter clinical1:SodaliteParameter_in2_1_1 ;
+.
+clinical1:SodaliteParameter_in2_1_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:primary ;
+  tosca:hasDataValue "playbooks/torque-job/configure.yml" ;
+.
+clinical1:SodaliteParameter_in3
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:start ;
+  DUL:hasParameter clinical1:SodaliteParameter_in3_1 ;
+.
+clinical1:SodaliteParameter_in3_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:implementation ;
+  DUL:hasParameter clinical1:SodaliteParameter_in3_1_1 ;
+.
+clinical1:SodaliteParameter_in3_1_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:primary ;
+  tosca:hasDataValue "playbooks/torque-job/start.yml" ;
+.
+clinical1:SodaliteParameter_in4
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies tosca:inputs ;
+  DUL:hasParameter clinical1:SodaliteParameter_in4_1 ;
+.
+clinical1:SodaliteParameter_in4_1
+  rdf:type soda:SodaliteParameter ;
+  DUL:classifies clinical1:wm_public_address ;
+  tosca:hasDataValue "{ default: { get_attribute: [SELF, host, public_address] } }" ;
+.
+clinical1:name
+  rdf:type rdf:Property ;
+.
+clinical1:nb_nodes
+  rdf:type rdf:Property ;
+.
+clinical1:ppn
+  rdf:type rdf:Property ;
+.
+clinical1:script_template
+  rdf:type rdf:Property ;
+.
+clinical1:ssh-key
+  rdf:type rdf:Property ;
+.
+clinical1:username
+  rdf:type rdf:Property ;
+.
+clinical1:walltime
+  rdf:type rdf:Property ;
+.
+clinical1:workspace
+  rdf:type rdf:Property ;
+.
+clinical1:wm_public_address
+  rdf:type rdf:Property ;
+.
+clinical1:wm_username
+  rdf:type rdf:Property ;
+.
+clinical1:wm_keypath
+  rdf:type rdf:Property ;
+.
+clinical1:job_name
+  rdf:type rdf:Property ;
+.
+clinical1:job_name
+  rdf:type rdf:Property ;
+.
+clinical1:job_script_template
+  rdf:type rdf:Property ;
+.
+clinical1:job_workspace
+  rdf:type rdf:Property ;
+.
+clinical1:job_email
+  rdf:type rdf:Property ;
+.
+clinical1:job_nb_nodes
+  rdf:type rdf:Property ;
+.
+clinical1:job_ppn
+  rdf:type rdf:Property ;
+.
+clinical1:job_gpus
+  rdf:type rdf:Property ;
+.
+clinical1:job_walltime
+  rdf:type rdf:Property ;
+.
+clinical1:job_monitor_period
+  rdf:type rdf:Property ;
+.
+clinical1:job_monitor_retries_headroom
+  rdf:type rdf:Property ;
+.
+<https://www.sodalite.eu/ontologies/clinical/tier1#my.nodes.hpc.wm.torque>
+  rdf:type owl:Class ;
+  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
+  soda:hasContext clinical1:SodaliteDescription_1 ;
+.

@@ -1,0 +1,58 @@
+- hosts: all
+  vars:
+    job_name: jobs/test-3.pbs
+    epoch: "00:00:00"
+    walltime: "00:02:00"
+    walltime_sec: "{{ (walltime | to_datetime('%H:%M:%S')).strftime('%s') | int - (epoch | to_datetime('%H:%M:%S')).strftime('%s') | int }}"
+    monitor_period: 10 # overall monitoring delay: consists of 2 delay steps due to poll of async and delay of until loop
+    monitor_delay_step: "{{ (monitor_period / 2) | round | int }}" # each step is half of overall delay
+    monitor_retries_headroom: 2 # additional retries for long job completion
+    monitor_retries: "{{ (walltime_sec | int /  monitor_period) | round | int + monitor_retries_headroom }}"
+  gather_facts: no
+  tasks:
+
+    - debug:
+        var: monitor_retries
+
+    - name: Submit the job
+      shell: qsub {{ job_name }}
+      register: job
+
+    - name: Saving job_id
+      set_fact:
+        job_id: "{{ job.stdout }}"
+
+    - name: Set attribute
+      set_stats:
+        data:
+          job_id: "{{ job.stdout }}"
+
+    - debug:
+        var: job_id
+
+    - debug:
+        var: walltime_sec
+
+    - name: Run continuously qstat to monitor the status of the job
+      shell: qstat -f {{ job_id }} | grep 'job_state' | grep -o '.$'
+      register: job_monitor
+      until: "job_monitor.stdout == 'C'"
+      delay: "{{ monitor_delay_step }}"
+      retries: "{{ monitor_retries }}"
+      async: "{{ walltime_sec | int }}"
+      poll: "{{ monitor_delay_step }}"
+
+    - debug:
+        var: job_monitor
+
+    - name: Wait the status monitoring to finish
+      async_status:
+        jid: "{{ job_monitor.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: "{{ monitor_retries }}"
+
+    - name: set state deleted after job is completed
+      set_stats:
+        data:
+          state: "deleted"

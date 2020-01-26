@@ -1,0 +1,287 @@
+# baseURI: https://www.sodalite.eu/ontologies/clinical/tier2/
+# imports: https://www.sodalite.eu/ontologies/clinical/tier1/
+
+@prefix : <https://www.sodalite.eu/ontologies/clinical/tier2/> .
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix clinical1: <https://www.sodalite.eu/ontologies/clinical/tier1/> .
+@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix tosca: <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+clinical1:AbstractApplicationDeployment_1
+    rdf:type soda:AbstractApplicationDeployment ;
+    soda:createdAt "2020-01-19T20:52:04.814+02:00"^^xsd:dateTime ;
+    soda:createdBy clinical1:User_1 ;
+    soda:includesTemplate :hpc-wm-torque ;
+    soda:includesTemplate :density-mapping ;
+    soda:includesTemplate :probabilistic-mapping ;
+    soda:includesTemplate :solver ;
+.
+clinical1:User_1
+    rdf:type soda:User ;
+.
+:
+    rdf:type owl:Ontology ;
+    owl:imports clinical1: ;
+    owl:versionInfo "Created with TopBraid Composer" ;
+.
+:Attribute_1
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:public_address ;
+    tosca:hasDataValue "sodalite-fe.hlrs.de" ;
+.
+:Attribute_2
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:username ;
+    tosca:hasDataValue "kamil" ;
+.
+:Attribute_3
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:ssh-key ;
+    tosca:hasDataValue "~/keys/kamil-sodalite-fe" ;
+.
+:Property_4_1
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:name ;
+    tosca:hasDataValue "uc-solver" ;
+.
+:Property_4_2
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/solver-job.pbs.j2" ;
+.
+:Property_4_3
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
+.
+:Property_4_4
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+:Property_4_5
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
+.
+:Property_4_6
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
+.
+:Property_4_7
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 10 ;
+.
+:Property_4_8
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
+.
+:Property_4_9
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
+.
+:Property_4_10
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
+.
+:Property_3_1
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:name ;
+    tosca:hasDataValue "uc-probabilistic-mapping" ;
+.
+:Property_3_2
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/probabilistic-mapping-job.pbs.j2" ;
+.
+:Property_3_3
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
+.
+:Property_3_4
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+:Property_3_5
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
+.
+:Property_3_6
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
+.
+:Property_3_7
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 10 ;
+.
+:Property_3_8
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
+.
+:Property_3_9
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
+.
+:Property_3_10
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
+.
+:Property_2_1
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:name ;
+    tosca:hasDataValue "uc-density-mapping" ;
+.
+:Property_2_2
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/density-mapping-job.pbs.j2" ;
+.
+:Property_2_3
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
+.
+:Property_2_4
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+:Property_2_5
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
+.
+:Property_2_6
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
+.
+:Property_2_7
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 20 ;
+.
+:Property_2_8
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
+.
+:Property_2_9
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
+.
+:Property_2_10
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
+.
+:Requirement_2
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:host ;
+    tosca:hasObjectValue :hpc-wm-torque ;
+.
+:Requirement_3
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:dependency ;
+    tosca:hasObjectValue :density-mapping ;
+.
+:Requirement_6
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:host ;
+    tosca:hasObjectValue :hpc-wm-torque ;
+.
+:Requirement_7
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:dependency ;
+    tosca:hasObjectValue :probabilistic-mapping ;
+.
+:Requirement_4
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:host ;
+    tosca:hasObjectValue :hpc-wm-torque ;
+.
+:SodaliteDescription_4
+    rdf:type soda:SodaliteDescription ;
+    tosca:properties :Property_4_1 ;
+    tosca:properties :Property_4_2 ;
+    tosca:properties :Property_4_3 ;
+    tosca:properties :Property_4_4 ;
+    tosca:properties :Property_4_5 ;
+    tosca:properties :Property_4_6 ;
+    tosca:properties :Property_4_7 ;
+    tosca:properties :Property_4_8 ;
+    tosca:properties :Property_4_9 ;
+    tosca:properties :Property_4_10 ;
+    tosca:requirements :Requirement_6 ;
+    tosca:requirements :Requirement_7 ;
+.
+:SodaliteDescription_5
+    rdf:type soda:SodaliteDescription ;
+    tosca:attributes :Attribute_1;
+    tosca:attributes :Attribute_2;
+    tosca:attributes :Attribute_3;
+.
+:SodaliteDescription_6
+    rdf:type soda:SodaliteDescription ;
+    tosca:properties :Property_3_1 ;
+    tosca:properties :Property_3_2 ;
+    tosca:properties :Property_3_3 ;
+    tosca:properties :Property_3_4 ;
+    tosca:properties :Property_3_5 ;
+    tosca:properties :Property_3_6 ;
+    tosca:properties :Property_3_7 ;
+    tosca:properties :Property_3_8 ;
+    tosca:properties :Property_3_9 ;
+    tosca:properties :Property_3_10 ;
+    tosca:requirements :Requirement_2 ;
+    tosca:requirements :Requirement_3 ;
+.
+:SodaliteDescription_7
+    rdf:type soda:SodaliteDescription ;
+    tosca:properties :Property_2_1 ;
+    tosca:properties :Property_2_2 ;
+    tosca:properties :Property_2_3 ;
+    tosca:properties :Property_2_4 ;
+    tosca:properties :Property_2_5 ;
+    tosca:properties :Property_2_6 ;
+    tosca:properties :Property_2_7 ;
+    tosca:properties :Property_2_8 ;
+    tosca:properties :Property_2_9 ;
+    tosca:properties :Property_2_10 ;
+    tosca:requirements :Requirement_4 ;
+.
+:hpc-wm-torque
+    rdf:type clinical1:my.nodes.hpc.wm.torque ;
+    soda:hasContext :SodaliteDescription_5 ;
+.
+:density-mapping
+    rdf:type clinical1:my.nodes.hpc.job.torque ;
+    soda:hasContext :SodaliteDescription_7 ;
+.
+:probabilistic-mapping
+    rdf:type clinical1:my.nodes.hpc.job.torque ;
+    soda:hasContext :SodaliteDescription_6 ;
+.
+:solver
+    rdf:type clinical1:my.nodes.hpc.job.torque ;
+    soda:hasContext :SodaliteDescription_4 ;
+.

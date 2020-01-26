@@ -1,0 +1,63 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: >
+        Create temporary inventory for wm, 
+        since opera requires internal envvars to access the target. 
+        Need more examples to access static nodes without specifying them in the inventory file
+      add_host:
+        name: wm
+        groups: wm
+        ansible_python_interpreter: /usr/bin/python3
+        ansible_host: "{{ wm_public_address }}"
+        ansible_user: "{{ wm_username }}"
+        ansible_ssh_private_key_file: "{{ wm_keypath }}"
+        ansible_ssh_common_args: >
+          -o IdentitiesOnly=yes
+          -o BatchMode=yes
+          -o UserKnownHostsFile=/dev/null
+          -o StrictHostKeyChecking=no
+
+- hosts: wm
+  gather_facts: no
+  tasks:
+    - name: set state stopped after 'C' status
+      set_stats:
+        data:
+          job_id: "{{ job_name }}"
+
+# - hosts: wm
+#   gather_facts: no
+#   tasks:
+#     - name: Submit the job
+#       shell: "qsub {{ job_name }}"
+#       register: job_id
+
+#     - name: Wait until the job is finished
+
+
+    # convert walltime to seconds with to_datetime
+    # submit and register job_id
+    # wait until the job status is 'C' use until with async = walltime_sec
+
+# - hosts: wm
+#   gather_facts: no
+#   tasks:
+#     - name:
+#       command: "qsub {{ job_name }}" 
+
+#     - name:
+#       wait_for_the_job_to_be_finished:
+
+#     - name: set state stopped after 'C' status
+#       set_stats:
+#         data:
+#           state: "stopped"
+
+#     - name: wait until job is removed from queue
+
+#     - name: set state deleted after job is removed
+#       set_stats:
+#         data:
+#           state: "deleted"

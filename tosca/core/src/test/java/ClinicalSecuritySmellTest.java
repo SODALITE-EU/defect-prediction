@@ -1,59 +1,33 @@
+import kb.dto.Attribute;
+import kb.repository.KB;
+import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
 import nl.jads.tosca.dto.Comment;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.impl.TreeModel;
-import org.eclipse.rdf4j.model.util.Models;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.config.RepositoryConfig;
-import org.eclipse.rdf4j.repository.config.RepositoryConfigSchema;
-import org.eclipse.rdf4j.repository.manager.LocalRepositoryManager;
-import org.eclipse.rdf4j.repository.manager.RepositoryManager;
 import org.eclipse.rdf4j.rio.RDFFormat;
-import org.eclipse.rdf4j.rio.RDFParser;
-import org.eclipse.rdf4j.rio.Rio;
-import org.eclipse.rdf4j.rio.helpers.StatementCollector;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
 public class ClinicalSecuritySmellTest {
-    private static RepositoryManager repositoryManager;
+    private static SodaliteRepository repositoryManager;
     private static Repository repository;
+    private static KB kb;
 
     @BeforeAll
     static void beforeAll() {
-        repositoryManager = new LocalRepositoryManager(new File("."));
-        repositoryManager.init();
-        TreeModel graph = new TreeModel();
-        InputStream config = ClinicalSecuritySmellTest.class.getResourceAsStream("/config_clinical.ttl");
-        RDFParser rdfParser = Rio.createParser(RDFFormat.TURTLE);
-        rdfParser.setRDFHandler(new StatementCollector(graph));
-        try {
-            rdfParser.parse(config, RepositoryConfigSchema.NAMESPACE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            config.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Resource repositoryNode = Models.subject(
-                graph.filter(null, RDF.TYPE, RepositoryConfigSchema.REPOSITORY)).orElse(null);
-
-        RepositoryConfig repositoryConfig = RepositoryConfig.create(graph, repositoryNode);
-        repositoryManager.addRepositoryConfig(repositoryConfig);
-
+        repositoryManager = new SodaliteRepository(".", "/config_clinical.ttl");
+        kb = new KB(repositoryManager,"Clinical");
         repository = repositoryManager.getRepository("Clinical");
 
         RepositoryConnection repositoryConnection = repository.getConnection();
@@ -104,18 +78,42 @@ public class ClinicalSecuritySmellTest {
     static void afterAll() {
         repository.shutDown();
         repositoryManager.removeRepository("Clinical");
-        repositoryManager.shutDown();
+        repositoryManager.shutDown("TEST");
+    }
+
+    @Test
+    void testAdminBYyDefault() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                List<Attribute> properties = new ArrayList<>();
+                for (Attribute p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.adminByDefault(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     @Test
     void testSuspiciousComment() {
         try {
-            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(repository);
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
                 System.out.println(comments);
-                assertEquals(2, comments.size());
+                assertEquals(1, comments.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

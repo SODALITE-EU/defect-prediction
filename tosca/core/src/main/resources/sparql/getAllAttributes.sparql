@@ -1,9 +1,9 @@
-select distinct ?p ?attribute
+select distinct ?concept ?attribute ?value
 where {
 		?resource soda:hasInferredContext ?context .
-		?context tosca:attributes ?p .
-		?p DUL:classifies ?attribute .
-		FILTER (?p != owl:Nothing ) .
+		?context tosca:attributes ?concept .
+		?concept DUL:classifies ?attribute .
+		OPTIONAL {?concept tosca:hasValue ?value .}
 }
 
 

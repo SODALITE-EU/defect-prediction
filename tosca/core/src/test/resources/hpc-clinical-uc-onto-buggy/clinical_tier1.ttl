@@ -23,8 +23,9 @@
 .
 
 clinical1:Attribute_1
-    rdf:type         tosca:Attribute ;
+    dcterms:description "User Name" ;
     DUL:classifies   clinical1:username ;
+    DUL:hasParameter clinical1:SodaliteParameter_US_1 ;
     DUL:hasParameter clinical1:SodaliteParameter_1 ;
 .
 
@@ -488,7 +489,11 @@ clinical1:SodaliteParameter_in4_13
     DUL:classifies     clinical1:job_monitor_retries_headroom ;
     tosca:hasDataValue "{ default: { get_property: [SELF, monitor_retries_headroom] } }" ;
 .
-
+clinical1:SodaliteParameter_US_1
+    rdf:type           soda:SodaliteParameter ;
+    DUL:classifies     tosca:default ;
+    tosca:hasDataValue "admin" ;
+.
 clinical1:name
     rdf:type rdf:Property ;
 .

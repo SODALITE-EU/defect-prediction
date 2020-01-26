@@ -14,12 +14,12 @@
 
 clinical1:AbstractApplicationDeployment_1
     rdf:type soda:AbstractApplicationDeployment ;
-    soda:createdAt "2019-11-19T20:52:04.814+02:00"^^xsd:dateTime ;
+    soda:createdAt "2020-01-19T20:52:04.814+02:00"^^xsd:dateTime ;
     soda:createdBy clinical1:User_1 ;
-    soda:includesTemplate :docker-host ;
-    soda:includesTemplate :skyline-alignment ;
-    soda:includesTemplate :skyline-extractor ;
-    soda:includesTemplate :vm ;
+    soda:includesTemplate :hpc-wm-torque ;
+    soda:includesTemplate :density-mapping ;
+    soda:includesTemplate :probabilistic-mapping ;
+    soda:includesTemplate :solver ;
 .
 clinical1:User_1
     rdf:type soda:User ;
@@ -29,112 +29,244 @@ clinical1:User_1
     owl:imports clinical1: ;
     owl:versionInfo "Created with TopBraid Composer" ;
 .
-:Property_11
+:Attribute_1
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:public_address ;
+    tosca:hasDataValue "sodalite-fe.hlrs.de" ;
+.
+:Attribute_2
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:username ;
+    tosca:hasDataValue "kamil" ;
+.
+:Attribute_3
+    rdf:type tosca:Attribute ;
+    DUL:classifies clinical1:ssh-key ;
+    tosca:hasDataValue "~/keys/kamil-sodalite-fe" ;
+.
+:Property_4_1
     rdf:type tosca:Property ;
     DUL:classifies clinical1:name ;
-    tosca:hasDataValue "snow-vm" ;
+    tosca:hasDataValue "uc-solver" ;
 .
-:Property_12
+:Property_4_2
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:image ;
-    tosca:hasDataValue "centos7" ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/solver-job.pbs.j2" ;
 .
-:Property_13
+:Property_4_3
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:flavor ;
-    tosca:hasDataValue "m1.small" ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
 .
-:Property_14
+:Property_4_4
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:network ;
-    tosca:hasDataValue "87b57656-381c-4921-82c0-bd65a8a67cfd" ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
 .
-:Property_15
+:Property_4_5
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:security_groups ;
-    tosca:hasDataValue "default,snow" ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
 .
-:Property_16
+:Property_4_6
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:key_name ;
-    tosca:hasDataValue "draganrX" ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
 .
-:Property_17
+:Property_4_7
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:registry_ip ;
-    tosca:hasDataValue "154.48.185.207" ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 10 ;
 .
-:Property_18
+:Property_4_8
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:image_name ;
-    tosca:hasDataValue "snow-skyline-extractor" ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
 .
-:Property_19
+:Property_4_9
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:ports ;
-    tosca:hasDataValue "8080:8080" ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
 .
-:Property_20
+:Property_4_10
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:exposed_ports ;
-    tosca:hasDataValue "8080" ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
 .
-:Property_21
+:Property_3_1
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:image_name ;
-    tosca:hasDataValue "snow-skyline-alignment" ;
+    DUL:classifies clinical1:name ;
+    tosca:hasDataValue "uc-probabilistic-mapping" ;
 .
-:Property_22
+:Property_3_2
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:ports ;
-    tosca:hasDataValue "8081:8080" ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/probabilistic-mapping-job.pbs.j2" ;
 .
-:Property_23
+:Property_3_3
     rdf:type tosca:Property ;
-    DUL:classifies clinical1:exposed_ports ;
-    tosca:hasDataValue "8080" ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
+.
+:Property_3_4
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+:Property_3_5
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
+.
+:Property_3_6
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
+.
+:Property_3_7
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 10 ;
+.
+:Property_3_8
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
+.
+:Property_3_9
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
+.
+:Property_3_10
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
+.
+:Property_2_1
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:name ;
+    tosca:hasDataValue "uc-density-mapping" ;
+.
+:Property_2_2
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:script_template ;
+    tosca:hasDataValue "~/opera/hpc-clinical-uc/artifacts/density-mapping-job.pbs.j2" ;
+.
+:Property_2_3
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:workspace ;
+    tosca:hasDataValue "/mnt/nfs/home/kamil/" ;
+.
+:Property_2_4
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:email ;
+    tosca:hasDataValue "tokmakov@hlrs.de" ;
+.
+:Property_2_5
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:gpus ;
+    tosca:hasDataValue 0 ;
+.
+:Property_2_6
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:nb_nodes ;
+    tosca:hasDataValue 1 ;
+.
+:Property_2_7
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:ppn ;
+    tosca:hasDataValue 20 ;
+.
+:Property_2_8
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:walltime ;
+    tosca:hasDataValue "00:30:00" ;
+.
+:Property_2_9
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_period ;
+    tosca:hasDataValue 10 ;
+.
+:Property_2_10
+    rdf:type tosca:Property ;
+    DUL:classifies clinical1:monitor_retries_headroom ;
+    tosca:hasDataValue 2 ;
 .
 :Requirement_2
     rdf:type tosca:Requirement ;
     DUL:classifies tosca:host ;
-    tosca:hasObjectValue :vm ;
+    tosca:hasObjectValue :hpc-wm-torque ;
 .
 :Requirement_3
     rdf:type tosca:Requirement ;
+    DUL:classifies tosca:dependency ;
+    tosca:hasObjectValue :density-mapping ;
+.
+:Requirement_6
+    rdf:type tosca:Requirement ;
     DUL:classifies tosca:host ;
-    tosca:hasObjectValue :docker-host ;
+    tosca:hasObjectValue :hpc-wm-torque ;
+.
+:Requirement_7
+    rdf:type tosca:Requirement ;
+    DUL:classifies tosca:dependency ;
+    tosca:hasObjectValue :probabilistic-mapping ;
 .
 :Requirement_4
     rdf:type tosca:Requirement ;
     DUL:classifies tosca:host ;
-    tosca:hasObjectValue :docker-host ;
+    tosca:hasObjectValue :hpc-wm-torque ;
 .
 :SodaliteDescription_4
     rdf:type soda:SodaliteDescription ;
-    tosca:properties :Property_11 ;
-    tosca:properties :Property_12 ;
-    tosca:properties :Property_13 ;
-    tosca:properties :Property_14 ;
-    tosca:properties :Property_15 ;
-    tosca:properties :Property_16 ;
+    tosca:properties :Property_4_1 ;
+    tosca:properties :Property_4_2 ;
+    tosca:properties :Property_4_3 ;
+    tosca:properties :Property_4_4 ;
+    tosca:properties :Property_4_5 ;
+    tosca:properties :Property_4_6 ;
+    tosca:properties :Property_4_7 ;
+    tosca:properties :Property_4_8 ;
+    tosca:properties :Property_4_9 ;
+    tosca:properties :Property_4_10 ;
+    tosca:requirements :Requirement_6 ;
+    tosca:requirements :Requirement_7 ;
 .
 :SodaliteDescription_5
     rdf:type soda:SodaliteDescription ;
-    tosca:properties :Property_17 ;
-    tosca:requirements :Requirement_2 ;
+    tosca:attributes :Attribute_1;
+    tosca:attributes :Attribute_2;
+    tosca:attributes :Attribute_3;
 .
 :SodaliteDescription_6
     rdf:type soda:SodaliteDescription ;
-    tosca:properties :Property_18 ;
-    tosca:properties :Property_19 ;
-    tosca:properties :Property_20 ;
+    tosca:properties :Property_3_1 ;
+    tosca:properties :Property_3_2 ;
+    tosca:properties :Property_3_3 ;
+    tosca:properties :Property_3_4 ;
+    tosca:properties :Property_3_5 ;
+    tosca:properties :Property_3_6 ;
+    tosca:properties :Property_3_7 ;
+    tosca:properties :Property_3_8 ;
+    tosca:properties :Property_3_9 ;
+    tosca:properties :Property_3_10 ;
+    tosca:requirements :Requirement_2 ;
     tosca:requirements :Requirement_3 ;
 .
 :SodaliteDescription_7
     rdf:type soda:SodaliteDescription ;
-    tosca:properties :Property_21 ;
-    tosca:properties :Property_22 ;
-    tosca:properties :Property_23 ;
+    tosca:properties :Property_2_1 ;
+    tosca:properties :Property_2_2 ;
+    tosca:properties :Property_2_3 ;
+    tosca:properties :Property_2_4 ;
+    tosca:properties :Property_2_5 ;
+    tosca:properties :Property_2_6 ;
+    tosca:properties :Property_2_7 ;
+    tosca:properties :Property_2_8 ;
+    tosca:properties :Property_2_9 ;
+    tosca:properties :Property_2_10 ;
     tosca:requirements :Requirement_4 ;
 .
 :hpc-wm-torque

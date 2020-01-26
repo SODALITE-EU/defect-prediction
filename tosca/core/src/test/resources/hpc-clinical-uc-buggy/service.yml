@@ -10,6 +10,7 @@ node_types:
     attributes:
       username:
         type: string
+        default: "admin"
       ssh-key:
         type: string
     capabilities:

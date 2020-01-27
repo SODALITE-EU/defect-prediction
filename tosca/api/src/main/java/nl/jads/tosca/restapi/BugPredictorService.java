@@ -1,5 +1,6 @@
 package nl.jads.tosca.restapi;
 
+import kb.repository.KB;
 import nl.jads.tosca.DefectPredictorKBApi;
 import nl.jads.tosca.dto.BugReport;
 import nl.jads.tosca.dto.FindBugInput;
@@ -28,7 +29,7 @@ public class BugPredictorService {
 //            responseContainer = "List")
     @Path("/tosca/json")
     public Response findBugs(FindBugInput findBugInput) throws IOException {
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
+        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB());
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
         return Response.ok(bugReport).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Origin","POST").build();
@@ -58,7 +59,7 @@ public class BugPredictorService {
         FindBugInput findBugInput = new FindBugInput();
         findBugInput.setActionId(fileDetail.getFileName());
         findBugInput.setDeploymentId(fileDetail.getFileName());
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi();
+        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB());
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
         return Response.ok(bugReport).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Origin","POST").build();

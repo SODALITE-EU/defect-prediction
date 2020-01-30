@@ -1,4 +1,5 @@
 pipeline {
+  options { disableConcurrentBuilds() }
   agent { label 'docker-slave' }
   stages {
     stage ('Pull repo code from github') {

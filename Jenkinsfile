@@ -7,6 +7,11 @@ pipeline {
       }
     }
     stage ('Build semantic-reasoner') {
+      when { 
+          not { 
+                triggeredBy 'UpstreamCause' 
+          }
+      }
       steps {
         build 'semantic-reasoner/master'
       }

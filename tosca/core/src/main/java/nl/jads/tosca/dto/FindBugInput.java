@@ -9,6 +9,8 @@ public class FindBugInput {
     private String deploymentId;
     private String toscaDefinition;
     private String ansibleDefinition;
+    private String repository;
+    private String server;
 
     public String getActionId() {
         return actionId;
@@ -40,5 +42,21 @@ public class FindBugInput {
 
     public void setAnsibleDefinition(String ansibleDefinition) {
         this.ansibleDefinition = ansibleDefinition;
+    }
+
+    public String getRepository() {
+        return repository;
+    }
+
+    public void setRepository(String repository) {
+        this.repository = repository;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
     }
 }

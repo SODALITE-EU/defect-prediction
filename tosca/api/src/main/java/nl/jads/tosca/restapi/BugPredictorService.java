@@ -37,7 +37,8 @@ public class BugPredictorService {
     @Path("/tosca/jsonv2")
     public Response findBugsV2(FindBugInput findBugInput) throws IOException {
         String actualPath = servletContext.getRealPath("/WEB-INF/classes");
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB(), actualPath);
+
+        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(getKB(findBugInput), actualPath);
         BugReport bugReport = kbApi.findBugs(findBugInput);
         IDEInput ideInput = new IDEInput();
         List<Warning> warningList = new ArrayList<>();
@@ -69,7 +70,7 @@ public class BugPredictorService {
     @Path("/tosca/json")
     public Response findBugs(FindBugInput findBugInput) throws IOException {
         String actualPath = servletContext.getRealPath("/WEB-INF/classes");
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB(), actualPath);
+        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(getKB(findBugInput), actualPath);
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
         return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
@@ -104,5 +105,17 @@ public class BugPredictorService {
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
         return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
+    }
+
+    private KB getKB(FindBugInput findBugInput) {
+        String server = findBugInput.getServer();
+        if (server == null || "".equals(server.trim())) {
+            server = KB.SERVER_URL;
+        }
+        String repo = findBugInput.getRepository();
+        if (repo == null || "".equals(repo.trim())) {
+            repo = KB.REPOSITORY;
+        }
+        return new KB(server, repo);
     }
 }

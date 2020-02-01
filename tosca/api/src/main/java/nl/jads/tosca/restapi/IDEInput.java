@@ -1,7 +1,10 @@
 package nl.jads.tosca.restapi;
 
-import java.util.List;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import java.util.List;
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class IDEInput {
 
     private List<Warning> warnings;

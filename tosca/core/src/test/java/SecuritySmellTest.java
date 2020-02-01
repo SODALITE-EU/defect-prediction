@@ -95,6 +95,7 @@ public class SecuritySmellTest {
                     BugRecord r = new BugRecord();
                     kbApi.fillContext(r, c, connection);
                     System.out.println(r.getElementType());
+                    System.out.println(r.getElementName());
                     System.out.println(r.getContext());
                 }
             } catch (IOException e) {

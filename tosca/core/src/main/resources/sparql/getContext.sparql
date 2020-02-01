@@ -1,13 +1,15 @@
-select distinct ?context ?element
+select distinct ?context ?element ?pt
 where {
     optional { ?var rdf:type soda:SodaliteParameter .
                ?p DUL:hasParameter ?var .
+               ?p DUL:classifies ?pt .
                ?desc tosca:properties ?p .
                ?context soda:hasContext ?desc .
                Bind ( "Property" as ?element) .
              }
     optional { ?var rdf:type soda:SodaliteParameter .
                ?p DUL:hasParameter ?var .
+                ?p DUL:classifies ?pt .
                 ?desc tosca:attributes ?p .
                 ?context soda:hasContext ?desc .
                 Bind ( "Attribute" as ?element) .

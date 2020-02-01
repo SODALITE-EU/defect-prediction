@@ -369,6 +369,10 @@ public class DefectPredictorKBApi {
             bugRecord.setContext(((IRI) bindingC.getValue()).getLocalName());
             Binding bindingE = bindingSet.getBinding("element");
             bugRecord.setElementType(((SimpleLiteral) bindingE.getValue()).getLabel());
+            Binding bindingP = bindingSet.getBinding("pt");
+            if (bindingP != null) {
+                bugRecord.setElementName(((IRI) bindingP.getValue()).getLocalName());
+            }
         }
         result.close();
     }

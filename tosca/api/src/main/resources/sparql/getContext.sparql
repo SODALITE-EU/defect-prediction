@@ -1,13 +1,15 @@
-select distinct ?context ?element
+select distinct ?context ?element ?pt
 where {
     optional { ?var rdf:type soda:SodaliteParameter .
                ?p DUL:hasParameter ?var .
+               ?p DUL:classifies ?pt .
                ?desc tosca:properties ?p .
                ?context soda:hasContext ?desc .
                Bind ( "Property" as ?element) .
              }
     optional { ?var rdf:type soda:SodaliteParameter .
                ?p DUL:hasParameter ?var .
+                ?p DUL:classifies ?pt .
                 ?desc tosca:attributes ?p .
                 ?context soda:hasContext ?desc .
                 Bind ( "Attribute" as ?element) .
@@ -23,12 +25,12 @@ where {
     optional {
              ?var rdfs:subClassOf tosca:tosca.nodes.Root .
              Bind (?var as ?context)
-             Bind ( "NodeTemplate" as ?element) .
+             Bind ( "Node" as ?element) .
            }
     optional {
                 ?var rdf:type ?type.
                 ?type rdfs:subClassOf* tosca:tosca.nodes.Root.
                  Bind (?var as ?context)
-                 Bind ( "Node" as ?element) .
+                 Bind ( "NodeTemplate" as ?element) .
                }
 	}

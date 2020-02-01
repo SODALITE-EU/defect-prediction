@@ -1,0 +1,7 @@
+select distinct ?var ?resource
+where {
+   	?var DUL:hasParameter ?p .
+	?p DUL:classifies tosca:default .
+	?p tosca:hasDataValue ?value.
+	FILTER (regex(?value, "http:*?","i")).
+	}

@@ -1,0 +1,34 @@
+select distinct ?context ?element
+where {
+    optional { ?var rdf:type soda:SodaliteParameter .
+               ?p DUL:hasParameter ?var .
+               ?desc tosca:properties ?p .
+               ?context soda:hasContext ?desc .
+               Bind ( "Property" as ?element) .
+             }
+    optional { ?var rdf:type soda:SodaliteParameter .
+               ?p DUL:hasParameter ?var .
+                ?desc tosca:attributes ?p .
+                ?context soda:hasContext ?desc .
+                Bind ( "Attribute" as ?element) .
+              }
+    optional { ?desc tosca:properties ?var .
+                ?context soda:hasContext ?desc .
+                Bind ( "Property" as ?element) .
+              }
+    optional {  ?desc tosca:attributes ?var .
+                ?context soda:hasContext ?desc .
+                Bind ( "Attribute" as ?element) .
+              }
+    optional {
+             ?var rdfs:subClassOf tosca:tosca.nodes.Root .
+             Bind (?var as ?context)
+             Bind ( "NodeTemplate" as ?element) .
+           }
+    optional {
+                ?var rdf:type ?type.
+                ?type rdfs:subClassOf* tosca:tosca.nodes.Root.
+                 Bind (?var as ?context)
+                 Bind ( "Node" as ?element) .
+               }
+	}

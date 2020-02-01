@@ -2,6 +2,7 @@ import kb.dto.Property;
 import kb.repository.KB;
 import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
+import nl.jads.tosca.dto.BugRecord;
 import nl.jads.tosca.dto.Comment;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -89,11 +90,18 @@ public class SecuritySmellTest {
             RepositoryConnection connection = repository.getConnection();
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
-                assertEquals(2, comments.size());
+                assertEquals(3, comments.size());
+                for(Comment c:comments){
+                    BugRecord r = new BugRecord();
+                    kbApi.fillContext(r, c, connection);
+                    System.out.println(r.getElementType());
+                    System.out.println(r.getContext());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -117,7 +125,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -141,7 +150,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -165,7 +175,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -189,7 +200,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -213,7 +225,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -237,7 +250,8 @@ public class SecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

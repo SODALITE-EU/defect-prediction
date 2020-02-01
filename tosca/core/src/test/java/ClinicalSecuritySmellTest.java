@@ -101,7 +101,8 @@ public class ClinicalSecuritySmellTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -112,12 +113,12 @@ public class ClinicalSecuritySmellTest {
             RepositoryConnection connection = repository.getConnection();
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
-                System.out.println(comments);
                 assertEquals(1, comments.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

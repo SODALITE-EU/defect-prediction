@@ -1,5 +1,7 @@
 package nl.jads.tosca.restapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import kb.repository.KB;
 import nl.jads.tosca.DefectPredictorKBApi;
 import nl.jads.tosca.dto.BugRecord;
@@ -86,6 +88,28 @@ public class BugPredictorService {
         String fileLocation = "e://" + fileDetail.getFileName();
         String actualPath = servletContext.getRealPath("/WEB-INF/classes");
         System.out.println("Received a File :" + fileLocation);
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        try {
+            TOSCADef toscaDef = mapper.readValue(uploadedInputStream, TOSCADef.class);
+            Metadata metadata = toscaDef.getMetadata();
+            String repoName;
+            if (metadata != null && metadata.getTemplateName() != null) {
+                repoName = metadata.getTemplateName();
+            } else {
+                repoName = KB.REPOSITORY;
+            }
+            System.out.println(repoName);
+            FindBugInput findBugInput = new FindBugInput();
+            findBugInput.setActionId(fileDetail.getFileName());
+            findBugInput.setDeploymentId(fileDetail.getFileName());
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB(repoName), actualPath);
+            BugReport bugReport = kbApi.findBugs(findBugInput);
+            kbApi.shutDown();
+            return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
+
+        } catch (Exception e) {
+            return Response.status(404).entity("No repository for the template").build();
+        }
         //saving file
 //        try {
 //            FileOutputStream out = new FileOutputStream(new File(fileLocation));
@@ -98,13 +122,6 @@ public class BugPredictorService {
 //            out.flush();
 //            out.close();
 //        } catch (IOException e) {e.printStackTrace();}
-        FindBugInput findBugInput = new FindBugInput();
-        findBugInput.setActionId(fileDetail.getFileName());
-        findBugInput.setDeploymentId(fileDetail.getFileName());
-        DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB(), actualPath);
-        BugReport bugReport = kbApi.findBugs(findBugInput);
-        kbApi.shutDown();
-        return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
     }
 
     private KB getKB(FindBugInput findBugInput) {

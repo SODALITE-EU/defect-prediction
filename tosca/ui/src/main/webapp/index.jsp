@@ -29,12 +29,14 @@
                                 "    <th>Defect Id</th>\n" +
                                 "    <th>Defect Type</th>\n" +
                                 "    <th>Location</th>\n" +
+                                "    <th>Defect Description</th>\n" +
                                 "  </tr>";
                             response.bugs.forEach(function(entry, index) {
                                 bugtable = bugtable +"<tr>\n" +
                                     "    <td>"+ index +"</td>\n" +
                                     "    <td>"+entry.bug_name+"</td>\n" +
-                                    "    <td>"+entry.bug_info.uri+"</td>\n" +
+                                    "    <td>"+entry.element_type + " " + entry.element_name+ " in " + entry.context+"</td>\n" +
+                                    "    <td>"+entry.description+"</td>\n" +
                                     "  </tr>";
                             });
                             bugtable = bugtable+ "</table>";

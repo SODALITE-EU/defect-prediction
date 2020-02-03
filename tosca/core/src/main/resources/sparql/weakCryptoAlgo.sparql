@@ -3,5 +3,5 @@ where {
    	?var DUL:hasParameter ?p .
 	?p DUL:classifies tosca:default .
 	?p tosca:hasDataValue ?value.
-	FILTER (?value IN ('md5', 'sh1') )
+	FILTER (lcase(str(?value))  IN ('md5', 'sh1') )
 	}

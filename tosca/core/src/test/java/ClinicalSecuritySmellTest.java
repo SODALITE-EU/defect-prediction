@@ -27,7 +27,7 @@ public class ClinicalSecuritySmellTest {
     @BeforeAll
     static void beforeAll() {
         repositoryManager = new SodaliteRepository(".", "/config_clinical.ttl");
-        kb = new KB(repositoryManager,"Clinical");
+        kb = new KB(repositoryManager, "Clinical");
         repository = repositoryManager.getRepository("Clinical");
 
         RepositoryConnection repositoryConnection = repository.getConnection();
@@ -114,6 +114,31 @@ public class ClinicalSecuritySmellTest {
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
                 assertEquals(1, comments.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testWeakCryptoAlgo() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                List<Attribute> properties = new ArrayList<>();
+                for (Attribute p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.weakCryptoAlgo(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,5 +1,8 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 
+metadata:
+  template_name: hpc-clinical-uc-buggy
+
 node_types:
 
   my.nodes.hpc.wm.torque:
@@ -13,6 +16,9 @@ node_types:
         default: "admin"
       ssh-key:
         type: string
+      authprotocol:
+        type: string
+        default: "MD5"
     capabilities:
       host:
         type: tosca.capabilities.Compute

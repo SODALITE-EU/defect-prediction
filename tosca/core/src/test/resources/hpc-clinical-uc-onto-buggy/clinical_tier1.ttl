@@ -27,6 +27,7 @@ clinical1:Attribute_1
     DUL:classifies   clinical1:username ;
     DUL:hasParameter clinical1:SodaliteParameter_US_1 ;
     DUL:hasParameter clinical1:SodaliteParameter_1 ;
+    DUL:hasParameter clinical1:SodaliteParameter_WeakAglo_1 ;
 .
 
 clinical1:Attribute_2
@@ -493,6 +494,11 @@ clinical1:SodaliteParameter_US_1
     rdf:type           soda:SodaliteParameter ;
     DUL:classifies     tosca:default ;
     tosca:hasDataValue "admin" ;
+.
+clinical1:SodaliteParameter_WeakAglo_1
+    rdf:type           soda:SodaliteParameter ;
+    DUL:classifies     tosca:default ;
+    tosca:hasDataValue "MD5" ;
 .
 clinical1:name
     rdf:type rdf:Property ;

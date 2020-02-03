@@ -29,7 +29,7 @@ def detectBugsFile():
         print(file.filename)
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        file_path = str(folder) + str(file.filename);
+        file_path = str(folder) + str(file.filename)
         res = runDetector(file_path,"default","default")
         if os.path.exists(file_path):
             os.remove(file_path)

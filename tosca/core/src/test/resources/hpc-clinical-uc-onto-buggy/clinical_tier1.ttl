@@ -24,17 +24,25 @@
 
 clinical1:Attribute_1
     dcterms:description "User Name" ;
-    DUL:classifies   clinical1:username ;
-    DUL:hasParameter clinical1:SodaliteParameter_US_1 ;
-    DUL:hasParameter clinical1:SodaliteParameter_1 ;
+    DUL:classifies      clinical1:username ;
+    DUL:hasParameter    clinical1:SodaliteParameter_US_1 ;
+    DUL:hasParameter    clinical1:SodaliteParameter_1 ;
 .
 
 clinical1:Attribute_4
-    dcterms:description "Auth Protocol" ;
-    DUL:classifies   clinical1:authprotocol ;
-    DUL:hasParameter clinical1:SodaliteParameter_1_1 ;
-    DUL:hasParameter clinical1:SodaliteParameter_WeakAglo_1 ;
+    dcterms:description "ssh key hash algorithm" ;
+    DUL:classifies      clinical1:ssh-key-hashalgo ;
+    DUL:hasParameter    clinical1:SodaliteParameter_1_1 ;
+    DUL:hasParameter    clinical1:SodaliteParameter_WeakAglo_1 ;
 .
+
+clinical1:Attribute_5
+    dcterms:description "ssh key size" ;
+    DUL:classifies      clinical1:ssh-key-size ;
+    DUL:hasParameter    clinical1:SodaliteParameter_1_2 ;
+    DUL:hasParameter    clinical1:SodaliteParameter_KeySize ;
+.
+
 clinical1:Attribute_2
     rdf:type         tosca:Attribute ;
     DUL:classifies   clinical1:ssh-key ;
@@ -164,6 +172,7 @@ clinical1:SodaliteDescription_1
     tosca:attributes    clinical1:Attribute_1 ;
     tosca:attributes    clinical1:Attribute_2 ;
     tosca:attributes    clinical1:Attribute_4 ;
+    tosca:attributes    clinical1:Attribute_5 ;
     tosca:capabilities  clinical1:Capability_1 ;
 .
 
@@ -281,10 +290,17 @@ clinical1:SodaliteParameter_1
     DUL:classifies       tosca:type ;
     tosca:hasObjectValue tosca:string ;
 .
+
 clinical1:SodaliteParameter_1_1
     rdf:type             soda:SodaliteParameter ;
     DUL:classifies       tosca:type ;
     tosca:hasObjectValue tosca:string ;
+.
+
+clinical1:SodaliteParameter_1_2
+    rdf:type             soda:SodaliteParameter ;
+    DUL:classifies       tosca:type ;
+    tosca:hasObjectValue tosca:integer ;
 .
 
 clinical1:SodaliteParameter_2
@@ -501,16 +517,25 @@ clinical1:SodaliteParameter_in4_13
     DUL:classifies     clinical1:job_monitor_retries_headroom ;
     tosca:hasDataValue "{ default: { get_property: [SELF, monitor_retries_headroom] } }" ;
 .
+
 clinical1:SodaliteParameter_US_1
     rdf:type           soda:SodaliteParameter ;
     DUL:classifies     tosca:default ;
     tosca:hasDataValue "admin" ;
 .
+
 clinical1:SodaliteParameter_WeakAglo_1
     rdf:type           soda:SodaliteParameter ;
     DUL:classifies     tosca:default ;
-    tosca:hasDataValue "MD5" ;
+    tosca:hasDataValue "sh1" ;
 .
+
+clinical1:SodaliteParameter_KeySize
+    rdf:type           soda:SodaliteParameter ;
+    DUL:classifies     tosca:default ;
+    tosca:hasDataValue 1024 ;
+.
+
 clinical1:name
     rdf:type rdf:Property ;
 .
@@ -518,9 +543,15 @@ clinical1:name
 clinical1:nb_nodes
     rdf:type rdf:Property ;
 .
-clinical1:authprotocol
+
+clinical1:ssh-key-hashalgo
     rdf:type rdf:Property ;
 .
+
+clinical1:ssh-key-size
+    rdf:type rdf:Property ;
+.
+
 clinical1:ppn
     rdf:type rdf:Property ;
 .
@@ -600,14 +631,16 @@ clinical1:job_monitor_period
 clinical1:job_monitor_retries_headroom
     rdf:type rdf:Property ;
 .
+
 clinical1:public_address
     rdf:type rdf:Property ;
 .
+
 clinical1:my.nodes.hpc.wm.torque
     rdf:type        owl:Class ;
     rdfs:subClassOf tosca:tosca.nodes.Compute ;
     soda:hasContext clinical1:SodaliteDescription_1 ;
-    rdfs:comment "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
+    rdfs:comment    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 
 clinical1:my.nodes.hpc.job.torque

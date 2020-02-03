@@ -146,4 +146,29 @@ public class ClinicalSecuritySmellTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void testWeakKeySize() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                List<Attribute> properties = new ArrayList<>();
+                for (Attribute p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.weakKeySize(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

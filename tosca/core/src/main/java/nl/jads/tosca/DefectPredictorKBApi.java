@@ -216,6 +216,19 @@ public class DefectPredictorKBApi {
         return tobeReturned;
     }
 
+    public boolean weakKeySize(Feature property, RepositoryConnection connection) throws IOException {
+        String sparql = fileToString("sparql/weakKeySize.sparql");
+        if (sparql == null) {
+            return false;
+        }
+        String query = PREFIXES + sparql;
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
+                query, new SimpleBinding("var", property.getClassifiedBy()));
+        boolean tobeReturned = result.hasNext();
+        result.close();
+        return tobeReturned;
+    }
+
     public List<Comment> suspiciousComment(RepositoryConnection connection) throws IOException {
         String sparql = fileToString("sparql/suspiciousComment.sparql");
         List<Comment> comments = new ArrayList<>();
@@ -257,7 +270,7 @@ public class DefectPredictorKBApi {
             if (adminByDefault(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("AdminByDefault");
-                bugRecord.setDescription("The default user is admin");
+                bugRecord.setDescription("The default user is admin or root");
                 fillContext(bugRecord, p, connection);
                 bugs.add(bugRecord);
             }
@@ -292,7 +305,14 @@ public class DefectPredictorKBApi {
             if (weakCryptoAlgo(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("WeakCryptoAlgo");
-                bugRecord.setDescription("The cryptography algorithm is weak");
+                bugRecord.setDescription("The cryptography algorithm is weak, using sh1 or md5");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (weakKeySize(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("WeakSSHKeySize");
+                bugRecord.setDescription("The size of SSH key should not be less than 2048");
                 fillContext(bugRecord, p, connection);
                 bugs.add(bugRecord);
             }
@@ -305,7 +325,7 @@ public class DefectPredictorKBApi {
             if (adminByDefault(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("AdminByDefault");
-                bugRecord.setDescription("The default user is admin");
+                bugRecord.setDescription("The default user is admin or root");
                 fillContext(bugRecord, p, connection);
                 bugs.add(bugRecord);
             }
@@ -340,7 +360,14 @@ public class DefectPredictorKBApi {
             if (weakCryptoAlgo(p, connection)) {
                 BugRecord bugRecord = new BugRecord();
                 bugRecord.setBugName("WeakCryptoAlgo");
-                bugRecord.setDescription("The cryptography algorithm is weak");
+                bugRecord.setDescription("The cryptography algorithm is weak, using sh1 or md5");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (weakKeySize(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("WeakSSHKeySize");
+                bugRecord.setDescription("The size of SSH key should not be less than 2048");
                 fillContext(bugRecord, p, connection);
                 bugs.add(bugRecord);
             }

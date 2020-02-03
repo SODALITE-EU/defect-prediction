@@ -16,9 +16,12 @@ node_types:
         default: "admin"
       ssh-key:
         type: string
-      authprotocol:
+      ssh-key-hashalgo:
         type: string
-        default: "MD5"
+        default: "sh1"
+      ssh-key-size:
+        type: integer
+        default: 1024
     capabilities:
       host:
         type: tosca.capabilities.Compute

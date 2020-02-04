@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-UPLOAD_FOLDER = '/home/indika/tmp/'
+UPLOAD_FOLDER = '/tmp/ansible/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -39,7 +39,7 @@ def detectBugsFile():
 
 
 def runDetector(file, action_id, deployment_id):
-    matches = Linter.main(["-r", "../ansiblelints/rules", "-R", file])
+    matches = Linter.main(["-r", "ansiblelints/rules", "-R", file])
     data = []
     bugs = {"action_id": action_id, "deployment_id": deployment_id, "bugs": data}
     for match in matches:

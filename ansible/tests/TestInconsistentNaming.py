@@ -1,6 +1,6 @@
 import unittest
 from ansiblelint import RulesCollection, Runner
-from ansiblelints.rules.InconsistentNaming import InconsistentNaming
+from ansiblelints.stage.InconsistentNaming import InconsistentNaming
 
 
 class TestInconsistentNaming(unittest.TestCase):

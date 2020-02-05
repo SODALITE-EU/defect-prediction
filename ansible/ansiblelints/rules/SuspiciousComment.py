@@ -27,5 +27,5 @@ class SuspiciousComment(AnsibleLintRule):
         for (prev_line_no, line) in enumerate(text.split("\n")):
             if issuspicious(line):
                 matches.append(Match(prev_line_no + 1, line,
-                                     file['path'], self, self.description))
+                                     file['path'], self, self.shortdesc))
         return matches

@@ -8,7 +8,7 @@ def isadmin(usr):
 
 class AdminByDefault(AnsibleLintRule):
     id = 'ANSIBLE0003'
-    description = 'Set admin as default-admin when it is empty'
+    description = 'The user is admin by default'
     severity = 'HIGH'
     tags = {'incomplete'}
     version_added = 'v1.0.0'

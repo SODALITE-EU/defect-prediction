@@ -2,7 +2,6 @@ from ansiblelint import AnsibleLintRule
 
 
 def ishardcoded(usr):
-    print("******" +str(usr))
     if usr:
         if "{" in str(usr):
             return False

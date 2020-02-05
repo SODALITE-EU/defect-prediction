@@ -15,6 +15,7 @@ def detectBugsJson():
     res = runDetector(input["ansible_definition"], input["action_id"], input["deployment_id"])
     return res
 
+
 @app.route('/bugs/ansible/file', methods=['POST'])
 def detectBugsFile():
     if 'file' not in request.files:
@@ -26,11 +27,10 @@ def detectBugsFile():
         return json.dumps({'message': 'No file selected for uploading'}, sort_keys=False, indent=4), 400
     else:
         folder = os.path.join(app.config['UPLOAD_FOLDER'])
-        print(file.filename)
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         file_path = str(folder) + str(file.filename)
-        res = runDetector(file_path,"default","default")
+        res = runDetector(file_path, "default", "default")
         if os.path.exists(file_path):
             os.remove(file_path)
         else:

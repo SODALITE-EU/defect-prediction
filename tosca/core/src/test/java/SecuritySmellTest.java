@@ -172,7 +172,7 @@ public class SecuritySmellTest {
                         properties.add(p);
                     }
                 }
-                assertEquals(2, properties.size());
+                assertEquals(3, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

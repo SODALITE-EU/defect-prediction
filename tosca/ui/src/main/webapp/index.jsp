@@ -57,7 +57,7 @@
                 // var filename = $('input[type=file]').val().split('\\').pop();
                 // fd.append("name", filename);
                 $.ajax({
-                    url: 'http://localhost:5000/bugs/ansible/file',
+                    url: 'http://35.188.199.162:5000/bugs/ansible/file',
                     type: 'post',
                     data: fd,
                     contentType: false,

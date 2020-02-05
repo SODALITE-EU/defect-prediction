@@ -4,11 +4,12 @@
 
     <script type="text/javascript">
 
-        function loadContent(selector){
+        function loadContent(selector) {
             $("#loadOnClick").html($(selector).html());
         }
-        function detectTOSCABugs () {
-            $("#but_upload").click(function() {
+
+        function detectTOSCABugs() {
+            $("#but_upload").click(function () {
                 var fd = new FormData();
                 var files = $('#file')[0].files[0];
                 fd.append('file', files);
@@ -20,37 +21,42 @@
                     data: fd,
                     contentType: false,
                     processData: false,
-                    dataType:"json",
-                    success: function(response){
-                        if(response !== 0){
-                            var bugtable = "<h2>TOSCA Defects</h2>\n";
-                            bugtable = bugtable+ "<table>\n" +
-                                "  <tr>\n" +
-                                "    <th>Defect Id</th>\n" +
-                                "    <th>Defect Type</th>\n" +
-                                "    <th>Location</th>\n" +
-                                "    <th>Defect Description</th>\n" +
-                                "  </tr>";
-                            response.bugs.forEach(function(entry, index) {
-                                bugtable = bugtable +"<tr>\n" +
-                                    "    <td>"+ index +"</td>\n" +
-                                    "    <td>"+entry.bug_name+"</td>\n" +
-                                    "    <td>"+entry.element_type + " " + entry.element_name+ " in " + entry.context+"</td>\n" +
-                                    "    <td>"+entry.description+"</td>\n" +
+                    dataType: "json",
+                    success: function (response) {
+                        if (response !== 0) {
+                            if (response.bugs.length === 0) {
+                                var bugtable = "<h2>No Bugs can be found</h2>\n";
+                                $("#loadOnClick").html(bugtable);
+                            } else {
+                                var bugtable = "<h2>TOSCA Bugs</h2>\n";
+                                bugtable = bugtable + "<table>\n" +
+                                    "  <tr>\n" +
+                                    "    <th>Bug Id</th>\n" +
+                                    "    <th>Bug Type</th>\n" +
+                                    "    <th>Location</th>\n" +
+                                    "    <th>Bug Description</th>\n" +
                                     "  </tr>";
-                            });
-                            bugtable = bugtable+ "</table>";
-                            $("#loadOnClick").html(bugtable);
-                        }
-                        else{
+                                response.bugs.forEach(function (entry, index) {
+                                    bugtable = bugtable + "<tr>\n" +
+                                        "    <td>" + index + "</td>\n" +
+                                        "    <td>" + entry.bug_name + "</td>\n" +
+                                        "    <td>" + entry.element_type + " " + entry.element_name + " in " + entry.context + "</td>\n" +
+                                        "    <td>" + entry.description + "</td>\n" +
+                                        "  </tr>";
+                                });
+                                bugtable = bugtable + "</table>";
+                                $("#loadOnClick").html(bugtable);
+                            }
+                        } else {
                             alert('file not uploaded');
                         }
                     },
                 });
             });
         }
-        function detectAnsibleBugs () {
-            $("#but_upload_ansible").click(function() {
+
+        function detectAnsibleBugs() {
+            $("#but_upload_ansible").click(function () {
                 var fd = new FormData();
                 var files = $('#file_ansible')[0].files[0];
                 fd.append('file', files);
@@ -62,27 +68,32 @@
                     data: fd,
                     contentType: false,
                     processData: false,
-                    dataType:"json",
-                    success: function(response){
-                        if(response !== 0){
-                            var bugtable = "<h2>Ansible Defects</h2>\n";
-                            bugtable = bugtable+ "<table>\n" +
-                                "  <tr>\n" +
-                                "    <th>Defect Id</th>\n" +
-                                "    <th>Defect Type</th>\n" +
-                                "    <th>Location</th>\n" +
-                                "  </tr>";
-                            response.bugs.forEach(function(entry, index) {
-                                bugtable = bugtable +"<tr>\n" +
-                                    "    <td>"+ index +"</td>\n" +
-                                    "    <td>"+entry.bug_name+"</td>\n" +
-                                    "    <td>"+entry.bug_info.uri+"</td>\n" +
+                    dataType: "json",
+                    success: function (response) {
+
+                        if (response !== 0) {
+                            if (response.bugs.length === 0) {
+                                var bugtable = "<h2>No Bugs can be found</h2>\n";
+                                $("#loadOnClick").html(bugtable);
+                            } else {
+                                var bugtable = "<h2>Ansible Bugs</h2>\n";
+                                bugtable = bugtable + "<table>\n" +
+                                    "  <tr>\n" +
+                                    "    <th>Bug Id</th>\n" +
+                                    "    <th>Bug Type</th>\n" +
+                                    "    <th>Location</th>\n" +
                                     "  </tr>";
-                            });
-                            bugtable = bugtable+ "</table>";
-                            $("#loadOnClick").html(bugtable);
-                        }
-                        else{
+                                response.bugs.forEach(function (entry, index) {
+                                    bugtable = bugtable + "<tr>\n" +
+                                        "    <td>" + index + "</td>\n" +
+                                        "    <td>" + entry.bug_name + "</td>\n" +
+                                        "    <td>" + entry.bug_info.uri + "</td>\n" +
+                                        "  </tr>";
+                                });
+                                bugtable = bugtable + "</table>";
+                                $("#loadOnClick").html(bugtable);
+                            }
+                        } else {
                             alert('file not uploaded');
                         }
                     },
@@ -95,14 +106,15 @@
             width: 100%;
 
         }
-        section.container1{
+
+        section.container1 {
             display: -webkit-flex; /* Safari */
             display: flex;
         }
 
-        .displayInline{
-            -webkit-flex: 1;  /* Safari 6.1+ */
-            -ms-flex: 1;  /* IE 10 */
+        .displayInline {
+            -webkit-flex: 1; /* Safari 6.1+ */
+            -ms-flex: 1; /* IE 10 */
             flex: auto;
         }
 
@@ -132,9 +144,10 @@
             float: right;
         }
 
-        .displayOnClick{
+        .displayOnClick {
             display: none;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -146,7 +159,9 @@
             padding: 8px;
         }
 
-        tr:nth-child(even){background-color: #f2f2f2}
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
 
         th {
             background-color: #4CAF50;
@@ -159,14 +174,15 @@
 <div class="container">
 
     <header>
-        <h1>SODALITE Defect Predictor</h1>
+        <h1>SODALITE Bug Predictor</h1>
     </header>
 
     <section id="container1">
         <nav class="displayInLine" style="width: 20%; float: left;">
             <ul>
-                <li><a href="#toscaSmell" class="quickLinks" onclick='loadContent("#toscaSmell")'>TOSCA Defects</a></li>
-                <li><a href="#ansibleSmell" class="quickLinks" onclick='loadContent("#ansibleSmell")'>Ansible Defects</a></li>
+                <li><a href="#toscaSmell" class="quickLinks" onclick='loadContent("#toscaSmell")'>TOSCA Bugs</a></li>
+                <li><a href="#ansibleSmell" class="quickLinks" onclick='loadContent("#ansibleSmell")'>Ansible Bugs</a>
+                </li>
             </ul>
         </nav>
 
@@ -183,7 +199,8 @@
                     <table>
                         <tr>
                             <td><input type="file" id="file" name="file"/></td>
-                            <td><input type="button" class="button" value="Upload" id="but_upload" onclick="detectTOSCABugs()"></td>
+                            <td><input type="button" class="button" value="Upload" id="but_upload"
+                                       onclick="detectTOSCABugs()"></td>
                         </tr>
 
                     </table>
@@ -201,7 +218,8 @@
                     <table>
                         <tr>
                             <td><input type="file" id="file_ansible" name="file"/></td>
-                            <td><input type="button" class="button" value="Upload" id="but_upload_ansible" onclick="detectAnsibleBugs()"></td>
+                            <td><input type="button" class="button" value="Upload" id="but_upload_ansible"
+                                       onclick="detectAnsibleBugs()"></td>
                         </tr>
 
                     </table>

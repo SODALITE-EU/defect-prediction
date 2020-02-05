@@ -1,6 +1,11 @@
 from ansiblelint import AnsibleLintRule
 
 
+def isadmin(usr):
+    usr = str(usr)
+    return usr in ['root', 'admin']
+
+
 class AdminByDefault(AnsibleLintRule):
     id = 'ANSIBLE0003'
     description = 'Set admin as default-admin when it is empty'
@@ -12,7 +17,7 @@ class AdminByDefault(AnsibleLintRule):
 
     def matchtask(self, file, task):
         if task["action"]["__ansible_module__"] in self._modules:
-            usr = task['action'].get('ansible_become_user')
-            usr = str(usr)
-            return usr in ['root', 'admin']
+            if isadmin(task['action'].get('ansible_become_user')) or isadmin(task['action'].get('ansible_user')):
+                return True
+
         return False

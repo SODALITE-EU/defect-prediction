@@ -1,5 +1,15 @@
 import ruamel.yaml
-from ansiblelint import AnsibleLintRule
+from ansiblelint import AnsibleLintRule, Match
+
+
+def issuspicious(line):
+    if "#" in line:
+        if 'todo' in line.lower():
+            return True
+        if 'bug' in line.lower():
+            return True
+        if 'fixme' in line.lower():
+            return True
 
 
 class SuspiciousComment(AnsibleLintRule):
@@ -10,13 +20,12 @@ class SuspiciousComment(AnsibleLintRule):
     version_added = 'v1.0.0'
     shortdesc = "SuspiciousComments"
 
-    def matchtask(self, file, task):
-
-        with open(file['path']) as fp:
-            data = ruamel.yaml.round_trip_load(fp)
-
-        for line in ruamel.yaml.round_trip_dump(data, indent=2, block_seq_indent=3).splitlines(True):
-            if "#" in line:
-                if 'TODO' in line:
-                    return True
-        return False
+    def matchlines(self, file, text):
+        matches = []
+        # arrays are 0-based, line numbers are 1-based
+        # so use prev_line_no as the counter
+        for (prev_line_no, line) in enumerate(text.split("\n")):
+            if issuspicious(line):
+                matches.append(Match(prev_line_no + 1, line,
+                                     file['path'], self, self.description))
+        return matches

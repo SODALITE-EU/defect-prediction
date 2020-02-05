@@ -12,6 +12,7 @@ class IncompleteConstructs(AnsibleLintRule):
 
     def matchtask(self, file, task):
         for comments_word in ['TODO', 'TO DO', 'FIXME', 'FIX ME']:
-            return comments_word in task.get('name')
+            if task.get('name'):
+                return comments_word in task.get('name')
 
         return False

@@ -1,4 +1,3 @@
-import ruamel.yaml
 from ansiblelint import AnsibleLintRule, Match
 
 

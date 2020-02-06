@@ -1,23 +1,29 @@
-from flask import Flask, json, request, Response
 import os
-from api import Linter
+from pathlib import Path
+
+from flask import Flask, json, request, Response
 from werkzeug.utils import secure_filename
+
+from api import Linter
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-UPLOAD_FOLDER = '/tmp/ansible/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/bugs/ansible/json', methods=['POST'])
-def detectBugsJson():
+def detect_bugs_json():
     input = request.get_json()
-    res = runDetector(input["ansible_definition"], input["action_id"], input["deployment_id"])
+    res = run_detector(input["ansible_definition"], input["action_id"], input["deployment_id"])
     return res
 
 
 @app.route('/bugs/ansible/file', methods=['POST'])
-def detectBugsFile():
+def detect_bugs_file():
+    home = str(Path.home())
+    soda_home = os.path.join(home, ".sodalite")
+    if not os.path.exists(soda_home):
+        os.makedirs(soda_home)
+
     if 'file' not in request.files:
         return json.dumps({'message': 'No file part in the request'}, sort_keys=False, indent=4), 400
 
@@ -26,11 +32,10 @@ def detectBugsFile():
     if file.filename == '':
         return json.dumps({'message': 'No file selected for uploading'}, sort_keys=False, indent=4), 400
     else:
-        folder = os.path.join(app.config['UPLOAD_FOLDER'])
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        file_path = str(folder) + str(file.filename)
-        res = runDetector(file_path, "default", "default")
+        file_path = os.path.join(soda_home, filename)
+        file.save(file_path)
+        res = run_detector(file_path, "default", "default")
         if os.path.exists(file_path):
             os.remove(file_path)
         else:
@@ -38,7 +43,7 @@ def detectBugsFile():
         return res
 
 
-def runDetector(file, action_id, deployment_id):
+def run_detector(file, action_id, deployment_id):
     matches = Linter.main(["-r", "ansiblelints/rules", "-R", file])
     data = []
     bugs = {"action_id": action_id, "deployment_id": deployment_id, "bugs": data}

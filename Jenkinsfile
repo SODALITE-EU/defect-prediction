@@ -17,6 +17,7 @@ pipeline {
         build 'semantic-reasoner/master'
       }
     }
+    
     stage ('Run Ansible Smells Tests') {
       steps {
         sh  """ #!/bin/bash

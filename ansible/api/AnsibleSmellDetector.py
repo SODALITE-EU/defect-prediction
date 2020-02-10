@@ -61,4 +61,4 @@ def run_detector(file, action_id, deployment_id):
     return resp
 
 
-app.run(host='0.0.0.0')
+app.run(host='0.0.0.0', port=5001)

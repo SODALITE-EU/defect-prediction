@@ -1,5 +1,7 @@
 ## defect-prediction
 
+This module predicts the smells, anti-patterns, and bugs in IaC (Ansible) and TOSCA. It also recommends the fixes. 
+
 ## Prerequisites
 This module depends on the SODALITE sub-project “semantic-reasoner”. Thus, first built it
 

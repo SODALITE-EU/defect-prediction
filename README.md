@@ -34,3 +34,9 @@ mvn clean install
 ```
 This requires maven 3.x 
 
+## Deployment
+
+The built artifact for TOSCA is a web application (.war file) that can be deployed in any Web server. 
+
+The built artifact for Ansible is a Flask Web application.
+

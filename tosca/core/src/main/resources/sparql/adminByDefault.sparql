@@ -11,6 +11,5 @@ where {
         ?var tosca:hasDataValue ?value.
 	}.
     FILTER (bound(?value)).
-    BIND ((?value IN ('admin', 'root') ) AS ?cond).
-	FILTER (?cond = true)
+	FILTER (str(?value) IN ('admin', 'root'))
 }

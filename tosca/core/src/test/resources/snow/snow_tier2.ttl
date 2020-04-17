@@ -100,6 +100,12 @@ snowt1:User_1
   DUL:classifies      snowt1:user_name ;
   tosca:hasDataValue "root";
 .
+:Property_UserNameNT2
+  rdf:type            tosca:Property ;
+  dcterms:description "User Name2" ;
+  DUL:classifies      snowt1:admin_user ;
+  tosca:hasDataValue "root";
+.
 :Requirement_2
   rdf:type tosca:Requirement ;
   DUL:classifies tosca:host ;
@@ -124,6 +130,7 @@ snowt1:User_1
   tosca:properties :Property_15 ;
   tosca:properties :Property_16 ;
   tosca:properties :Property_UserNameNT ;
+  tosca:properties :Property_UserNameNT2 ;
 .
 :SodaliteDescription_5
   rdf:type soda:SodaliteDescription ;

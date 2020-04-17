@@ -697,7 +697,9 @@ snowt1:auth_protocol
 snowt1:user_name
   rdf:type rdf:Property ;
 .
-
+snowt1:admin_user
+  rdf:type rdf:Property ;
+.
 snowt1:pass_word
   rdf:type rdf:Property ;
 .

@@ -1,0 +1,16 @@
+select distinct ?var ?resource
+where {
+    ?var DUL:classifies ?resource.
+    FILTER (regex(str(?resource), "port(.+?)|(.+?)?port","i")).
+    optional {
+        ?var DUL:hasParameter ?p .
+	    ?p DUL:classifies tosca:default .
+	    ?p tosca:hasDataValue ?value.
+	}.
+    optional {
+        ?var tosca:hasDataValue ?value.
+	}.
+    FILTER (bound(?value)).
+    FILTER( ?value < 0 ) .
+    FILTER( ?value > 65535 )
+}

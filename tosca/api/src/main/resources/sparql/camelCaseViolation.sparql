@@ -1,0 +1,6 @@
+select distinct ?var ?resource
+where {
+    ?var DUL:classifies ?resource.
+    bind(strafter(str(?resource),str(:)) as ?name).
+    FILTER (regex(?name, "^[a-z]+([A-Z][a-z0-9]+)+")).
+}

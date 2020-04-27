@@ -87,7 +87,7 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
                 List<Attribute> properties = new ArrayList<>();
                 for (Attribute p : parameters) {
                     if (p.getParameters() == null) {
@@ -128,7 +128,7 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
                 List<Attribute> properties = new ArrayList<>();
                 for (Attribute p : parameters) {
                     if (p.getParameters() == null) {
@@ -153,7 +153,7 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection);
+                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
                 List<Attribute> properties = new ArrayList<>();
                 for (Attribute p : parameters) {
                     if (p.getParameters() == null) {

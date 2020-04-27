@@ -91,7 +91,7 @@ public class SecuritySmellTest {
             try {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
                 assertEquals(3, comments.size());
-                for(Comment c:comments){
+                for (Comment c : comments) {
                     BugRecord r = new BugRecord();
                     kbApi.fillContext(r, c, connection);
                     System.out.println(r.getElementType());
@@ -112,7 +112,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {
@@ -137,7 +137,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {
@@ -162,7 +162,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {
@@ -187,7 +187,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {
@@ -212,7 +212,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {
@@ -237,7 +237,7 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection);
+                Set<Property> parameters = kbApi.getProperties(connection, null);
                 List<Property> properties = new ArrayList<>();
                 for (Property p : parameters) {
                     if (p.getParameters() == null) {

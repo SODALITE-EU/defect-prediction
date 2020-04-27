@@ -86,9 +86,20 @@ public class DefectPredictorKBApi {
         return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
 
-    public Set<Attribute> getAllAttributes(RepositoryConnection connection) throws IOException {
+    public Set<Attribute> getAllAttributes(RepositoryConnection connection, String deploymentId) throws IOException {
         Set<Attribute> attributes = new HashSet<>();
-        String sparql = fileToString("sparql/getAllAttributes.sparql");
+        String sparql;
+        if (deploymentId != null) {
+            sparql = "select distinct ?concept ?attribute ?value\n" +
+                    "where {\n" +
+                    "FILTER (regex(str(?concept), \"(.*)/" + deploymentId + "/(.*)\",\"i\")).\n" +
+                    "\t\t?context tosca:attributes ?concept .\n" +
+                    "\t\t?concept DUL:classifies ?attribute .\n" +
+                    "\t\tOPTIONAL {?concept tosca:hasValue ?value .}\n" +
+                    "}\n";
+        } else {
+            sparql = fileToString("sparql/getAllAttributes.sparql");
+        }
         if (sparql == null) {
             return attributes;
         }
@@ -112,9 +123,21 @@ public class DefectPredictorKBApi {
         return attributes;
     }
 
-    public Set<Property> getProperties(RepositoryConnection connection) throws IOException {
+    public Set<Property> getProperties(RepositoryConnection connection, String deploymentId) throws IOException {
         Set<Property> properties = new HashSet<>();
-        String sparql = fileToString("sparql/getAllProperties.sparql");
+        String sparql;
+        if (deploymentId != null) {
+            sparql = "select distinct ?concept ?property ?value\n" +
+                    "where {\n" +
+                    "FILTER (regex(str(?concept), \"(.*)/" + deploymentId + "/(.*)\",\"i\")).\n" +
+                    "\t?context tosca:properties ?concept .\n" +
+                    "\t?concept DUL:classifies ?property .\n" +
+                    "\tOPTIONAL {?concept tosca:hasValue ?value .}\n" +
+                    "}\n" +
+                    "\n";
+        } else {
+            sparql = fileToString("sparql/getAllProperties.sparql");
+        }
         if (sparql == null) {
             return properties;
         }
@@ -262,7 +285,7 @@ public class DefectPredictorKBApi {
             fillContext(bugRecord, c, connection);
             bugs.add(bugRecord);
         }
-        Set<Property> parameters = getProperties(connection);
+        Set<Property> parameters = getProperties(connection, bugInput.getDeploymentId());
         for (Property p : parameters) {
             if (p.getParameters() == null) {
                 p.setParameters(new HashSet<>());
@@ -317,7 +340,7 @@ public class DefectPredictorKBApi {
                 bugs.add(bugRecord);
             }
         }
-        Set<Attribute> attributes = getAllAttributes(connection);
+        Set<Attribute> attributes = getAllAttributes(connection, bugInput.getDeploymentId());
         for (Attribute p : attributes) {
             if (p.getParameters() == null) {
                 p.setParameters(new HashSet<>());

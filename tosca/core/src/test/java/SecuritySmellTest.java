@@ -132,6 +132,94 @@ public class SecuritySmellTest {
     }
 
     @Test
+    void testDashCaseViolation() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                List<Feature> properties2 = new ArrayList<>();
+                for (Feature p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.isDashCase(p, connection)) {
+                        properties.add(p);
+                    } else {
+                        properties2.add(p);
+                    }
+                }
+                assertEquals(2, properties.size());
+                assertEquals(78, properties2.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testSnakeCaseViolation() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                List<Feature> properties2 = new ArrayList<>();
+                for (Feature p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.isSnakeCase(p, connection)) {
+                        properties.add(p);
+                    } else {
+                        properties2.add(p);
+                    }
+                }
+                assertEquals(40, properties.size());
+                assertEquals(40, properties2.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testCamelCaseViolation() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                List<Feature> properties2 = new ArrayList<>();
+                for (Feature p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.isCamelCase(p, connection)) {
+                        properties.add(p);
+                        System.out.println("*******" + p);
+                    } else {
+                        properties2.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+                assertEquals(79, properties2.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     void testEmptyPassword() {
         try {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);

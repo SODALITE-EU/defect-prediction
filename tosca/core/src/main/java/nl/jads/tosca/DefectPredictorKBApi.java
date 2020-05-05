@@ -13,7 +13,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Value;
+import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleLiteral;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.query.Binding;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQueryResult;
@@ -40,6 +42,7 @@ public class DefectPredictorKBApi {
             "PREFIX owl: <http://www.w3.org/2002/07/owl#> \r\n";
     private KB kb;
     private String homeLoc;
+    private ValueFactory vf = SimpleValueFactory.getInstance();
 
     public DefectPredictorKBApi(KB kb) {
         this(kb, "");
@@ -261,6 +264,50 @@ public class DefectPredictorKBApi {
         result.close();
         return tobeReturned;
     }
+
+    public boolean isDashCase(Feature property, RepositoryConnection connection) throws IOException {
+        String sparql = fileToString("sparql/dashCaseCheck.sparql");
+        if (sparql == null) {
+            return false;
+        }
+        String query = PREFIXES + sparql;
+
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
+                query, new SimpleBinding("var", property.getClassifiedBy()),
+                new SimpleBinding("pName", vf.createLiteral(property.getName())));
+        boolean tobeReturned = result.hasNext();
+        result.close();
+        return tobeReturned;
+    }
+
+    public boolean isCamelCase(Feature property, RepositoryConnection connection) throws IOException {
+        String sparql = fileToString("sparql/camelCaseCheck.sparql");
+        if (sparql == null) {
+            return false;
+        }
+        String query = PREFIXES + sparql;
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
+                query, new SimpleBinding("var", property.getClassifiedBy()),
+                new SimpleBinding("pName", vf.createLiteral(property.getName())));
+        boolean tobeReturned = result.hasNext();
+        result.close();
+        return tobeReturned;
+    }
+
+    public boolean isSnakeCase(Feature property, RepositoryConnection connection) throws IOException {
+        String sparql = fileToString("sparql/snakeCaseCheck.sparql");
+        if (sparql == null) {
+            return false;
+        }
+        String query = PREFIXES + sparql;
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
+                query, new SimpleBinding("var", property.getClassifiedBy()),
+                new SimpleBinding("pName", vf.createLiteral(property.getName())));
+        boolean tobeReturned = result.hasNext();
+        result.close();
+        return tobeReturned;
+    }
+
 
     public List<Comment> suspiciousComment(RepositoryConnection connection) throws IOException {
         String sparql = fileToString("sparql/suspiciousComment.sparql");

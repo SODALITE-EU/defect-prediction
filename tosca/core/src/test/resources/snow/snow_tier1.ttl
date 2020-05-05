@@ -102,7 +102,7 @@ snowt1:Property_10
 snowt1:Property_2
     rdf:type            tosca:Property ;
     dcterms:description "The name of the image on the host" ;
-    DUL:classifies      snowt1:image_name ;
+    DUL:classifies      snowt1:imageName ;
     DUL:hasParameter    snowt1:SodaliteParameter_19 ;
     DUL:hasParameter    snowt1:SodaliteParameter_20 ;
 .
@@ -171,7 +171,7 @@ snowt1:Property_UserName
 snowt1:Property_Password
     rdf:type            tosca:Property ;
     dcterms:description "Password" ;
-    DUL:classifies      snowt1:pass_word ;
+    DUL:classifies      snowt1:pass-word ;
     DUL:hasParameter    snowt1:SodaliteParameter_PS_4 ;
     DUL:hasParameter    snowt1:SodaliteParameter_PS_3 ;
 .
@@ -179,7 +179,7 @@ snowt1:Property_Password
 snowt1:Property_Password2
     rdf:type            tosca:Property ;
     dcterms:description "Password 2" ;
-    DUL:classifies      snowt1:pass_word ;
+    DUL:classifies      snowt1:pass-word ;
     DUL:hasParameter    snowt1:SodaliteParameter_PS_1 ;
     DUL:hasParameter    snowt1:SodaliteParameter_PS_5 ;
 .
@@ -436,7 +436,7 @@ snowt1:SodaliteParameter_35
 
 snowt1:SodaliteParameter_36
     rdf:type           soda:SodaliteParameter ;
-    DUL:classifies     snowt1:image_name ;
+    DUL:classifies     snowt1:imageName ;
     tosca:hasDataValue "{ default: { get_property: [ SELF, image_name ] } }" ;
 .
 
@@ -754,7 +754,7 @@ snowt1:image
     rdf:type rdf:Property ;
 .
 
-snowt1:image_name
+snowt1:imageName
     rdf:type rdf:Property ;
 .
 
@@ -810,7 +810,7 @@ snowt1:admin_user
     rdf:type rdf:Property ;
 .
 
-snowt1:pass_word
+snowt1:pass-word
     rdf:type rdf:Property ;
 .
 

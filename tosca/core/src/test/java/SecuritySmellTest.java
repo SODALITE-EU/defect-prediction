@@ -1,4 +1,4 @@
-import kb.dto.Property;
+import kb.dto.Feature;
 import kb.repository.KB;
 import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
@@ -112,9 +112,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -137,9 +137,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -162,9 +162,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -187,9 +187,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -212,9 +212,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -237,9 +237,9 @@ public class SecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, null);
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }

@@ -23,7 +23,7 @@ capability_types:
         constraints:
           - equal: mesos
 
-  tosca.capabilities.indigo.MesosMaster:        
+  tosca.capabilities.indigo.MesosMaster:
     derived_from: tosca.capabilities.Container
 
   tosca.capabilities.indigo.MesosSlave:
@@ -166,10 +166,10 @@ node_types:
     metadata:
       icon: /images/mesos.png
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Mesos
-        host:
-          type: tosca.capabilities.indigo.MesosMaster
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Mesos
+      host:
+        type: tosca.capabilities.indigo.MesosMaster
     properties:
       # Set the current data of the mesos server
       # but it can also specified in the TOSCA document
@@ -187,11 +187,11 @@ node_types:
       mesos_username:
         type: string
         required: no
-        default: 'admin'       
+        default: 'admin'
       mesos_password:
         type: string
         required: no
-        default: 'admin'         
+        default: 'admin'
       marathon_enable_ssl:
         type: boolean
         required: no
@@ -350,7 +350,7 @@ node_types:
             cms_config_onedatatoken: { get_property: [ SELF, onedatatoken ] }
             marathon_user: { get_property: [ SELF, marathon_username ] }
             marathon_pass: { get_property: [ SELF, marathon_password ] }
-            zookeeper_host_list: { get_property: [ SELF, master_ips ] }            
+            zookeeper_host_list: { get_property: [ SELF, master_ips ] }
             proxy_cache_manager: { get_property: [ SELF, cms_proxycache_token_manager ] }
     requirements:
       - host:
@@ -364,8 +364,8 @@ node_types:
     metadata:
       icon: /images/mesos.png
     capabilities:
-        host:
-          type: tosca.capabilities.indigo.MesosSlave
+      host:
+        type: tosca.capabilities.indigo.MesosSlave
     properties:
       # Set the current data of the mesos server
       # but it can also specified in the TOSCA document
@@ -533,13 +533,13 @@ node_types:
       spark_mesos_deploy_app:
         type: string
         constraints:
-        - valid_values: [ apache-zeppelin, spark-dispatcher ]
+          - valid_values: [ apache-zeppelin, spark-dispatcher ]
         required: false
       spark_hdfs_uri:
         type: string
         required: false
         default: ''
-      spark_swift_auth_url: 
+      spark_swift_auth_url:
         type: string
         required: false
         default: ''
@@ -547,7 +547,7 @@ node_types:
         type: string
         required: false
         default: '8080'
-      spark_swift_region: 
+      spark_swift_region:
         type: string
         required: false
         default: ''
@@ -555,23 +555,23 @@ node_types:
         type: string
         required: false
         default: ''
-      spark_swift_username: 
+      spark_swift_username:
         type: string
         required: false
         default: ''
-      spark_swift_password: 
+      spark_swift_password:
         type: string
         required: false
         default: ''
-      spark_swift_provider: 
+      spark_swift_provider:
         type: string
         required: false
         default: 'Test'
-      spark_cores_max: 
+      spark_cores_max:
         type: integer
         required: false
         default: '-1'
-      spark_executor_cores: 
+      spark_executor_cores:
         type: integer
         required: false
         default: '-1'
@@ -579,11 +579,11 @@ node_types:
         type: scalar-unit.size
         required: false
         default: '0 GB'
-      spark_driver_mem: 
+      spark_driver_mem:
         type: scalar-unit.size
         required: false
         default: '0 GB'
-      spark_driver_cores: 
+      spark_driver_cores:
         type: integer
         required: false
         default: '-1'

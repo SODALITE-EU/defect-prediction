@@ -2,2227 +2,2711 @@
 # imports: http://purl.org/dc/elements/1.1/
 # imports: https://www.sodalite.eu/ontologies/sodalite-metamodel/
 
-@prefix : <https://www.sodalite.eu/ontologies/tosca/> .
-@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix :        <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix DUL:     <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
-@prefix spin: <http://spinrdf.org/spin#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix soda:    <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 DUL:hasParameter
-  rdfs:range soda:SodaliteParameter ;
+    rdfs:range soda:SodaliteParameter ;
 .
+
 :
-  rdf:type owl:Ontology ;
-  spin:imports <http://topbraid.org/spin/owlrl-all> ;
-  owl:imports dc: ;
-  owl:imports soda: ;
-  owl:versionInfo "Created with TopBraid Composer" ;
+    rdf:type        owl:Ontology ;
+    spin:imports    <http://topbraid.org/spin/owlrl-all> ;
+    owl:imports     dc: ;
+    owl:imports     soda: ;
+    owl:versionInfo "Created with TopBraid Composer" ;
 .
+
 :Attribute
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Feature ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Feature ;
 .
+
 :Attribute_1
-  rdf:type :Attribute ;
-  dcterms:description "A unique identifier of the realized instance of a Node Template that derives from any TOSCA normative type" ;
-  DUL:classifies :tosca_id ;
-  DUL:hasParameter :SodaliteParameter_6 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "A unique identifier of the realized instance of a Node Template that derives from any TOSCA normative type" ;
+    DUL:classifies   :tosca_id ;
+    DUL:hasParameter :SodaliteParameter_6 ;
 .
+
 :Attribute_10
-  rdf:type :Attribute ;
-  dcterms:description "The list of logical ports assigned to the compute host instance and information about them." ;
-  DUL:classifies :ports ;
-  DUL:hasParameter :Parameter_6 ;
-  DUL:hasParameter :SodaliteParameter_12 ;
+    rdf:type            :Attribute ;
+    dcterms:description "The list of logical ports assigned to the compute host instance and information about them." ;
+    DUL:classifies      :ports ;
+    DUL:hasParameter    :Parameter_6 ;
+    DUL:hasParameter    :SodaliteParameter_12 ;
 .
+
 :Attribute_11
-  rdf:type :Attribute ;
-  dcterms:description "The Endpoint's IP address as propagated up by the associated node’s host (Compute) container." ;
-  DUL:classifies :ip_address ;
-  DUL:hasParameter :SodaliteParameter_80 ;
+    rdf:type            :Attribute ;
+    dcterms:description
+                        "The Endpoint's IP address as propagated up by the associated node’s host (Compute) container." ;
+    DUL:classifies      :ip_address ;
+    DUL:hasParameter    :SodaliteParameter_80 ;
 .
+
 :Attribute_2
-  rdf:type :Attribute ;
-  dcterms:description "Reflects the name of the Node Template as defined in the TOSCA service template. This name is not unique to the realized instance model of corresponding deployed application as each template in the model can result in one or more instances (e.g., scaled) when orchestrated to a provider environment." ;
-  DUL:classifies :tosca_name ;
-  DUL:hasParameter :SodaliteParameter_7 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "Reflects the name of the Node Template as defined in the TOSCA service template. This name is not unique to the realized instance model of corresponding deployed application as each template in the model can result in one or more instances (e.g., scaled) when orchestrated to a provider environment." ;
+    DUL:classifies   :tosca_name ;
+    DUL:hasParameter :SodaliteParameter_7 ;
 .
+
 :Attribute_3
-  rdf:type :Attribute ;
-  dcterms:description "The state of the node instance." ;
-  DUL:classifies :state ;
-  DUL:hasParameter :SodaliteParameter_8 ;
+    rdf:type            :Attribute ;
+    dcterms:description "The state of the node instance." ;
+    DUL:classifies      :state ;
+    DUL:hasParameter    :SodaliteParameter_8 ;
 .
+
 :Attribute_4
-  rdf:type :Attribute ;
-  dcterms:description "A unique identifier of the realized instance of a Relationship Template that derives from any TOSCA normative type." ;
-  DUL:classifies :tosca_id ;
-  DUL:hasParameter :Parameter_12 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "A unique identifier of the realized instance of a Relationship Template that derives from any TOSCA normative type." ;
+    DUL:classifies   :tosca_id ;
+    DUL:hasParameter :Parameter_12 ;
 .
+
 :Attribute_5
-  rdf:type :Attribute ;
-  dcterms:description "This attribute reflects the name of the Relationship Template as defined in the TOSCA service template. This name is not unique to the realized instance model of corresponding deployed application as each template in the model can result in one or more instances (e.g., scaled) when orchestrated to a provider environment." ;
-  DUL:classifies :tosca_name ;
-  DUL:hasParameter :SodaliteParameter_41 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "This attribute reflects the name of the Relationship Template as defined in the TOSCA service template. This name is not unique to the realized instance model of corresponding deployed application as each template in the model can result in one or more instances (e.g., scaled) when orchestrated to a provider environment." ;
+    DUL:classifies   :tosca_name ;
+    DUL:hasParameter :SodaliteParameter_41 ;
 .
+
 :Attribute_6
-  rdf:type :Attribute ;
-  dcterms:description "The primary private IP address assigned by the cloud provider that applications may use to access the Compute node." ;
-  DUL:classifies :private_address ;
-  DUL:hasParameter :SodaliteParameter_14 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "The primary private IP address assigned by the cloud provider that applications may use to access the Compute node." ;
+    DUL:classifies   :private_address ;
+    DUL:hasParameter :SodaliteParameter_14 ;
 .
+
 :Attribute_7
-  rdf:type :Attribute ;
-  dcterms:description "The primary public IP address assigned by the cloud provider that applications may use to access the Compute node." ;
-  DUL:classifies :public_address ;
-  DUL:hasParameter :SodaliteParameter_15 ;
+    rdf:type         :Attribute ;
+    dcterms:description
+                     "The primary public IP address assigned by the cloud provider that applications may use to access the Compute node." ;
+    DUL:classifies   :public_address ;
+    DUL:hasParameter :SodaliteParameter_15 ;
 .
+
 :Attribute_8
-  rdf:type :Attribute ;
-  dcterms:description "The list of logical networks assigned to the compute host instance and information about them." ;
-  DUL:classifies :networks ;
-  DUL:hasParameter :SodaliteParameter_16 ;
+    rdf:type            :Attribute ;
+    dcterms:description
+                        "The list of logical networks assigned to the compute host instance and information about them." ;
+    DUL:classifies      :networks ;
+    DUL:hasParameter    :SodaliteParameter_16 ;
 .
+
 :Attribute_9
-  rdf:type :Attribute ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_17 ;
+    rdf:type         :Attribute ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_17 ;
 .
+
 :CPU_FrequencyProperty
-  rdf:type :Property ;
-  dcterms:description "Specifies the operating frequency of CPU's core. This property expresses the expected frequency of one (1) CPU as provided by the property “num_cpus”." ;
-  DUL:classifies :cpu_frequency ;
-  DUL:hasParameter :Constraint_2 ;
-  DUL:hasParameter :SodaliteParameter_30 ;
-  DUL:hasParameter :SodaliteParameter_31 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "Specifies the operating frequency of CPU's core. This property expresses the expected frequency of one (1) CPU as provided by the property “num_cpus”." ;
+    DUL:classifies   :cpu_frequency ;
+    DUL:hasParameter :Constraint_2 ;
+    DUL:hasParameter :SodaliteParameter_30 ;
+    DUL:hasParameter :SodaliteParameter_31 ;
 .
+
 :Capability
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Dependency ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Dependency ;
 .
+
 :Capability_1
-  rdf:type :Capability ;
-  DUL:classifies :feature ;
-  DUL:hasParameter :SodaliteParameter_9 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :feature ;
+    DUL:hasParameter :SodaliteParameter_9 ;
 .
+
 :Capability_2
-  rdf:type :Capability ;
-  DUL:classifies :host ;
-  DUL:hasParameter :Parameter_13 ;
-  DUL:hasParameter :SodaliteParameter_18 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :host ;
+    DUL:hasParameter :Parameter_13 ;
+    DUL:hasParameter :SodaliteParameter_18 ;
 .
+
 :Capability_3
-  rdf:type :Capability ;
-  DUL:classifies :endpoint ;
-  DUL:hasParameter :SodaliteParameter_19 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :endpoint ;
+    DUL:hasParameter :SodaliteParameter_19 ;
 .
+
 :Capability_4
-  rdf:type :Capability ;
-  DUL:classifies :os ;
-  DUL:hasParameter :SodaliteParameter_20 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :os ;
+    DUL:hasParameter :SodaliteParameter_20 ;
 .
+
 :Capability_5
-  rdf:type :Capability ;
-  DUL:classifies :scalable ;
-  DUL:hasParameter :SodaliteParameter_21 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :scalable ;
+    DUL:hasParameter :SodaliteParameter_21 ;
 .
+
 :Capability_6
-  rdf:type :Capability ;
-  DUL:classifies :binding ;
-  DUL:hasParameter :SodaliteParameter_22 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :binding ;
+    DUL:hasParameter :SodaliteParameter_22 ;
 .
+
 :Capability_7
-  rdf:type :Capability ;
-  DUL:classifies :host ;
-  DUL:hasParameter :SodaliteParameter_11 ;
-  DUL:hasParameter :SodaliteParameter_5 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :host ;
+    DUL:hasParameter :SodaliteParameter_11 ;
+    DUL:hasParameter :SodaliteParameter_5 ;
 .
+
 :Capability_8
-  rdf:type :Capability ;
-  DUL:classifies :attachment ;
-  DUL:hasParameter :SodaliteParameter_48 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :attachment ;
+    DUL:hasParameter :SodaliteParameter_48 ;
 .
+
 :Capability_9
-  rdf:type :Capability ;
-  DUL:classifies :host ;
-  DUL:hasParameter :SodaliteParameter_85 ;
-  DUL:hasParameter :SodaliteParameter_86 ;
+    rdf:type         :Capability ;
+    DUL:classifies   :host ;
+    DUL:hasParameter :SodaliteParameter_85 ;
+    DUL:hasParameter :SodaliteParameter_86 ;
 .
+
 :ComputeDescription
-  rdf:type soda:SodaliteDescription ;
-  :attributes :Attribute_10 ;
-  :attributes :Attribute_6 ;
-  :attributes :Attribute_7 ;
-  :attributes :Attribute_8 ;
-  :attributes :Attribute_9 ;
-  :capabilities :Capability_2 ;
-  :capabilities :Capability_3 ;
-  :capabilities :Capability_4 ;
-  :capabilities :Capability_5 ;
-  :capabilities :Capability_6 ;
-  :requirements :Concept_1 ;
+    rdf:type      soda:SodaliteDescription ;
+    :attributes   :Attribute_10 ;
+    :attributes   :Attribute_6 ;
+    :attributes   :Attribute_7 ;
+    :attributes   :Attribute_8 ;
+    :attributes   :Attribute_9 ;
+    :capabilities :Capability_2 ;
+    :capabilities :Capability_3 ;
+    :capabilities :Capability_4 ;
+    :capabilities :Capability_5 ;
+    :capabilities :Capability_6 ;
+    :requirements :Concept_1 ;
 .
+
 :Concept_1
-  rdf:type :Requirement ;
-  DUL:classifies :local_storage ;
-  DUL:hasParameter :Parameter_10 ;
-  DUL:hasParameter :Parameter_7 ;
-  DUL:hasParameter :Parameter_8 ;
-  DUL:hasParameter :Parameter_9 ;
+    rdf:type         :Requirement ;
+    DUL:classifies   :local_storage ;
+    DUL:hasParameter :Parameter_10 ;
+    DUL:hasParameter :Parameter_7 ;
+    DUL:hasParameter :Parameter_8 ;
+    DUL:hasParameter :Parameter_9 ;
 .
+
 :Configure
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :Constraint_1
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_38 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_38 ;
 .
+
 :Constraint_2
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_29 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_29 ;
 .
+
 :Constraint_3
-  rdf:type soda:SodaliteParameter ;
-  :greater_or_equal "0 MB" ;
+    rdf:type          soda:SodaliteParameter ;
+    :greater_or_equal "0 MB" ;
 .
+
 :Constraint_4
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_36 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_36 ;
 .
+
 :DataType
-  rdf:type owl:Class ;
-  rdfs:subClassOf DUL:Region ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf DUL:Region ;
 .
+
 :Dependency
-  rdf:type owl:Class ;
-  rdfs:subClassOf soda:SodaliteConcept ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf soda:SodaliteConcept ;
 .
+
 :DiskSizeProperty
-  rdf:type :Property ;
-  dcterms:description "Size of the local disk available to applications running on the Compute node." ;
-  DUL:classifies :disk_size ;
-  DUL:hasParameter :Constraint_3 ;
-  DUL:hasParameter :SodaliteParameter_32 ;
-  DUL:hasParameter :SodaliteParameter_33 ;
+    rdf:type            :Property ;
+    dcterms:description "Size of the local disk available to applications running on the Compute node." ;
+    DUL:classifies      :disk_size ;
+    DUL:hasParameter    :Constraint_3 ;
+    DUL:hasParameter    :SodaliteParameter_32 ;
+    DUL:hasParameter    :SodaliteParameter_33 ;
 .
+
 :Feature
-  rdf:type owl:Class ;
-  rdfs:subClassOf soda:SodaliteConcept ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf soda:SodaliteConcept ;
 .
+
 :Interface
-  rdf:type owl:Class ;
-  rdfs:subClassOf soda:SodaliteConcept ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf soda:SodaliteConcept ;
 .
+
 :Interface_1
-  rdf:type :Interface ;
-  DUL:classifies :Configure ;
-  DUL:hasParameter :Parameter_14 ;
+    rdf:type         :Interface ;
+    DUL:classifies   :Configure ;
+    DUL:hasParameter :Parameter_14 ;
 .
+
 :Interface_2
-  rdf:type :Interface ;
-  DUL:classifies :Standard ;
-  DUL:hasParameter :SodaliteParameter_10 ;
+    rdf:type         :Interface ;
+    DUL:classifies   :Standard ;
+    DUL:hasParameter :SodaliteParameter_10 ;
 .
+
 :List
-  rdf:type owl:Class ;
-  rdfs:subClassOf DUL:Region ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf DUL:Region ;
 .
+
 :List_1
-  rdf:type :List ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
+    rdf:type        :List ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
 .
+
 :List_2
-  rdf:type :List ;
+    rdf:type :List ;
 .
+
 :List_3
-  rdf:type :List ;
-  :hasDataValue "peer" ;
-  :hasDataValue "source" ;
-  :hasDataValue "target" ;
+    rdf:type      :List ;
+    :hasDataValue "peer" ;
+    :hasDataValue "source" ;
+    :hasDataValue "target" ;
 .
+
 :List_4
-  rdf:type :List ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Database> ;
+    rdf:type        :List ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Database> ;
 .
+
 :List_5
-  rdf:type :List ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
+    rdf:type        :List ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
 .
+
 :List_6
-  rdf:type :List ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Container> ;
+    rdf:type        :List ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Container> ;
 .
+
 :List_7
-  rdf:type :List ;
-  :hasDataValue "igmp " ;
-  :hasDataValue "tcp" ;
-  :hasDataValue "udp" ;
+    rdf:type      :List ;
+    :hasDataValue "igmp " ;
+    :hasDataValue "tcp" ;
+    :hasDataValue "udp" ;
 .
+
 :List_8
-  rdf:type :List ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
+    rdf:type        :List ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
 .
+
 :Max
-  rdf:type owl:Class ;
-  rdfs:subClassOf DUL:Region ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf DUL:Region ;
 .
+
 :MemSizeProperty
-  rdf:type :Property ;
-  dcterms:description "Size of memory available to applications running on the Compute node." ;
-  DUL:classifies :mem_size ;
-  DUL:hasParameter :Constraint_4 ;
-  DUL:hasParameter :Parameter_11 ;
-  DUL:hasParameter :SodaliteParameter_34 ;
+    rdf:type            :Property ;
+    dcterms:description "Size of memory available to applications running on the Compute node." ;
+    DUL:classifies      :mem_size ;
+    DUL:hasParameter    :Constraint_4 ;
+    DUL:hasParameter    :Parameter_11 ;
+    DUL:hasParameter    :SodaliteParameter_34 ;
 .
+
 :Min
-  rdf:type owl:Class ;
-  rdfs:subClassOf DUL:Region ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf DUL:Region ;
 .
+
 :NameProperty
-  rdf:type :Property ;
-  DUL:classifies :name ;
-  DUL:hasParameter :SodaliteParameter_35 ;
-  DUL:hasParameter :SodaliteParameter_37 ;
+    rdf:type         :Property ;
+    DUL:classifies   :name ;
+    DUL:hasParameter :SodaliteParameter_35 ;
+    DUL:hasParameter :SodaliteParameter_37 ;
 .
+
 :Num_CPUsProperty
-  rdf:type :Property ;
-  dcterms:description "Number of (actual or virtual) CPUs associated with the Compute node." ;
-  DUL:classifies :num_cpus ;
-  DUL:hasParameter :Constraint_1 ;
-  DUL:hasParameter :SodaliteParameter_39 ;
-  DUL:hasParameter :SodaliteParameter_40 ;
+    rdf:type            :Property ;
+    dcterms:description "Number of (actual or virtual) CPUs associated with the Compute node." ;
+    DUL:classifies      :num_cpus ;
+    DUL:hasParameter    :Constraint_1 ;
+    DUL:hasParameter    :SodaliteParameter_39 ;
+    DUL:hasParameter    :SodaliteParameter_40 ;
 .
+
 :Parameter_1
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :capability ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :capability ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
 .
+
 :Parameter_10
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :occurrences ;
-  DUL:hasParameter :SodaliteParameter_87 ;
-  DUL:hasParameter :SodaliteParameter_88 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :occurrences ;
+    DUL:hasParameter :SodaliteParameter_87 ;
+    DUL:hasParameter :SodaliteParameter_88 ;
 .
+
 :Parameter_11
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :Parameter_12
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :Parameter_13
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :valid_source_types ;
-  :hasObjectValue :List_1 ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :valid_source_types ;
+    :hasObjectValue :List_1 ;
 .
+
 :Parameter_14
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.relationship.Configure> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.relationship.Configure> ;
 .
+
 :Parameter_2
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :node ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :node ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
 .
+
 :Parameter_3
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :capability ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :capability ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
 .
+
 :Parameter_4
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :node ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :node ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
 .
+
 :Parameter_5
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :relationship ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.HostedOn> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :relationship ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.HostedOn> ;
 .
+
 :Parameter_6
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_13 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_13 ;
 .
+
 :Parameter_7
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :capability ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :capability ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
 .
+
 :Parameter_8
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :node ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Storage.BlockStorage> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :node ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Storage.BlockStorage> ;
 .
+
 :Parameter_9
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :relationship ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.AttachesTo> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :relationship ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.AttachesTo> ;
 .
+
 :Property
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Feature ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Feature ;
 .
+
 :Property_1
-  rdf:type :Property ;
-  DUL:classifies :name ;
-  DUL:hasParameter :SodaliteParameter_27 ;
-  DUL:hasParameter :SodaliteParameter_28 ;
+    rdf:type         :Property ;
+    DUL:classifies   :name ;
+    DUL:hasParameter :SodaliteParameter_27 ;
+    DUL:hasParameter :SodaliteParameter_28 ;
 .
+
 :Property_10
-  rdf:type :Property ;
-  dcterms:description "The optional URL path of the endpoint’s address if applicable for the protocol." ;
-  DUL:classifies :url_path ;
-  DUL:hasParameter :SodaliteParameter_62 ;
-  DUL:hasParameter :SodaliteParameter_63 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional URL path of the endpoint’s address if applicable for the protocol." ;
+    DUL:classifies      :url_path ;
+    DUL:hasParameter    :SodaliteParameter_62 ;
+    DUL:hasParameter    :SodaliteParameter_63 ;
 .
+
 :Property_11
-  rdf:type :Property ;
-  dcterms:description "The optional name (or ID) of the network port to which this endpoint should be bound." ;
-  DUL:classifies :port_name ;
-  DUL:hasParameter :SodaliteParameter_64 ;
-  DUL:hasParameter :SodaliteParameter_65 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional name (or ID) of the network port to which this endpoint should be bound." ;
+    DUL:classifies      :port_name ;
+    DUL:hasParameter    :SodaliteParameter_64 ;
+    DUL:hasParameter    :SodaliteParameter_65 ;
 .
+
 :Property_12
-  rdf:type :Property ;
-  dcterms:description "The optional name (or ID) of the network to which this endpoint should be bound." ;
-  DUL:classifies :network_name ;
-  DUL:hasParameter :SodaliteParameter_66 ;
-  DUL:hasParameter :SodaliteParameter_67 ;
-  DUL:hasParameter :SodaliteParameter_68 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional name (or ID) of the network to which this endpoint should be bound." ;
+    DUL:classifies      :network_name ;
+    DUL:hasParameter    :SodaliteParameter_66 ;
+    DUL:hasParameter    :SodaliteParameter_67 ;
+    DUL:hasParameter    :SodaliteParameter_68 ;
 .
+
 :Property_13
-  rdf:type :Property ;
-  dcterms:description "The optional indicator of the direction of the connection." ;
-  DUL:classifies :initiator ;
-  DUL:hasParameter :SodaliteParameter_69 ;
-  DUL:hasParameter :SodaliteParameter_70 ;
-  DUL:hasParameter :SodaliteParameter_71 ;
-  DUL:hasParameter :SodaliteParameter_72 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional indicator of the direction of the connection." ;
+    DUL:classifies      :initiator ;
+    DUL:hasParameter    :SodaliteParameter_69 ;
+    DUL:hasParameter    :SodaliteParameter_70 ;
+    DUL:hasParameter    :SodaliteParameter_71 ;
+    DUL:hasParameter    :SodaliteParameter_72 ;
 .
+
 :Property_14
-  rdf:type :Property ;
-  dcterms:description "The optional map of ports the Endpoint supports (if more than one)." ;
-  DUL:classifies :ports ;
-  DUL:hasParameter :SodaliteParameter_74 ;
-  DUL:hasParameter :SodaliteParameter_75 ;
-  DUL:hasParameter :SodaliteParameter_76 ;
-  DUL:hasParameter :SodaliteParameter_78 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional map of ports the Endpoint supports (if more than one)." ;
+    DUL:classifies      :ports ;
+    DUL:hasParameter    :SodaliteParameter_74 ;
+    DUL:hasParameter    :SodaliteParameter_75 ;
+    DUL:hasParameter    :SodaliteParameter_76 ;
+    DUL:hasParameter    :SodaliteParameter_78 ;
 .
+
 :Property_15
-  rdf:type :Property ;
-  dcterms:description "the optional root password for the DBMS service" ;
-  DUL:classifies :root_password ;
-  DUL:hasParameter :SodaliteParameter_81 ;
-  DUL:hasParameter :SodaliteParameter_82 ;
+    rdf:type            :Property ;
+    dcterms:description "the optional root password for the DBMS service" ;
+    DUL:classifies      :root_password ;
+    DUL:hasParameter    :SodaliteParameter_81 ;
+    DUL:hasParameter    :SodaliteParameter_82 ;
 .
+
 :Property_16
-  rdf:type :Property ;
-  dcterms:description "The port the DBMS service will listen to for data and requests." ;
-  DUL:classifies :port ;
-  DUL:hasParameter :SodaliteParameter_83 ;
-  DUL:hasParameter :SodaliteParameter_84 ;
+    rdf:type            :Property ;
+    dcterms:description "The port the DBMS service will listen to for data and requests." ;
+    DUL:classifies      :port ;
+    DUL:hasParameter    :SodaliteParameter_83 ;
+    DUL:hasParameter    :SodaliteParameter_84 ;
 .
+
 :Property_17
-  rdf:type :Property ;
-  DUL:classifies :name ;
-  DUL:hasParameter :SodaliteParameter_89 ;
+    rdf:type         :Property ;
+    DUL:classifies   :name ;
+    DUL:hasParameter :SodaliteParameter_89 ;
 .
+
 :Property_18
-  rdf:type :Property ;
-  dcterms:description "The name of the logical network (e.g., “public”, “private”, “admin”. etc.)." ;
-  DUL:classifies :network_name ;
-  DUL:hasParameter :SodaliteParameter_91 ;
+    rdf:type            :Property ;
+    dcterms:description "The name of the logical network (e.g., “public”, “private”, “admin”. etc.)." ;
+    DUL:classifies      :network_name ;
+    DUL:hasParameter    :SodaliteParameter_91 ;
 .
+
 :Property_19
-  rdf:type :Property ;
-  dcterms:description "The unique ID of the network generated by the network provider." ;
-  DUL:classifies :network_id ;
-  DUL:hasParameter :SodaliteParameter_92 ;
+    rdf:type            :Property ;
+    dcterms:description "The unique ID of the network generated by the network provider." ;
+    DUL:classifies      :network_id ;
+    DUL:hasParameter    :SodaliteParameter_92 ;
 .
+
 :Property_2
-  rdf:type :Property ;
-  dcterms:description "Domain-specific software component version." ;
-  DUL:classifies :component_version ;
-  DUL:hasParameter :SodaliteParameter_23 ;
-  DUL:hasParameter :SodaliteParameter_24 ;
+    rdf:type            :Property ;
+    dcterms:description "Domain-specific software component version." ;
+    DUL:classifies      :component_version ;
+    DUL:hasParameter    :SodaliteParameter_23 ;
+    DUL:hasParameter    :SodaliteParameter_24 ;
 .
+
 :Property_20
-  rdf:type :Property ;
-  dcterms:description "The list of IP addresses assigned from the underlying network." ;
-  DUL:classifies :addresses ;
-  DUL:hasParameter :SodaliteParameter_93 ;
-  DUL:hasParameter :SodaliteParameter_95 ;
+    rdf:type            :Property ;
+    dcterms:description "The list of IP addresses assigned from the underlying network." ;
+    DUL:classifies      :addresses ;
+    DUL:hasParameter    :SodaliteParameter_93 ;
+    DUL:hasParameter    :SodaliteParameter_95 ;
 .
+
 :Property_21
-  rdf:type :Property ;
-  dcterms:description "The Operating System (OS) architecture. Examples of valid values include: x86_32, x86_64, etc." ;
-  DUL:classifies :architecture ;
-  DUL:hasParameter :SodaliteParameter_96 ;
-  DUL:hasParameter :SodaliteParameter_97 ;
+    rdf:type            :Property ;
+    dcterms:description
+                        "The Operating System (OS) architecture. Examples of valid values include: x86_32, x86_64, etc." ;
+    DUL:classifies      :architecture ;
+    DUL:hasParameter    :SodaliteParameter_96 ;
+    DUL:hasParameter    :SodaliteParameter_97 ;
 .
+
 :Property_22
-  rdf:type :Property ;
-  dcterms:description "The Operating System (OS) type. Examples of valid values include: linux, aix, mac, windows, etc." ;
-  DUL:classifies :type ;
-  DUL:hasParameter :SodaliteParameter_98 ;
-  DUL:hasParameter :SodaliteParameter_99 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "The Operating System (OS) type. Examples of valid values include: linux, aix, mac, windows, etc." ;
+    DUL:classifies   :type ;
+    DUL:hasParameter :SodaliteParameter_98 ;
+    DUL:hasParameter :SodaliteParameter_99 ;
 .
+
 :Property_23
-  rdf:type :Property ;
-  dcterms:description "The Operating System (OS) distribution. Examples of valid values for an “type” of “Linux” would include: debian, fedora, rhel and ubuntu." ;
-  DUL:classifies :distribution ;
-  DUL:hasParameter :SodaliteParameter_100 ;
-  DUL:hasParameter :SodaliteParameter_101 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "The Operating System (OS) distribution. Examples of valid values for an “type” of “Linux” would include: debian, fedora, rhel and ubuntu." ;
+    DUL:classifies   :distribution ;
+    DUL:hasParameter :SodaliteParameter_100 ;
+    DUL:hasParameter :SodaliteParameter_101 ;
 .
+
 :Property_24
-  rdf:type :Property ;
-  dcterms:description "The Operating System version" ;
-  DUL:classifies :version ;
-  DUL:hasParameter :SodaliteParameter_102 ;
-  DUL:hasParameter :SodaliteParameter_103 ;
+    rdf:type            :Property ;
+    dcterms:description "The Operating System version" ;
+    DUL:classifies      :version ;
+    DUL:hasParameter    :SodaliteParameter_102 ;
+    DUL:hasParameter    :SodaliteParameter_103 ;
 .
+
 :Property_25
-  rdf:type :Property ;
-  dcterms:description "The relative location (e.g., mount point on the file system) that provides the root location to address the attached node." ;
-  DUL:classifies :location ;
-  DUL:hasParameter :SodaliteParameter_105 ;
-  DUL:hasParameter :SodaliteParameter_106 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "The relative location (e.g., mount point on the file system) that provides the root location to address the attached node." ;
+    DUL:classifies   :location ;
+    DUL:hasParameter :SodaliteParameter_105 ;
+    DUL:hasParameter :SodaliteParameter_106 ;
 .
+
 :Property_26
-  rdf:type :Property ;
-  dcterms:description "The logical device name for the attached device." ;
-  DUL:classifies :device ;
-  DUL:hasParameter :SodaliteParameter_108 ;
-  DUL:hasParameter :SodaliteParameter_109 ;
+    rdf:type            :Property ;
+    dcterms:description "The logical device name for the attached device." ;
+    DUL:classifies      :device ;
+    DUL:hasParameter    :SodaliteParameter_108 ;
+    DUL:hasParameter    :SodaliteParameter_109 ;
 .
+
 :Property_27
-  rdf:type :Property ;
-  dcterms:description "The optional protocol name." ;
-  DUL:classifies :protocol ;
-  DUL:hasParameter :SodaliteParameter_111 ;
-  DUL:hasParameter :SodaliteParameter_112 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional protocol name." ;
+    DUL:classifies      :protocol ;
+    DUL:hasParameter    :SodaliteParameter_111 ;
+    DUL:hasParameter    :SodaliteParameter_112 ;
 .
+
 :Property_28
-  rdf:type :Property ;
-  dcterms:description "The required token type." ;
-  DUL:classifies :token_type ;
-  DUL:hasParameter :SodaliteParameter_113 ;
-  DUL:hasParameter :SodaliteParameter_114 ;
+    rdf:type            :Property ;
+    dcterms:description "The required token type." ;
+    DUL:classifies      :token_type ;
+    DUL:hasParameter    :SodaliteParameter_113 ;
+    DUL:hasParameter    :SodaliteParameter_114 ;
 .
+
 :Property_29
-  rdf:type :Property ;
-  dcterms:description "The required token used as a credential for authorization or access to a networked resource." ;
-  DUL:classifies :token ;
-  DUL:hasParameter :SodaliteParameter_115 ;
+    rdf:type            :Property ;
+    dcterms:description "The required token used as a credential for authorization or access to a networked resource." ;
+    DUL:classifies      :token ;
+    DUL:hasParameter    :SodaliteParameter_115 ;
 .
+
 :Property_3
-  rdf:type :Property ;
-  dcterms:description "The optional credential that can be used to authenticate to the software component." ;
-  DUL:classifies :admin_credential ;
-  DUL:hasParameter :SodaliteParameter_25 ;
-  DUL:hasParameter :SodaliteParameter_26 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional credential that can be used to authenticate to the software component." ;
+    DUL:classifies      :admin_credential ;
+    DUL:hasParameter    :SodaliteParameter_25 ;
+    DUL:hasParameter    :SodaliteParameter_26 ;
 .
+
 :Property_30
-  rdf:type :Property ;
-  dcterms:description "The optional list of protocol-specific keys or assertions." ;
-  DUL:classifies :keys ;
-  DUL:hasParameter :SodaliteParameter_116 ;
-  DUL:hasParameter :SodaliteParameter_117 ;
-  DUL:hasParameter :SodaliteParameter_118 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional list of protocol-specific keys or assertions." ;
+    DUL:classifies      :keys ;
+    DUL:hasParameter    :SodaliteParameter_116 ;
+    DUL:hasParameter    :SodaliteParameter_117 ;
+    DUL:hasParameter    :SodaliteParameter_118 ;
 .
+
 :Property_31
-  rdf:type :Property ;
-  dcterms:description "The optional user (name or ID) used for non-token-based credentials" ;
-  DUL:classifies :user ;
-  DUL:hasParameter :SodaliteParameter_120 ;
-  DUL:hasParameter :SodaliteParameter_121 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional user (name or ID) used for non-token-based credentials" ;
+    DUL:classifies      :user ;
+    DUL:hasParameter    :SodaliteParameter_120 ;
+    DUL:hasParameter    :SodaliteParameter_121 ;
 .
+
 :Property_32
-  rdf:type :Property ;
-  dcterms:description "The minimum number of instances that should be created for the associated TOSCA Node Template by a TOSCA orchestrator." ;
-  DUL:classifies :min_instances ;
-  DUL:hasParameter :SodaliteParameter_127 ;
-  DUL:hasParameter :SodaliteParameter_128 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "The minimum number of instances that should be created for the associated TOSCA Node Template by a TOSCA orchestrator." ;
+    DUL:classifies   :min_instances ;
+    DUL:hasParameter :SodaliteParameter_127 ;
+    DUL:hasParameter :SodaliteParameter_128 ;
 .
+
 :Property_33
-  rdf:type :Property ;
-  dcterms:description "The maximum number of instances that should be created for the associated TOSCA Node Template by a TOSCA orchestrator." ;
-  DUL:classifies :max_instances ;
-  DUL:hasParameter :SodaliteParameter_129 ;
-  DUL:hasParameter :SodaliteParameter_130 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "The maximum number of instances that should be created for the associated TOSCA Node Template by a TOSCA orchestrator." ;
+    DUL:classifies   :max_instances ;
+    DUL:hasParameter :SodaliteParameter_129 ;
+    DUL:hasParameter :SodaliteParameter_130 ;
 .
+
 :Property_34
-  rdf:type :Property ;
-  dcterms:description "The default number of instances a TOSCA orchestrator should attempt to allocate." ;
-  DUL:classifies :default_instances ;
-  DUL:hasParameter :SodaliteParameter_131 ;
-  DUL:hasParameter :SodaliteParameter_132 ;
+    rdf:type            :Property ;
+    dcterms:description "The default number of instances a TOSCA orchestrator should attempt to allocate." ;
+    DUL:classifies      :default_instances ;
+    DUL:hasParameter    :SodaliteParameter_131 ;
+    DUL:hasParameter    :SodaliteParameter_132 ;
 .
+
 :Property_35
-  rdf:type :Property ;
-  dcterms:description "The logical network port name" ;
-  DUL:classifies :port_name ;
-  DUL:hasParameter :SodaliteParameter_133 ;
+    rdf:type            :Property ;
+    dcterms:description "The logical network port name" ;
+    DUL:classifies      :port_name ;
+    DUL:hasParameter    :SodaliteParameter_133 ;
 .
+
 :Property_36
-  rdf:type :Property ;
-  dcterms:description "The unique ID for the network port generated by the network provider." ;
-  DUL:classifies :port_id ;
-  DUL:hasParameter :SodaliteParameter_134 ;
+    rdf:type            :Property ;
+    dcterms:description "The unique ID for the network port generated by the network provider." ;
+    DUL:classifies      :port_id ;
+    DUL:hasParameter    :SodaliteParameter_134 ;
 .
+
 :Property_37
-  rdf:type :Property ;
-  dcterms:description "The unique ID for the network" ;
-  DUL:classifies :network_id ;
-  DUL:hasParameter :SodaliteParameter_135 ;
+    rdf:type            :Property ;
+    dcterms:description "The unique ID for the network" ;
+    DUL:classifies      :network_id ;
+    DUL:hasParameter    :SodaliteParameter_135 ;
 .
+
 :Property_38
-  rdf:type :Property ;
-  dcterms:description "The unique media access control (MAC) address assigned to the port." ;
-  DUL:classifies :mac_address ;
-  DUL:hasParameter :SodaliteParameter_136 ;
+    rdf:type            :Property ;
+    dcterms:description "The unique media access control (MAC) address assigned to the port." ;
+    DUL:classifies      :mac_address ;
+    DUL:hasParameter    :SodaliteParameter_136 ;
 .
+
 :Property_39
-  rdf:type :Property ;
-  dcterms:description "The list of IP addresses assigned to the port." ;
-  DUL:classifies :addresses ;
-  DUL:hasParameter :SodaliteParameter_137 ;
-  DUL:hasParameter :SodaliteParameter_138 ;
+    rdf:type            :Property ;
+    dcterms:description "The list of IP addresses assigned to the port." ;
+    DUL:classifies      :addresses ;
+    DUL:hasParameter    :SodaliteParameter_137 ;
+    DUL:hasParameter    :SodaliteParameter_138 ;
 .
+
 :Property_4
-  rdf:type :Property ;
-  DUL:classifies :size ;
-  DUL:hasParameter :SodaliteParameter_42 ;
-  DUL:hasParameter :SodaliteParameter_49 ;
-  DUL:hasParameter :SodaliteParameter_90 ;
+    rdf:type         :Property ;
+    DUL:classifies   :size ;
+    DUL:hasParameter :SodaliteParameter_42 ;
+    DUL:hasParameter :SodaliteParameter_49 ;
+    DUL:hasParameter :SodaliteParameter_90 ;
 .
+
 :Property_40
-  rdf:type :Property ;
-  dcterms:description "If set, the endpoint accepts only secure connections (using credentials supplied on the ConnectsTo relationship)." ;
-  DUL:classifies :secure ;
-  DUL:hasParameter :SodaliteParameter_140 ;
-  DUL:hasParameter :SodaliteParameter_141 ;
-  DUL:hasParameter :SodaliteParameter_142 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "If set, the endpoint accepts only secure connections (using credentials supplied on the ConnectsTo relationship)." ;
+    DUL:classifies   :secure ;
+    DUL:hasParameter :SodaliteParameter_140 ;
+    DUL:hasParameter :SodaliteParameter_141 ;
+    DUL:hasParameter :SodaliteParameter_142 ;
 .
+
 :Property_41
-  rdf:type :Property ;
-  dcterms:description "The required protocol used on the port." ;
-  DUL:classifies :protocol ;
-  DUL:hasParameter :SodaliteParameter_152 ;
-  DUL:hasParameter :SodaliteParameter_153 ;
-  DUL:hasParameter :SodaliteParameter_154 ;
-  DUL:hasParameter :SodaliteParameter_155 ;
+    rdf:type            :Property ;
+    dcterms:description "The required protocol used on the port." ;
+    DUL:classifies      :protocol ;
+    DUL:hasParameter    :SodaliteParameter_152 ;
+    DUL:hasParameter    :SodaliteParameter_153 ;
+    DUL:hasParameter    :SodaliteParameter_154 ;
+    DUL:hasParameter    :SodaliteParameter_155 ;
 .
+
 :Property_42
-  rdf:type :Property ;
-  dcterms:description "The optional target port." ;
-  DUL:classifies :target ;
-  DUL:hasParameter :SodaliteParameter_157 ;
-  DUL:hasParameter :SodaliteParameter_158 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional target port." ;
+    DUL:classifies      :target ;
+    DUL:hasParameter    :SodaliteParameter_157 ;
+    DUL:hasParameter    :SodaliteParameter_158 ;
 .
+
 :Property_43
-  rdf:type :Property ;
-  dcterms:description "The optional range for target port." ;
-  DUL:classifies :target_range ;
-  DUL:hasParameter :SodaliteParameter_159 ;
-  DUL:hasParameter :SodaliteParameter_160 ;
-  DUL:hasParameter :SodaliteParameter_161 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional range for target port." ;
+    DUL:classifies      :target_range ;
+    DUL:hasParameter    :SodaliteParameter_159 ;
+    DUL:hasParameter    :SodaliteParameter_160 ;
+    DUL:hasParameter    :SodaliteParameter_161 ;
 .
+
 :Property_44
-  rdf:type :Property ;
-  dcterms:description "The optional source port." ;
-  DUL:classifies :source ;
-  DUL:hasParameter :SodaliteParameter_165 ;
-  DUL:hasParameter :SodaliteParameter_166 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional source port." ;
+    DUL:classifies      :source ;
+    DUL:hasParameter    :SodaliteParameter_165 ;
+    DUL:hasParameter    :SodaliteParameter_166 ;
 .
+
 :Property_5
-  rdf:type :Property ;
-  dcterms:description "ID of an existing volume (that is in the accessible scope of the requesting application)." ;
-  DUL:classifies :volume_id ;
-  DUL:hasParameter :SodaliteParameter_44 ;
-  DUL:hasParameter :SodaliteParameter_45 ;
+    rdf:type            :Property ;
+    dcterms:description "ID of an existing volume (that is in the accessible scope of the requesting application)." ;
+    DUL:classifies      :volume_id ;
+    DUL:hasParameter    :SodaliteParameter_44 ;
+    DUL:hasParameter    :SodaliteParameter_45 ;
 .
+
 :Property_6
-  rdf:type :Property ;
-  dcterms:description "Some identifier that represents an existing snapshot that should be used when creating the block storage (volume)." ;
-  DUL:classifies :snapshot_id ;
-  DUL:hasParameter :SodaliteParameter_46 ;
-  DUL:hasParameter :SodaliteParameter_47 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "Some identifier that represents an existing snapshot that should be used when creating the block storage (volume)." ;
+    DUL:classifies   :snapshot_id ;
+    DUL:hasParameter :SodaliteParameter_46 ;
+    DUL:hasParameter :SodaliteParameter_47 ;
 .
+
 :Property_7
-  rdf:type :Property ;
-  dcterms:description "The name of the (Layer 4 through 7) protocol that the endpoint accepts." ;
-  DUL:classifies :protocol ;
-  DUL:hasParameter :SodaliteParameter_50 ;
-  DUL:hasParameter :SodaliteParameter_51 ;
-  DUL:hasParameter :SodaliteParameter_52 ;
+    rdf:type            :Property ;
+    dcterms:description "The name of the (Layer 4 through 7) protocol that the endpoint accepts." ;
+    DUL:classifies      :protocol ;
+    DUL:hasParameter    :SodaliteParameter_50 ;
+    DUL:hasParameter    :SodaliteParameter_51 ;
+    DUL:hasParameter    :SodaliteParameter_52 ;
 .
+
 :Property_8
-  rdf:type :Property ;
-  dcterms:description "The optional port of the endpoint." ;
-  DUL:classifies :port ;
-  DUL:hasParameter :SodaliteParameter_57 ;
-  DUL:hasParameter :SodaliteParameter_58 ;
+    rdf:type            :Property ;
+    dcterms:description "The optional port of the endpoint." ;
+    DUL:classifies      :port ;
+    DUL:hasParameter    :SodaliteParameter_57 ;
+    DUL:hasParameter    :SodaliteParameter_58 ;
 .
+
 :Property_9
-  rdf:type :Property ;
-  dcterms:description "If set, the endpoint accepts only secure connections (using credentials supplied on the ConnectsTo relationship)." ;
-  DUL:classifies :secure ;
-  DUL:hasParameter :SodaliteParameter_59 ;
-  DUL:hasParameter :SodaliteParameter_60 ;
-  DUL:hasParameter :SodaliteParameter_61 ;
+    rdf:type         :Property ;
+    dcterms:description
+                     "If set, the endpoint accepts only secure connections (using credentials supplied on the ConnectsTo relationship)." ;
+    DUL:classifies   :secure ;
+    DUL:hasParameter :SodaliteParameter_59 ;
+    DUL:hasParameter :SodaliteParameter_60 ;
+    DUL:hasParameter :SodaliteParameter_61 ;
 .
+
 :Requirement
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Dependency ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :Dependency ;
 .
+
 :Requirement_1
-  rdf:type :Requirement ;
-  DUL:classifies :dependency ;
-  DUL:hasParameter :Parameter_1 ;
-  DUL:hasParameter :Parameter_2 ;
-  DUL:hasParameter :SodaliteParameter_1 ;
-  DUL:hasParameter :SodaliteParameter_2 ;
+    rdf:type         :Requirement ;
+    DUL:classifies   :dependency ;
+    DUL:hasParameter :Parameter_1 ;
+    DUL:hasParameter :Parameter_2 ;
+    DUL:hasParameter :SodaliteParameter_1 ;
+    DUL:hasParameter :SodaliteParameter_2 ;
 .
+
 :Requirement_2
-  rdf:type :Requirement ;
-  DUL:classifies :host ;
-  DUL:hasParameter :Parameter_3 ;
-  DUL:hasParameter :Parameter_4 ;
-  DUL:hasParameter :Parameter_5 ;
+    rdf:type         :Requirement ;
+    DUL:classifies   :host ;
+    DUL:hasParameter :Parameter_3 ;
+    DUL:hasParameter :Parameter_4 ;
+    DUL:hasParameter :Parameter_5 ;
 .
+
 :SodaliteDescription_1
-  rdf:type soda:SodaliteDescription ;
-  :capabilities :Capability_7 ;
+    rdf:type      soda:SodaliteDescription ;
+    :capabilities :Capability_7 ;
 .
+
 :SodaliteDescription_10
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_27 ;
-  :properties :Property_28 ;
-  :properties :Property_29 ;
-  :properties :Property_30 ;
-  :properties :Property_31 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_27 ;
+    :properties :Property_28 ;
+    :properties :Property_29 ;
+    :properties :Property_30 ;
+    :properties :Property_31 ;
 .
+
 :SodaliteDescription_11
-  rdf:type soda:SodaliteDescription ;
-  :operations :SodaliteParameter_122 ;
-  :operations :SodaliteParameter_123 ;
-  :operations :SodaliteParameter_124 ;
-  :operations :SodaliteParameter_125 ;
-  :operations :SodaliteParameter_126 ;
+    rdf:type    soda:SodaliteDescription ;
+    :operations :SodaliteParameter_122 ;
+    :operations :SodaliteParameter_123 ;
+    :operations :SodaliteParameter_124 ;
+    :operations :SodaliteParameter_125 ;
+    :operations :SodaliteParameter_126 ;
 .
+
 :SodaliteDescription_12
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_32 ;
-  :properties :Property_33 ;
-  :properties :Property_34 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_32 ;
+    :properties :Property_33 ;
+    :properties :Property_34 ;
 .
+
 :SodaliteDescription_13
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_35 ;
-  :properties :Property_36 ;
-  :properties :Property_37 ;
-  :properties :Property_38 ;
-  :properties :Property_39 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_35 ;
+    :properties :Property_36 ;
+    :properties :Property_37 ;
+    :properties :Property_38 ;
+    :properties :Property_39 ;
 .
+
 :SodaliteDescription_14
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_40 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_40 ;
 .
+
 :SodaliteDescription_15
-  rdf:type soda:SodaliteDescription ;
-  :operations :SodaliteParameter_144 ;
-  :operations :SodaliteParameter_145 ;
-  :operations :SodaliteParameter_146 ;
-  :operations :SodaliteParameter_147 ;
-  :operations :SodaliteParameter_148 ;
-  :operations :SodaliteParameter_149 ;
-  :operations :SodaliteParameter_150 ;
-  :operations :SodaliteParameter_151 ;
+    rdf:type    soda:SodaliteDescription ;
+    :operations :SodaliteParameter_144 ;
+    :operations :SodaliteParameter_145 ;
+    :operations :SodaliteParameter_146 ;
+    :operations :SodaliteParameter_147 ;
+    :operations :SodaliteParameter_148 ;
+    :operations :SodaliteParameter_149 ;
+    :operations :SodaliteParameter_150 ;
+    :operations :SodaliteParameter_151 ;
 .
+
 :SodaliteDescription_16
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_41 ;
-  :properties :Property_42 ;
-  :properties :Property_43 ;
-  :properties :Property_44 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_41 ;
+    :properties :Property_42 ;
+    :properties :Property_43 ;
+    :properties :Property_44 ;
 .
+
 :SodaliteDescription_17
-  rdf:type soda:SodaliteDescription ;
-  :valid_target_types :SodaliteParameter_167 ;
+    rdf:type            soda:SodaliteDescription ;
+    :valid_target_types :SodaliteParameter_167 ;
 .
+
 :SodaliteDescription_2
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_17 ;
-  :properties :Property_4 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_17 ;
+    :properties :Property_4 ;
 .
+
 :SodaliteDescription_3
-  rdf:type soda:SodaliteDescription ;
-  :capabilities :Capability_8 ;
-  :properties :Property_5 ;
-  :properties :Property_6 ;
+    rdf:type      soda:SodaliteDescription ;
+    :capabilities :Capability_8 ;
+    :properties   :Property_5 ;
+    :properties   :Property_6 ;
 .
+
 :SodaliteDescription_4
-  rdf:type soda:SodaliteDescription ;
-  :attributes :Attribute_11 ;
-  :properties :Property_10 ;
-  :properties :Property_11 ;
-  :properties :Property_12 ;
-  :properties :Property_13 ;
-  :properties :Property_14 ;
-  :properties :Property_7 ;
-  :properties :Property_8 ;
-  :properties :Property_9 ;
+    rdf:type    soda:SodaliteDescription ;
+    :attributes :Attribute_11 ;
+    :properties :Property_10 ;
+    :properties :Property_11 ;
+    :properties :Property_12 ;
+    :properties :Property_13 ;
+    :properties :Property_14 ;
+    :properties :Property_7 ;
+    :properties :Property_8 ;
+    :properties :Property_9 ;
 .
+
 :SodaliteDescription_5
-  rdf:type soda:SodaliteDescription ;
-  :capabilities :Capability_9 ;
-  :properties :Property_15 ;
-  :properties :Property_16 ;
+    rdf:type      soda:SodaliteDescription ;
+    :capabilities :Capability_9 ;
+    :properties   :Property_15 ;
+    :properties   :Property_16 ;
 .
+
 :SodaliteDescription_6
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_18 ;
-  :properties :Property_19 ;
-  :properties :Property_20 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_18 ;
+    :properties :Property_19 ;
+    :properties :Property_20 ;
 .
+
 :SodaliteDescription_7
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_21 ;
-  :properties :Property_22 ;
-  :properties :Property_23 ;
-  :properties :Property_24 ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :Property_21 ;
+    :properties :Property_22 ;
+    :properties :Property_23 ;
+    :properties :Property_24 ;
 .
+
 :SodaliteDescription_8
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_25 ;
-  :properties :Property_26 ;
-  :valid_target_types :SodaliteParameter_104 ;
+    rdf:type            soda:SodaliteDescription ;
+    :properties         :Property_25 ;
+    :properties         :Property_26 ;
+    :valid_target_types :SodaliteParameter_104 ;
 .
+
 :SodaliteDescription_9
-  rdf:type soda:SodaliteDescription ;
-  :valid_target_types :SodaliteParameter_110 ;
+    rdf:type            soda:SodaliteDescription ;
+    :valid_target_types :SodaliteParameter_110 ;
 .
+
 :SodaliteParameter_1
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :relationship ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.DependsOn> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :relationship ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.DependsOn> ;
 .
+
 :SodaliteParameter_10
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.node.lifecycle.Standard> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.node.lifecycle.Standard> ;
 .
+
 :SodaliteParameter_100
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_101
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_102
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :version ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :version ;
 .
+
 :SodaliteParameter_103
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_104
-  rdf:type soda:SodaliteParameter ;
-  :hasObjectValue :List_5 ;
+    rdf:type        soda:SodaliteParameter ;
+    :hasObjectValue :List_5 ;
 .
+
 :SodaliteParameter_105
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_106
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_107 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_107 ;
 .
+
 :SodaliteParameter_107
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min_length ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min_length ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_108
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_109
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_11
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
 .
+
 :SodaliteParameter_110
-  rdf:type soda:SodaliteParameter ;
-  :hasObjectValue :List_6 ;
+    rdf:type        soda:SodaliteParameter ;
+    :hasObjectValue :List_6 ;
 .
+
 :SodaliteParameter_111
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_112
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_113
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_114
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "password" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "password" ;
 .
+
 :SodaliteParameter_115
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_116
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :map ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :map ;
 .
+
 :SodaliteParameter_117
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_118
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_119 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_119 ;
 .
+
 :SodaliteParameter_119
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_12
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :map ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :map ;
 .
+
 :SodaliteParameter_120
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_121
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_122
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Standard lifecycle create operation" ;
-  DUL:classifies :create ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Standard lifecycle create operation" ;
+    DUL:classifies      :create ;
 .
+
 :SodaliteParameter_123
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Standard lifecycle configure operation." ;
-  DUL:classifies :configure ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Standard lifecycle configure operation." ;
+    DUL:classifies      :configure ;
 .
+
 :SodaliteParameter_124
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Standard lifecycle start operation." ;
-  DUL:classifies :start ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Standard lifecycle start operation." ;
+    DUL:classifies      :start ;
 .
+
 :SodaliteParameter_125
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description " Standard lifecycle stop operation." ;
-  DUL:classifies :stop ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description " Standard lifecycle stop operation." ;
+    DUL:classifies      :stop ;
 .
+
 :SodaliteParameter_126
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description " Standard lifecycle delete operation." ;
-  DUL:classifies :delete ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description " Standard lifecycle delete operation." ;
+    DUL:classifies      :delete ;
 .
+
 :SodaliteParameter_127
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :integer ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :integer ;
 .
+
 :SodaliteParameter_128
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  DUL:hasParameter :default ;
-  :hasDataValue "1" ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :default ;
+    DUL:hasParameter :default ;
+    :hasDataValue    "1" ;
 .
+
 :SodaliteParameter_129
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :integer ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :integer ;
 .
+
 :SodaliteParameter_13
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortInfo> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortInfo> ;
 .
+
 :SodaliteParameter_130
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_131
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :integer ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :integer ;
 .
+
 :SodaliteParameter_132
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_133
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_134
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_135
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_136
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_137
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :list ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :list ;
 .
+
 :SodaliteParameter_138
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_139 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_139 ;
 .
+
 :SodaliteParameter_139
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_14
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_140
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :boolean ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :boolean ;
 .
+
 :SodaliteParameter_141
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "true"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "true"^^xsd:boolean ;
 .
+
 :SodaliteParameter_142
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_143 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_143 ;
 .
+
 :SodaliteParameter_143
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :equal ;
-  :hasDataValue "true"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :equal ;
+    :hasDataValue  "true"^^xsd:boolean ;
 .
+
 :SodaliteParameter_144
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to pre-configure the source endpoint." ;
-  DUL:classifies :pre_configure_source ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to pre-configure the source endpoint." ;
+    DUL:classifies      :pre_configure_source ;
 .
+
 :SodaliteParameter_145
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to pre-configure the target endpoint" ;
-  DUL:classifies :pre_configure_target ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to pre-configure the target endpoint" ;
+    DUL:classifies      :pre_configure_target ;
 .
+
 :SodaliteParameter_146
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to post-configure the source endpoint." ;
-  DUL:classifies :post_configure_source ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to post-configure the source endpoint." ;
+    DUL:classifies      :post_configure_source ;
 .
+
 :SodaliteParameter_147
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to post-configure the target endpoint." ;
-  DUL:classifies :post_configure_target ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to post-configure the target endpoint." ;
+    DUL:classifies      :post_configure_target ;
 .
+
 :SodaliteParameter_148
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to notify the source node of a target node being added via a relationship." ;
-  DUL:classifies :add_target ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to notify the source node of a target node being added via a relationship." ;
+    DUL:classifies      :add_target ;
 .
+
 :SodaliteParameter_149
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "peration to notify the target node of a source node which is now available via a relationship." ;
-  DUL:classifies :add_source ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description
+                        "peration to notify the target node of a source node which is now available via a relationship." ;
+    DUL:classifies      :add_source ;
 .
+
 :SodaliteParameter_15
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_150
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to notify source some property or attribute of the target changed." ;
-  DUL:classifies :target_changed ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to notify source some property or attribute of the target changed." ;
+    DUL:classifies      :target_changed ;
 .
+
 :SodaliteParameter_151
-  rdf:type soda:SodaliteParameter ;
-  dcterms:description "Operation to remove a target node." ;
-  DUL:classifies :remove_target ;
+    rdf:type            soda:SodaliteParameter ;
+    dcterms:description "Operation to remove a target node." ;
+    DUL:classifies      :remove_target ;
 .
+
 :SodaliteParameter_152
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_153
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "true"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "true"^^xsd:boolean ;
 .
+
 :SodaliteParameter_154
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "tcp" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "tcp" ;
 .
+
 :SodaliteParameter_155
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_156 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_156 ;
 .
+
 :SodaliteParameter_156
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :valid_values ;
-  :hasObjectValue :List_7 ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :valid_values ;
+    :hasObjectValue :List_7 ;
 .
+
 :SodaliteParameter_157
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
 .
+
 :SodaliteParameter_158
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_159
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :range ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :range ;
 .
+
 :SodaliteParameter_16
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :map ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :map ;
 .
+
 :SodaliteParameter_160
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_161
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_162 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_162 ;
 .
+
 :SodaliteParameter_162
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :in_range ;
-  DUL:hasParameter :SodaliteParameter_163 ;
-  DUL:hasParameter :SodaliteParameter_164 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :in_range ;
+    DUL:hasParameter :SodaliteParameter_163 ;
+    DUL:hasParameter :SodaliteParameter_164 ;
 .
+
 :SodaliteParameter_163
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_164
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :max ;
-  :hasDataValue "65535" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :max ;
+    :hasDataValue  "65535" ;
 .
+
 :SodaliteParameter_165
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
 .
+
 :SodaliteParameter_166
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_167
-  rdf:type soda:SodaliteParameter ;
-  :hasObjectValue :List_8 ;
+    rdf:type        soda:SodaliteParameter ;
+    :hasObjectValue :List_8 ;
 .
+
 :SodaliteParameter_17
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.NetworkInfo> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.NetworkInfo> ;
 .
+
 :SodaliteParameter_18
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
 .
+
 :SodaliteParameter_19
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint.Admin> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint.Admin> ;
 .
+
 :SodaliteParameter_2
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :occurrences ;
-  DUL:hasParameter :SodaliteParameter_3 ;
-  DUL:hasParameter :SodaliteParameter_4 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :occurrences ;
+    DUL:hasParameter :SodaliteParameter_3 ;
+    DUL:hasParameter :SodaliteParameter_4 ;
 .
+
 :SodaliteParameter_20
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.OperatingSystem> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.OperatingSystem> ;
 .
+
 :SodaliteParameter_21
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Scalable> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Scalable> ;
 .
+
 :SodaliteParameter_22
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.network.Bindable> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.network.Bindable> ;
 .
+
 :SodaliteParameter_23
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :version ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :version ;
 .
+
 :SodaliteParameter_24
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_25
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Credential> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Credential> ;
 .
+
 :SodaliteParameter_26
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_27
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_28
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_29
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :greater_or_equal ;
-  :hasDataValue "0.1 GHz" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :greater_or_equal ;
+    :hasDataValue  "0.1 GHz" ;
 .
+
 :SodaliteParameter_3
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min ;
-  :hasDataValue "0" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min ;
+    :hasDataValue  "0" ;
 .
+
 :SodaliteParameter_30
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.frequency> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.frequency> ;
 .
+
 :SodaliteParameter_31
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_32
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_33
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
 .
+
 :SodaliteParameter_34
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
 .
+
 :SodaliteParameter_35
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_36
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :greater_or_equal ;
-  :hasDataValue "0 MB" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :greater_or_equal ;
+    :hasDataValue  "0 MB" ;
 .
+
 :SodaliteParameter_37
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_38
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :greater_or_equal ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :greater_or_equal ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_39
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_4
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :max ;
-  :hasDataValue "UNBOUNDED" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :max ;
+    :hasDataValue  "UNBOUNDED" ;
 .
+
 :SodaliteParameter_40
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :integer ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :integer ;
 .
+
 :SodaliteParameter_41
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_42
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size> ;
 .
+
 :SodaliteParameter_43
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :greater_or_equal ;
-  :hasDataValue "0 MB" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :greater_or_equal ;
+    :hasDataValue  "0 MB" ;
 .
+
 :SodaliteParameter_44
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_45
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_46
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_47
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_48
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment> ;
 .
+
 :SodaliteParameter_49
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_43 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_43 ;
 .
+
 :SodaliteParameter_5
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :valid_source_types ;
-  :hasObjectValue :List_2 ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :valid_source_types ;
+    :hasObjectValue :List_2 ;
 .
+
 :SodaliteParameter_50
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_51
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_52
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "tcp" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "tcp" ;
 .
+
 :SodaliteParameter_53
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_54 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_54 ;
 .
+
 :SodaliteParameter_54
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :in_range ;
-  DUL:hasParameter :SodaliteParameter_55 ;
-  DUL:hasParameter :SodaliteParameter_56 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :in_range ;
+    DUL:hasParameter :SodaliteParameter_55 ;
+    DUL:hasParameter :SodaliteParameter_56 ;
 .
+
 :SodaliteParameter_55
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_56
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :max ;
-  :hasDataValue "65535" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :max ;
+    :hasDataValue  "65535" ;
 .
+
 :SodaliteParameter_57
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef> ;
 .
+
 :SodaliteParameter_58
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_59
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :boolean ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :boolean ;
 .
+
 :SodaliteParameter_6
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_60
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_61
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_62
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_63
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_64
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_65
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_66
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_67
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_68
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "PRIVATE" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "PRIVATE" ;
 .
+
 :SodaliteParameter_69
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_7
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_70
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_71
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "source" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "source" ;
 .
+
 :SodaliteParameter_72
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_73 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_73 ;
 .
+
 :SodaliteParameter_73
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :valid_values ;
-  :hasObjectValue :List_3 ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :valid_values ;
+    :hasObjectValue :List_3 ;
 .
+
 :SodaliteParameter_74
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :map ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :map ;
 .
+
 :SodaliteParameter_75
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_76
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :constraints ;
-  DUL:hasParameter :SodaliteParameter_77 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :constraints ;
+    DUL:hasParameter :SodaliteParameter_77 ;
 .
+
 :SodaliteParameter_77
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min_length ;
-  :hasDataValue "1" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min_length ;
+    :hasDataValue  "1" ;
 .
+
 :SodaliteParameter_78
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_79 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_79 ;
 .
+
 :SodaliteParameter_79
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortSpec> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortSpec> ;
 .
+
 :SodaliteParameter_8
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_80
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_81
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_82
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_83
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :integer ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :integer ;
 .
+
 :SodaliteParameter_84
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_85
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute> ;
 .
+
 :SodaliteParameter_86
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :valid_source_types ;
-  :hasObjectValue :List_4 ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :valid_source_types ;
+    :hasObjectValue :List_4 ;
 .
+
 :SodaliteParameter_87
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :min ;
-  :hasDataValue "0" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :min ;
+    :hasDataValue  "0" ;
 .
+
 :SodaliteParameter_88
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :max ;
-  :hasDataValue "UNBOUNDED" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :max ;
+    :hasDataValue  "UNBOUNDED" ;
 .
+
 :SodaliteParameter_89
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_9
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
 .
+
 :SodaliteParameter_90
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :default ;
-  :hasDataValue "0 MB" ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :default ;
+    :hasDataValue  "0 MB" ;
 .
+
 :SodaliteParameter_91
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_92
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_93
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :entry_schema ;
-  DUL:hasParameter :SodaliteParameter_94 ;
+    rdf:type         soda:SodaliteParameter ;
+    DUL:classifies   :entry_schema ;
+    DUL:hasParameter :SodaliteParameter_94 ;
 .
+
 :SodaliteParameter_94
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_95
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :list ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :list ;
 .
+
 :SodaliteParameter_96
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_97
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SodaliteParameter_98
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :type ;
-  :hasObjectValue :string ;
+    rdf:type        soda:SodaliteParameter ;
+    DUL:classifies  :type ;
+    :hasObjectValue :string ;
 .
+
 :SodaliteParameter_99
-  rdf:type soda:SodaliteParameter ;
-  DUL:classifies :required ;
-  :hasDataValue "false"^^xsd:boolean ;
+    rdf:type       soda:SodaliteParameter ;
+    DUL:classifies :required ;
+    :hasDataValue  "false"^^xsd:boolean ;
 .
+
 :SoftwareComponent_Description
-  rdf:type soda:SodaliteDescription ;
-  :properties :Property_2 ;
-  :properties :Property_3 ;
-  :requirements :Requirement_2 ;
+    rdf:type      soda:SodaliteDescription ;
+    :properties   :Property_2 ;
+    :properties   :Property_3 ;
+    :requirements :Requirement_2 ;
 .
+
 :Standard
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :add_source
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :add_target
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :addresses
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :admin_credential
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :architecture
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :attachment
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :attributes
-  rdf:type owl:ObjectProperty ;
-  rdfs:range :Attribute ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:range         :Attribute ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :binding
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :boolean
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :capabilities
-  rdf:type owl:ObjectProperty ;
-  rdfs:range :Capability ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:range         :Capability ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :capability
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :component_version
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :configure
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :constraints
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :cpu_frequency
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :create
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :default
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :default_instances
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :delete
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :dependency
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :device
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :disk_size
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :distribution
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :endpoint
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :entry_schema
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :equal
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :feature
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :get_attribute
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :get_property
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :greater_or_equal
-  rdf:type owl:DatatypeProperty ;
+    rdf:type owl:DatatypeProperty ;
 .
+
 :hasDataValue
-  rdf:type owl:DatatypeProperty ;
-  rdfs:subPropertyOf DUL:hasDataValue ;
-  rdfs:subPropertyOf :hasValue ;
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf DUL:hasDataValue ;
+    rdfs:subPropertyOf :hasValue ;
 .
+
 :hasObjectValue
-  rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf DUL:hasRegion ;
-  rdfs:subPropertyOf :hasValue ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf DUL:hasRegion ;
+    rdfs:subPropertyOf :hasValue ;
 .
+
 :hasValue
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :host
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :implementation
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :in_range
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :initiator
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :inputs
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :integer
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :interfaces
-  rdf:type owl:ObjectProperty ;
-  rdfs:range :Interface ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:range         :Interface ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :ip_address
-  rdf:type owl:ObjectProperty ;
+    rdf:type owl:ObjectProperty ;
 .
+
 :keys
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :list
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :local_storage
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :location
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :mac_address
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :map
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :max
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :max_instances
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :mem_size
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :min
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :min_instances
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :min_length
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :name
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :network_id
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :network_name
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :networks
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :node
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :num_cpus
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :occurrences
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :operations
-  rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :os
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :port
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :port_id
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :port_name
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :ports
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :post_configure_source
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :post_configure_target
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :pre_configure_source
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :pre_configure_target
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :primary
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :private_address
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :properties
-  rdf:type owl:ObjectProperty ;
-  rdfs:range :Property ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:range         :Property ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :protocol
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :public_address
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :range
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :relationship
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :remove_target
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :required
-  rdf:type owl:DatatypeProperty ;
-  rdfs:range xsd:boolean ;
+    rdf:type   owl:DatatypeProperty ;
+    rdfs:range xsd:boolean ;
 .
+
 :requirements
-  rdf:type owl:ObjectProperty ;
-  rdfs:range :Requirement ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:range         :Requirement ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :root_password
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :scalable
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/scalar-unit.frequency>
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/scalar-unit.size>
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :secure
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :size
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :snapshot_id
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :source
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :start
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :state
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :stop
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :string
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :target
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :target_changed
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :target_range
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :token
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :token_type
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Attachment>
-  rdf:type owl:Class ;
-  dcterms:description "The Attachment capability is the default TOSCA type for defining an attachment capability of a (logical) infrastructure device node (e.g., BlockStorage node)." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Attachment capability is the default TOSCA type for defining an attachment capability of a (logical) infrastructure device node (e.g., BlockStorage node)." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute>
-  rdf:type owl:Class ;
-  dcterms:description "The Compute capability, when included on a Node Type or Template definition, indicates that the node can provide hosting on a named compute resource." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Container> ;
-  soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute_Description> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Compute capability, when included on a Node Type or Template definition, indicates that the node can provide hosting on a named compute resource." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Container> ;
+    soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute_Description> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute_Description>
-  rdf:type soda:SodaliteDescription ;
-  :properties :CPU_FrequencyProperty ;
-  :properties :DiskSizeProperty ;
-  :properties :MemSizeProperty ;
-  :properties :NameProperty ;
-  :properties :Num_CPUsProperty ;
+    rdf:type    soda:SodaliteDescription ;
+    :properties :CPU_FrequencyProperty ;
+    :properties :DiskSizeProperty ;
+    :properties :MemSizeProperty ;
+    :properties :NameProperty ;
+    :properties :Num_CPUsProperty ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Container>
-  rdf:type owl:Class ;
-  dcterms:description "The Container capability, when included on a Node Type or Template definition, indicates that the node can act as a container for (or a host for) one or more other declared Node Types." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Container capability, when included on a Node Type or Template definition, indicates that the node can act as a container for (or a host for) one or more other declared Node Types." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint>
-  rdf:type owl:Class ;
-  dcterms:description "The Endpoint capability is the default TOSCA type for defining a network endpoint capability." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
-  soda:hasContext :SodaliteDescription_4 ;
+    rdf:type            owl:Class ;
+    dcterms:description
+                        "The Endpoint capability is the default TOSCA type for defining a network endpoint capability." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    soda:hasContext     :SodaliteDescription_4 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint.Admin>
-  rdf:type owl:Class ;
-  dcterms:description "The Endpoint.Admin capability is the default TOSCA type for defining a specialized administrator endpoint capability" ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint> ;
-  soda:hasContext :SodaliteDescription_14 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Endpoint.Admin capability is the default TOSCA type for defining a specialized administrator endpoint capability" ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Endpoint> ;
+    soda:hasContext :SodaliteDescription_14 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Network>
-  rdf:type owl:Class ;
-  dcterms:description "The Network capability, when included on a Node Type or Template definition, indicates that the node can provide addressiblity for the named network with the specified ports." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
-  soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Network_Description> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Network capability, when included on a Node Type or Template definition, indicates that the node can provide addressiblity for the named network with the specified ports." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Network_Description> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Network_Description>
-  rdf:type DUL:Description ;
-  :properties :Property_1 ;
+    rdf:type    DUL:Description ;
+    :properties :Property_1 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node>
-  rdf:type owl:Class ;
-  dcterms:description "The Node capability indicates the base capabilities of a TOSCA Node Type." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    rdf:type            owl:Class ;
+    dcterms:description "The Node capability indicates the base capabilities of a TOSCA Node Type." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.OperatingSystem>
-  rdf:type owl:Class ;
-  dcterms:description "The OperatingSystem capability is the default TOSCA type for expressing an Operating System capability for a node." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
-  soda:hasContext :SodaliteDescription_7 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The OperatingSystem capability is the default TOSCA type for expressing an Operating System capability for a node." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    soda:hasContext :SodaliteDescription_7 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA base capability type from which all other normative TOSCA capability types derive." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
+    rdf:type            owl:Class ;
+    dcterms:description "The TOSCA base capability type from which all other normative TOSCA capability types derive." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Scalable>
-  rdf:type owl:Class ;
-  dcterms:description "The OperatingSystem capability is the default TOSCA type for expressing a scalability capability for a node." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
-  soda:hasContext :SodaliteDescription_12 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The OperatingSystem capability is the default TOSCA type for expressing a scalability capability for a node." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Root> ;
+    soda:hasContext :SodaliteDescription_12 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.network.Bindable>
-  rdf:type owl:Class ;
-  dcterms:description "A node type that includes the Bindable capability indicates that it can be bound to a logical network association via a network port." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "A node type that includes the Bindable capability indicates that it can be bound to a logical network association via a network port." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Credential>
-  rdf:type owl:Class ;
-  dcterms:description "The Credential type describes authorization credentials used to access network-accessible resources" ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
-  soda:hasContext :SodaliteDescription_10 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Credential type describes authorization credentials used to access network-accessible resources" ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
+    soda:hasContext :SodaliteDescription_10 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA base data type from which all other normative TOSCA data types derive." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
+    rdf:type            owl:Class ;
+    dcterms:description "The TOSCA base data type from which all other normative TOSCA data types derive." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.NetworkInfo>
-  rdf:type owl:Class ;
-  dcterms:description "The Network type describes logical network information." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
-  soda:hasContext :SodaliteDescription_6 ;
+    rdf:type            owl:Class ;
+    dcterms:description "The Network type describes logical network information." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
+    soda:hasContext     :SodaliteDescription_6 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortDef>
-  rdf:type owl:Class ;
-  DUL:hasParameter :SodaliteParameter_53 ;
-  rdfs:subClassOf soda:SodaliteSituation ;
-  rdfs:subClassOf :integer ;
+    rdf:type         owl:Class ;
+    DUL:hasParameter :SodaliteParameter_53 ;
+    rdfs:subClassOf  soda:SodaliteSituation ;
+    rdfs:subClassOf  :integer ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortInfo>
-  rdf:type owl:Class ;
-  dcterms:description "The PortInfo type describes network port information." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
-  soda:hasContext :SodaliteDescription_13 ;
+    rdf:type            owl:Class ;
+    dcterms:description "The PortInfo type describes network port information." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
+    soda:hasContext     :SodaliteDescription_13 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.network.PortSpec>
-  rdf:type owl:Class ;
-  dcterms:description "The PortSpec type is used when describing port specifications for a network connection." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
-  soda:hasContext :SodaliteDescription_16 ;
+    rdf:type            owl:Class ;
+    dcterms:description "The PortSpec type is used when describing port specifications for a network connection." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Root> ;
+    soda:hasContext     :SodaliteDescription_16 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA Node Type all other TOSCA base Node Types derive from." ;
-  rdfs:subClassOf soda:SodaliteSituation ;
+    rdf:type            owl:Class ;
+    dcterms:description "The TOSCA Node Type all other TOSCA base Node Types derive from." ;
+    rdfs:subClassOf     soda:SodaliteSituation ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA root Interface Type from which all other TOSCA base Interface Types derive" ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
+    rdf:type            owl:Class ;
+    dcterms:description "The TOSCA root Interface Type from which all other TOSCA base Interface Types derive" ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.node.lifecycle.Standard>
-  rdf:type owl:Class ;
-  dcterms:description "The Standard lifecycle interface defines the essential normative operations that TOSCA nodes may support." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.Root> ;
-  soda:hasContext :SodaliteDescription_11 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Standard lifecycle interface defines the essential normative operations that TOSCA nodes may support." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.Root> ;
+    soda:hasContext :SodaliteDescription_11 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.relationship.Configure>
-  rdf:type owl:Class ;
-  dcterms:description "The Configure lifecycle interface defines the essential normative operations that TOSCA relationships may support." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.Root> ;
-  soda:hasContext :SodaliteDescription_15 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The Configure lifecycle interface defines the essential normative operations that TOSCA relationships may support." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.Root> ;
+    soda:hasContext :SodaliteDescription_15 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Compute>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA Abstract.Compute node represents an abstract compute resource without any requirements on storage or network resources" ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
-  soda:hasContext :SodaliteDescription_1 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA Abstract.Compute node represents an abstract compute resource without any requirements on storage or network resources" ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
+    soda:hasContext :SodaliteDescription_1 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Storage>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA Abstract.Storage node represents an abstract storage resource without any requirements on compute or network resources." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
-  soda:hasContext :SodaliteDescription_2 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA Abstract.Storage node represents an abstract storage resource without any requirements on compute or network resources." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
+    soda:hasContext :SodaliteDescription_2 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA Compute node represents one or more processors of software applications or services along with other essential local resources. Collectively, the resources represented by a compute node can logically be viewed as a (real or virtual) “server”." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Compute> ;
-  soda:hasContext :ComputeDescription ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA Compute node represents one or more processors of software applications or services along with other essential local resources. Collectively, the resources represented by a compute node can logically be viewed as a (real or virtual) “server”." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Compute> ;
+    soda:hasContext :ComputeDescription ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.DBMS>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA DBMS node represents a typical relational SQL Database Management System software component or service." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
-  soda:hasContext :SodaliteDescription_5 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA DBMS node represents a typical relational SQL Database Management System software component or service." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent> ;
+    soda:hasContext :SodaliteDescription_5 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Database>
-  rdf:type owl:Class ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA Node Type all other TOSCA base Node Types derive from." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
-  soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root_Description> ;
+    rdf:type            owl:Class ;
+    dcterms:description "The TOSCA Node Type all other TOSCA base Node Types derive from." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
+    soda:hasContext     <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root_Description> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root_Description>
-  rdf:type soda:SodaliteDescription ;
-  :attributes :Attribute_1 ;
-  :attributes :Attribute_2 ;
-  :attributes :Attribute_3 ;
-  :capabilities :Capability_1 ;
-  :interfaces :Interface_2 ;
-  :requirements :Requirement_1 ;
+    rdf:type      soda:SodaliteDescription ;
+    :attributes   :Attribute_1 ;
+    :attributes   :Attribute_2 ;
+    :attributes   :Attribute_3 ;
+    :capabilities :Capability_1 ;
+    :interfaces   :Interface_2 ;
+    :requirements :Requirement_1 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA SoftwareComponent node represents a generic software component that can be managed and run by a TOSCA compute node." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
-  soda:hasContext :SoftwareComponent_Description ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA SoftwareComponent node represents a generic software component that can be managed and run by a TOSCA compute node." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root> ;
+    soda:hasContext :SoftwareComponent_Description ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent_Description>
-  rdf:type soda:SodaliteDescription ;
+    rdf:type soda:SodaliteDescription ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Storage.BlockStorage>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA BlockStorage node represents a server-local block storage device (i.e., not shared) offering evenly sized blocks of data from which raw storage volumes can be created." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Storage> ;
-  soda:hasContext :SodaliteDescription_3 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA BlockStorage node represents a server-local block storage device (i.e., not shared) offering evenly sized blocks of data from which raw storage volumes can be created." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Abstract.Storage> ;
+    soda:hasContext :SodaliteDescription_3 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.AttachesTo>
-  rdf:type owl:Class ;
-  dcterms:description "The AttachesTo type represents an attachment relationship between two nodes (e.g. for attaching a storage node to a Compute node)." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
-  soda:hasContext :SodaliteDescription_8 ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The AttachesTo type represents an attachment relationship between two nodes (e.g. for attaching a storage node to a Compute node)." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
+    soda:hasContext :SodaliteDescription_8 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.DependsOn>
-  rdf:type owl:Class ;
-  dcterms:description "The DependsOn type represents a general dependency relationship between two nodes." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
-  soda:hasContext :SodaliteDescription_17 ;
+    rdf:type            owl:Class ;
+    dcterms:description "The DependsOn type represents a general dependency relationship between two nodes." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
+    soda:hasContext     :SodaliteDescription_17 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.HostedOn>
-  rdf:type owl:Class ;
-  dcterms:description "The HostedOn type represents a hosting relationship between two nodes." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
-  soda:hasContext :SodaliteDescription_9 ;
+    rdf:type            owl:Class ;
+    dcterms:description "The HostedOn type represents a hosting relationship between two nodes." ;
+    rdfs:subClassOf     <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root> ;
+    soda:hasContext     :SodaliteDescription_9 ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root>
-  rdf:type owl:Class ;
-  dcterms:description "The TOSCA base relationship type from which all other normative TOSCA relationship types derive." ;
-  rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
-  soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root_Description> ;
+    rdf:type        owl:Class ;
+    dcterms:description
+                    "The TOSCA base relationship type from which all other normative TOSCA relationship types derive." ;
+    rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.entity.Root> ;
+    soda:hasContext <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root_Description> ;
 .
+
 <https://www.sodalite.eu/ontologies/tosca/tosca.relationships.Root_Description>
-  rdf:type DUL:Description ;
-  :attributes :Attribute_4 ;
-  :attributes :Attribute_5 ;
-  :interfaces :Interface_1 ;
+    rdf:type    DUL:Description ;
+    :attributes :Attribute_4 ;
+    :attributes :Attribute_5 ;
+    :interfaces :Interface_1 ;
 .
+
 :tosca_id
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :tosca_name
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :type
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :url_path
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :user
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :valid_source_types
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :valid_target_types
-  rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf soda:specification ;
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf soda:specification ;
 .
+
 :valid_values
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .
+
 :version
-  rdf:type owl:Class ;
-  rdfs:subClassOf :DataType ;
+    rdf:type        owl:Class ;
+    rdfs:subClassOf :DataType ;
 .
+
 :volume_id
-  rdf:type rdf:Property ;
+    rdf:type rdf:Property ;
 .

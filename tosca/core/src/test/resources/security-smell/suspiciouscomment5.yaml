@@ -169,7 +169,7 @@ node_types:
         type: tosca.interfaces.MiCADO.Occopus
       Terraform:
         type: tosca.interfaces.MiCADO.Terraform
- 
+
   # Some examples of abstraction in Compute node types
   tosca.nodes.MiCADO.CloudSigma.Compute.Occo:
     description: Basic CloudSigma VM for MiCADO, by Occopus
@@ -377,7 +377,7 @@ node_types:
       description of a Docker container in the style of a Kubernetes 
       ContainerSpec or Docker Compose long syntax
     derived_from: tosca.nodes.Container.Application.Docker
-    
+
     properties:
 
       # Kubernetes style field names
@@ -408,9 +408,9 @@ node_types:
         type: string
         required: false
         constraints:
-        - valid_values:
-          - 'Always'
-          - 'IfNotPresent'
+          - valid_values:
+              - 'Always'
+              - 'IfNotPresent'
       lifecycle:
         description: Kubernetes hooks for lifecycle management
         type: map
@@ -484,7 +484,7 @@ node_types:
       container_name:
         description: the container name *translates to Kubernetes name*
         type: string
-        required : false
+        required: false
       deploy:
         description: supports Swarm-only options of a Compose file
         type: deploy_type
@@ -573,21 +573,21 @@ node_types:
         description: working directory *translates to Kubernetes workingDir*
         type: string
         required: false
-    
+
     # Fill the artifact with the image property by default    
     artifacts:
       image:
         type: tosca.artifacts.Deployment.Image.Container.Docker
         file: { get_property: [ SELF, image ] }
         repository: docker_hub
-    
+
     # Possible interfaces for this node
     interfaces:
       Swarm:
         type: tosca.interfaces.MiCADO.Swarm
       Kubernetes:
         type: tosca.interfaces.MiCADO.Kubernetes
-    
+
     # Possible outputs for this node
     attributes:
       port:
@@ -601,7 +601,7 @@ node_types:
         type: tosca.capabilities.Container.Docker
       scalable:
         type: tosca.capabilities.Scalable
-    
+
     # Relationships this node supports
     requirements:
       - service:
@@ -625,14 +625,14 @@ node_types:
   tosca.nodes.MiCADO.Container.Application.Docker.Deployment:
     description: An abstraction of the Docker container node, creates a Kubernetes Deployment
     derived_from: tosca.nodes.MiCADO.Container.Application.Docker
-    
+
     # Fill the artifact by default with the image property
     artifacts:
       image:
         type: tosca.artifacts.Deployment.Image.Container.Docker
         file: { get_property: [ SELF, image ] }
         repository: docker_hub
-    
+
     # Use these interface inputs by default
     interfaces:
       Kubernetes:
@@ -679,7 +679,7 @@ node_types:
           capability: tosca.capabilities.Compute
           node: tosca.nodes.MiCADO.Compute
           relationship: tosca.relationships.HostedOn
-  
+
   tosca.nodes.MiCADO.Container.Pod.Kubernetes.Deployment:
     description: An abstraction of the above, creates a Deployment
     derived_from: tosca.nodes.MiCADO.Container.Pod.Kubernetes
@@ -855,7 +855,7 @@ node_types:
                 path: { get_property: [ SELF, path ] }
                 endpoints: { get_property: [ SELF, endpoints ] }
                 readOnly: { get_property: [ SELF, readOnly ] }
-  
+
   tosca.nodes.MiCADO.network.Network.Docker:
     description: Node for creating a new Docker network
     derived_from: tosca.nodes.network.Network
@@ -963,7 +963,7 @@ artifact_types:
       raw_text:
         type: string
         required: false
-  
+
   tosca.artifacts.File.Secrets.Docker:
     description: A legacy artifact type for Docker secrets
     derived_from: tosca.artifacts.File
@@ -1046,21 +1046,21 @@ data_types:
         type: integer
         required: false
       protocol:
-        description: Protocol (Swarm & Kubernetes) - SCTP is Kube only 
+        description: Protocol (Swarm & Kubernetes) - SCTP is Kube only
         type: string
         required: false
         constraints:
-        - valid_values:
-          - 'tcp'
-          - 'TCP'
-          - 'udp'
-          - 'UDP'
-          - 'SCTP'
+          - valid_values:
+              - 'tcp'
+              - 'TCP'
+              - 'udp'
+              - 'UDP'
+              - 'SCTP'
       targetPort:
         description: Port inside container (Kubernetes-style)
         type: string
         required: false
-          
+
       # Kubernetes ContainerPort fields
       containerPort:
         description: Give more info on exposed ports, omitting this does not prevent the port from being exposed (internally)
@@ -1089,10 +1089,10 @@ data_types:
         type: string
         required: false
         constraints:
-        - valid_values:
-          - 'host'
-          - 'ingress'
-      
+          - valid_values:
+              - 'host'
+              - 'ingress'
+
       # Kubernetes Service field
       metadata:
         description: Kubernetes space for adding metadata (such as service name)
@@ -1153,11 +1153,11 @@ data_types:
         type: string
         required: false
         constraints:
-        - valid_values:
-          - 'ClusterIP'
-          - 'NodePort'
-          - 'LoadBalancer'
-          - 'ExternalName'
+          - valid_values:
+              - 'ClusterIP'
+              - 'NodePort'
+              - 'LoadBalancer'
+              - 'ExternalName'
 
   resource_type:
     description: Available fields for Swarm deploy resources
@@ -1231,7 +1231,7 @@ policy_types:
         type: string
         description: python code to define scaling rule
         required: true
-  
+
   tosca.policies.Alerting.MiCADO:
     description: base MiCADO policy for alerting
     derived_from: tosca.policies.Root
@@ -1254,7 +1254,7 @@ policy_types:
         description: the priority with which the policy will be exectued (not yet implemented)
         default: 100
         required: false
-  
+
   tosca.policies.Monitoring.MiCADO:
     description: base MiCADO policy for enabling prometheus exporters
     derived_from: tosca.policies.Root

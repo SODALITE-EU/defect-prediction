@@ -5,7 +5,7 @@ metadata:
 
 node_types:
 
-  my.nodes.hpc.wm.torque: 
+  my.nodes.hpc.wm.torque:
     description: >
       torque wm, here we can define properties/attributes applicable for torque WM
     derived_from: tosca.nodes.Compute
@@ -19,7 +19,7 @@ node_types:
         type: tosca.capabilities.Compute
         valid_source_types: [my.nodes.hpc.job.torque]
 
-  my.nodes.hpc.job.torque: 
+  my.nodes.hpc.job.torque:
     description: >
       torque job type, here we can define properties/attributes applicable for torque WM, 
       e.g. execution environment, etc.

@@ -7,7 +7,7 @@ metadata:
   template_icon: shell-icon.png
 
 description: >
- This Shell supports devices that run Cumulus Linux operating system
+  This Shell supports devices that run Cumulus Linux operating system
 
 imports:
   - cloudshell_standard: cloudshell_networking_standard_5_0_4.yaml

@@ -43,6 +43,13 @@ clinical1:Attribute_5
     DUL:hasParameter    clinical1:SodaliteParameter_KeySize ;
 .
 
+clinical1:Attribute_6
+    dcterms:description "server port" ;
+    DUL:classifies      clinical1:server_port ;
+    DUL:hasParameter    clinical1:SodaliteParameter_1_3 ;
+    DUL:hasParameter    clinical1:SodaliteParameter_ServerPort ;
+.
+
 clinical1:Attribute_2
     rdf:type         tosca:Attribute ;
     DUL:classifies   clinical1:ssh-key ;
@@ -173,6 +180,7 @@ clinical1:SodaliteDescription_1
     tosca:attributes    clinical1:Attribute_2 ;
     tosca:attributes    clinical1:Attribute_4 ;
     tosca:attributes    clinical1:Attribute_5 ;
+    tosca:attributes    clinical1:Attribute_6 ;
     tosca:capabilities  clinical1:Capability_1 ;
 .
 
@@ -298,6 +306,12 @@ clinical1:SodaliteParameter_1_1
 .
 
 clinical1:SodaliteParameter_1_2
+    rdf:type             soda:SodaliteParameter ;
+    DUL:classifies       tosca:type ;
+    tosca:hasObjectValue tosca:integer ;
+.
+
+clinical1:SodaliteParameter_1_3
     rdf:type             soda:SodaliteParameter ;
     DUL:classifies       tosca:type ;
     tosca:hasObjectValue tosca:integer ;
@@ -536,6 +550,12 @@ clinical1:SodaliteParameter_KeySize
     tosca:hasDataValue 1024 ;
 .
 
+clinical1:SodaliteParameter_ServerPort
+    rdf:type           soda:SodaliteParameter ;
+    DUL:classifies     tosca:default ;
+    tosca:hasDataValue 655366 ;
+.
+
 clinical1:name
     rdf:type rdf:Property ;
 .
@@ -549,6 +569,10 @@ clinical1:ssh-key-hashalgo
 .
 
 clinical1:ssh-key-size
+    rdf:type rdf:Property ;
+.
+
+clinical1:server_port
     rdf:type rdf:Property ;
 .
 

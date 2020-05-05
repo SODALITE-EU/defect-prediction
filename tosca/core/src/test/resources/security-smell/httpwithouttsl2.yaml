@@ -61,7 +61,7 @@ capability_types:
         required: false
       gpu_model:
         type: string
-        required: false  
+        required: false
 
   tosca.capabilities.indigo.LRMS:
     derived_from: tosca.capabilities.Container
@@ -70,7 +70,7 @@ capability_types:
         type: string
         required: true
         constraints:
-        - valid_values: [ local, torque, slurm, sge, condor, mesos, kubernetes ]
+          - valid_values: [ local, torque, slurm, sge, condor, mesos, kubernetes ]
 
   tosca.capabilities.indigo.LRMS.Torque:
     derived_from: tosca.capabilities.indigo.LRMS
@@ -122,7 +122,7 @@ capability_types:
         constraints:
           - equal: mesos
 
-  tosca.capabilities.indigo.MesosMaster:        
+  tosca.capabilities.indigo.MesosMaster:
     derived_from: tosca.capabilities.Container
 
   tosca.capabilities.indigo.MesosSlave:
@@ -232,7 +232,7 @@ node_types:
         start:
           implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/dodas_roll/artifacts/apache/apache_start.yml
 
-# INDIGO non normative types
+  # INDIGO non normative types
 
   tosca.nodes.indigo.Database.MySQL:
     derived_from: tosca.nodes.Database.MySQL
@@ -277,7 +277,7 @@ node_types:
       scalable:
         type: tosca.capabilities.indigo.Scalable
       os:
-         type: tosca.capabilities.indigo.OperatingSystem
+        type: tosca.capabilities.indigo.OperatingSystem
       endpoint:
         type: tosca.capabilities.indigo.Endpoint
       host:
@@ -492,7 +492,7 @@ node_types:
             export_dir: { get_property: [ SELF, export_dir ] }
             galaxy_flavor: { get_property: [ SELF, flavor ] }
             get_refdata: { get_property: [ SELF, reference_data ] }
- 
+
   tosca.nodes.indigo.GalaxyWN:
     derived_from: tosca.nodes.SoftwareComponent
     properties:
@@ -712,7 +712,7 @@ node_types:
         default: 'DIRECT'
         required: false
       refdata_cvmfs_proxy_port:
-        type: integer 
+        type: integer
         description: CernVM-FS proxy port
         default: 80
         required: false
@@ -863,9 +863,9 @@ node_types:
         required: false
         default: ''
     capabilities:
-        wn:
-          type: tosca.capabilities.Scalable
-          valid_source_types: [tosca.nodes.indigo.ElasticCluster]
+      wn:
+        type: tosca.capabilities.Scalable
+        valid_source_types: [tosca.nodes.indigo.ElasticCluster]
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -919,8 +919,8 @@ node_types:
         default: false
         required: false
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS
+      lrms:
+        type: tosca.capabilities.indigo.LRMS
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -930,8 +930,8 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Torque:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Torque
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Torque
     interfaces:
       Standard:
         configure:
@@ -953,8 +953,8 @@ node_types:
         file: indigo-dc.openvpn
         type: tosca.artifacts.AnsibleGalaxy.role
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Slurm
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Slurm
     interfaces:
       Standard:
         configure:
@@ -967,8 +967,8 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Local:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Local
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Local
 
   tosca.nodes.indigo.Container.Runtime.Docker:
     derived_from: tosca.nodes.SoftwareComponent
@@ -1200,10 +1200,10 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Mesos:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Mesos
-        host:
-          type: tosca.capabilities.indigo.MesosMaster
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Mesos
+      host:
+        type: tosca.capabilities.indigo.MesosMaster
     properties:
       # Set the current data of the mesos server
       # but it can also specified in the TOSCA document
@@ -1220,11 +1220,11 @@ node_types:
       mesos_username:
         type: string
         required: no
-        default: 'admin'       
+        default: 'admin'
       mesos_password:
         type: string
         required: no
-        default: 'admin'         
+        default: 'admin'
       marathon_enable_ssl:
         type: boolean
         required: no
@@ -1419,11 +1419,11 @@ node_types:
         type: string
         required: no
         default: 'https://dodas-tts.cloud.cnaf.infn.it'
-      oneclient_token: 
+      oneclient_token:
         type: string
         required: no
         default: 'dummy'
-      oneprovider_name: 
+      oneprovider_name:
         type: string
         required: no
         default: 'dummy'
@@ -1432,7 +1432,7 @@ node_types:
         type: list
         entry_schema:
           type: string
-      cms_orchestrator: 
+      cms_orchestrator:
         type: string
         required: no
         default: 'marathon'
@@ -1458,7 +1458,7 @@ node_types:
             cms_input_protocol: { get_property: [ SELF, cms_input_protocol ] }
             marathon_user: { get_property: [ SELF, marathon_username ] }
             marathon_pass: { get_property: [ SELF, marathon_password ] }
-            zookeeper_host_list: { get_property: [ SELF, master_ips ] }            
+            zookeeper_host_list: { get_property: [ SELF, master_ips ] }
             proxy_cache_manager: { get_property: [ SELF, cms_proxycache_token_manager ] }
             proxy_tts: { get_property: [ SELF, watts_endpoint ] }
             proxy_iam_endpoint: { get_property: [ SELF, iam_endpoint ] }
@@ -1574,7 +1574,7 @@ node_types:
             marathon_password: { get_property: [ SELF, marathon_password ] }
             condor_host: { get_property: [ SELF, htcondor_config_condor_host ] }
             zookeeper_peers: { get_property: [ SELF, master_ips ] }
-            zookeeper_host_list: { get_property: [ SELF, master_ips ] } 
+            zookeeper_host_list: { get_property: [ SELF, master_ips ] }
             lb_peers: { get_property: [ SELF, lb_ips ] }
             htcondor_config_schedd_ip_pub: { get_property: [ SELF, htcondor_config_schedd_ip_pub ] }
             htcondor_config_schedd_ip: { get_property: [ SELF, htcondor_config_schedd_ip ] }
@@ -1655,7 +1655,7 @@ node_types:
       htcondor_config_ccb_ip:
         type: string
         required: yes
-      htcondor_config_schedd_ip: 
+      htcondor_config_schedd_ip:
         type: string
         required: yes
       proxycache_host:
@@ -1790,8 +1790,8 @@ node_types:
   tosca.nodes.indigo.LRMS.WorkerNode.Mesos:
     derived_from: tosca.nodes.indigo.LRMS.WorkerNode
     capabilities:
-        host:
-          type: tosca.capabilities.indigo.MesosSlave
+      host:
+        type: tosca.capabilities.indigo.MesosSlave
     properties:
       # Set the current data of the mesos server
       # but it can also specified in the TOSCA document
@@ -1900,7 +1900,7 @@ node_types:
       elasticsearch_secret:
         type: string
         required: no
-      cms_orchestrator: 
+      cms_orchestrator:
         type: string
         required: no
         default: 'marathon'
@@ -1988,13 +1988,13 @@ node_types:
       spark_mesos_deploy_app:
         type: string
         constraints:
-        - valid_values: [ apache-zeppelin, spark-dispatcher ]
+          - valid_values: [ apache-zeppelin, spark-dispatcher ]
         required: false
       spark_hdfs_uri:
         type: string
         required: false
         default: ''
-      spark_swift_auth_url: 
+      spark_swift_auth_url:
         type: string
         required: false
         default: ''
@@ -2002,7 +2002,7 @@ node_types:
         type: string
         required: false
         default: '8080'
-      spark_swift_region: 
+      spark_swift_region:
         type: string
         required: false
         default: ''
@@ -2010,23 +2010,23 @@ node_types:
         type: string
         required: false
         default: ''
-      spark_swift_username: 
+      spark_swift_username:
         type: string
         required: false
         default: ''
-      spark_swift_password: 
+      spark_swift_password:
         type: string
         required: false
         default: ''
-      spark_swift_provider: 
+      spark_swift_provider:
         type: string
         required: false
         default: 'Test'
-      spark_cores_max: 
+      spark_cores_max:
         type: integer
         required: false
         default: '-1'
-      spark_executor_cores: 
+      spark_executor_cores:
         type: integer
         required: false
         default: '-1'
@@ -2034,11 +2034,11 @@ node_types:
         type: scalar-unit.size
         required: false
         default: '0 GB'
-      spark_driver_mem: 
+      spark_driver_mem:
         type: scalar-unit.size
         required: false
         default: '0 GB'
-      spark_driver_cores: 
+      spark_driver_cores:
         type: integer
         required: false
         default: '-1'
@@ -2136,7 +2136,7 @@ node_types:
         description: Haddocking application
         required: true
         constraints:
-        - valid_values: [ disvis, powerfit ]
+          - valid_values: [ disvis, powerfit ]
     artifacts:
       galaxy_role:
         file: indigo-dc.disvis-powerfit
@@ -2269,7 +2269,7 @@ node_types:
           type: string
         description: A map of string representing environment settings
 
-# https://wiki.italiangrid.it/twiki/bin/view/CREAM/JdlGuide
+  # https://wiki.italiangrid.it/twiki/bin/view/CREAM/JdlGuide
   tosca.nodes.indigo.Grid.Job:
     derived_from: tosca.nodes.indigo.Batch.Job
     properties:
@@ -2344,8 +2344,8 @@ node_types:
         file: indigo-dc.openvpn
         type: tosca.artifacts.AnsibleGalaxy.role
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Kubernetes
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Kubernetes
     interfaces:
       Standard:
         configure:
@@ -2364,13 +2364,13 @@ node_types:
         type: string
         default: local
         constraints:
-        - valid_values: [ local, kubernetes ]
+          - valid_values: [ local, kubernetes ]
       authenticator:
         required: no
         type: string
         default: local
         constraints:
-        - valid_values: [ local, dummy ]
+          - valid_values: [ local, dummy ]
     artifacts:
       kube_role:
         file: indigo-dc.jupyterhub
@@ -2382,7 +2382,7 @@ node_types:
           inputs:
             jupyterhub_spawner: { get_property: [ SELF, spawner ] }
             jupyterhub_authenticator: { get_property: [ SELF, spawner ] }
-    
+
   tosca.nodes.indigo.BlockStorage:
     derived_from: tosca.nodes.BlockStorage
     properties:

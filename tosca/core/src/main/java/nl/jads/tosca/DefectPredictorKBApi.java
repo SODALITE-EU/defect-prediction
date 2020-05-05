@@ -24,10 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DefectPredictorKBApi {
 
@@ -86,8 +83,8 @@ public class DefectPredictorKBApi {
         return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
 
-    public Set<Attribute> getAllAttributes(RepositoryConnection connection, String deploymentId) throws IOException {
-        Set<Attribute> attributes = new HashSet<>();
+    public Set<Feature> getAllAttributes(RepositoryConnection connection, String deploymentId) throws IOException {
+        Set<Feature> attributes = new HashSet<>();
         String sparql;
         if (deploymentId != null) {
             sparql = "select distinct ?concept ?attribute ?value\n" +
@@ -123,8 +120,8 @@ public class DefectPredictorKBApi {
         return attributes;
     }
 
-    public Set<Property> getProperties(RepositoryConnection connection, String deploymentId) throws IOException {
-        Set<Property> properties = new HashSet<>();
+    public Set<Feature> getProperties(RepositoryConnection connection, String deploymentId) throws IOException {
+        Set<Feature> properties = new HashSet<>();
         String sparql;
         if (deploymentId != null) {
             sparql = "select distinct ?concept ?property ?value\n" +
@@ -214,7 +211,7 @@ public class DefectPredictorKBApi {
     }
 
     public boolean invalidPortRange(Feature property, RepositoryConnection connection) throws IOException {
-        String sparql = fileToString("sparql/InvalidPortRange1.sparql");
+        String sparql = fileToString("sparql/invalidPortRange.sparql");
         if (sparql == null) {
             return false;
         }
@@ -298,120 +295,78 @@ public class DefectPredictorKBApi {
             fillContext(bugRecord, c, connection);
             bugs.add(bugRecord);
         }
-        Set<Property> parameters = getProperties(connection, bugInput.getDeploymentId());
-        for (Property p : parameters) {
-            if (p.getParameters() == null) {
-                p.setParameters(new HashSet<>());
-            }
-            if (adminByDefault(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("AdminByDefault");
-                bugRecord.setDescription("The default user is admin or root");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (emptyPassword(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("EmptyPassword");
-                bugRecord.setDescription("The password is empty");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (hardcodedSecret(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("HardcodedSecret");
-                bugRecord.setDescription("The password or user name is hardcoded");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (invalidIPAddressBinding(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("InvalidIPAddressBinding");
-                bugRecord.setDescription("The address has a binding of 0.0.0./*L");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (useOfHTTPWithoutTLS(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("UseOfHTTPWithoutTLS");
-                bugRecord.setDescription("The address uses HTTP without TSL");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (weakCryptoAlgo(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("WeakCryptoAlgo");
-                bugRecord.setDescription("The cryptography algorithm is weak, using sh1 or md5");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (weakKeySize(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("WeakSSHKeySize");
-                bugRecord.setDescription("The size of SSH key should not be less than 2048");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-        }
-        Set<Attribute> attributes = getAllAttributes(connection, bugInput.getDeploymentId());
-        for (Attribute p : attributes) {
-            if (p.getParameters() == null) {
-                p.setParameters(new HashSet<>());
-            }
-            if (adminByDefault(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("AdminByDefault");
-                bugRecord.setDescription("The default user is admin or root");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (emptyPassword(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("EmptyPassword");
-                bugRecord.setDescription("The password is empty");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (hardcodedSecret(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("HardcodedSecret");
-                bugRecord.setDescription("The password or user name is hardcoded");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (invalidIPAddressBinding(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("InvalidIPAddressBinding");
-                bugRecord.setDescription("The address has a binding of 0.0.0./*L");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (useOfHTTPWithoutTLS(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("UseOfHTTPWithoutTLS");
-                bugRecord.setDescription("The address uses HTTP without TSL");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (weakCryptoAlgo(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("WeakCryptoAlgo");
-                bugRecord.setDescription("The cryptography algorithm is weak, using sh1 or md5");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-            if (weakKeySize(p, connection)) {
-                BugRecord bugRecord = new BugRecord();
-                bugRecord.setBugName("WeakSSHKeySize");
-                bugRecord.setDescription("The size of SSH key should not be less than 2048");
-                fillContext(bugRecord, p, connection);
-                bugs.add(bugRecord);
-            }
-        }
+        Set<Feature> parameters = getProperties(connection, bugInput.getDeploymentId());
+        checkSmells(parameters, connection, bugs);
+        Set<Feature> attributes = getAllAttributes(connection, bugInput.getDeploymentId());
+        checkSmells(attributes, connection, bugs);
         bugReport.setActionId(bugInput.getActionId());
         bugReport.setDeploymentId(bugInput.getDeploymentId());
         bugReport.setBugs(bugs);
         return bugReport;
+    }
+
+    private void checkSmells(Collection<Feature> parameters, RepositoryConnection connection, List<BugRecord> bugs) throws IOException {
+        for (Feature p : parameters) {
+            if (p.getParameters() == null) {
+                p.setParameters(new HashSet<>());
+            }
+            if (adminByDefault(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("AdminByDefault");
+                bugRecord.setDescription("The default user is admin or root");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (emptyPassword(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("EmptyPassword");
+                bugRecord.setDescription("The password is empty");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (hardcodedSecret(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("HardcodedSecret");
+                bugRecord.setDescription("The password or user name is hardcoded");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (invalidIPAddressBinding(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("InvalidIPAddressBinding");
+                bugRecord.setDescription("The address has a binding of 0.0.0./*L");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (invalidPortRange(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("InvalidPortRange");
+                bugRecord.setDescription("TCP port values are not within the range from 0 to 65535.");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (useOfHTTPWithoutTLS(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("UseOfHTTPWithoutTLS");
+                bugRecord.setDescription("The address uses HTTP without TSL");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (weakCryptoAlgo(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("WeakCryptoAlgo");
+                bugRecord.setDescription("The cryptography algorithm is weak, using sh1 or md5");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+            if (weakKeySize(p, connection)) {
+                BugRecord bugRecord = new BugRecord();
+                bugRecord.setBugName("WeakSSHKeySize");
+                bugRecord.setDescription("The size of SSH key should not be less than 2048");
+                fillContext(bugRecord, p, connection);
+                bugs.add(bugRecord);
+            }
+        }
     }
 
     public void fillContext(BugRecord bugRecord, Feature property, RepositoryConnection connection) throws IOException {

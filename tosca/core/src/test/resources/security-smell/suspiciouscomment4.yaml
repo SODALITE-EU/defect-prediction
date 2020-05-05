@@ -115,7 +115,7 @@ topology_template:
           min_number_of_instances: 1
           max_number_of_instances: 1
           watchdog: none
-        inject_files: 
+        inject_files:
           source_path: ../Artifacts/keys/authorized_keys #SSH authorized_keys
           dest_path: /home/ubuntu/.ssh/authorized_keys
         meta_data:

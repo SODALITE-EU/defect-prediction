@@ -45,7 +45,7 @@ capability_types:
         type: string
         required: true
         constraints:
-        - valid_values: [ local, torque, slurm, sge, condor, mesos ]
+          - valid_values: [ local, torque, slurm, sge, condor, mesos ]
 
   tosca.capabilities.indigo.LRMS.Torque:
     derived_from: tosca.capabilities.indigo.LRMS
@@ -186,7 +186,7 @@ node_types:
         start:
           implementation: https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/apache/apache_start.yml
 
-# INDIGO non normative types
+  # INDIGO non normative types
   tosca.nodes.indigo.Saxs:
     derived_from: tosca.nodes.SoftwareComponent
     artifacts:
@@ -245,7 +245,7 @@ node_types:
       scalable:
         type: tosca.capabilities.indigo.Scalable
       os:
-         type: tosca.capabilities.indigo.OperatingSystem
+        type: tosca.capabilities.indigo.OperatingSystem
       endpoint:
         type: tosca.capabilities.indigo.Endpoint
 
@@ -475,9 +475,9 @@ node_types:
         description: IP of the Front-End node
         required: true
     capabilities:
-        wn:
-          type: tosca.capabilities.Scalable
-          valid_source_types: [tosca.nodes.indigo.ElasticCluster]
+      wn:
+        type: tosca.capabilities.Scalable
+        valid_source_types: [tosca.nodes.indigo.ElasticCluster]
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -520,8 +520,8 @@ node_types:
         required: false
         default: []
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS
+      lrms:
+        type: tosca.capabilities.indigo.LRMS
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -531,8 +531,8 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Torque:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Torque
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Torque
     interfaces:
       Standard:
         configure:
@@ -550,8 +550,8 @@ node_types:
         file: indigo-dc.nfs
         type: tosca.artifacts.AnsibleGalaxy.role
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Slurm
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Slurm
     interfaces:
       Standard:
         configure:
@@ -563,8 +563,8 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Local:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Local
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Local
 
   tosca.nodes.indigo.Container.Runtime.Docker:
     derived_from: tosca.nodes.SoftwareComponent
@@ -627,8 +627,8 @@ node_types:
   tosca.nodes.indigo.LRMS.FrontEnd.Mesos:
     derived_from: tosca.nodes.indigo.LRMS.FrontEnd
     capabilities:
-        lrms:
-          type: tosca.capabilities.indigo.LRMS.Mesos
+      lrms:
+        type: tosca.capabilities.indigo.LRMS.Mesos
     properties:
       # Set the current data of the mesos server
       # but it can also specified in the TOSCA document
@@ -980,7 +980,7 @@ node_types:
         description: Haddocking application
         required: true
         constraints:
-        - valid_values: [ disvis, powerfit ]
+          - valid_values: [ disvis, powerfit ]
     artifacts:
       galaxy_role:
         file: indigo-dc.disvis-powerfit
@@ -1113,7 +1113,7 @@ node_types:
           type: string
         description: A map of string representing environment settings
 
-# https://wiki.italiangrid.it/twiki/bin/view/CREAM/JdlGuide
+  # https://wiki.italiangrid.it/twiki/bin/view/CREAM/JdlGuide
   tosca.nodes.indigo.Grid.Job:
     derived_from: tosca.nodes.indigo.Batch.Job
     properties:

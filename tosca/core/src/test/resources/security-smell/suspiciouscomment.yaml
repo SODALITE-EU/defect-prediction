@@ -64,9 +64,9 @@ policy_types:
       strict:
         type: boolean
         description: >
-         If true, the scheduling is stopped if the policy can't be applied.
-         If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
-         To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
+          If true, the scheduling is stopped if the policy can't be applied.
+          If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
+          To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
         required: false
         default: true
   yorc.openstack.policies.ServerGroupAntiAffinity:
@@ -81,9 +81,9 @@ policy_types:
       strict:
         type: boolean
         description: >
-         If true, the scheduling is stopped if the policy can't be applied.
-         If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
-         To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
+          If true, the scheduling is stopped if the policy can't be applied.
+          If false, the policy is applied if possible according to the OpenStack environment resources. If it's not possible, the scheduling is still done.
+          To use a non-strict policy, the OpenStack environment should support Compute service API 2.15 or above.
         required: false
         default: true
 

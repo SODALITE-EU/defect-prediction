@@ -576,9 +576,11 @@ clinical1:job_monitor_period
 clinical1:job_monitor_retries_headroom
     rdf:type rdf:Property ;
 .
+
 clinical1:public_address
     rdf:type rdf:Property ;
 .
+
 clinical1:my.nodes.hpc.wm.torque
     rdf:type        owl:Class ;
     rdfs:subClassOf tosca:tosca.nodes.Compute ;

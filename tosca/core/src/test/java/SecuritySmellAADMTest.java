@@ -1,9 +1,7 @@
-import kb.dto.Property;
+import kb.dto.Feature;
 import kb.repository.KB;
 import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
-import nl.jads.tosca.dto.BugRecord;
-import nl.jads.tosca.dto.Comment;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -120,9 +118,9 @@ public class SecuritySmellAADMTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, "234333");
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, "234333");
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -146,9 +144,9 @@ public class SecuritySmellAADMTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Property> parameters = kbApi.getProperties(connection, "234333");
-                List<Property> properties = new ArrayList<>();
-                for (Property p : parameters) {
+                Set<Feature> parameters = kbApi.getProperties(connection, "234333");
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }

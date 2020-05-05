@@ -20,7 +20,7 @@ node_types:
         create:
           inputs:
             registry_ip:    { default: { get_property: [ SELF, registry_ip ] } }
-            public_ipv4_address: { default:  { get_attribute: [ SELF, host, public_address ] } }            
+            public_ipv4_address: { default:  { get_attribute: [ SELF, host, public_address ] } }
           implementation:
             primary: playbooks/docker/create_docker_host.yml
         delete:
@@ -46,7 +46,7 @@ node_types:
         required: true
       exposed_ports:
         type: string
-        description: Exposed ports of the container like "8081" 
+        description: Exposed ports of the container like "8081"
         required: true
     interfaces:
       Standard:

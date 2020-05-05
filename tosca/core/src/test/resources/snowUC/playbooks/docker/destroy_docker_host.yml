@@ -10,8 +10,8 @@
   tasks:
     - name: Delete the path to registry communication keys
       file:
-          path: "/etc/docker/certs.d/{{ registry_ip }}"
-          state: absent
+        path: "/etc/docker/certs.d/{{ registry_ip }}"
+        state: absent
 
   roles:
     - geerlingguy.repo-epel

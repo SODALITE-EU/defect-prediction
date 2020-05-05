@@ -11,6 +11,5 @@ where {
         ?var tosca:hasDataValue ?value.
 	}.
     FILTER (bound(?value)).
-    FILTER( ?value < 0 ) .
-    FILTER( ?value > 65535 )
+    FILTER( ?value < 0 || ?value > 65535 )
 }

@@ -4,9 +4,9 @@
 
   tasks:
     - name: Delete security group for Snow-UC
-        - os_security_group:
-            name: snow
-            state: absent
+              - os_security_group:
+              name: snow
+              state: absent
     - name: Delete VM
       os_server:
         state: absent

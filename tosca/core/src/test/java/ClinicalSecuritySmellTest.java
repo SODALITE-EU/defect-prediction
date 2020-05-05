@@ -1,4 +1,4 @@
-import kb.dto.Attribute;
+import kb.dto.Feature;
 import kb.repository.KB;
 import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
@@ -87,9 +87,9 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
-                List<Attribute> properties = new ArrayList<>();
-                for (Attribute p : parameters) {
+                Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
@@ -128,13 +128,38 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
-                List<Attribute> properties = new ArrayList<>();
-                for (Attribute p : parameters) {
+                Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }
                     if (kbApi.weakCryptoAlgo(p, connection)) {
+                        properties.add(p);
+                    }
+                }
+                assertEquals(1, properties.size());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testInvalidPortRange() {
+        try {
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
+            RepositoryConnection connection = repository.getConnection();
+            try {
+                Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
+                    if (p.getParameters() == null) {
+                        p.setParameters(new HashSet<>());
+                    }
+                    if (kbApi.invalidPortRange(p, connection)) {
                         properties.add(p);
                     }
                 }
@@ -153,9 +178,9 @@ public class ClinicalSecuritySmellTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Attribute> parameters = kbApi.getAllAttributes(connection, null);
-                List<Attribute> properties = new ArrayList<>();
-                for (Attribute p : parameters) {
+                Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+                List<Feature> properties = new ArrayList<>();
+                for (Feature p : parameters) {
                     if (p.getParameters() == null) {
                         p.setParameters(new HashSet<>());
                     }

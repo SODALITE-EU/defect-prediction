@@ -27,14 +27,14 @@
         data:
           job_id: "{{ job_name }}"
 
-# - hosts: wm
-#   gather_facts: no
-#   tasks:
-#     - name: Submit the job
-#       shell: "qsub {{ job_name }}"
-#       register: job_id
+    # - hosts: wm
+    #   gather_facts: no
+    #   tasks:
+    #     - name: Submit the job
+    #       shell: "qsub {{ job_name }}"
+    #       register: job_id
 
-#     - name: Wait until the job is finished
+    #     - name: Wait until the job is finished
 
 
     # convert walltime to seconds with to_datetime

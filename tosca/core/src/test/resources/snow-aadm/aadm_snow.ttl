@@ -1,103 +1,107 @@
-@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
-@prefix sv1: <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/> .
+@prefix DUL:   <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix soda:  <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix sv1:   <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/> .
 @prefix tosca: <https://www.sodalite.eu/ontologies/tosca/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/27827d44-0f6c-11ea-8d71-362b9e155667>
-  a soda:User .
+    a soda:User .
 
-<https://www.sodalite.eu/ontologies/workspace/1/234333/snow-vm> a sv1:sodalite.nodes.OpenStack.VM;
-  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_m32kberr90m3ookmbp62eko2tn> .
+<https://www.sodalite.eu/ontologies/workspace/1/234333/snow-vm>
+    a               sv1:sodalite.nodes.OpenStack.VM ;
+    soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_m32kberr90m3ookmbp62eko2tn> .
 
-<https://www.sodalite.eu/ontologies/workspace/1/234333/topology_template_inputs> a
-    tosca:Input;
-  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_1ti7b6qgsj01ooijcpmok6ui5o> .
+<https://www.sodalite.eu/ontologies/workspace/1/234333/topology_template_inputs>
+    a               tosca:Input ;
+    soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_1ti7b6qgsj01ooijcpmok6ui5o> .
 
-<https://www.sodalite.eu/ontologies/workspace/1/234333/ssh-key-name> a rdf:Property .
+<https://www.sodalite.eu/ontologies/workspace/1/234333/ssh-key-name>
+    a rdf:Property .
 
-<https://www.sodalite.eu/ontologies/workspace/1/234333/docker-registry-ip> a rdf:Property .
+<https://www.sodalite.eu/ontologies/workspace/1/234333/docker-registry-ip>
+    a rdf:Property .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/AADM_pf62lush4v2gvg24unpl62bktq>
-  a soda:AbstractApplicationDeployment;
-  soda:createdAt "2020-04-28T10:18:20.035+03:00";
-  soda:createdBy <https://www.sodalite.eu/ontologies/workspace/1/234333/27827d44-0f6c-11ea-8d71-362b9e155667>;
-  soda:includesInput <https://www.sodalite.eu/ontologies/workspace/1/234333/topology_template_inputs>;
-  soda:includesTemplate <https://www.sodalite.eu/ontologies/workspace/1/234333/snow-vm> .
+    a                     soda:AbstractApplicationDeployment ;
+    soda:createdAt        "2020-04-28T10:18:20.035+03:00" ;
+    soda:createdBy        <https://www.sodalite.eu/ontologies/workspace/1/234333/27827d44-0f6c-11ea-8d71-362b9e155667> ;
+    soda:includesInput    <https://www.sodalite.eu/ontologies/workspace/1/234333/topology_template_inputs> ;
+    soda:includesTemplate <https://www.sodalite.eu/ontologies/workspace/1/234333/snow-vm> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_m32kberr90m3ookmbp62eko2tn>
-  a soda:SodaliteDescription;
-  tosca:properties <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_1dbh546o4p4m97m4koppcr84pq>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_aq1sv3cb7lqhqf2n8afmfhlt6r>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_kinevkfgmmo4o6n15f6b0ekvb7>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_lqtokuigfn42kl4j9b7hl207gr>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_oa1rrrrp8ls5mjtt96po1p7dfq>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_sc9cfknmaciitn6b7b1ou2nrp>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_uldqkhokvt1gk6uc1o00pt63v8>;
-  tosca:requirements <https://www.sodalite.eu/ontologies/workspace/1/234333/ReqClassifier_oabttfg0049sdim7b7vtmlbsn7> .
+    a                  soda:SodaliteDescription ;
+    tosca:properties   <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_1dbh546o4p4m97m4koppcr84pq>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_aq1sv3cb7lqhqf2n8afmfhlt6r>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_kinevkfgmmo4o6n15f6b0ekvb7>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_lqtokuigfn42kl4j9b7hl207gr>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_oa1rrrrp8ls5mjtt96po1p7dfq>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_sc9cfknmaciitn6b7b1ou2nrp>,
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_uldqkhokvt1gk6uc1o00pt63v8> ;
+    tosca:requirements
+                       <https://www.sodalite.eu/ontologies/workspace/1/234333/ReqClassifier_oabttfg0049sdim7b7vtmlbsn7> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_oa1rrrrp8ls5mjtt96po1p7dfq>
-  a tosca:Property;
-  DUL:classifies sv1:key_name;
-  tosca:hasDataValue "{ get_input: ssh-key-name }" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:key_name ;
+    tosca:hasDataValue "{ get_input: ssh-key-name }" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_sc9cfknmaciitn6b7b1ou2nrp>
-  a tosca:Property;
-  DUL:classifies sv1:user_name;
-  tosca:hasDataValue "root" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:user_name ;
+    tosca:hasDataValue "root" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_uldqkhokvt1gk6uc1o00pt63v8>
-  a tosca:Property;
-  DUL:classifies sv1:name;
-  tosca:hasDataValue "snow-vm" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:name ;
+    tosca:hasDataValue "snow-vm" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_aq1sv3cb7lqhqf2n8afmfhlt6r>
-  a tosca:Property;
-  DUL:classifies sv1:network;
-  tosca:hasDataValue "orchestrator-net" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:network ;
+    tosca:hasDataValue "orchestrator-net" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_kinevkfgmmo4o6n15f6b0ekvb7>
-  a tosca:Property;
-  DUL:classifies sv1:security_groups;
-  tosca:hasDataValue "default,snow" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:security_groups ;
+    tosca:hasDataValue "default,snow" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_1dbh546o4p4m97m4koppcr84pq>
-  a tosca:Property;
-  DUL:classifies sv1:image;
-  tosca:hasDataValue "centos7" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:image ;
+    tosca:hasDataValue "centos7" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_lqtokuigfn42kl4j9b7hl207gr>
-  a tosca:Property;
-  DUL:classifies sv1:flavor;
-  tosca:hasDataValue "m1.small" .
+    a                  tosca:Property ;
+    DUL:classifies     sv1:flavor ;
+    tosca:hasDataValue "m1.small" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/ReqClassifier_oabttfg0049sdim7b7vtmlbsn7>
-  a tosca:Requirement;
-  DUL:classifies sv1:protected_by;
-  tosca:hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/234333/security-rules-snow> .
+    a                    tosca:Requirement ;
+    DUL:classifies       sv1:protected_by ;
+    tosca:hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/234333/security-rules-snow> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/Desc_1ti7b6qgsj01ooijcpmok6ui5o>
-  a soda:SodaliteDescription;
-  tosca:input <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_ns5d7bm81kjn5cjmpn000kjkp7>,
-    <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_vtjjilbt9sb0tt2shvut60ji37> .
+    a           soda:SodaliteDescription ;
+    tosca:input <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_ns5d7bm81kjn5cjmpn000kjkp7>,
+                <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_vtjjilbt9sb0tt2shvut60ji37> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_ns5d7bm81kjn5cjmpn000kjkp7>
-  a tosca:Feature;
-  DUL:classifies <https://www.sodalite.eu/ontologies/workspace/1/234333/ssh-key-name>;
-  DUL:hasParameter <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_8i578r0aae5c1pncqfrhseqeo9> .
+    a                tosca:Feature ;
+    DUL:classifies   <https://www.sodalite.eu/ontologies/workspace/1/234333/ssh-key-name> ;
+    DUL:hasParameter <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_8i578r0aae5c1pncqfrhseqeo9> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_8i578r0aae5c1pncqfrhseqeo9>
-  a tosca:Property;
-  DUL:classifies tosca:type;
-  tosca:hasDataValue "string" .
+    a                  tosca:Property ;
+    DUL:classifies     tosca:type ;
+    tosca:hasDataValue "string" .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/Input_vtjjilbt9sb0tt2shvut60ji37>
-  a tosca:Feature;
-  DUL:classifies <https://www.sodalite.eu/ontologies/workspace/1/234333/docker-registry-ip>;
-  DUL:hasParameter <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_vil96gulr8ktj15e9tcgmh11hg> .
+    a                tosca:Feature ;
+    DUL:classifies   <https://www.sodalite.eu/ontologies/workspace/1/234333/docker-registry-ip> ;
+    DUL:hasParameter <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_vil96gulr8ktj15e9tcgmh11hg> .
 
 <https://www.sodalite.eu/ontologies/workspace/1/234333/PropClassifer_vil96gulr8ktj15e9tcgmh11hg>
-  a tosca:Property;
-  DUL:classifies tosca:type;
-  tosca:hasDataValue "string" .
+    a                  tosca:Property ;
+    DUL:classifies     tosca:type ;
+    tosca:hasDataValue "string" .

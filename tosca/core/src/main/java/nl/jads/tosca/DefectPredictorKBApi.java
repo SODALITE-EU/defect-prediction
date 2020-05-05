@@ -213,6 +213,19 @@ public class DefectPredictorKBApi {
         return tobeReturned;
     }
 
+    public boolean invalidPortRange(Feature property, RepositoryConnection connection) throws IOException {
+        String sparql = fileToString("sparql/InvalidPortRange1.sparql");
+        if (sparql == null) {
+            return false;
+        }
+        String query = PREFIXES + sparql;
+        TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
+                query, new SimpleBinding("var", property.getClassifiedBy()));
+        boolean tobeReturned = result.hasNext();
+        result.close();
+        return tobeReturned;
+    }
+
     public boolean useOfHTTPWithoutTLS(Feature property, RepositoryConnection connection) throws IOException {
         String sparql = fileToString("sparql/useOfHTTPwithoutTLS.sparql");
         if (sparql == null) {

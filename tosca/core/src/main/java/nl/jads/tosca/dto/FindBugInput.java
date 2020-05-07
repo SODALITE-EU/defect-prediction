@@ -11,6 +11,7 @@ public class FindBugInput {
     private String ansibleDefinition;
     private String repository;
     private String server;
+    private String aadmid;
 
     public String getActionId() {
         return actionId;
@@ -58,5 +59,13 @@ public class FindBugInput {
 
     public void setServer(String server) {
         this.server = server;
+    }
+
+    public String getAadmid() {
+        return aadmid;
+    }
+
+    public void setAadmid(String aadmid) {
+        this.aadmid = aadmid;
     }
 }

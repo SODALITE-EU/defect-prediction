@@ -86,13 +86,14 @@ public class DefectPredictorKBApi {
         return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
 
-    public Set<Feature> getAllAttributes(RepositoryConnection connection, String deploymentId) throws IOException {
+    public Set<Feature> getAllAttributes(RepositoryConnection connection, String aadmid) throws IOException {
         Set<Feature> attributes = new HashSet<>();
         String sparql;
-        if (deploymentId != null) {
+        if (aadmid != null) {
             sparql = "select distinct ?concept ?attribute ?value\n" +
                     "where {\n" +
-                    "FILTER (regex(str(?concept), \"(.*)/" + deploymentId + "/(.*)\",\"i\")).\n" +
+                    "    ?aadm soda:includesTemplate ?resource .\n" +
+                    "    FILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
                     "\t\t?context tosca:attributes ?concept .\n" +
                     "\t\t?concept DUL:classifies ?attribute .\n" +
                     "\t\tOPTIONAL {?concept tosca:hasValue ?value .}\n" +
@@ -123,24 +124,25 @@ public class DefectPredictorKBApi {
         return attributes;
     }
 
-    public Set<Feature> getProperties(RepositoryConnection connection, String deploymentId) throws IOException {
+    public Set<Feature> getProperties(RepositoryConnection connection, String aadmid) throws IOException {
         Set<Feature> properties = new HashSet<>();
         String sparql;
-        if (deploymentId != null) {
+        if (aadmid != null) {
             sparql = "select distinct ?concept ?property ?value\n" +
                     "where {\n" +
-                    "FILTER (regex(str(?concept), \"(.*)/" + deploymentId + "/(.*)\",\"i\")).\n" +
-                    "\t?context tosca:properties ?concept .\n" +
-                    "\t?concept DUL:classifies ?property .\n" +
-                    "\tOPTIONAL {?concept tosca:hasValue ?value .}\n" +
-                    "}\n" +
-                    "\n";
+                    "    ?aadm soda:includesTemplate ?resource .\n" +
+                    "    FILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
+                    "   ?context tosca:properties ?concept .\n" +
+                    "   ?concept DUL:classifies ?property .\n" +
+                    "   OPTIONAL {?concept tosca:hasValue ?value .}\n" +
+                    "}";
         } else {
             sparql = fileToString("sparql/getAllProperties.sparql");
         }
         if (sparql == null) {
             return properties;
         }
+        System.out.println(sparql);
         String query = PREFIXES + sparql;
         TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection, query);
 
@@ -342,9 +344,9 @@ public class DefectPredictorKBApi {
             fillContext(bugRecord, c, connection);
             bugs.add(bugRecord);
         }
-        Set<Feature> parameters = getProperties(connection, bugInput.getDeploymentId());
+        Set<Feature> parameters = getProperties(connection, bugInput.getAadmid());
         checkSmells(parameters, connection, bugs);
-        Set<Feature> attributes = getAllAttributes(connection, bugInput.getDeploymentId());
+        Set<Feature> attributes = getAllAttributes(connection, bugInput.getAadmid());
         checkSmells(attributes, connection, bugs);
         bugReport.setActionId(bugInput.getActionId());
         bugReport.setDeploymentId(bugInput.getDeploymentId());

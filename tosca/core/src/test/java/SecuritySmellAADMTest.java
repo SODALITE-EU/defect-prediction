@@ -89,29 +89,6 @@ public class SecuritySmellAADMTest {
         repositoryManager.shutDown("TEST");
     }
 
-//    @Test
-//    void testSuspiciousComment() {
-//        try {
-//            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
-//            RepositoryConnection connection = repository.getConnection();
-//            try {
-//                List<Comment> comments = kbApi.suspiciousComment(connection);
-//                assertEquals(3, comments.size());
-//                for (Comment c : comments) {
-//                    BugRecord r = new BugRecord();
-//                    kbApi.fillContext(r, c, connection);
-//                    System.out.println(r.getElementType());
-//                    System.out.println(r.getElementName());
-//                    System.out.println(r.getContext());
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @Test
     void testAdminBYyDefault() {
         try {
@@ -128,7 +105,7 @@ public class SecuritySmellAADMTest {
                         properties.add(p);
                     }
                 }
-                assertEquals(1, properties.size());
+                assertEquals(4, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -154,7 +131,7 @@ public class SecuritySmellAADMTest {
                         properties.add(p);
                     }
                 }
-                assertEquals(1, properties.size());
+                assertEquals(6, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

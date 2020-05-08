@@ -79,6 +79,15 @@ public class SecuritySmellAADMTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // add the RDF data from the inputstream directly to our database
+        try {
+            InputStream input2 =
+                    SecuritySmellAADMTest.class.getResourceAsStream("/snow-aadm/AADM_as9oa3dfppj6q7irhn6lsl6p16.ttl");
+            repositoryConnection.add(input2, "", RDFFormat.TURTLE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         repositoryConnection.close();
     }
 
@@ -95,7 +104,7 @@ public class SecuritySmellAADMTest {
             DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
             RepositoryConnection connection = repository.getConnection();
             try {
-                Set<Feature> parameters = kbApi.getProperties(connection, "234333");
+                Set<Feature> parameters = kbApi.getProperties(connection, "AADM_as9oa3dfppj6q7irhn6lsl6p16");
                 List<Feature> properties = new ArrayList<>();
                 for (Feature p : parameters) {
                     if (p.getParameters() == null) {
@@ -105,7 +114,7 @@ public class SecuritySmellAADMTest {
                         properties.add(p);
                     }
                 }
-                assertEquals(4, properties.size());
+                assertEquals(2, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -131,7 +140,7 @@ public class SecuritySmellAADMTest {
                         properties.add(p);
                     }
                 }
-                assertEquals(6, properties.size());
+                assertEquals(4, properties.size());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,10 +1,15 @@
-select distinct ?concept ?property ?value
-where {
-#	?resource soda:hasInferredContext ?context .
-	?context tosca:properties ?concept .
-	?concept DUL:classifies ?property .
-	OPTIONAL {?concept tosca:hasValue ?value .}
-}
-
-
-                
+select distinct ?concept ?property
+	where {
+		{
+		#tier2
+		?aadm soda:includesTemplate ?resource .
+		?resource soda:hasContext ?context .
+		?context tosca:properties ?concept .
+		?concept DUL:classifies ?property .
+		} UNION {
+		#tier 1
+		?context  tosca:properties ?concept .
+		?concept DUL:classifies ?property .
+	    ?concept DUL:hasParameter ?p .
+		}
+	}

@@ -1,10 +1,15 @@
-select distinct ?concept ?attribute ?value
-where {
-#		?resource soda:hasInferredContext ?context .
+select distinct ?concept ?attribute
+	where {
+		{
+		#tier2
+		?aadm soda:includesTemplate ?resource .
+		?resource soda:hasContext ?context .
 		?context tosca:attributes ?concept .
 		?concept DUL:classifies ?attribute .
-		OPTIONAL {?concept tosca:hasValue ?value .}
-}
-
-
-                
+		} UNION {
+		#tier 1
+		?context  tosca:attributes ?concept .
+		?concept DUL:classifies ?attribute .
+	    ?concept DUL:hasParameter ?p .
+		}
+	}

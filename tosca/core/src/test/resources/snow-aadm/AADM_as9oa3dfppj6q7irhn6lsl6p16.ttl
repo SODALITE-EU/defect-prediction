@@ -1,0 +1,251 @@
+@prefix : <https://www.sodalite.eu/ontologies/tosca/> .
+@prefix DUL: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix optimizations: <https://www.sodalite.eu/ontologies/optimizations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix soda: <https://www.sodalite.eu/ontologies/sodalite-metamodel/> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/AADM_as9oa3dfppj6q7irhn6lsl6p16>
+  a soda:AbstractApplicationDeployment .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/27827d44-0f6c-11ea-8d71-362b9e155667>
+  a soda:User .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/skyline-extractor>
+  a <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/sodalite.nodes.DockerizedComponent> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_hktfqhjqj4f92btdj3cg94oki0>
+  a soda:SodaliteDescription;
+  :capabilities <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_hfi0iijjvr8hcvpg2qs2omeklc>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_qcmnc6c0t5bksaic79ai2qgir2>;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_769hlpqvukakciasj2bspnpq4g>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_ada62dprepgk8haa17erendbbj>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_pt29ntvmkebifinvvoec766v4b>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_qm028hf5tg7gp3hb554apkg5q1>;
+  :requirements <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_967s257h339gr7kc0vlhu1dtsh> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_769hlpqvukakciasj2bspnpq4g>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/image_name>;
+  :hasDataValue "snow-skyline-extractor" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_qm028hf5tg7gp3hb554apkg5q1>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/ports>;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_t02n72vgo95eglm5ti36f8sl2p> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_ada62dprepgk8haa17erendbbj>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/exposed_ports>;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_2vq23rkuuc9fer1sih41kf7rtg> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_pt29ntvmkebifinvvoec766v4b>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/workspace/1/pcv1okrenaoqghb94ecjl4e5s3/volume>;
+  :hasDataValue "/tmp/docker:/tmp" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_967s257h339gr7kc0vlhu1dtsh>
+  a :Requirement;
+  DUL:classifies :dependency;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/tensorflow> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_qcmnc6c0t5bksaic79ai2qgir2>
+  a :Capability;
+  DUL:classifies :host;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/capability_compute> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_hfi0iijjvr8hcvpg2qs2omeklc>
+  a :Capability;
+  DUL:classifies :os;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/operating_system> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/skyline-zoe>
+  a <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/sodalite.nodes.DockerizedComponent>;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_kkfs11svi0t01kl1rto74sn30n> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_kkfs11svi0t01kl1rto74sn30n>
+  a soda:SodaliteDescription;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5jar31cru8a8hfr8bmkc366i5h>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_ennl1g4ahk17ofd2mr2jq78bp>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_m953erudv4n9pigmkmac3q4ql0>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_pni10sp8abjanqh0srqfjdef5c> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_m953erudv4n9pigmkmac3q4ql0>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/image_name>;
+  :hasDataValue "snow-skyline-extractor" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_ennl1g4ahk17ofd2mr2jq78bp>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/ports>;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_agmb26pvea7j3cpkiijpi5a81u> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5jar31cru8a8hfr8bmkc366i5h>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/exposed_ports>;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_tmvgfqrj9rmk89g8vi6bdkujhg> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_pni10sp8abjanqh0srqfjdef5c>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/workspace/1/pcv1okrenaoqghb94ecjl4e5s3/volume>;
+  :hasDataValue "/tmp/docker:/tmp" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/tensorflow>
+  a :tosca.nodes.SoftwareComponent;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_m3f9rvro71hn36k45nn69sjui3> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_m3f9rvro71hn36k45nn69sjui3>
+  a soda:SodaliteDescription .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/snow-docker-host>
+  a <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/sodalite.nodes.DockerHost>;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_512t4veeps1ki6jmd6o2o0lj70> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_512t4veeps1ki6jmd6o2o0lj70>
+  a soda:SodaliteDescription;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_id7g5qmkq49b0k45ib82mr1d1j>;
+  :requirements <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_eedv1tr87c9dkvpqdhfv4kurdf> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_id7g5qmkq49b0k45ib82mr1d1j>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/registry_ip>;
+  :hasDataValue "{ get_input: docker-registry-ip }" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_eedv1tr87c9dkvpqdhfv4kurdf>
+  a :Requirement;
+  DUL:classifies :host;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/snow-vm> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/snow-vm>
+  a <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/sodalite.nodes.OpenStack.VM>;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_pfk93vjn0o8ro2q4ohdvfjn5ps> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_pfk93vjn0o8ro2q4ohdvfjn5ps>
+  a soda:SodaliteDescription;
+  :capabilities <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_2jsm54amjj1fiqukqas7qq8qvb>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_kf6lof9ga38omdjpofuci1jcla>;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_1t3tbfi6qpr6cv96dr9a8g2kju>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5s6ctvs3kqpugff288c668uulr>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5tbibq6kq9d0thqecac76ntm62>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6mnje8amqjpfo4jvjpisqu52hb>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6tr9l4l6mh146b1mpps4lgsg7t>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_bjm7qjbs7jvfrio2chhr4lnqll>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_oaa4i6nbboaf6hr2mmolis3p3a>;
+  :requirements <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_j6unfpfacgplu0ceuj6t2vq2ur> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5tbibq6kq9d0thqecac76ntm62>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/security_groups>;
+  :hasDataValue "default,snow" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_bjm7qjbs7jvfrio2chhr4lnqll>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/key_name>;
+  :hasDataValue "{ get_input: ssh-key-name }" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6mnje8amqjpfo4jvjpisqu52hb>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/user_name>;
+  :hasDataValue "root" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6tr9l4l6mh146b1mpps4lgsg7t>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/flavor>;
+  :hasDataValue "m1.small" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_1t3tbfi6qpr6cv96dr9a8g2kju>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/network>;
+  :hasDataValue "orchestrator-net" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_5s6ctvs3kqpugff288c668uulr>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/name>;
+  :hasDataValue "snow-vm" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_oaa4i6nbboaf6hr2mmolis3p3a>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/image>;
+  :hasDataValue "centos7" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/ReqClassifier_j6unfpfacgplu0ceuj6t2vq2ur>
+  a :Requirement;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/protected_by>;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/n4apag4l8bsqahgc3vqlj9ss7u/security-rules-snow> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_kf6lof9ga38omdjpofuci1jcla>
+  a :Capability;
+  DUL:classifies :host;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/capability_compute> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/CapClassifier_2jsm54amjj1fiqukqas7qq8qvb>
+  a :Capability;
+  DUL:classifies :os;
+  :hasObjectValue <https://www.sodalite.eu/ontologies/workspace/1/c48umvidip4uf5p8608v4gjvhc/operating_system> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/capability_compute>
+  a :sodalite.capabilities.Compute;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_ml3usa2ugjnkuvtifmcosclbat> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_ml3usa2ugjnkuvtifmcosclbat>
+  a soda:SodaliteDescription;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6dkigdnl9413dodhe73hrcvpqv>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_thing7ircv2edkg77u0s2ln9bf> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_6dkigdnl9413dodhe73hrcvpqv>
+  a :Property;
+  DUL:classifies <https://www.sodalite.eu/ontologies/snow-vehicle/tier1/num_gpus>;
+  :hasDataValue "1"^^xsd:int .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_thing7ircv2edkg77u0s2ln9bf>
+  a :Property;
+  DUL:classifies :mem_size;
+  :hasDataValue "1"^^xsd:int .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/operating_system>
+  a :tosca.capabilities.OperatingSystem;
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_uvhvqs3ofp8hgjvaelimj5or58> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_uvhvqs3ofp8hgjvaelimj5or58>
+  a soda:SodaliteDescription;
+  :properties <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_24bii78v9m5rt0bfjr1kq3hifi> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/PropClassifer_24bii78v9m5rt0bfjr1kq3hifi>
+  a :Property;
+  DUL:classifies :architecture;
+  :hasDataValue "x86_64" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_t02n72vgo95eglm5ti36f8sl2p>
+  :hasDataValue "8080:8080" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_2vq23rkuuc9fer1sih41kf7rtg>
+  :hasDataValue "8080"^^xsd:int .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_agmb26pvea7j3cpkiijpi5a81u>
+  :hasDataValue "8080:8080" .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/List_tmvgfqrj9rmk89g8vi6bdkujhg>
+  :hasDataValue "8080"^^xsd:int .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/skyline-extractor>
+  soda:hasContext <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/Desc_hktfqhjqj4f92btdj3cg94oki0> .
+
+<https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/AADM_as9oa3dfppj6q7irhn6lsl6p16>
+  soda:createdAt "2020-05-08T12:32:10.091+03:00";
+  soda:createdBy <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/27827d44-0f6c-11ea-8d71-362b9e155667>;
+  soda:includesTemplate <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/capability_compute>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/operating_system>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/skyline-extractor>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/skyline-zoe>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/snow-docker-host>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/snow-vm>,
+    <https://www.sodalite.eu/ontologies/workspace/1/7lmr116mi1v1r3v4ob0hkv17g0/tensorflow> .

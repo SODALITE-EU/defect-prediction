@@ -90,14 +90,22 @@ public class DefectPredictorKBApi {
         Set<Feature> attributes = new HashSet<>();
         String sparql;
         if (aadmid != null) {
-            sparql = "select distinct ?concept ?attribute ?value\n" +
-                    "where {\n" +
-                    "    ?aadm soda:includesTemplate ?resource .\n" +
-                    "    FILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
+            sparql = "select distinct ?concept ?attribute\n" +
+                    "\twhere {\n" +
+                    "\t\t{\n" +
+                    "\t\t#tier2\n" +
+                    "\t\t?aadm soda:includesTemplate ?resource .\n" +
+                    "\t\tFILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
+                    "\t\t?resource soda:hasContext ?context .\n" +
                     "\t\t?context tosca:attributes ?concept .\n" +
                     "\t\t?concept DUL:classifies ?attribute .\n" +
-                    "\t\tOPTIONAL {?concept tosca:hasValue ?value .}\n" +
-                    "}\n";
+                    "\t\t} UNION {\n" +
+                    "\t\t#tier 1\n" +
+                    "\t\t?context  tosca:attributes ?concept .\n" +
+                    "\t\t?concept DUL:classifies ?attribute .\n" +
+                    "?concept DUL:hasParameter ?p .\n" +
+                    "\t\t}\n" +
+                    "\t}";
         } else {
             sparql = fileToString("sparql/getAllAttributes.sparql");
         }
@@ -128,21 +136,28 @@ public class DefectPredictorKBApi {
         Set<Feature> properties = new HashSet<>();
         String sparql;
         if (aadmid != null) {
-            sparql = "select distinct ?concept ?property ?value\n" +
-                    "where {\n" +
-                    "    ?aadm soda:includesTemplate ?resource .\n" +
-                    "    FILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
-                    "   ?context tosca:properties ?concept .\n" +
-                    "   ?concept DUL:classifies ?property .\n" +
-                    "   OPTIONAL {?concept tosca:hasValue ?value .}\n" +
-                    "}";
+            sparql = "select distinct ?concept ?property\n" +
+                    "\twhere {\n" +
+                    "\t\t{\n" +
+                    "\t\t#tier2\n" +
+                    "\t\t?aadm soda:includesTemplate ?resource .\n" +
+                    "\t\tFILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
+                    "\t\t?resource soda:hasContext ?context .\t\n" +
+                    "\t\t?context tosca:properties ?concept .\n" +
+                    "\t\t?concept DUL:classifies ?property .\n" +
+                    "\t\t} UNION {\n" +
+                    "\t\t#tier 1\n" +
+                    "\t\t?context  tosca:properties ?concept .\n" +
+                    "\t\t?concept DUL:classifies ?property .\n" +
+                    "?concept DUL:hasParameter ?p .\n" +
+                    "\t\t}\n" +
+                    "\t}";
         } else {
             sparql = fileToString("sparql/getAllProperties.sparql");
         }
         if (sparql == null) {
             return properties;
         }
-        System.out.println(sparql);
         String query = PREFIXES + sparql;
         TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection, query);
 

@@ -4,7 +4,7 @@ from pathlib import Path
 from flask import Flask, json, request, Response
 from werkzeug.utils import secure_filename
 
-from api import Linter
+import Linter
 
 app = Flask(__name__)
 app.config["DEBUG"] = True

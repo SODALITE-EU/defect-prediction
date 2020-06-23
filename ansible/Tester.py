@@ -1,4 +1,4 @@
-from api import Linter
+import Linter
 
 matches = Linter.main(["-v", "-r", "../ansiblelints/rules", "-R", "../testResources/ansible-smell/create.yml"])
 for match in matches:

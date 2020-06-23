@@ -1,0 +1,18 @@
+version: '3'
+services:
+  tosca-smell:
+    # will build ./tosca/Dockerfile
+    build:
+      context: ./tosca
+    ports:
+     - "8080:8080"
+    environment:
+      - WAIT_HOSTS=graph-db:7200
+
+
+  ansible-smell:
+    # will build ./ansible/Dockerfile
+    build:
+        ./ansible
+    ports:
+      - "7200:7200"

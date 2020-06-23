@@ -15,4 +15,4 @@ services:
     build:
         ./ansible
     ports:
-      - "7200:7200"
+      - "5000:5000"

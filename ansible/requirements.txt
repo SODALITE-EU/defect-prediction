@@ -1,2 +1,2 @@
-ansible-lint==2.7
+ansible-lint
 flask

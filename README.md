@@ -40,3 +40,30 @@ The built artifact for TOSCA is a web application (.war file) that can be deploy
 
 The built artifact for Ansible is a Flask Web application.
 
+## Docker Image Building and Usage: Ansible Smell Detector 
+```
+sudo docker build -t sodalite/ansiblesmells .
+sudo docker run -p 5000:5000 -d --name=anssAPI sodalite/ansiblesmells
+sudo docker start anssAPI
+sudo docker logs anssAPI
+sudo docker stop anssAPI
+sudo docker rm  anssAPI
+```
+
+## Docker Image Building and Usage: TOSCA Smell Detector 
+```
+sudo docker build -t sodalite/toscasmells .
+sudo docker run -p 8080:8080 -d --name=tossAPI sodalite/toscasmells
+sudo docker start tossAPI
+sudo docker logs tossAPI
+sudo docker stop tossAPI
+sudo docker rm  tossAPI
+```
+## Run Docker Compose
+
+```
+sudo docker-compose up
+sudo docker image ls
+```
+
+

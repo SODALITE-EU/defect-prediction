@@ -1,5 +1,5 @@
-# Using lightweight alpine image
-FROM python:3.7.7-alpine3.10
+# Using python 3.7 full image
+FROM python:3.7.7-buster
 # Defining working directory and copy the requirements file
 WORKDIR /usr/src/myapp
 COPY requirements.txt .

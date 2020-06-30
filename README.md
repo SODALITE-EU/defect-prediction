@@ -66,4 +66,29 @@ sudo docker-compose up
 sudo docker image ls
 ```
 
+## REST APIs
+
+# TOSCA
+
+```
+POST http://{serverIP}:8080/bug-predictor-api/v0.1/bugs/tosca/json
+```
+A sample request
+```
+{
+	"aadmid": "z",
+	"repository": "x", # optional
+	"server" : "y" # optional
+}
+```
+```
+POST http://{serverIP}:8080/bug-predictor-api/v0.1/bugs/tosca/file
+```
+Send the TOSCA file as multipart/form-data (name:” file”, value: actual file)
+
+# Ansible
+```
+http://{serverIP}:5000//bugs/ansible/file
+```
+Send the Ansible file as multipart/form-data (name:” file”, value: actual file)
 

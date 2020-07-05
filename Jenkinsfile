@@ -34,6 +34,33 @@ pipeline {
         archiveArtifacts artifacts: '**/*.war, **/*.jar', onlyIfSuccessful: true
       }
     }
+	
+	stage('Build docker images') {
+            steps {
+                sh "cd tosca; docker build -t toscasmells  -f Dockerfile ."
+                sh "cd ansible; docker build -t ansiblesmells -f Dockerfile ."
+            }
+    }
+   
+    stage('Push Dockerfile to DockerHub') {
+            when {
+               branch "master"
+            }
+            steps {
+                withDockerRegistry(credentialsId: 'jenkins-sodalite.docker_token', url: '') {
+                    sh  """#!/bin/bash                       
+                            docker tag toscasmells sodaliteh2020/toscasmells:${BUILD_NUMBER}
+                            docker tag toscasmells sodaliteh2020/toscasmells
+                            docker push sodaliteh2020/toscasmells:${BUILD_NUMBER}
+                            docker push sodaliteh2020/toscasmells
+                            docker tag ansiblesmells sodaliteh2020/ansiblesmells:${BUILD_NUMBER}
+                            docker tag ansiblesmells sodaliteh2020/ansiblesmells
+                            docker push sodaliteh2020/ansiblesmells:${BUILD_NUMBER}
+                            docker push sodaliteh2020/ansiblesmells
+                        """
+                }
+            }
+    }
   }
   post {
     failure {

@@ -59,7 +59,8 @@ public class BugPredictorService {
         ideInput.setWarnings(warningList);
         kbApi.shutDown();
         return Response.ok(ideInput).header(
-                "Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
+                "Access-Control-Allow-Origin", "*").
+                header("Access-Control-Allow-Origin", "POST").build();
     }
 
     @POST
@@ -75,7 +76,8 @@ public class BugPredictorService {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(getKB(findBugInput), actualPath);
         BugReport bugReport = kbApi.findBugs(findBugInput);
         kbApi.shutDown();
-        return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
+        return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").
+                header("Access-Control-Allow-Origin", "POST").build();
     }
 
     @POST
@@ -100,12 +102,14 @@ public class BugPredictorService {
             }
             System.out.println(repoName);
             FindBugInput findBugInput = new FindBugInput();
+            findBugInput.setRepository(repoName);
             findBugInput.setActionId(fileDetail.getFileName());
             findBugInput.setDeploymentId(fileDetail.getFileName());
-            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB(repoName), actualPath);
+            DefectPredictorKBApi kbApi = new DefectPredictorKBApi(getKB(findBugInput), actualPath);
             BugReport bugReport = kbApi.findBugs(findBugInput);
             kbApi.shutDown();
-            return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Origin", "POST").build();
+            return Response.ok(bugReport).header("Access-Control-Allow-Origin", "*").
+                    header("Access-Control-Allow-Origin", "POST").build();
 
         } catch (Exception e) {
             return Response.status(404).entity("No repository for the template").build();

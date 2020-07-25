@@ -1,5 +1,7 @@
 import unittest
+
 from ansiblelint import RulesCollection, Runner
+
 from ansiblelints.rules.HardCodedSecrets import HardCodedSecrets
 
 

@@ -15,11 +15,11 @@
       salt_size: 6
       confirm: yes
 
-    # - name: "boot_loader_password_user"
+      # - name: "boot_loader_password_user"
       # prompt: "grub boot loader user (Ubuntu)"
       # private: no
 
-    # - name: "boot_loader_password_ubuntu"
+      # - name: "boot_loader_password_ubuntu"
       # prompt: "grub boot loader password (Ubuntu)"
       # private: yes
       # #requires passlib - pip install passlib
@@ -43,22 +43,22 @@
         msg: "ERROR: Setting boot loader password is currently not supported on {{ ansible_distribution }}"
       when: ansible_distribution == "Ubuntu"
 
-    # - name: Set boot loader password users (Ubuntu)
-      # lineinfile: >
-          # dest=/etc/grub.d/01_users
-          # state=present
-          # insertafter="EOF"
-          # line='set superusers="{{ boot_loader_password_user }}"'
+        # - name: Set boot loader password users (Ubuntu)
+        # lineinfile: >
+        # dest=/etc/grub.d/01_users
+        # state=present
+        # insertafter="EOF"
+        # line='set superusers="{{ boot_loader_password_user }}"'
+        # when: ansible_distribution == "Ubuntu"
+
+        # - name: Set boot loader password (Ubuntu)
+        # lineinfile: >
+        # dest=/etc/grub.d/00_header
+        # state=present
+        # insertafter="EOF"
+      # line='password_pbkdf2 {{ boot_loader_password_user }} {{ boot_loader_password_ubuntu }}'
       # when: ansible_distribution == "Ubuntu"
 
-    # - name: Set boot loader password (Ubuntu)
-      # lineinfile: >
-          # dest=/etc/grub.d/00_header
-          # state=present
-          # insertafter="EOF"
-          # line='password_pbkdf2 {{ boot_loader_password_user }} {{ boot_loader_password_ubuntu }}'
-      # when: ansible_distribution == "Ubuntu"
-
-    # - name: Activate boot loader password (Ubuntu)
+      # - name: Activate boot loader password (Ubuntu)
       # command: /usr/sbin/update-grub
       # when: ansible_distribution == "Ubuntu"

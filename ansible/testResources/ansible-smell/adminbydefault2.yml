@@ -22,7 +22,7 @@
           },
         {% endfor %}
       }
-      
+
 - name: F03c. Remove Address Groups (Try 1)
   fortios_firewall_addrgrp:
     host: "{{ ansible_host }}"

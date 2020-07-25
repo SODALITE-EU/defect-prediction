@@ -1,6 +1,9 @@
 import unittest
+
 from ansiblelint import RulesCollection, Runner
+
 from ansiblelints.rules.InvalidIPaddressbinding import InvalidIPaddressbinding
+
 
 class TestInvalidIPaddressbinding(unittest.TestCase):
     collection = RulesCollection()

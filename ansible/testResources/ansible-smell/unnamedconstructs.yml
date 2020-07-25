@@ -2,7 +2,7 @@
   tasks:
     - yum:
         name: http
-        state : latest
+        state: latest
     - service:
         name: httpd
         state: started

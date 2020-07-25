@@ -1,6 +1,9 @@
 import unittest
+
 from ansiblelint import RulesCollection, Runner
+
 from ansiblelints.rules.AdminByDefault import AdminByDefault
+
 
 class TestAdminByDefault(unittest.TestCase):
     collection = RulesCollection()

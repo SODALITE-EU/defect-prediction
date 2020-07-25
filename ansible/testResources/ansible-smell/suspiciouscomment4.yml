@@ -3,36 +3,36 @@
 - name: install system tools
   apt: name={{ item }} update_cache=yes state=present
   with_items:
-   - htop
-   - iotop
-   - inotify-tools
-   - sysstat
-   - sysdig
-   - oprofile
-   - nicstat
-   - iptraf
-   - pax-utils
+    - htop
+    - iotop
+    - inotify-tools
+    - sysstat
+    - sysdig
+    - oprofile
+    - nicstat
+    - iptraf
+    - pax-utils
   tags: systools
 
 - name: install hardware static perf tools
   apt: name={{ item }} update_cache=yes state=present
   with_items:
-   - hwinfo
+    - hwinfo
 
 - name: install kernel tools
   apt: name={{ item }} update_cache=yes state=present
   with_items:
-   - linux-tools-generic
+    - linux-tools-generic
   tags: perf
 
 
 - name: install systemtap
   apt: name={{ item }}
-       update_cache=yes
-       state=latest
+    update_cache=yes
+    state=latest
   with_items:
-   - gcc
-   - systemtap
+    - gcc
+    - systemtap
   tags: systemtap
 
 - name: get repo keys
@@ -48,8 +48,8 @@
 
 - name: install debug info kernel
   apt: name=linux-image-{{ ansible_kernel }}-dbgsym
-       update_cache=yes
-       state=present
+    update_cache=yes
+    state=present
   # HACK for Travis CI
   # ubuntu release and kernel version do not match
   # for example trusty has kernel 3.13 but on Travis CI kernel was upgraded to 4.4

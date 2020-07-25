@@ -8,100 +8,11 @@
       name: '{{ db_user1 }}'
       login_user: '{{ pg_user }}'
   block:
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Check that PGOPTIONS environment variable is effective (1/2)
-    ignore_errors: true
-    environment:
-      PGCLIENTENCODING: UTF8
-      PGOPTIONS: -c default_transaction_read_only=on
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      password: '{{ db_password1 }}'
-  - name: Check that PGOPTIONS environment variable is effective (2/2)
-    assert:
-      that:
-      - '{{ result is failed }}'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: 'Create a user (password encrypted: {{ encrypted }})'
-    environment:
-      PGCLIENTENCODING: UTF8
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      password: '{{ db_password1 }}'
-      encrypted: '{{ encrypted }}'
-  - block:
-    - name: Check that ansible reports it was created
-      assert: &id001
-        that:
-        - '{{ result is changed }}'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Check that it was created
-    shell: echo "select * from pg_user where usename='{{ db_user1 }}';" | psql -d
-      postgres
-  - assert:
-      that:
-      - result.stdout_lines[-1] == '(1 row)'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Check that creating user a second time does nothing
-    environment:
-      PGCLIENTENCODING: UTF8
-      PGOPTIONS: -c default_transaction_read_only=on
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      password: '{{ db_password1 }}'
-      encrypted: '{{ encrypted }}'
-  - block:
-    - name: Check that ansible reports no change
-      assert: &id002
-        that:
-        - '{{ result is not changed }}'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Define an expiration time
-    environment:
-      PGCLIENTENCODING: UTF8
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      expires: '2025-01-01'
-  - name: Check that ansible reports it was created
-    assert: *id001
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Redefine the same expiration time
-    environment:
-      PGCLIENTENCODING: UTF8
-      PGOPTIONS: -c default_transaction_read_only=on
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      expires: '2025-01-01'
-  - name: Check that ansible reports no change
-    assert: *id002
-  - block:
     - become_user: '{{ pg_user }}'
       become: true
       register: result
-      name: 'Using MD5-hashed password: check that password not changed when using
-        cleartext password'
+      name: Check that PGOPTIONS environment variable is effective (1/2)
+      ignore_errors: true
       environment:
         PGCLIENTENCODING: UTF8
         PGOPTIONS: -c default_transaction_read_only=on
@@ -110,314 +21,403 @@
         name: '{{ db_user1 }}'
         login_user: '{{ pg_user }}'
         password: '{{ db_password1 }}'
-        encrypted: 'yes'
-    - name: Check that ansible reports no change
-      assert: *id002
+    - name: Check that PGOPTIONS environment variable is effective (2/2)
+      assert:
+        that:
+          - '{{ result is failed }}'
     - become_user: '{{ pg_user }}'
       become: true
       register: result
-      name: 'Using MD5-hashed password: check that password not changed when using
-        md5 hash with ''ENCRYPTED'''
+      name: 'Create a user (password encrypted: {{ encrypted }})'
       environment:
+        PGCLIENTENCODING: UTF8
+      database.postgresql.postgresql_user:
+        db: postgres
+        name: '{{ db_user1 }}'
+        login_user: '{{ pg_user }}'
+        password: '{{ db_password1 }}'
+        encrypted: '{{ encrypted }}'
+    - block:
+        - name: Check that ansible reports it was created
+          assert: &id001
+            that:
+              - '{{ result is changed }}'
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Check that it was created
+      shell: echo "select * from pg_user where usename='{{ db_user1 }}';" | psql -d
+        postgres
+    - assert:
+        that:
+          - result.stdout_lines[-1] == '(1 row)'
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Check that creating user a second time does nothing
+      environment:
+        PGCLIENTENCODING: UTF8
         PGOPTIONS: -c default_transaction_read_only=on
       database.postgresql.postgresql_user:
         db: postgres
         name: '{{ db_user1 }}'
         login_user: '{{ pg_user }}'
-        password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
-        encrypted: 'yes'
-    - name: Check that ansible reports no change
-      assert: *id002
+        password: '{{ db_password1 }}'
+        encrypted: '{{ encrypted }}'
+    - block:
+        - name: Check that ansible reports no change
+          assert: &id002
+            that:
+              - '{{ result is not changed }}'
     - become_user: '{{ pg_user }}'
       become: true
       register: result
-      name: 'Using MD5-hashed password: check that password not changed when using
+      name: Define an expiration time
+      environment:
+        PGCLIENTENCODING: UTF8
+      database.postgresql.postgresql_user:
+        db: postgres
+        name: '{{ db_user1 }}'
+        login_user: '{{ pg_user }}'
+        expires: '2025-01-01'
+    - name: Check that ansible reports it was created
+      assert: *id001
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Redefine the same expiration time
+      environment:
+        PGCLIENTENCODING: UTF8
+        PGOPTIONS: -c default_transaction_read_only=on
+      database.postgresql.postgresql_user:
+        db: postgres
+        name: '{{ db_user1 }}'
+        login_user: '{{ pg_user }}'
+        expires: '2025-01-01'
+    - name: Check that ansible reports no change
+      assert: *id002
+    - block:
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password not changed when using
+        cleartext password'
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: '{{ db_password1 }}'
+            encrypted: 'yes'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password not changed when using
+        md5 hash with ''ENCRYPTED'''
+          environment:
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
+            encrypted: 'yes'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password not changed when using
         md5 hash with ''UNENCRYPTED'''
-      environment:
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
-        encrypted: 'no'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: Redefine the same expiration time and password (encrypted)
-      environment:
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        encrypted: 'yes'
-        password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
-        expires: '2025-01-01'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password changed when using another
+          environment:
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
+            encrypted: 'no'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: Redefine the same expiration time and password (encrypted)
+          environment:
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            encrypted: 'yes'
+            password: md5{{ (db_password1 ~ db_user1) | hash('md5')}}
+            expires: '2025-01-01'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password changed when using another
         cleartext password'
-      environment:
-        PGCLIENTENCODING: UTF8
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: prefix{{ db_password1 }}
-        encrypted: 'yes'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password changed when using another
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: prefix{{ db_password1 }}
+            encrypted: 'yes'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password changed when using another
         md5 hash with ''ENCRYPTED'''
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: md5{{ ('prefix1' ~ db_password1 ~ db_user1) | hash('md5')}}
-        encrypted: 'yes'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: change_pass_unencrypted
-      name: 'Using MD5-hashed password: check that password changed when using md5
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: md5{{ ('prefix1' ~ db_password1 ~ db_user1) | hash('md5')}}
+            encrypted: 'yes'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: change_pass_unencrypted
+          name: 'Using MD5-hashed password: check that password changed when using md5
         hash with ''UNENCRYPTED'''
-      failed_when:
-      - change_pass_unencrypted is failed
-      - '"UNENCRYPTED PASSWORD is no longer supported" not in change_pass_unencrypted.msg'
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: md5{{ ('prefix2' ~ db_password1 ~ db_user1) | hash('md5')}}
-        encrypted: 'no'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password changed when clearing
+          failed_when:
+            - change_pass_unencrypted is failed
+            - '"UNENCRYPTED PASSWORD is no longer supported" not in change_pass_unencrypted.msg'
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: md5{{ ('prefix2' ~ db_password1 ~ db_user1) | hash('md5')}}
+            encrypted: 'no'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password changed when clearing
         the password'
-      environment:
-        PGCLIENTENCODING: UTF8
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'yes'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password not changed when clearing
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'yes'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password not changed when clearing
         the password again'
-      environment:
-        PGCLIENTENCODING: UTF8
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'yes'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using cleartext password: check that password not changed when clearing
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'yes'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password not changed when clearing
         the password again'
-      environment:
-        PGCLIENTENCODING: UTF8
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'no'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password changed when using a cleartext
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'no'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password changed when using a cleartext
         password'
-      environment:
-        PGCLIENTENCODING: UTF8
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: '{{ db_password1 }}'
-        encrypted: 'yes'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    when: encrypted == 'yes'
-  - block:
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using cleartext password: check that password not changed when using
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: '{{ db_password1 }}'
+            encrypted: 'yes'
+        - name: Check that ansible reports it was created
+          assert: *id001
+      when: encrypted == 'yes'
+    - block:
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password not changed when using
         cleartext password'
-      environment:
-        PGCLIENTENCODING: UTF8
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: '{{ db_password1 }}'
-        encrypted: 'no'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: Redefine the same expiration time and password (not encrypted)
-      environment:
-        PGCLIENTENCODING: UTF8
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: '{{ db_password1 }}'
-        encrypted: 'no'
-        expires: '2025-01-01'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using cleartext password: check that password changed when using another
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: '{{ db_password1 }}'
+            encrypted: 'no'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: Redefine the same expiration time and password (not encrypted)
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: '{{ db_password1 }}'
+            encrypted: 'no'
+            expires: '2025-01-01'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password changed when using another
         cleartext password'
-      environment:
-        PGCLIENTENCODING: UTF8
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: changed{{ db_password1 }}
-        encrypted: 'no'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using cleartext password: check that password changed when clearing the
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: changed{{ db_password1 }}
+            encrypted: 'no'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password changed when clearing the
         password'
-      environment:
-        PGCLIENTENCODING: UTF8
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'no'
+        - name: Check that ansible reports it was created
+          assert: *id001
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password not changed when clearing
+        the password again'
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'no'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using MD5-hashed password: check that password not changed when clearing
+        the password again'
+          environment:
+            PGCLIENTENCODING: UTF8
+            PGOPTIONS: -c default_transaction_read_only=on
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: ''
+            encrypted: 'yes'
+        - name: Check that ansible reports no change
+          assert: *id002
+        - become_user: '{{ pg_user }}'
+          become: true
+          register: result
+          name: 'Using cleartext password: check that password changed when using cleartext
+        password'
+          environment:
+            PGCLIENTENCODING: UTF8
+          database.postgresql.postgresql_user:
+            db: postgres
+            name: '{{ db_user1 }}'
+            login_user: '{{ pg_user }}'
+            password: '{{ db_password1 }}'
+            encrypted: 'no'
+        - name: Check that ansible reports it was created
+          assert: *id001
+      when: encrypted == 'no'
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Remove user
       database.postgresql.postgresql_user:
         db: postgres
         name: '{{ db_user1 }}'
         login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'no'
+        state: absent
     - name: Check that ansible reports it was created
       assert: *id001
     - become_user: '{{ pg_user }}'
       become: true
       register: result
-      name: 'Using cleartext password: check that password not changed when clearing
-        the password again'
+      name: Check that they were removed
+      shell: echo "select * from pg_user where usename='{{ db_user1 }}';" | psql -d
+        postgres
       environment:
-        PGCLIENTENCODING: UTF8
+        PGOPTIONS: -c default_transaction_read_only=on
+    - assert:
+        that:
+          - result.stdout_lines[-1] == '(0 rows)'
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Check that removing user a second time does nothing
+      environment:
         PGOPTIONS: -c default_transaction_read_only=on
       database.postgresql.postgresql_user:
         db: postgres
         name: '{{ db_user1 }}'
         login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'no'
+        state: absent
     - name: Check that ansible reports no change
       assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using MD5-hashed password: check that password not changed when clearing
-        the password again'
-      environment:
-        PGCLIENTENCODING: UTF8
-        PGOPTIONS: -c default_transaction_read_only=on
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: ''
-        encrypted: 'yes'
-    - name: Check that ansible reports no change
-      assert: *id002
-    - become_user: '{{ pg_user }}'
-      become: true
-      register: result
-      name: 'Using cleartext password: check that password changed when using cleartext
-        password'
-      environment:
-        PGCLIENTENCODING: UTF8
-      database.postgresql.postgresql_user:
-        db: postgres
-        name: '{{ db_user1 }}'
-        login_user: '{{ pg_user }}'
-        password: '{{ db_password1 }}'
-        encrypted: 'no'
-    - name: Check that ansible reports it was created
-      assert: *id001
-    when: encrypted == 'no'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Remove user
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      state: absent
-  - name: Check that ansible reports it was created
-    assert: *id001
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Check that they were removed
-    shell: echo "select * from pg_user where usename='{{ db_user1 }}';" | psql -d
-      postgres
-    environment:
-      PGOPTIONS: -c default_transaction_read_only=on
-  - assert:
-      that:
-      - result.stdout_lines[-1] == '(0 rows)'
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Check that removing user a second time does nothing
-    environment:
-      PGOPTIONS: -c default_transaction_read_only=on
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      state: absent
-  - name: Check that ansible reports no change
-    assert: *id002
   always:
-  - become_user: '{{ pg_user }}'
-    become: true
-    register: result
-    name: Remove user
-    database.postgresql.postgresql_user:
-      db: postgres
-      name: '{{ db_user1 }}'
-      login_user: '{{ pg_user }}'
-      state: absent
+    - become_user: '{{ pg_user }}'
+      become: true
+      register: result
+      name: Remove user
+      database.postgresql.postgresql_user:
+        db: postgres
+        name: '{{ db_user1 }}'
+        login_user: '{{ pg_user }}'
+        state: absent

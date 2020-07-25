@@ -1,6 +1,9 @@
 import unittest
+
 from ansiblelint import RulesCollection, Runner
+
 from ansiblelints.rules.HardCodePassword import HardCodePassword
+
 
 class TestHardCodePassword(unittest.TestCase):
     collection = RulesCollection()

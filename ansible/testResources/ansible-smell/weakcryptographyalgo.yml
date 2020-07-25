@@ -22,5 +22,5 @@
 - name: Cleanup files from certificates
   file: state=absent path="{{ item }}"
   with_items:
-  - "/tmp/{{ ansible_fqdn }}-crt.pem"
-  - "/tmp/{{ ansible_fqdn }}-key.pem"
+    - "/tmp/{{ ansible_fqdn }}-crt.pem"
+    - "/tmp/{{ ansible_fqdn }}-key.pem"

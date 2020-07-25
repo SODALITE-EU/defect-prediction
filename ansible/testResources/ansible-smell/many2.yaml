@@ -13,7 +13,7 @@
         sslverify: yes
         sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
       when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
-    - name: install grafana 
+    - name: install grafana
       yum:
         name: grafana
       when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
@@ -25,14 +25,14 @@
         state: restarted
         enabled: yes
       when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
-    - name: check status firewalld 
+    - name: check status firewalld
       shell: "firewall-cmd --state"
       register: status
       failed_when:
-        - status.rc != 0 
+        - status.rc != 0
         - status.rc != 252
       when: ansible_distribution == "CentOS" and ansible_distribution_version == '7'
-    - name: Firewalld setting 
+    - name: Firewalld setting
       firewalld:
         port: 3000/tcp
         immediate: yes

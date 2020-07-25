@@ -12,7 +12,7 @@
   lineinfile:
     dest: /etc/sysconfig/docker
     regexp: '^OPTIONS="'
-    line: OPTIONS="--default-ulimit nofile=1024:4096 -H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375" 
+    line: OPTIONS="--default-ulimit nofile=1024:4096 -H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375"
   become: true
 - name: start docker
   service:
@@ -76,7 +76,7 @@
     group: jenkins
   become: true
   with_items:
- #   - github-plugin-configuration.xml
+    #   - github-plugin-configuration.xml
     - jenkins.model.JenkinsLocationConfiguration.xml
     - jenkins.pem
 #- name: Remove secrets
@@ -111,25 +111,25 @@
 #  failed_when: "result.stderr != '' and 'No change' not in result.stderr"
 - name: Create Jobs
   shell: >
-        cat /opt/{{item}} | 
-        java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
-        create-job $(echo {{item}} | sed 's/\.[^.]*$//')
-        --username {{jenkins_admin_username}}
-        --password {{jenkins_admin_password}}
+    cat /opt/{{item}} |
+    java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
+    create-job $(echo {{item}} | sed 's/\.[^.]*$//')
+    --username {{jenkins_admin_username}}
+    --password {{jenkins_admin_password}}
   with_items:
     - nestbuild.xml
-  failed_when: "result.stderr != '' and 'No change' not in result.stderr" 
+  failed_when: "result.stderr != '' and 'No change' not in result.stderr"
 - name: Reload Configs
   shell: >
-        java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
-        reload-configuration
-        --username {{jenkins_admin_username}}
-        --password {{jenkins_admin_password}}
+    java -jar {{jenkins_jar_location}} -s http://{{jenkins_hostname}}:{{jenkins_http_port}}{{jenkins_url_prefix}}/
+    reload-configuration
+    --username {{jenkins_admin_username}}
+    --password {{jenkins_admin_password}}
   changed_when: false
   notify: restart Jenkins
 
 - name: Start Ansible Docker
-  docker_container: 
+  docker_container:
     name: ansible
     image: teamidefix/ansible
 #- name: Add Docker as host

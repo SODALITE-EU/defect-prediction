@@ -8,11 +8,11 @@ tinyproxy_startservers: 10
 tinyproxy_maxrequest: 0
 
 tinyproxy_allowed_subnets:
-    - 0.0.0.0
+  - 0.0.0.0
 tinyproxy_denied_subnets: []
 
 tinyproxy_listen_addresses:
-    - 0.0.0.0
+  - 0.0.0.0
 tinyproxy_port: 8888
 
 tinyproxy_upstream_proxies: []

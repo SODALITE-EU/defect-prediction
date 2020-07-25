@@ -1,2 +1,14 @@
 ansible-lint
 flask
+pandas
+numpy
+pickle-mixin
+gensim
+keras
+tensorflow
+spacy
+treelib
+anytree
+pyyaml
+requests
+beautifulsoup4

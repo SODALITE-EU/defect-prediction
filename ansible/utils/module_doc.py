@@ -4,10 +4,10 @@ from utils.ident_ans_mods import identify_ansible_modules
 from utils.module_parameters import get_module_parameters, map_module_used_parameters
 
 
-def match_tasks_doc(pkl_file_tasks):
+def match_tasks_doc(tasks):
     # 'tasks_from_repos.pkl'
-    with open(pkl_file_tasks, 'rb') as input_file:
-        tasks = pickle.load(input_file)
+    # with open(pkl_file_tasks, 'rb') as input_file:
+    #     tasks = pickle.load(input_file)
     descriptions = tasks[['task_name', 'method_description']]
     with open('data\\modules.pkl', 'rb') as input_file:
         mda = pickle.load(input_file)
@@ -30,7 +30,7 @@ def match_tasks_doc(pkl_file_tasks):
     one_key_set = tasks_10[tasks_10['mod_keys_found'].apply(lambda x: len(x) < 2)]
     one_key_set['mod_keys_found_string'] = one_key_set['mod_keys_found'].apply(lambda x: ''.join(x))
     params_dict = get_module_parameters(top10_module_list)
-    one_key_set = one_key_set.drop(columns=['found_used_parameters'])
+    # one_key_set = one_key_set.drop(columns=['found_used_parameters'])
     one_key_set['found_used_parameters'] = one_key_set['method_description'].apply(
         lambda x: map_module_used_parameters(x, params_dict))
     return one_key_set

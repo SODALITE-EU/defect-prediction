@@ -5,10 +5,16 @@ from flask import Flask, json, request, Response
 from werkzeug.utils import secure_filename
 
 import Linter
-from utils.mutation import process_tasks
+from utils.ansible_ast import build_ast
+from utils.module_doc import match_tasks_doc
+from utils.mutation import process_tasks, finalize_tokenization
+from utils.w2c_cnn import predict
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+import nltk
+
+nltk.download('punkt')
 
 
 @app.route('/bugs/ansible/json', methods=['POST'])
@@ -62,7 +68,7 @@ def detect_linguistic_bugs():
         filename = secure_filename(file.filename)
         file_path = os.path.join(soda_home, filename)
         file.save(file_path)
-        res = verify(file_path)
+        res = detect_linguistic_ap(file_path)
         if os.path.exists(file_path):
             os.remove(file_path)
         else:
@@ -70,11 +76,14 @@ def detect_linguistic_bugs():
         return res
 
 
-def verify(file):
+def detect_linguistic_ap(file):
     tasks_df = process_tasks(file)
-    print(tasks_df)
-    js = json.dumps(tasks_df, sort_keys=False, indent=4)
-
+    tasks_mapped_module_parameters = match_tasks_doc(tasks_df)
+    m10 = build_ast(tasks_mapped_module_parameters)
+    tokenized_df = finalize_tokenization(m10)
+    tokenized_df = tokenized_df[['task_name', 'task_complete', 'mod_keys_found_string']]
+    results = predict(tokenized_df)
+    js = json.dumps(results, sort_keys=False, indent=4)
     resp = Response(js, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'
@@ -92,7 +101,6 @@ def run_detector(file, action_id, deployment_id):
                                   "description": str(match.message)}}
         data.append(bugrecord)
     js = json.dumps(bugs, sort_keys=False, indent=4)
-
     resp = Response(js, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'

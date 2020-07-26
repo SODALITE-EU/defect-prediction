@@ -135,3 +135,18 @@ def mutate(mapped10_ast_token):
     merged2['task_com'] = merged2['token_task_names'] + merged2['third_tokens']
     merged2['task_complete'] = merged2['task_com'].apply(lambda x: correct_first_token_name2(x))
     return merged2
+
+
+def finalize_tokenization(tokenized_data):
+    m10 = deepcopy(tokenized_data)
+    m10['token_task_names'] = m10['token_task_names'].apply(lambda x: remove_symbols_simple(x))
+    m10['third_tokens'] = m10['third_tokens'].apply(lambda x: remove_symbols_simple(x))
+    m10.head()
+    m = deepcopy(m10)
+    m['token_task_names'] = m['token_task_names'].apply(lambda x: ['TaskName'] + x)
+    mm = deepcopy(m)
+    mm['third_tokens'] = mm['third_tokens'].apply(lambda x: correct_first_token_name(x))
+    merged2 = deepcopy(mm)
+    merged2['task_com'] = merged2['token_task_names'] + merged2['third_tokens']
+    merged2['task_complete'] = merged2['task_com'].apply(lambda x: correct_first_token_name2(x))
+    return merged2

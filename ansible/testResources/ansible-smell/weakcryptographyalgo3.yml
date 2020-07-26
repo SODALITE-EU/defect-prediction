@@ -54,8 +54,8 @@
         # - name: Set boot loader password (Ubuntu)
         # lineinfile: >
         # dest=/etc/grub.d/00_header
-        # state=present
-        # insertafter="EOF"
+      # state=present
+      # insertafter="EOF"
       # line='password_pbkdf2 {{ boot_loader_password_user }} {{ boot_loader_password_ubuntu }}'
       # when: ansible_distribution == "Ubuntu"
 

@@ -5,8 +5,8 @@ from utils.build_sequence_tokens import return_tokens, \
 from utils.pre_process import remove_symbols, flatten_list
 
 
-def build(pkl_file_tasks_module_mapped_parameters):
-    mapped10 = pkl_file_tasks_module_mapped_parameters.copy()
+def build_ast(tasks_mapped_module_parameters):
+    mapped10 = tasks_mapped_module_parameters.copy()
     mapped10['has_params'] = mapped10['found_used_parameters'].apply(lambda x: is_empty(x['intersected_params']))
     mapped10['initial_ast'] = mapped10['method_description'].apply(lambda x: return_tokens(x))
     mapped10['second_ast'] = mapped10['initial_ast'].apply(lambda x: convert_int_bool_to_str(x))

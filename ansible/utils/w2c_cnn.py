@@ -210,12 +210,33 @@ def _train(mutated, module_name):
     return json_out
 
 
-def _predict(val_set, module_name):
+def _predict(test_set_module, module_name):
     model = tensorflow.keras.models.load_model('models\\' + module_name)
     node, size = model.get_input_shape_at(0)
-    val_set['task_complete_one_string'] = val_set['task_complete'].apply(lambda x: list_to_string(x))
+    test_set_module['task_complete_one_string'] = test_set_module['task_complete'].apply(lambda x: list_to_string(x))
     tokenizer_val = Tokenizer(lower=False)
-    tokenizer_val.fit_on_texts(val_set['task_complete'])
-    tasks_val_tokens = tokenizer_val.texts_to_sequences(val_set['task_complete_one_string'])
+    tokenizer_val.fit_on_texts(test_set_module['task_complete'])
+    tasks_val_tokens = tokenizer_val.texts_to_sequences(test_set_module['task_complete_one_string'])
     tasks_val_pad = pad_sequences(tasks_val_tokens, maxlen=size, padding='post')
     return model.predict(tasks_val_pad)
+
+
+def predict(test_set):
+    with open('data\\top10_list.pkl', 'rb') as input_file:
+        top10_list = pickle.load(input_file)
+    mergedlist = []
+    for x in top10_list:
+        val_set2 = test_set.copy()
+        val_set2 = val_set2[val_set2['mod_keys_found_string'] == x]
+        if val_set2.empty:
+            continue
+        result = _predict(val_set2, x)
+        y_classes = result.argmax(axis=-1)
+        val_set2['consistent'] = y_classes.tolist()
+        val_set2['consistent'] = val_set2['consistent'].apply(lambda x: True if x == 1 else False)
+        val_set2 = val_set2[['task_name', 'consistent']]
+        dic = val_set2.to_dict(orient='records')
+        for item in dic:
+            mergedlist.append(item)
+
+    return json.dumps(mergedlist)

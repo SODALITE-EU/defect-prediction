@@ -1,7 +1,8 @@
 ansible-lint
 flask
 pandas
-numpy
+numpy==1.19.0
+scipy==1.4.1
 pickle-mixin
 gensim
 keras

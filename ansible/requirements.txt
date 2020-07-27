@@ -1,14 +1,14 @@
-ansible-lint
+# ansible-lint
 flask
-pandas
+pandas==1.0.5
 numpy==1.16.0
-nltk
+nltk==3.5
 scipy==1.4.1
 pickle-mixin
 gensim
-keras
-tensorflow
-spacy
+keras==2.4.3
+tensorflow==2.3.0
+spacy==2.3.2
 treelib
 anytree
 pyyaml

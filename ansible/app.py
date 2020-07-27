@@ -1,4 +1,5 @@
 import os
+import pickle
 from pathlib import Path
 
 from flask import Flask, json, request, Response
@@ -8,7 +9,7 @@ import Linter
 from utils.ansible_ast import build_ast
 from utils.module_doc import match_tasks_doc
 from utils.mutation import process_tasks, finalize_tokenization
-from utils.w2c_cnn import predict
+from utils.w2c_cnn import predict, train
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -74,6 +75,19 @@ def detect_linguistic_bugs():
         else:
             print("The file does not exist to be removed")
         return res
+
+
+@app.route('/bugs/ansible/linguistic/train', methods=['POST'])
+def re_train():
+    with open('data/mutated.pkl', 'rb') as input_file:
+        mutated = pickle.load(input_file)
+    mutated_selected = mutated[['task_name', 'task_complete', 'mod_keys_found_string', 'consistent']]
+    js = train(mutated_selected)
+    resp = Response(js, status=200, mimetype='application/json')
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Allow-Methods'] = 'POST'
+    resp.headers['Access-Control-Max-Age'] = '1000'
+    return resp
 
 
 def detect_linguistic_ap(file):

@@ -9,7 +9,7 @@ def match_tasks_doc(tasks):
     # with open(pkl_file_tasks, 'rb') as input_file:
     #     tasks = pickle.load(input_file)
     descriptions = tasks[['task_name', 'method_description']]
-    with open('data\\modules.pkl', 'rb') as input_file:
+    with open('data/modules.pkl', 'rb') as input_file:
         mda = pickle.load(input_file)
     df_desc_mod = descriptions.copy()
     df_desc_mod = df_desc_mod.reset_index()
@@ -19,7 +19,7 @@ def match_tasks_doc(tasks):
     df = df[df['mod_keys_found'].apply(len).gt(0)]
     tasks_ast_raw = df.reset_index(drop=True)
 
-    with open('data\\top10_list.pkl', 'rb') as input_file:
+    with open('data/top10_list.pkl', 'rb') as input_file:
         top10_module_list = pickle.load(input_file)
 
     tasks_ast_raw = tasks_ast_raw[

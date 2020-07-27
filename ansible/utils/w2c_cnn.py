@@ -34,7 +34,7 @@ def tokens_to_string(tokens, inverse_map=None):
 
 
 def train(mutated):
-    with open('data\\top10_list.pkl', 'rb') as input_file:
+    with open('data/top10_list.pkl', 'rb') as input_file:
         top10_list = pickle.load(input_file)
 
     titles = []
@@ -203,7 +203,7 @@ def _train(mutated, module_name):
         "AUC": lr_auc
     }
     # y = json.dumps(json_out)
-    model.save('models\\' + module_name)
+    model.save('models/' + module_name)
     # with open('models\\' + module_name + '.pkl', 'wb') as output_file:
     #     pickle.dump(model, output_file)
 
@@ -211,7 +211,7 @@ def _train(mutated, module_name):
 
 
 def _predict(test_set_module, module_name):
-    model = tensorflow.keras.models.load_model('models\\' + module_name)
+    model = tensorflow.keras.models.load_model('models/' + module_name)
     node, size = model.get_input_shape_at(0)
     test_set_module['task_complete_one_string'] = test_set_module['task_complete'].apply(lambda x: list_to_string(x))
     tokenizer_val = Tokenizer(lower=False)
@@ -222,7 +222,7 @@ def _predict(test_set_module, module_name):
 
 
 def predict(test_set):
-    with open('data\\top10_list.pkl', 'rb') as input_file:
+    with open('data/top10_list.pkl', 'rb') as input_file:
         top10_list = pickle.load(input_file)
     mergedlist = []
     for x in top10_list:

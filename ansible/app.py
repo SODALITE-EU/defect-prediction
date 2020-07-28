@@ -82,8 +82,8 @@ def re_train():
     with open('data/mutated.pkl', 'rb') as input_file:
         mutated = pickle.load(input_file)
     mutated_selected = mutated[['task_name', 'task_complete', 'mod_keys_found_string', 'consistent']]
-    js = train(mutated_selected)
-    resp = Response(js, status=200, mimetype='application/json')
+    results = train(mutated_selected)
+    resp = Response(results, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'
     resp.headers['Access-Control-Max-Age'] = '1000'
@@ -97,8 +97,7 @@ def detect_linguistic_ap(file):
     tokenized_df = finalize_tokenization(m10)
     tokenized_df = tokenized_df[['task_name', 'task_complete', 'mod_keys_found_string']]
     results = predict(tokenized_df)
-    js = json.dumps(results, indent=4, sort_keys=True)
-    resp = Response(js, status=200, mimetype='application/json')
+    resp = Response(results, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST'
     resp.headers['Access-Control-Max-Age'] = '1000'

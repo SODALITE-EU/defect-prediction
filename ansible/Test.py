@@ -13,16 +13,16 @@ m10 = build_ast(tasks_mapped_module_parameters)
 tokenized_df = finalize_tokenization(m10)
 # print(tokenized_df)
 # print(tokenized_df.columns)
-with open('data/mutated.pkl', 'rb') as input_file:
-    mutated = pickle.load(input_file)
-
-# with open('data\\mutated_valid.pkl', 'rb') as input_file:
-#     testdata = pickle.load(input_file)
+# with open('data/mutated.pkl', 'rb') as input_file:
+#     mutated = pickle.load(input_file)
 #
-mutated_selected = mutated[['task_name', 'task_complete', 'mod_keys_found_string', 'consistent']]
-# print(mutated_selected.columns)
-# # print(mutated_selected)
-print(train(mutated_selected))
+# # with open('data\\mutated_valid.pkl', 'rb') as input_file:
+# #     testdata = pickle.load(input_file)
+# #
+# mutated_selected = mutated[['task_name', 'task_complete', 'mod_keys_found_string', 'consistent']]
+# # print(mutated_selected.columns)
+# # # print(mutated_selected)
+# print(train(mutated_selected))
 #
 # testdata = testdata[testdata['mod_keys_found_string'] == 'shell']
 # testdata = testdata[['task_name', 'task_complete', 'mod_keys_found_string']]

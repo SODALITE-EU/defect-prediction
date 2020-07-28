@@ -239,4 +239,4 @@ def predict(test_set):
         for item in dic:
             mergedlist.append(item)
 
-    return json.dumps(mergedlist, indent=4, sort_keys=True)
+    return json.dumps(mergedlist, indent=4, sort_keys=False)

@@ -1,4 +1,4 @@
-# ansible-lint
+ansible-lint
 flask
 pandas==1.0.5
 numpy==1.16.0

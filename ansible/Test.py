@@ -7,11 +7,10 @@ from utils.w2c_cnn import predict,train
 
 nltk.download('punkt')
 
-# tasks_df = process_tasks("C:\\Postdoc\\projects\\sodalite-eu"
-#                          "\\defect-prediction\\ansible\\testResources\\ansible-smell\\httpwithouttls.yml")
-# tasks_mapped_module_parameters = match_tasks_doc(tasks_df)
-# m10 = build_ast(tasks_mapped_module_parameters)
-# tokenized_df = finalize_tokenization(m10)
+tasks_df = process_tasks("testResources/ansible-smell/httpwithouttls.yml")
+tasks_mapped_module_parameters = match_tasks_doc(tasks_df)
+m10 = build_ast(tasks_mapped_module_parameters)
+tokenized_df = finalize_tokenization(m10)
 # print(tokenized_df)
 # print(tokenized_df.columns)
 with open('data/mutated.pkl', 'rb') as input_file:

@@ -68,7 +68,7 @@ sudo docker image ls
 
 ## REST APIs
 
-# TOSCA
+# TOSCA Smells
 
 ```
 POST http://{serverIP}:8080/bug-predictor-api/v0.1/bugs/tosca/json
@@ -81,14 +81,31 @@ A sample request
 	"server" : "y" # optional
 }
 ```
+
+Or, Send the TOSCA file as multipart/form-data (name:” file”, value: actual file)
+
 ```
 POST http://{serverIP}:8080/bug-predictor-api/v0.1/bugs/tosca/file
 ```
-Send the TOSCA file as multipart/form-data (name:” file”, value: actual file)
 
-# Ansible
+
+# Ansible Smells 
 ```
-http://{serverIP}:5000//bugs/ansible/file
+http://{serverIP}:5000/bugs/ansible/file
 ```
 Send the Ansible file as multipart/form-data (name:” file”, value: actual file)
+
+# Ansible Linguistic Anti-patterns
+
+To retrain the deep learning models (optinal)
+
+```
+http://{serverIP}:5000/bugs/ansible/linguistic/train
+```
+
+To detect/predict linguistic anti-patterns, send the Ansible file as multipart/form-data (name:” file”, value: actual file)
+
+```
+http://{serverIP}:5000/bugs/ansible/linguistic/file
+```
 

@@ -71,7 +71,7 @@ sudo docker image ls
 # TOSCA Smells
 
 ```
-POST http://{serverIP}:8080/bug-predictor-api/v0.1/bugs/tosca/json
+POST http://ip:8080/bug-predictor-api/v0.1/bugs/tosca/jsonv2
 ```
 A sample request
 ```

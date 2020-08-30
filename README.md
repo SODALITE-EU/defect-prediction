@@ -108,4 +108,4 @@ To detect/predict linguistic anti-patterns, send the Ansible file as multipart/f
 ```
 http://{serverIP}:5000/bugs/ansible/linguistic/file
 ```
-
+ 

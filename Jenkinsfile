@@ -21,8 +21,7 @@ pipeline {
         steps {
             sh  """ #!/bin/bash
 			        cd ansible
-                    pip3 install -r requirements.txt
-                    pip3 install -e .
+                    pip3 install -r requirements.txt                  
                     python3 -m pytest --pyargs -s ${WORKSPACE}/tests --junitxml="results.xml" --cov=components --cov=models --cov-report xml tests/
                 """
             junit 'results.xml'

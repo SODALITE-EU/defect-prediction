@@ -21,8 +21,12 @@ pipeline {
         steps {
             sh  """ #!/bin/bash
 			        cd ansible
-                    pip3 install -r requirements.txt                  
-                    python3 -m pytest --pyargs -s ./tests --junitxml="results.xml" --cov=components --cov=models --cov-report xml tests/
+                    python3 -mvenv .venv
+					. .venv/bin/activate
+					python3 -m pip install --upgrade pip
+					python3 -m pip install -r requirements.txt                 
+                    python3 -m pytest --pyargs -s ./tests --junitxml="results.xml" --cov-report xml tests/
+					cp *.xml $WORKSPACE
                 """
             junit 'results.xml'
         }

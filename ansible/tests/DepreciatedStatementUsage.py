@@ -1,4 +1,3 @@
-import pytest
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
 

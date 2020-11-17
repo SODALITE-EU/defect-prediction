@@ -8,7 +8,7 @@ class TestAdminByDefault:
 
     def test_file(self):
         collection = RulesCollection()
-        self.collection.register(HardCodedSecrets())
+        collection.register(HardCodedSecrets())
         success = 'testResources/ansible-smell/create.yml'
         good_runner = Runner(collection, success, [], [], [])
         # print(good_runner.run())

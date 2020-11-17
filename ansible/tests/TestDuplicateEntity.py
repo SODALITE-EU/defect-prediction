@@ -1,7 +1,8 @@
 import collections
 import unittest
 
-from ansiblelint import RulesCollection, Runner
+from ansiblelint.rules import RulesCollection
+from ansiblelint.runner import Runner
 
 from ansiblelints.stage.DuplicateEntity import DuplicateEntity
 

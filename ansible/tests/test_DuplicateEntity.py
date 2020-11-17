@@ -1,5 +1,4 @@
 import collections
-import unittest
 
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner

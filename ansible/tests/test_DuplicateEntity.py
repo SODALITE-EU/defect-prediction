@@ -7,13 +7,11 @@ from ansiblelint.runner import Runner
 from ansiblelints.stage.DuplicateEntity import DuplicateEntity
 
 
-class TestDuplicateEntity(unittest.TestCase):
-    collection = RulesCollection()
-
-    def setUp(self):
-        self.collection.register(DuplicateEntity())
+class TestDuplicateEntity:
 
     def test_file(self):
+        collection = RulesCollection()
+        self.collection.register(DuplicateEntity())
         file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
         good_runner = Runner(self.collection, file_name, [], [], [])
 

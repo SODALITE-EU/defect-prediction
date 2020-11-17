@@ -1,4 +1,4 @@
-from ansiblelint import AnsibleLintRule, Match
+from ansiblelint.rules import AnsibleLintRule
 
 
 def issuspicious(line):
@@ -25,6 +25,8 @@ class SuspiciousComment(AnsibleLintRule):
         # so use prev_line_no as the counter
         for (prev_line_no, line) in enumerate(text.split("\n")):
             if issuspicious(line):
-                matches.append(Match(prev_line_no + 1, line,
-                                     file['path'], self, self.shortdesc))
+                matches.append(({'file_path': file['path']},
+                                self.shortdesc))
+                # matches.append(Match(prev_line_no + 1, line,
+                #                      file['path'], self, self.shortdesc))
         return matches

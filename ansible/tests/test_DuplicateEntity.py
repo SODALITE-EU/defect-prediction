@@ -11,9 +11,9 @@ class TestDuplicateEntity:
 
     def test_file(self):
         collection = RulesCollection()
-        self.collection.register(DuplicateEntity())
+        collection.register(DuplicateEntity())
         file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
-        good_runner = Runner(self.collection, file_name, [], [], [])
+        good_runner = Runner(collection, file_name, [], [], [])
 
         name_list = []
         for item in good_runner.run():

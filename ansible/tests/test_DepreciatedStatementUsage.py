@@ -9,9 +9,9 @@ class TestDepreciatedStatementUsage:
 
     def test_file(self):
         collection = RulesCollection()
-        self.collection.register(DepreciatedStatementUsage())
+        collection.register(DepreciatedStatementUsage())
 
         file_name = 'testResources/ansible-smell/adminbydefault.yml'
-        good_runner = Runner(self.collection, file_name, [], [], [])
+        good_runner = Runner(collection, file_name, [], [], [])
 
         print(good_runner.run())

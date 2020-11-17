@@ -15,4 +15,4 @@ class TestInvalidIPaddressbinding:
         print(result)
         print(type(result))
         print(len(result))
-        self.assertGreaterEqual(1, len(good_runner.run()))
+        assert 1 == len(good_runner.run())

@@ -13,5 +13,4 @@ class TestSuspiciousComment(unittest.TestCase):
         collection.register(SuspiciousComment())
         file_name = str('testResources/ansible-smell/suspiciouscomment.yml')
         good_runner = Runner(collection, file_name, [], [], [])
-        for item in good_runner.run():
-            print(item)
+        print(good_runner.run())

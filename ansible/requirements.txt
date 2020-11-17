@@ -17,3 +17,5 @@ requests
 beautifulsoup4
 scikit-learn
 matplotlib
+pytest
+pytest-cov

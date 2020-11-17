@@ -17,13 +17,19 @@ pipeline {
         build 'semantic-reasoner/master'
       }
     }
-    stage ('Run Ansible Smells Tests') {
-      steps {
-        sh  """ #!/bin/bash
-                cd ansible
-                python3 -m unittest tests/Test*.py
-            """
-      }
+    stage('Test ansible-defect') {
+        steps {
+            sh  """ #!/bin/bash
+			        cd ansible
+                    python3 -mvenv .venv
+					. .venv/bin/activate
+					python3 -m pip install --upgrade pip
+					python3 -m pip install -r requirements.txt                 
+                    python3 -m pytest --pyargs -s ./tests --junitxml="results.xml" --cov-report xml tests/
+					cp *.xml $WORKSPACE
+                """
+            junit 'results.xml'
+        }
     }
     stage ('Build defect-prediction') {
       steps {
@@ -34,7 +40,7 @@ pipeline {
         archiveArtifacts artifacts: '**/*.war, **/*.jar', onlyIfSuccessful: true
       }
     }
-    stage('SonarQube analysis'){
+    stage('SonarQube analysis TOSCA'){
         environment {
           scannerHome = tool 'SonarQubeScanner'
         }
@@ -47,7 +53,19 @@ pipeline {
             }
         }
     }
-  
+    stage('SonarQube analysis Ansible'){
+        environment {
+          scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('SonarCloud') {
+                sh  """ #!/bin/bash
+                        cd "ansible"
+                        ${scannerHome}/bin/sonar-scanner
+                    """
+            }
+        }
+    }
    stage('Build docker images') {
             steps {
                 sh "cd tosca; docker build -t toscasmells  -f Dockerfile ."

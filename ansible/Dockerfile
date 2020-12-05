@@ -1,5 +1,5 @@
-# Using python:3.8-alpine image
-FROM python:3.8-alpine
+# Using python:3.7-slim-buster image
+FROM python:3.7-slim-buster
 # Defining working directory and copy the requirements file
 WORKDIR /usr/src/myapp
 COPY requirements.txt .

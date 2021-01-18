@@ -84,9 +84,6 @@ def re_train():
     mutated_selected = mutated[['task_name', 'task_complete', 'mod_keys_found_string', 'consistent']]
     results = train(mutated_selected)
     resp = Response(results, status=200, mimetype='application/json')
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers['Access-Control-Allow-Methods'] = 'POST'
-    resp.headers['Access-Control-Max-Age'] = '1000'
     return resp
 
 
@@ -98,9 +95,6 @@ def detect_linguistic_ap(file):
     tokenized_df = tokenized_df[['task_name', 'task_complete', 'mod_keys_found_string']]
     results = predict(tokenized_df)
     resp = Response(results, status=200, mimetype='application/json')
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers['Access-Control-Allow-Methods'] = 'POST'
-    resp.headers['Access-Control-Max-Age'] = '1000'
     return resp
 
 
@@ -115,9 +109,6 @@ def run_detector(file, action_id, deployment_id):
         data.append(bugrecord)
     js = json.dumps(bugs, sort_keys=False, indent=4)
     resp = Response(js, status=200, mimetype='application/json')
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.headers['Access-Control-Allow-Methods'] = 'POST'
-    resp.headers['Access-Control-Max-Age'] = '1000'
     return resp
 
 

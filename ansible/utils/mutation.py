@@ -1,5 +1,5 @@
-import logging  # Setting up the loggings to monitor gensim
 import os
+import os.path
 import os.path
 from copy import deepcopy
 
@@ -7,8 +7,6 @@ import pandas as pd
 import yaml
 
 from utils.trainutil import mutate_descriptions2, remove_symbols_simple
-
-logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt='%H:%M:%S', level=logging.INFO)
 
 
 def split_task_name_body(task_dict):

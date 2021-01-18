@@ -1,7 +1,6 @@
-from treelib import Node
-from nltk import word_tokenize
-
 from anytree import Node, PreOrderIter
+from nltk import word_tokenize
+from treelib import Node
 
 
 def is_empty(params):

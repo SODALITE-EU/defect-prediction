@@ -12,6 +12,3 @@ class TestHttpWithoutTls:
         success = 'testResources/ansible-smell/httpwithouttls2.yml'
         good_runner = Runner(collection, success, [], [], [])
         print(good_runner.run())
-        # print(type(good_runner.run()))
-        # print(len(good_runner.run()))
-        # self.assertGreaterEqual(1, len(good_runner.run()))

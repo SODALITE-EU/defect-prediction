@@ -11,14 +11,11 @@ from sklearn.metrics import roc_auc_score
 from tensorflow.python.keras import layers
 from tensorflow.python.keras import regularizers
 from tensorflow.python.keras.layers import Dropout
-from tensorflow.python.keras.layers import Input, Embedding
+from tensorflow.python.keras.layers import Embedding
 from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.optimizers import Adam, SGD
+from tensorflow.python.keras.optimizers import SGD
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.preprocessing.text import Tokenizer
-
-
-# tf.compat.v1.disable_eager_execution()
 
 
 def list_to_string(lst):
@@ -86,13 +83,9 @@ def _train(mutated, module_name):
     np.argmax(num_tokens)
     max_tokens = np.mean(num_tokens) + 2 * np.std(num_tokens)
     max_tokens = int(max_tokens)
-    np.sum(num_tokens < max_tokens) / len(num_tokens)
     tasks_train_pad = pad_sequences(tasks_train_tokens, maxlen=max_tokens, padding='post')
     tasks_test_pad = pad_sequences(tasks_test_tokens, maxlen=max_tokens, padding='post')
     tasks_val_pad = pad_sequences(tasks_val_tokens, maxlen=max_tokens, padding='post')
-
-    idx = tokenizer_train.word_index
-    inverse_map = dict(zip(idx.values(), idx.keys()))
 
     embedding_size = 100
     num_words = len(list(tokenizer_train.word_index)) + 1
@@ -105,16 +98,8 @@ def _train(mutated, module_name):
                 embedding_matrix[i] = embedding_vector
 
     sequence_length = max_tokens
-    vocabulary_size = num_words
-    embedding_dim = embedding_size
-    filter_sizes = [3, 4, 5]
     batch_size = 256
 
-    embedding_layer = Embedding(input_dim=num_words, output_dim=embedding_size, weights=[embedding_matrix],
-                                input_length=max_tokens, trainable=False, name='embedding_layer')
-    inputs = Input(shape=(sequence_length,))
-    embedding = embedding_layer(inputs)
-    sample_size = tasks_train_pad.shape
     tensorflow.compat.v1.disable_eager_execution()
 
     # CNN architecture
@@ -122,12 +107,10 @@ def _train(mutated, module_name):
     num_classes = 2
 
     # Training params
-    # batch_size = 256
     num_epochs = 20
 
     # Model parameters
     num_filters = 64
-    embed_dim = embedding_size
     weight_decay = 1e-4
 
     print("training CNN ...")
@@ -154,10 +137,8 @@ def _train(mutated, module_name):
 
     model.add(layers.Flatten())
     model.add(layers.Dense(128, activation='relu', kernel_regularizer=regularizers.l2(weight_decay)))
-    # model.add(BatchNormalization())
     model.add(layers.Dense(num_classes, activation='softmax'))
 
-    adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
     sgd = SGD(lr=1e-2, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss=tensorflow.keras.losses.MeanAbsoluteError(), optimizer=sgd, metrics=['accuracy'])
     model.summary()
@@ -202,11 +183,7 @@ def _train(mutated, module_name):
         "MCC": mcc,
         "AUC": lr_auc
     }
-    # y = json.dumps(json_out)
     model.save('models/' + module_name)
-    # with open('models\\' + module_name + '.pkl', 'wb') as output_file:
-    #     pickle.dump(model, output_file)
-
     return json_out
 
 

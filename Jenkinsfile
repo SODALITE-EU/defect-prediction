@@ -25,7 +25,7 @@ pipeline {
 					. .venv/bin/activate
 					python3 -m pip install --upgrade pip
 					python3 -m pip install -r requirements.txt                     				
-                    python3 -m pytest --pyargs -s ./tests --junitxml="results.xml" --cov=ansiblesmells --cov-report xml tests/
+                    python3 -m pytest --pyargs -s ./tests --junitxml="results.xml" --cov=ansiblelints --cov-report xml tests/
 					cp *.xml $WORKSPACE
                 """
             junit 'results.xml'

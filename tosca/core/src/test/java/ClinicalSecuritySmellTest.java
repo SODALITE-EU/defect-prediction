@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class ClinicalSecuritySmellTest {
+    private static final java.util.logging.Logger log = Logger.getLogger(ClinicalSecuritySmellTest.class.getName());
     private static SodaliteRepository repositoryManager;
     private static Repository repository;
     private static KB kb;
@@ -37,7 +39,7 @@ public class ClinicalSecuritySmellTest {
                     ClinicalSecuritySmellTest.class.getResourceAsStream("/import/DUL.rdf");
             repositoryConnection.add(input, "", RDFFormat.RDFXML);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
         // add the RDF data from the inputstream directly to our database
         try {
@@ -45,7 +47,7 @@ public class ClinicalSecuritySmellTest {
                     ClinicalSecuritySmellTest.class.getResourceAsStream("/core/sodalite-metamodel.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
         // add the RDF data from the inputstream directly to our database
         try {
@@ -53,7 +55,7 @@ public class ClinicalSecuritySmellTest {
                     ClinicalSecuritySmellTest.class.getResourceAsStream("/core/tosca-builtins.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
         // add the RDF data from the inputstream directly to our database
         try {
@@ -61,7 +63,7 @@ public class ClinicalSecuritySmellTest {
                     ClinicalSecuritySmellTest.class.getResourceAsStream("/hpc-clinical-uc-onto-buggy/clinical_tier1.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
         // add the RDF data from the inputstream directly to our database
         try {
@@ -69,7 +71,7 @@ public class ClinicalSecuritySmellTest {
                     ClinicalSecuritySmellTest.class.getResourceAsStream("/hpc-clinical-uc-onto-buggy/clinical_tier2.ttl");
             repositoryConnection.add(input, "", RDFFormat.TURTLE);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
         repositoryConnection.close();
     }
@@ -99,10 +101,10 @@ public class ClinicalSecuritySmellTest {
                 }
                 assertEquals(1, properties.size());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 
@@ -115,10 +117,10 @@ public class ClinicalSecuritySmellTest {
                 List<Comment> comments = kbApi.suspiciousComment(connection);
                 assertEquals(1, comments.size());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 
@@ -140,10 +142,10 @@ public class ClinicalSecuritySmellTest {
                 }
                 assertEquals(1, properties.size());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 
@@ -165,10 +167,10 @@ public class ClinicalSecuritySmellTest {
                 }
                 assertEquals(1, properties.size());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 
@@ -190,10 +192,10 @@ public class ClinicalSecuritySmellTest {
                 }
                 assertEquals(1, properties.size());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warning(e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warning(e.getMessage());
         }
     }
 }

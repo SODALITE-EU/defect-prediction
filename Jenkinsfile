@@ -1,5 +1,8 @@
 pipeline {
-  options { disableConcurrentBuilds() }
+  options { 
+	  disableConcurrentBuilds() 
+	  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '30', daysToKeepStr: '', numToKeepStr: '')
+  }
   agent { label 'docker-slave' }
   stages {
     stage ('Pull repo code from github') {

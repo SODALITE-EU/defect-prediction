@@ -28,28 +28,12 @@ public class ClinicalSecuritySmellTest {
         repositoryManager = new SodaliteRepository(".", "/config_clinical.ttl");
         kb = new KB(repositoryManager, "Clinical");
         repository = repositoryManager.getRepository("Clinical");
-
         RepositoryConnection repositoryConnection = repository.getConnection();
-        // add the RDF data from the inputstream directly to our database
-
         repositoryConnection.add(ClinicalSecuritySmellTest.class.getResourceAsStream("/import/DUL.rdf"), "", RDFFormat.RDFXML);
-
-        // add the RDF data from the inputstream directly to our database
-
         repositoryConnection.add(ClinicalSecuritySmellTest.class.getResourceAsStream("/core/sodalite-metamodel.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
-
         repositoryConnection.add(ClinicalSecuritySmellTest.class.getResourceAsStream("/core/tosca-builtins.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
-
         repositoryConnection.add(ClinicalSecuritySmellTest.class.getResourceAsStream("/hpc-clinical-uc-onto-buggy/clinical_tier1.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
-
         repositoryConnection.add(ClinicalSecuritySmellTest.class.getResourceAsStream("/hpc-clinical-uc-onto-buggy/clinical_tier2.ttl"), "", RDFFormat.TURTLE);
-
         repositoryConnection.close();
     }
 
@@ -62,10 +46,8 @@ public class ClinicalSecuritySmellTest {
 
     @Test
     void testAdminBYyDefault() throws IOException {
-
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-
         Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
@@ -77,7 +59,6 @@ public class ClinicalSecuritySmellTest {
             }
         }
         assertEquals(1, properties.size());
-
     }
 
     @Test
@@ -104,7 +85,6 @@ public class ClinicalSecuritySmellTest {
             }
         }
         assertEquals(1, properties.size());
-
     }
 
     @Test
@@ -122,7 +102,6 @@ public class ClinicalSecuritySmellTest {
             }
         }
         assertEquals(1, properties.size());
-
     }
 
     @Test
@@ -140,6 +119,5 @@ public class ClinicalSecuritySmellTest {
             }
         }
         assertEquals(1, properties.size());
-
     }
 }

@@ -26,31 +26,15 @@ public class SecuritySmellAADMTest {
     static void beforeAll() throws IOException {
         repositoryManager = new SodaliteRepository(".", "/config.ttl");
         kb = new KB(repositoryManager, "TOSCA");
-
         repository = repositoryManager.getRepository("TOSCA");
-
         RepositoryConnection repositoryConnection = repository.getConnection();
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/import/DUL.rdf"), "", RDFFormat.RDFXML);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/core/sodalite-metamodel.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/core/tosca-builtins.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/snow/snow_tier1.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/snow/snow_tier2.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/snow-aadm/aadm_snow.ttl"), "", RDFFormat.TURTLE);
-
-        // add the RDF data from the inputstream directly to our database
         repositoryConnection.add(SecuritySmellAADMTest.class.getResourceAsStream("/snow-aadm/AADM_as9oa3dfppj6q7irhn6lsl6p16.ttl"), "", RDFFormat.TURTLE);
-
         repositoryConnection.close();
     }
 
@@ -76,7 +60,6 @@ public class SecuritySmellAADMTest {
             }
         }
         assertEquals(2, properties.size());
-
     }
 
 
@@ -95,7 +78,6 @@ public class SecuritySmellAADMTest {
             }
         }
         assertEquals(4, properties.size());
-
     }
 
 }

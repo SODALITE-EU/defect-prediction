@@ -67,7 +67,6 @@ public class ClinicalSecuritySmellTest {
         RepositoryConnection connection = repository.getConnection();
         List<Comment> comments = kbApi.suspiciousComment(connection);
         assertEquals(1, comments.size());
-
     }
 
     @Test

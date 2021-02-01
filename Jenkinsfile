@@ -40,7 +40,6 @@ pipeline {
                 cd tosca
                 mvn clean install
             """
-        archiveArtifacts artifacts: '**/*.war, **/*.jar', onlyIfSuccessful: true
       }
     }
     stage('SonarQube analysis TOSCA'){

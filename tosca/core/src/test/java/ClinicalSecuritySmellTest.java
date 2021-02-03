@@ -25,7 +25,7 @@ public class ClinicalSecuritySmellTest {
 
     @BeforeAll
     static void beforeAll() throws IOException {
-        repositoryManager = new SodaliteRepository(".", "/config_clinical.ttl");
+        repositoryManager = new SodaliteRepository("target/", "/config_clinical.ttl");
         kb = new KB(repositoryManager, "Clinical");
         repository = repositoryManager.getRepository("Clinical");
         RepositoryConnection repositoryConnection = repository.getConnection();
@@ -48,7 +48,7 @@ public class ClinicalSecuritySmellTest {
     void testAdminBYyDefault() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+        Set<Feature> parameters = kbApi.getAllAttributes(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -73,7 +73,7 @@ public class ClinicalSecuritySmellTest {
     void testWeakCryptoAlgo() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+        Set<Feature> parameters = kbApi.getAllAttributes(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -90,7 +90,7 @@ public class ClinicalSecuritySmellTest {
     void testInvalidPortRange() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+        Set<Feature> parameters = kbApi.getAllAttributes(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -107,7 +107,7 @@ public class ClinicalSecuritySmellTest {
     void testWeakKeySize() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getAllAttributes(connection, null);
+        Set<Feature> parameters = kbApi.getAllAttributes(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {

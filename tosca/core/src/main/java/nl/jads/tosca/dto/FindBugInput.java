@@ -12,6 +12,7 @@ public class FindBugInput {
     private String repository;
     private String server;
     private String aadmid;
+    private String rmid;
 
     public String getActionId() {
         return actionId;
@@ -67,5 +68,13 @@ public class FindBugInput {
 
     public void setAadmid(String aadmid) {
         this.aadmid = aadmid;
+    }
+    
+    public String getRmid() {
+        return rmid;
+    }
+
+    public void setRmid(String rmid) {
+        this.rmid = rmid;
     }
 }

@@ -26,7 +26,7 @@ public class SecuritySmellTest {
 
     @BeforeAll
     static void beforeAll() throws IOException {
-        repositoryManager = new SodaliteRepository(".", "/config.ttl");
+        repositoryManager = new SodaliteRepository("target/", "/config.ttl");
         kb = new KB(repositoryManager, "TOSCA");
         repository = repositoryManager.getRepository("TOSCA");
         RepositoryConnection repositoryConnection = repository.getConnection();
@@ -61,7 +61,7 @@ public class SecuritySmellTest {
     void testAdminBYyDefault() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -78,7 +78,7 @@ public class SecuritySmellTest {
     void testDashCaseViolation() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         List<Feature> properties2 = new ArrayList<>();
         for (Feature p : parameters) {
@@ -99,7 +99,7 @@ public class SecuritySmellTest {
     void testSnakeCaseViolation() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         List<Feature> properties2 = new ArrayList<>();
         for (Feature p : parameters) {
@@ -120,7 +120,7 @@ public class SecuritySmellTest {
     void testCamelCaseViolation() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         List<Feature> properties2 = new ArrayList<>();
         for (Feature p : parameters) {
@@ -142,7 +142,7 @@ public class SecuritySmellTest {
     void testEmptyPassword() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -159,7 +159,7 @@ public class SecuritySmellTest {
     void testHardcodedSecret() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -176,7 +176,7 @@ public class SecuritySmellTest {
     void testUseOfHTTPWithoutTLS() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -193,7 +193,7 @@ public class SecuritySmellTest {
     void testWeakCryptoAlgo() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -210,7 +210,7 @@ public class SecuritySmellTest {
     void testInvalidIPAddressBinding() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, null);
+        Set<Feature> parameters = kbApi.getProperties(connection, null, null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {

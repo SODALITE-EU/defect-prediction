@@ -24,7 +24,7 @@ public class SecuritySmellAADMTest {
 
     @BeforeAll
     static void beforeAll() throws IOException {
-        repositoryManager = new SodaliteRepository(".", "/config.ttl");
+        repositoryManager = new SodaliteRepository("target/", "/config.ttl");
         kb = new KB(repositoryManager, "TOSCA");
         repository = repositoryManager.getRepository("TOSCA");
         RepositoryConnection repositoryConnection = repository.getConnection();
@@ -49,7 +49,7 @@ public class SecuritySmellAADMTest {
     void testAdminBYyDefault() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, "AADM_as9oa3dfppj6q7irhn6lsl6p16");
+        Set<Feature> parameters = kbApi.getProperties(connection, "AADM_as9oa3dfppj6q7irhn6lsl6p16", null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -59,7 +59,7 @@ public class SecuritySmellAADMTest {
                 properties.add(p);
             }
         }
-        assertEquals(2, properties.size());
+        assertEquals(1, properties.size());
     }
 
 
@@ -67,7 +67,7 @@ public class SecuritySmellAADMTest {
     void testHardcodedSecret() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, "234333");
+        Set<Feature> parameters = kbApi.getProperties(connection, "AADM_pf62lush4v2gvg24unpl62bktq", null);
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -77,7 +77,7 @@ public class SecuritySmellAADMTest {
                 properties.add(p);
             }
         }
-        assertEquals(4, properties.size());
+        assertEquals(1, properties.size());
     }
 
 }

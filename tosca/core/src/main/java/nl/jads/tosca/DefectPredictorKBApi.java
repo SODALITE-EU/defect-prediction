@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.*;
 
 public class DefectPredictorKBApi {
@@ -56,7 +57,11 @@ public class DefectPredictorKBApi {
     public static void main(String[] args) throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB());
         FindBugInput findBugInput = new FindBugInput();
+        long startTime = Instant.now().toEpochMilli();
         BugReport bugReport = kbApi.findBugs(findBugInput);
+        long endTime = Instant.now().toEpochMilli();
+		long timeElapsed = endTime - startTime;
+		System.out.println("findBugs in milliseconds: " + timeElapsed);
         for (BugRecord r : bugReport.getBugs()) {
             System.out.println(r.getBugName());
             System.out.println(r.getContext());
@@ -86,29 +91,35 @@ public class DefectPredictorKBApi {
         return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
 
-    public Set<Feature> getAllAttributes(RepositoryConnection connection, String aadmid) throws IOException {
+    public Set<Feature> getAllAttributes(RepositoryConnection connection, String aadmid, String rmid) throws IOException {
         Set<Feature> attributes = new HashSet<>();
-        String sparql;
+        String sparql = null;
         if (aadmid != null) {
             sparql = "select distinct ?concept ?attribute\n" +
                     "\twhere {\n" +
-                    "\t\t{\n" +
                     "\t\t#tier2\n" +
                     "\t\t?aadm soda:includesTemplate ?resource .\n" +
                     "\t\tFILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
                     "\t\t?resource soda:hasContext ?context .\n" +
                     "\t\t?context tosca:attributes ?concept .\n" +
                     "\t\t?concept DUL:classifies ?attribute .\n" +
-                    "\t\t} UNION {\n" +
-                    "\t\t#tier 1\n" +
+                    "\t\t}\n";
+        } else if (rmid != null) {
+        	sparql =  "select distinct ?concept ?attribute\n" +
+                    "\twhere {\n" +
+                    "\t\t#tier1\n" +
+                    "\t\t?rm soda:includesType ?resource .\n" +
+                    "\t\tFILTER (contains(str(?rm), \"" + rmid + "\")).\n" +
+                    "\t\t?resource soda:hasContext ?context .\t\n" +
                     "\t\t?context  tosca:attributes ?concept .\n" +
                     "\t\t?concept DUL:classifies ?attribute .\n" +
-                    "?concept DUL:hasParameter ?p .\n" +
-                    "\t\t}\n" +
+                    "\t\t?concept DUL:hasParameter ?p .\n" +
+                    "\t\t\n" +
                     "\t}";
         } else {
-            sparql = fileToString("sparql/getAllAttributes.sparql");
+        	sparql = fileToString("sparql/getAllAttributes.sparql");
         }
+        
         if (sparql == null) {
             return attributes;
         }
@@ -132,32 +143,39 @@ public class DefectPredictorKBApi {
         return attributes;
     }
 
-    public Set<Feature> getProperties(RepositoryConnection connection, String aadmid) throws IOException {
+    public Set<Feature> getProperties(RepositoryConnection connection, String aadmid, String rmid) throws IOException {
         Set<Feature> properties = new HashSet<>();
-        String sparql;
+        String sparql = null;
         if (aadmid != null) {
             sparql = "select distinct ?concept ?property\n" +
                     "\twhere {\n" +
-                    "\t\t{\n" +
                     "\t\t#tier2\n" +
                     "\t\t?aadm soda:includesTemplate ?resource .\n" +
                     "\t\tFILTER (contains(str(?aadm), \"" + aadmid + "\")).\n" +
                     "\t\t?resource soda:hasContext ?context .\t\n" +
                     "\t\t?context tosca:properties ?concept .\n" +
                     "\t\t?concept DUL:classifies ?property .\n" +
-                    "\t\t} UNION {\n" +
-                    "\t\t#tier 1\n" +
+                    "\t}";
+        } else if (rmid != null) {
+        	sparql =  "select distinct ?concept ?property\n" +
+                    "\twhere {\n" +
+                    "\t\t#tier1\n" +
+                    "\t\t?rm soda:includesType ?resource .\n" +
+                    "\t\tFILTER (contains(str(?rm), \"" + rmid + "\")).\n" +
+                    "\t\t?resource soda:hasContext ?context .\t\n" +
                     "\t\t?context  tosca:properties ?concept .\n" +
                     "\t\t?concept DUL:classifies ?property .\n" +
-                    "?concept DUL:hasParameter ?p .\n" +
-                    "\t\t}\n" +
+                    "\t\t?concept DUL:hasParameter ?p .\n" +
+                    "\t\t\n" +
                     "\t}";
         } else {
-            sparql = fileToString("sparql/getAllProperties.sparql");
+        	sparql = fileToString("sparql/getAllProperties.sparql");
         }
+        
         if (sparql == null) {
             return properties;
         }
+        
         String query = PREFIXES + sparql;
         TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection, query);
 
@@ -359,10 +377,11 @@ public class DefectPredictorKBApi {
             fillContext(bugRecord, c, connection);
             bugs.add(bugRecord);
         }
-        Set<Feature> parameters = getProperties(connection, bugInput.getAadmid());
+        Set<Feature> parameters = getProperties(connection, bugInput.getAadmid(), bugInput.getRmid());
         checkSmells(parameters, connection, bugs);
-        Set<Feature> attributes = getAllAttributes(connection, bugInput.getAadmid());
-        checkSmells(attributes, connection, bugs);
+        Set<Feature> attributes = getAllAttributes(connection, bugInput.getAadmid(), bugInput.getRmid());
+        checkSmells(attributes, connection, bugs);    
+      
         bugReport.setActionId(bugInput.getActionId());
         bugReport.setDeploymentId(bugInput.getDeploymentId());
         bugReport.setBugs(bugs);

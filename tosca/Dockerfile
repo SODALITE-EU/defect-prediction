@@ -1,4 +1,4 @@
-FROM tomcat:9.0.40-jdk11
+FROM tomcat:9.0.52-jdk11
 
 COPY ./api/target/bug-predictor-api.war /usr/local/tomcat/webapps/bug-predictor-api.war
 EXPOSE 8080

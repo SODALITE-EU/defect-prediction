@@ -357,7 +357,10 @@ public class DefectPredictorKBApi {
         while (result.hasNext()) {
             BindingSet bindingSet = result.next();
             IRI p1 = (IRI) bindingSet.getBinding("resource").getValue();
-            comments.add(new Comment(p1, bindingSet.getValue("comment").stringValue()));
+            IRI classifier = (IRI) bindingSet.getBinding("classifier").getValue();
+            Comment c = new Comment(classifier, bindingSet.getValue("comment").stringValue());
+            c.setClassifiedBy(p1);
+            comments.add(c);
         }
         result.close();
         return comments;
@@ -457,9 +460,10 @@ public class DefectPredictorKBApi {
         String query = PREFIXES + sparql;
         IRI var;
         if (property instanceof Comment) {
-            var = ((Comment) property).getIri();
+        	//var = ((Comment) property).getIri();
+            var = ((Comment) property).getClassifiedBy();
         } else {
-            var = property.getClassifiedBy();
+        var = property.getClassifiedBy();
         }
         TupleQueryResult result = QueryUtil.evaluateSelectQuery(connection,
                 query, new SimpleBinding("var", var));

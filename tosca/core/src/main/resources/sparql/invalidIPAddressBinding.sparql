@@ -1,6 +1,17 @@
 select distinct ?var ?resource
 where {
-   	?var DUL:hasParameter ?p .
-	?p DUL:classifies tosca:default .
-	?p tosca:hasDataValue "0.0.0.0".
+	?var DUL:classifies ?resource.
+	
+	optional {
+		?var DUL:hasParameter ?p .
+		?p DUL:classifies tosca:default .
+		?p tosca:hasDataValue ?value .
+		VALUES ?value {"0.0.0.0" "0.0.0.0/0"}.
 	}
+    
+	optional {
+		?var (DUL:hasParameter)*/tosca:hasDataValue ?value.
+		VALUES ?value {"0.0.0.0" "0.0.0.0/0"}.
+	}
+	FILTER (bound(?value)).
+}

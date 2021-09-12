@@ -38,7 +38,7 @@ pipeline {
       steps {
         sh  """ #!/bin/bash
                 cd tosca
-                mvn clean install
+                mvn  clean install -Ddefault.min.distinct.threshold=104857600
             """
       }
     }

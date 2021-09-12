@@ -189,7 +189,7 @@ snowt1:User_1
 :skyline-extractor
     rdf:type        <https://www.sodalite.eu/ontologies/snow/tier1/sodalite.nodes.DockerizedComponent> ;
     soda:hasContext :SodaliteDescription_6 ;
-    rdfs:comment    "addresses skyline-extractor bug: https://bugs.launchpad.net/keystone/+bug/323345"^^rdfs:Literal
+    dcterms:description    "addresses skyline-extractor bug: https://bugs.launchpad.net/keystone/+bug/323345"^^rdfs:Literal
 .
 
 :vm

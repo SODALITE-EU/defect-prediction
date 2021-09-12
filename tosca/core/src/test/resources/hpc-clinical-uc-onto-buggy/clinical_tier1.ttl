@@ -72,7 +72,7 @@ clinical1:Property_1
 clinical1:Property_2
     rdf:type         tosca:Property ;
     dcterms:description
-                     "Job script template with j2 extension, such that Ansible can process it with the template module" ;
+                     "later Job script template with j2 extension, such that Ansible can process it with the template module" ;
     DUL:classifies   clinical1:script_template ;
     DUL:hasParameter clinical1:SodaliteParameter_P1_2 ;
 .
@@ -664,7 +664,7 @@ clinical1:my.nodes.hpc.wm.torque
     rdf:type        owl:Class ;
     rdfs:subClassOf tosca:tosca.nodes.Compute ;
     soda:hasContext clinical1:SodaliteDescription_1 ;
-    rdfs:comment    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
+    dcterms:description "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 
 clinical1:my.nodes.hpc.job.torque

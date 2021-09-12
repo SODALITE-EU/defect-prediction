@@ -1,5 +1,6 @@
-select distinct ?resource ?comment
+select distinct ?resource ?comment ?classifier
 where {
-   	?resource rdfs:comment ?comment .
+	?resource rdfs:comment|dcterms:description ?comment;
+	DUL:classifies ?classifier
    	FILTER (regex(lcase(str(?comment)), "(bug|hack|later|todo|later2)","i")).
-	}
+}

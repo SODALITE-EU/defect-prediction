@@ -105,6 +105,7 @@ snowt1:Property_2
     DUL:classifies      snowt1:imageName ;
     DUL:hasParameter    snowt1:SodaliteParameter_19 ;
     DUL:hasParameter    snowt1:SodaliteParameter_20 ;
+dcterms:description    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 
 snowt1:Property_3
@@ -113,6 +114,7 @@ snowt1:Property_3
     DUL:classifies      snowt1:ports ;
     DUL:hasParameter    snowt1:SodaliteParameter_21 ;
     DUL:hasParameter    snowt1:SodaliteParameter_22 ;
+    dcterms:description    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 
 snowt1:Property_4
@@ -687,7 +689,7 @@ snowt1:SodaliteParameter_PS_1
     rdf:type           soda:SodaliteParameter ;
     DUL:classifies     tosca:default ;
     tosca:hasDataValue "admin" ;
-    rdfs:comment       "TODO: Replace hardcoded password with secure vault"^^rdfs:Literal
+    dcterms:description       "TODO: Replace hardcoded password with secure vault"^^rdfs:Literal
 .
 
 snowt1:SodaliteParameter_PS_4
@@ -834,7 +836,7 @@ snowt1:bind_host
     rdf:type        owl:Class ;
     rdfs:subClassOf <https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute> ;
     soda:hasContext snowt1:SodaliteDescription_3 ;
-    rdfs:comment    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
+    dcterms:description    "addresses bug: https://bugs.launchpad.net/keystone/+bug/1472285"^^rdfs:Literal
 .
 
 snowt1:vm_name

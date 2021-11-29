@@ -6,7 +6,7 @@ nltk==3.6.5
 scipy==1.4.1
 pickle-mixin
 gensim
-keras==2.4.0
+keras==2.6.0rc3
 tensorflow>=2.2.1
 spacy==2.3.2
 treelib

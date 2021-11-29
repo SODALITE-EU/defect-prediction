@@ -2,7 +2,7 @@ ansible-lint
 flask
 pandas==1.0.5
 numpy==1.16.3
-nltk==3.6.4
+nltk==3.6.5
 scipy==1.4.1
 pickle-mixin
 gensim

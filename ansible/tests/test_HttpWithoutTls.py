@@ -9,6 +9,6 @@ class TestHttpWithoutTls:
     def test_file(self):
         collection = RulesCollection()
         collection.register(HttpWithoutTls())
-        success = 'testResources/ansible-smell/httpwithouttls2.yml'
-        good_runner = Runner(collection, success, [], [], [])
+        file_name = 'testResources/ansible-smell/httpwithouttls2.yml'
+        good_runner = Runner(file_name, rules=collection)
         print(good_runner.run())

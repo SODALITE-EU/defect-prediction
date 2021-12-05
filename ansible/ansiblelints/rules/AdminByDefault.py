@@ -1,4 +1,4 @@
-from ansiblelint import AnsibleLintRule
+from ansiblelint.rules import AnsibleLintRule
 
 
 def isadmin(usr):

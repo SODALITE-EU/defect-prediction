@@ -10,5 +10,5 @@ class TestWeakCryptographyalgo:
         collection = RulesCollection()
         collection.register(WeakCryptographyalgo())
         file_name = str('testResources/ansible-smell/weakcryptographyalgo.yml')
-        good_runner = Runner(collection, file_name, [], [], [])
+        good_runner = Runner(file_name, rules=collection)
         print(good_runner.run())

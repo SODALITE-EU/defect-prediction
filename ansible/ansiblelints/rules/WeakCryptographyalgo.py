@@ -1,5 +1,5 @@
 import ruamel.yaml
-from ansiblelint import AnsibleLintRule
+from ansiblelint.rules import AnsibleLintRule
 
 
 class WeakCryptographyalgo(AnsibleLintRule):

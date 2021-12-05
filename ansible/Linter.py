@@ -30,11 +30,10 @@ import ansiblelint.formatters as formatters
 import six
 import yaml
 from ansiblelint.constants import DEFAULT_RULESDIR
-
+from ansiblelint.file_utils import normpath
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
-
-from ansiblelint.utils import get_playbooks_and_roles, normpath
+# from ansiblelint.utils import get_playbooks_and_roles, normpath
 from ansiblelint.version import __version__
 
 
@@ -52,7 +51,7 @@ def load_config(config_file):
 
 
 def main(args):
-    formatter = formatters.Formatter()
+    # formatter = formatters.Formatter()
 
     parser = optparse.OptionParser("%prog [options] [playbook.yml [playbook2 ...]]|roledirectory",
                                    version="%prog " + __version__)
@@ -87,7 +86,7 @@ def main(args):
     parser.add_option('-t', dest='tags',
                       action='append',
                       default=[],
-                      help="only check rules whose id/tags match these values")
+                      help="only check rules whosef id/tags match these values")
     parser.add_option('-T', dest='listtags', action='store_true',
                       help="list all the tags")
     parser.add_option('-v', dest='verbosity', action='count',
@@ -151,18 +150,18 @@ def main(args):
     if options.parseable_severity:
         formatter = formatters.ParseableSeverityFormatter()
 
-    # no args triggers auto-detection mode
-    if len(args) == 0 and not (options.listrules or options.listtags):
-        args = get_playbooks_and_roles(options=options)
+    # # # no args triggers auto-detection mode
+    # if len(args) == 0 and not (options.listrules or options.listtags):
+    #     args = get_playbooks_and_roles(options=options)
 
     if options.use_default_rules:
         rulesdirs = options.rulesdir + [DEFAULT_RULESDIR]
     else:
         rulesdirs = options.rulesdir or [DEFAULT_RULESDIR]
 
-    rules = RulesCollection()
-    for rulesdir in rulesdirs:
-        rules.extend(RulesCollection.create_from_directory(rulesdir))
+    rules = RulesCollection(rulesdirs)
+    # for rulesdir in rulesdirs:
+    #     rules.extend(RulesCollection.load_plugins(rulesdir))
 
     if options.listrules:
         print(rules)
@@ -184,9 +183,7 @@ def main(args):
     matches = list()
     checked_files = set()
     for playbook in playbooks:
-        runner = Runner(rules, playbook, options.tags,
-                        options.skip_list, options.exclude_paths,
-                        options.verbosity, checked_files)
+        runner = Runner(playbook, rules=rules)
         matches.extend(runner.run())
 
     matches.sort(key=lambda x: (normpath(x.filename), x.linenumber, x.rule.id))

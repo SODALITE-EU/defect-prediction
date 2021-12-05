@@ -10,5 +10,5 @@ class TestComplexExpression:
         collection = RulesCollection()
         collection.register(ComplexExpression())
         file_name = 'testResources/ansible-smell/complexexpression.yml'
-        good_runner = Runner(collection, file_name, [], [], [])
+        good_runner = Runner(file_name, rules=collection)
         print(good_runner.run())

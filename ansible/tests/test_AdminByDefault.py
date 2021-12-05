@@ -9,7 +9,7 @@ class TestAdminByDefault:
     def test_file(self):
         collection = RulesCollection()
         collection.register(AdminByDefault())
-        success = 'testResources/ansible-smell/adminbydefault.yml'
-        good_runner = Runner(collection, success, [], [], [])
+        file_name = 'testResources/ansible-smell/adminbydefault.yml'
+        good_runner = Runner(file_name, rules=collection)
         # print(good_runner.run())
         assert 3 == len(good_runner.run())

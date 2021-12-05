@@ -14,6 +14,6 @@ class TestIncompleteConditional(unittest.TestCase):
 
     def test_file(self):
         file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
-        good_runner = Runner(self.collection, file_name, [], [], [])
+        good_runner = Runner(file_name, rules=self.collection)
 
         print(good_runner.run())

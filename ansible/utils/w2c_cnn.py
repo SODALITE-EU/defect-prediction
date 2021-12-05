@@ -4,7 +4,7 @@ import pickle
 import numpy as np
 import tensorflow
 from gensim.models import Word2Vec
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import matthews_corrcoef
 from sklearn.metrics import roc_auc_score
@@ -13,7 +13,7 @@ from tensorflow.python.keras import regularizers
 from tensorflow.python.keras.layers import Dropout
 from tensorflow.python.keras.layers import Embedding
 from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.preprocessing.text import Tokenizer
 

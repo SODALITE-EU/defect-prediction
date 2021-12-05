@@ -1,0 +1,7 @@
+sudo docker build indikakumara/misconfigapi:0.0.1
+sudo docker run -d --name=miscofdetector -p 5000:5000 indikakumara/misconfigapi:0.0.1
+sudo docker start miscofdetector
+sudo docker logs miscofdetector
+sudo docker stop miscofdetector
+sudo docker rm  miscofdetector
+sudo docker rmi indikakumara/misconfigapi:0.0.1

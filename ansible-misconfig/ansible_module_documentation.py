@@ -112,3 +112,33 @@ def scrap_module_info(modules_list):
     top_module_df.columns = ['Parameter_Name', 'Datatype_Param', 'Choices', 'Default', 'Description', 'Module_Name',
                              'Module_Link', 'Collection_Name', 'Synopsis', 'Notes']
     return ([top_module_df, list_all_modules])
+
+
+def load_module_parameter_docs():
+    df_module_level_texts = pd.read_excel('files/module_level.xlsx')
+    df_parameter_level_texts = pd.read_excel('files/parameter_level.xlsx')
+
+    df_parameter_level_texts = df_parameter_level_texts.dropna(how='all')
+    df_module_level_texts = df_module_level_texts.dropna(how='all')
+    return df_module_level_texts, df_parameter_level_texts
+
+
+def save_to_files():
+    module_documentation = scrap_module_info(list_top_modules)
+    df_module_documentation = module_documentation[0]
+    all_available_modules = module_documentation[1]
+
+    df_module_documentation['Module_Name'].nunique()
+
+    synopsis = df_module_documentation.explode('Synopsis')[
+        ['Collection_Name', 'Module_Name', 'Module_Link', 'Synopsis']].drop_duplicates().dropna()
+    synopsis.columns = ['Collection_Name', 'Module_Name', 'Module_Link', 'Text']
+    synopsis['section'] = 'synopsis'
+    notes = df_module_documentation.explode('Notes')[
+        ['Collection_Name', 'Module_Name', 'Module_Link', 'Notes']].drop_duplicates().dropna()
+    notes.columns = ['Collection_Name', 'Module_Name', 'Module_Link', 'Text']
+    notes['section'] = 'notes'
+    df_module_level_texts = pd.concat([synopsis, notes])
+
+    df_module_level_texts.to_excel(
+        'files/module_level.xlsx')

@@ -1,9 +1,10 @@
 from jinja2 import Environment, FileSystemLoader
-env = Environment(loader=FileSystemLoader('templates'))
-template = env.get_template('octal_template.txt')
-output_from_parsed_template = template.render(module_name='file', parameter_name='mode')
-print(output_from_parsed_template)
 
-# to save the results
-with open("rules/octal_file.py", "w") as fh:
-    fh.write(output_from_parsed_template)
+from ansible_module_documentation import load_module_parameter_docs
+from misconftypes.octal_type import gen_rule
+
+
+def generate_linter_rules():
+    env = Environment(loader=FileSystemLoader('templates'))
+    df_module_level_texts, df_parameter_level_texts = load_module_parameter_docs()
+    gen_rule(df_parameter_level_texts, env)

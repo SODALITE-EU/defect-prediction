@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING, Any, Dict, Union
+
 # Auto Generated Rules. Do not change manually
 from ansiblelint.rules import AnsibleLintRule
 
@@ -7,13 +8,14 @@ if TYPE_CHECKING:
 
     from ansiblelint.file_utils import Lintable
 
-class {{rule_name}}(AnsibleLintRule):
-    id = '{{rule_id}}'
-    shortdesc = '{{rule_desc_short}}'
-    description = '{{rule_desc}}'
-    tag = '{{misconfiguration_type}}'
 
-    _modules = ['{{modules_sel}}']
+class OctalPermissionsRule(AnsibleLintRule):
+    id = 'risky-octal'
+    shortdesc = 'Octal file permissions must contain leading zero or be a string'
+    description = 'Numeric file permissions without leading zero can behave in unexpected ways. See https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_repository_module.html for more details'
+    tag = 'Formatting'
+
+    _modules = ['yum_repository']
 
     def is_invalid_permission(self, mode: int) -> bool:
         # sensible file permission modes don't
@@ -25,15 +27,15 @@ class {{rule_name}}(AnsibleLintRule):
         # are more generous than world permissions
 
         other_write_without_read = (
-            mode % 8 and mode % 8 < 4 and not (mode % 8 == 1 and (mode >> 6) % 2 == 1)
+                mode % 8 and mode % 8 < 4 and not (mode % 8 == 1 and (mode >> 6) % 2 == 1)
         )
         group_write_without_read = (
-            (mode >> 3) % 8
-            and (mode >> 3) % 8 < 4
-            and not ((mode >> 3) % 8 == 1 and (mode >> 6) % 2 == 1)
+                (mode >> 3) % 8
+                and (mode >> 3) % 8 < 4
+                and not ((mode >> 3) % 8 == 1 and (mode >> 6) % 2 == 1)
         )
         user_write_without_read = (
-            (mode >> 6) % 8 and (mode >> 6) % 8 < 4 and not (mode >> 6) % 8 == 1
+                (mode >> 6) % 8 and (mode >> 6) % 8 < 4 and not (mode >> 6) % 8 == 1
         )
         other_more_generous_than_group = mode % 8 > (mode >> 3) % 8
         other_more_generous_than_user = mode % 8 > (mode >> 6) % 8
@@ -49,10 +51,10 @@ class {{rule_name}}(AnsibleLintRule):
         )
 
     def matchtask(
-        self, task: Dict[str, Any], file: 'Optional[Lintable]' = None
+            self, task: Dict[str, Any], file: 'Optional[Lintable]' = None
     ) -> Union[bool, str]:
         if task["action"]["__ansible_module__"] in self._modules:
-            mode = task['action'].get('{{parameter_name}}', None)
+            mode = task['action'].get('mode', None)
 
             if isinstance(mode, str):
                 return False

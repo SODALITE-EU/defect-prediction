@@ -5,6 +5,7 @@ from flask import Flask, json, request, Response
 from werkzeug.utils import secure_filename
 
 import Linter
+from ansible_lint_rule_generator import generate_linter_rules
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -23,6 +24,7 @@ def re_generate_rules():
     module_names = request.get_json()["modules"]
     # TODO
     # TODO Parse the documentation for the give modules and generate rules
+    generate_linter_rules()
     js = json.dumps({'message': 'Rule were generated for ' + module_names}, sort_keys=False, indent=4)
     resp = Response(js, status=200, mimetype='application/json')
     return resp

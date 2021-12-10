@@ -12,7 +12,7 @@ def check_similarity(par_descr, ref_text):
     return False
 
 
-def gen_rule(df_parameter_level_texts, env):
+def gen_rule_octal_type(df_parameter_level_texts, env):
     df_parameter_level_texts['conf_index'] = df_parameter_level_texts['Description'].apply(check_similarity,
                                                                                            ref_text="""You must either add a leading zero so that Ansible's YAML parser knows it is an octal number or quote it so Ansible receives a string and can do its own conversion from string into number.""")
 

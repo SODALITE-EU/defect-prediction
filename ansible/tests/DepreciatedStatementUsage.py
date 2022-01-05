@@ -11,6 +11,6 @@ class TestDepreciatedStatementUsage:
         collection.register(DepreciatedStatementUsage())
 
         file_name = 'testResources/ansible-smell/adminbydefault.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
 
         print(good_runner.run())

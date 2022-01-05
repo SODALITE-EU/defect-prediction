@@ -10,7 +10,7 @@ class TestInvalidIPaddressbinding:
         collection = RulesCollection()
         collection.register(InvalidIPaddressbinding())
         file_name = 'testResources/ansible-smell/invalidIPaddressbinding.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
         result = good_runner.run()
         print(result)
         print(type(result))

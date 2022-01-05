@@ -10,7 +10,7 @@ class TestHardCodePassword:
         collection = RulesCollection()
         collection.register(HardCodePassword())
         file_name = 'testResources/ansible-smell/hardcodepassword.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
         print(good_runner.run())
         print(type(good_runner.run()))
         print(len(good_runner.run()))

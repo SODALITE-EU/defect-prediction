@@ -14,5 +14,5 @@ class TestInconsistentNaming(unittest.TestCase):
 
     def test_file(self):
         file_name = 'testResources/ansible-smell/unnamedconstructs.yml'
-        good_runner = Runner(file_name, rules=self.collection)
+        good_runner = Runner(playbook=file_name, rules=self.collection)
         print(good_runner.run())

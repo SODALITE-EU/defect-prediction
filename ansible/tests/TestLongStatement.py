@@ -14,6 +14,6 @@ class TestLongStatement(unittest.TestCase):
 
     def test_file(self):
         file_name = 'testResources/ansible-smell/many.yaml'
-        good_runner = Runner(file_name, rules=self.collection)
+        good_runner = Runner(playbook=file_name, rules=self.collection)
 
         print(good_runner.run())

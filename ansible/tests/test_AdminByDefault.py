@@ -10,6 +10,6 @@ class TestAdminByDefault:
         collection = RulesCollection()
         collection.register(AdminByDefault())
         file_name = 'testResources/ansible-smell/adminbydefault.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
         # print(good_runner.run())
         assert 3 == len(good_runner.run())

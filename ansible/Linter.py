@@ -183,7 +183,7 @@ def main(args):
     matches = list()
     checked_files = set()
     for playbook in playbooks:
-        runner = Runner(playbook, rules=rules)
+        runner = Runner(playbook=playbook, rules=rules)
         matches.extend(runner.run())
 
     matches.sort(key=lambda x: (normpath(x.filename), x.linenumber, x.rule.id))

@@ -12,7 +12,7 @@ class TestDuplicateEntity:
         collection = RulesCollection()
         collection.register(DuplicateEntity())
         file_name = 'testResources/ansible-smell/hardcodepassword5.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
 
         name_list = []
         for item in good_runner.run():

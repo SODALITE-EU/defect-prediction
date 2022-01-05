@@ -10,7 +10,7 @@ class TestEmptyPassword:
         collection = RulesCollection()
         collection.register(EmptyPassword0())
         file_name = 'testResources/ansible-smell/adminbydefault.yml'
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
         print(good_runner.run())
         print(len(good_runner.run()))
         assert 0 == len(good_runner.run())

@@ -10,5 +10,5 @@ class TestSuspiciousComment:
         collection = RulesCollection()
         collection.register(SuspiciousComment())
         file_name = str('testResources/ansible-smell/suspiciouscomment.yml')
-        good_runner = Runner(file_name, rules=collection)
+        good_runner = Runner(playbook=file_name, rules=collection)
         print(good_runner.run())

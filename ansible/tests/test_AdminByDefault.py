@@ -2,9 +2,9 @@ from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
 
 from ansiblelints.rules.AdminByDefault import AdminByDefault
+import unittest
 
-
-class TestAdminByDefault:
+class TestAdminByDefault(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

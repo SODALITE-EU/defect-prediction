@@ -1,10 +1,10 @@
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
-
+import unittest
 from ansiblelints.rules.EmptyPassword0 import EmptyPassword0
 
 
-class TestEmptyPassword:
+class TestEmptyPassword(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

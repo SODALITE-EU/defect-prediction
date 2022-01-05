@@ -1,10 +1,12 @@
+import unittest
+
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
 
 from ansiblelints.stage.DepreciatedStatementUsage import DepreciatedStatementUsage
 
 
-class TestDepreciatedStatementUsage:
+class TestDepreciatedStatementUsage(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

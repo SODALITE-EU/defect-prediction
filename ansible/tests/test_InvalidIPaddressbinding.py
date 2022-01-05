@@ -1,10 +1,10 @@
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
-
+import unittest
 from ansiblelints.rules.InvalidIPaddressbinding import InvalidIPaddressbinding
 
 
-class TestInvalidIPaddressbinding:
+class TestInvalidIPaddressbinding(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

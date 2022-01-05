@@ -1,10 +1,10 @@
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
-
+import unittest
 from ansiblelints.rules.SuspiciousComment import SuspiciousComment
 
 
-class TestSuspiciousComment:
+class TestSuspiciousComment(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

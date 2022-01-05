@@ -1,5 +1,4 @@
-- name: Debug
-  debug:
+- debug:
     msg: "{{groups['DBServers'][0]}}, {{ groups['DBServers'][1] }}, {{ansible_default_ipv4.address}}"
 
 - name: Bulid cluster

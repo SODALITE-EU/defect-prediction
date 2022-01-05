@@ -2,9 +2,9 @@ from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
 
 from ansiblelints.rules.ComplexExpression import ComplexExpression
+import unittest
 
-
-class TestComplexExpression:
+class TestComplexExpression(unittest.TestCase):
 
     def test_file(self):
         collection = RulesCollection()

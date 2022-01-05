@@ -34,6 +34,22 @@ pipeline {
             junit 'results.xml'
         }
     }
+	stage('Test ansible-misconfiguration') {
+        steps {
+            sh  """ #!/bin/bash
+			        cd ansible
+                    python3 -mvenv .venv
+					. .venv/bin/activate
+					python3 -m pip install --upgrade pip
+					python3 -m pip install -r requirements.txt  
+					python3 -m pip install -U pip setuptools wheel --user
+					python3 -m spacy download en_core_web_sm					                   				
+                    python3 -m pytest --pyargs -s ./tests --junitxml="results2.xml" --cov=ansiblelints --cov-report xml tests/
+					cp *.xml $WORKSPACE
+                """
+            junit 'results2.xml'
+        }
+    }
     stage ('Build defect-prediction') {
       steps {
         sh  """ #!/bin/bash
@@ -68,6 +84,19 @@ pipeline {
             }
         }
     }
+   stage('SonarQube analysis AnsibleMisconfig'){
+        environment {
+          scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('SonarCloud') {
+                sh  """ #!/bin/bash
+                        cd "ansible-misconfig"
+                        ${scannerHome}/bin/sonar-scanner
+                    """
+            }
+        }
+    }
    stage('Build docker images') {
    	        when {
 				allOf {
@@ -78,6 +107,7 @@ pipeline {
             steps {
                 sh "cd tosca; docker build -t toscasmells  -f Dockerfile ."
                 sh "cd ansible; docker build -t ansiblesmells -f Dockerfile ."
+				sh "cd ansible-misconfig; docker build -t ansiblemisconfigs -f Dockerfile ."
             }
     }
    
@@ -99,6 +129,10 @@ pipeline {
                             docker tag ansiblesmells sodaliteh2020/ansiblesmells
                             docker push sodaliteh2020/ansiblesmells:${BUILD_NUMBER}
                             docker push sodaliteh2020/ansiblesmells
+							docker tag ansiblemisconfigs sodaliteh2020/ansiblemisconfigs:${BUILD_NUMBER}
+                            docker tag ansiblemisconfigs sodaliteh2020/ansiblemisconfigs
+                            docker push sodaliteh2020/ansiblemisconfigs:${BUILD_NUMBER}
+                            docker push sodaliteh2020/ansiblemisconfigs
                         """
                 }
             }

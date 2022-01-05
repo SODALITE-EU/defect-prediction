@@ -104,7 +104,7 @@ def run_detector(file, action_id, deployment_id):
     bugs = {"action_id": action_id, "deployment_id": deployment_id, "bugs": data}
     for match in matches:
         bugrecord = {"bug_name": str(match.rule),
-                     "bug_info": {"uri": str(match.linenumber) + " , " + str(match.line),
+                     "bug_info": {"line_number": str(match.linenumber),
                                   "description": str(match.message)}}
         data.append(bugrecord)
     js = json.dumps(bugs, sort_keys=False, indent=4)

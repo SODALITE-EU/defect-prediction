@@ -42,9 +42,9 @@ pipeline {
 					. .venv/bin/activate
 					python3 -m pip install --upgrade pip
 					python3 -m pip install -r requirements.txt  
-					python3 -m pip install -U pip setuptools wheel --user
+					python3 -m pip install -U pip setuptools wheel
 					python3 -m spacy download en_core_web_sm					                   				
-                    python3 -m pytest --pyargs -s ./tests --junitxml="results2.xml" --cov=ansiblelints --cov-report xml tests/
+                                        python3 -m pytest --pyargs -s ./tests --junitxml="results2.xml" --cov=ansiblelints --cov-report xml tests/
 					cp *.xml $WORKSPACE
                 """
             junit 'results2.xml'

@@ -129,7 +129,7 @@ pipeline {
                             docker tag ansiblesmells sodaliteh2020/ansiblesmells
                             docker push sodaliteh2020/ansiblesmells:${BUILD_NUMBER}
                             docker push sodaliteh2020/ansiblesmells
-							docker tag ansiblemisconfigs sodaliteh2020/ansiblemisconfigs:${BUILD_NUMBER}
+			    docker tag ansiblemisconfigs sodaliteh2020/ansiblemisconfigs:${BUILD_NUMBER}
                             docker tag ansiblemisconfigs sodaliteh2020/ansiblemisconfigs
                             docker push sodaliteh2020/ansiblemisconfigs:${BUILD_NUMBER}
                             docker push sodaliteh2020/ansiblemisconfigs

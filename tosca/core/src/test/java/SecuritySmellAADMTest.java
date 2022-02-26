@@ -19,6 +19,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class SecuritySmellAADMTest {
     private static SodaliteRepository repositoryManager;
@@ -66,6 +67,7 @@ public class SecuritySmellAADMTest {
                 properties.add(p);
             }
         }
+        assertNotNull(kbApi.findBugs(findBugInput));
         assertEquals(1, properties.size());
         assertEquals("AADM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getAadmid());
         assertEquals("RM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getRmid());

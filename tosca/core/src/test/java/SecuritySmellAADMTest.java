@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class SecuritySmellAADMTest {
     private static SodaliteRepository repositoryManager;
@@ -54,6 +56,7 @@ public class SecuritySmellAADMTest {
         findBugInput.setAadmid("AADM_as9oa3dfppj6q7irhn6lsl6p16");
         findBugInput.setRmid("RM_as9oa3dfppj6q7irhn6lsl6p16");
         Set<Feature> parameters = kbApi.getProperties(connection, findBugInput.getAadmid(), findBugInput.getRmid());
+        Set<Feature> attributes = kbApi.getAllAttributes(connection, findBugInput.getAadmid(), findBugInput.getRmid());
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -66,6 +69,8 @@ public class SecuritySmellAADMTest {
         assertEquals(1, properties.size());
         assertEquals("AADM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getAadmid());
         assertEquals("RM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getRmid());
+        assertTrue(attributes.isEmpty());
+        assertFalse(parameters.isEmpty());
     }
 
 

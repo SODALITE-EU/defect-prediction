@@ -1,4 +1,4 @@
-from ansiblelint.rules import AnsibleLintRule
+from ansiblelint.rules import AnsibleLintRule //NOSONAR
 
 
 class DeprecatedVariableRule(AnsibleLintRule):

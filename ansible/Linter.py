@@ -30,7 +30,7 @@ import ansiblelint.formatters as formatters
 import six
 import yaml
 from ansiblelint.constants import DEFAULT_RULESDIR
-from ansiblelint.file_utils import normpath
+from ansiblelint.file_utils import normpath //NOSONAR
 from ansiblelint.rules import RulesCollection
 from ansiblelint.runner import Runner
 # from ansiblelint.utils import get_playbooks_and_roles, normpath
@@ -159,7 +159,7 @@ def main(args):
     else:
         rulesdirs = options.rulesdir or [DEFAULT_RULESDIR]
 
-    rules = RulesCollection(rulesdirs)
+    rules = RulesCollection(rulesdirs) //NOSONAR
     # for rulesdir in rulesdirs:
     #     rules.extend(RulesCollection.load_plugins(rulesdir))
 
@@ -183,7 +183,7 @@ def main(args):
     matches = list()
     checked_files = set()
     for playbook in playbooks:
-        runner = Runner(playbook=playbook, rules=rules)
+        runner = Runner(playbook=playbook, rules=rules) //NOSONAR
         matches.extend(runner.run())
 
     matches.sort(key=lambda x: (normpath(x.filename), x.linenumber, x.rule.id))

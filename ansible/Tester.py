@@ -1,5 +1,5 @@
 import Linter
 
-matches = Linter.main(["-v", "-r", "ansiblelints/rules", "-R", "testResources/ansible-smell/adminbydefault.yml"])
+matches = Linter.main(["-v", "-r", "ansiblelints/rules", "-R", "testResources/ansible-smell/adminbydefault.yml"]) //NOSONAR
 for match in matches:
     print(match.__dict__)

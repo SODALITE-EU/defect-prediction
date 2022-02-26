@@ -1,4 +1,4 @@
-from ansiblelint.rules import AnsibleLintRule
+from ansiblelint.rules import AnsibleLintRule //NOSONAR
 
 
 class EmptyPassword1(AnsibleLintRule):

@@ -2,6 +2,7 @@ import kb.dto.Feature;
 import kb.repository.KB;
 import kb.repository.SodaliteRepository;
 import nl.jads.tosca.DefectPredictorKBApi;
+import nl.jads.tosca.dto.FindBugInput;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -49,7 +50,10 @@ public class SecuritySmellAADMTest {
     void testAdminBYyDefault() throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(kb);
         RepositoryConnection connection = repository.getConnection();
-        Set<Feature> parameters = kbApi.getProperties(connection, "AADM_as9oa3dfppj6q7irhn6lsl6p16", null);
+        FindBugInput findBugInput = new FindBugInput();
+        findBugInput.setAadmid("AADM_as9oa3dfppj6q7irhn6lsl6p16");
+        findBugInput.setRmid("RM_as9oa3dfppj6q7irhn6lsl6p16");
+        Set<Feature> parameters = kbApi.getProperties(connection, findBugInput.getAadmid(), findBugInput.getRmid());
         List<Feature> properties = new ArrayList<>();
         for (Feature p : parameters) {
             if (p.getParameters() == null) {
@@ -60,6 +64,8 @@ public class SecuritySmellAADMTest {
             }
         }
         assertEquals(1, properties.size());
+        assertEquals("AADM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getAadmid());
+        assertEquals("RM_as9oa3dfppj6q7irhn6lsl6p16", findBugInput.getRmid());
     }
 
 

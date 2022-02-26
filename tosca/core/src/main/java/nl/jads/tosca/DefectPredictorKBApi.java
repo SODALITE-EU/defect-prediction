@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.*;
 
 public class DefectPredictorKBApi {
@@ -57,17 +56,9 @@ public class DefectPredictorKBApi {
     public static void main(String[] args) throws IOException {
         DefectPredictorKBApi kbApi = new DefectPredictorKBApi(new KB());
         FindBugInput findBugInput = new FindBugInput();
-        long startTime = Instant.now().toEpochMilli();
         BugReport bugReport = kbApi.findBugs(findBugInput);
-        long endTime = Instant.now().toEpochMilli();
-		long timeElapsed = endTime - startTime;
-		System.out.println("findBugs in milliseconds: " + timeElapsed);
         for (BugRecord r : bugReport.getBugs()) {
             System.out.println(r.getBugName());
-            System.out.println(r.getContext());
-            System.out.println(r.getElementName());
-            System.out.println(r.getElementType());
-//            System.out.println(r.getBugInfo().serialise());
         }
     }
 

@@ -101,7 +101,7 @@ def detect_linguistic_ap(file):
 def run_detector(file, action_id, deployment_id):
     matches = Linter.main(["-r", "ansiblelints/rules", "-R", file])
     data = []
-    bugs = {"bugs": data} # pragma: no cover
+    bugs = {"bugs": data}
     for match in matches:
         bugrecord = {"bug_name": str(match.rule),
                      "bug_info": {"line_number": str(match.linenumber),

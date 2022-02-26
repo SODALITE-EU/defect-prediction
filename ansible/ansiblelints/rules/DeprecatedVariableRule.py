@@ -1,5 +1,4 @@
-from ansiblelint.rules import AnsibleLintRule #NOSONAR
-
+from ansiblelint.rules import AnsibleLintRule
 
 class DeprecatedVariableRule(AnsibleLintRule):
     id = 'ANSIBLE0001'

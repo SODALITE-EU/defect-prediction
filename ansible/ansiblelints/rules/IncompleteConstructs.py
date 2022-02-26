@@ -1,4 +1,4 @@
-from ansiblelint.rules import AnsibleLintRule #NOSONAR
+from ansiblelint.rules import AnsibleLintRule
 
 
 class IncompleteConstructs(AnsibleLintRule):

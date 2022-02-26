@@ -188,7 +188,7 @@ def main(args):
 
     matches.sort(key=lambda x: (normpath(x.filename), x.linenumber, x.rule.id))
 
-    return matches
+    return matches, runner, rules
 
 
 if __name__ == '__main__':

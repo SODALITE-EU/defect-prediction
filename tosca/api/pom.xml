@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>com.ontotext.graphdb</groupId>
 			<artifactId>graphdb-free-runtime</artifactId>
-			<version>9.10.2</version>
+			<version>9.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

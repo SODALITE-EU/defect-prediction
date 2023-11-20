@@ -17,3 +17,4 @@ beautifulsoup4
 pytest
 pytest-cov
 Jinja2
+ansible-core>=2.12.0b1 # not directly required, pinned by Snyk to avoid a vulnerability
